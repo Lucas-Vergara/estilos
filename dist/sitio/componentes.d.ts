@@ -18,6 +18,7 @@ export declare function Palabras({ texto, modo, como: Etiqueta, className, prefi
 /**
  * Cursor propio (solo escritorio con mouse): un punto acento que sigue al puntero y se agranda con una etiqueta sobre
  * los elementos con data-cursor="Ver". No reemplaza el cursor del sistema, así nada deja de funcionar.
+ * Solo para la línea sitio diseñadora (.sd-cursor): la línea sitio no lo usa.
  */
 export declare function Cursor({ prefijo }: {
     prefijo?: Prefijo;
