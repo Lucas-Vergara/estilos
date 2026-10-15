@@ -50,8 +50,9 @@ export function Palabras({ texto, modo, como: Etiqueta = "h2", className, prefij
 /**
  * Cursor propio (solo escritorio con mouse): un punto acento que sigue al puntero y se agranda con una etiqueta sobre
  * los elementos con data-cursor="Ver". No reemplaza el cursor del sistema, así nada deja de funcionar.
+ * Solo para la línea sitio diseñadora (.sd-cursor): la línea sitio no lo usa.
  */
-export function Cursor({ prefijo = "s" }: { prefijo?: Prefijo }) {
+export function Cursor({ prefijo = "sd" }: { prefijo?: Prefijo }) {
   const punto = useRef<HTMLDivElement>(null);
   const etiqueta = useRef<HTMLSpanElement>(null);
 

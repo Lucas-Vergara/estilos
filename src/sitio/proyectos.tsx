@@ -74,7 +74,7 @@ export function Proyecto({ p, indice }: { p: DatosProyecto; indice?: number }) {
           </a>
         )}
       </div>
-      <div data-reveal="escala" data-cursor={p.url ? "Ver" : undefined}>
+      <div data-reveal="escala">
         <MarcoNavegador url={p.medio.url} src={p.medio.src} tipo={p.medio.tipo} poster={p.medio.poster} alt={p.medio.alt ?? p.titulo} proporcion={p.medio.proporcion}>
           {p.medio.maqueta}
         </MarcoNavegador>

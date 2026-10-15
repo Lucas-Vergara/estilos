@@ -420,13 +420,6 @@ html:not(.js) .s-horizontal-fijo, .s-simple .s-horizontal-fijo { position: stati
   background: var(--s-tinta); color: var(--s-fondo); font-size: 14px; font-weight: 500; box-shadow: var(--s-sombra-alta); animation: s-aviso-entra 0.4s var(--s-ease);
 }
 @keyframes s-aviso-entra { from { opacity: 0; transform: translate(-50%, 14px); } }
-/* Cursor propio (solo mouse): punto que se agranda con una etiqueta sobre [data-cursor="Ver"] (Cursor) */
-.s-cursor { position: fixed; top: 0; left: 0; z-index: 200; width: 0; height: 0; pointer-events: none; opacity: 0; transition: opacity 0.3s; }
-.s-cursor[data-on] { opacity: 1; }
-.s-cursor::before { content: ""; position: absolute; left: -6px; top: -6px; width: 12px; height: 12px; border-radius: 50%; background: var(--s-acento); transition: transform 0.35s var(--s-ease); }
-.s-cursor[data-grande]::before { transform: scale(7); }
-.s-cursor span { position: absolute; transform: translate(-50%, -50%); color: var(--s-sobre-acento); font-size: 13px; font-weight: 600; white-space: nowrap; opacity: 0; transition: opacity 0.2s; }
-.s-cursor[data-grande] span { opacity: 1; transition-delay: 0.1s; }
 
 /* ---------- Variante simple (al estilo de Rafa Conde) ---------- */
 

@@ -53,6 +53,7 @@ Ideas pedidas para la biblioteca:
 
 ## Descartado
 
+- **Punto que sigue al cursor en toda la página** (línea sitio): no me gusta. Sí me gustan los efectos de cursor dentro de una sección (p. ej. la grilla 3D con la bola que sigue al puntero).
 - **MUI**: trae su propio look y pelea con el mío (solo se usó en etexScrapF, antiguo).
 
 ## Pendiente de decidir

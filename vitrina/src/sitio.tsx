@@ -1,9 +1,9 @@
 import { StrictMode, useEffect, useState, type CSSProperties } from "react";
 import { createRoot } from "react-dom/client";
-import { CreditoEstilos, Indicador, Variacion } from "../../src";
+import { Indicador, Variacion } from "../../src";
 import { Sparkline } from "../../src/graficos";
 import {
-  Avatar, BotonSonido, Cursor, Entrada, FondoAnimado, NavPildora, Ola, Palabras, Proyecto, Telon,
+  Avatar, BotonSonido, Entrada, FondoAnimado, NavPildora, Ola, Palabras, Proyecto, Telon,
   iniciarInteracciones, iniciarMovimiento, irCon, sonidos, useSeccionActiva, type DatosProyecto, type ModoFondo,
 } from "../../src/sitio";
 import { Grilla3D, Objeto3D, type FormaObjeto } from "../../src/3d";
@@ -13,7 +13,7 @@ import "../../css/base.css";
 import "../../css/lineas/sitio.css";
 import "./vitrina-sitio.css";
 
-// Vitrina de la línea "sitio": un portafolio de ejemplo que usa todos los módulos. Contenido de muestra.
+// Vitrina de la línea "sitio": un sitio de ejemplo que usa todos los módulos. Contenido genérico, sin nombres reales.
 
 const ENLACES = [
   { id: "inicio", texto: "Inicio" },
@@ -29,13 +29,13 @@ function MaquetaPanel() {
   const precios = [12990, 12990, 12490, 12490, 12490, 11990, 11990, 11490];
   return (
     <div className="maqueta-panel">
-      <div className="maqueta-barra"><b>Monitor de precios</b><span>Hoy, 06:00</span></div>
+      <div className="maqueta-barra"><b>Panel de ejemplo</b><span>Hoy, 06:00</span></div>
       <div className="indicadores">
         <Indicador etiqueta="Precio típico" valor={clp.format(11490)} variacion={<Variacion actual={11490} anterior={12990} formato={clp.format} subirEsBueno={false} />} tendencia={<Sparkline valores={precios} escalonado fluido alto={28} />} />
         <Indicador etiqueta="Tiendas con stock" valor="38" detalle="de 45" />
       </div>
       <div className="maqueta-filas">
-        {[["Concepción", 42, 100], ["Los Ángeles", 18, 43], ["Chillán", 7, 17], ["Talcahuano", 0, 0]].map(([t, n, p]) => (
+        {[["Zona norte", 42, 100], ["Zona centro", 18, 43], ["Zona sur", 7, 17], ["Zona oeste", 0, 0]].map(([t, n, p]) => (
           <div key={t as string}><span>{t}</span><span className="barra-pista"><span className="barra-relleno" style={{ display: "block", width: `${p}%` }} /></span><b>{n}</b></div>
         ))}
       </div>
@@ -46,31 +46,31 @@ function MaquetaPanel() {
 function MaquetaLanding() {
   return (
     <div className="maqueta-landing">
-      <span className="s-etiqueta">Reciclaje · Biobío</span>
-      <b>Precios de compra, en un solo lugar.</b>
-      <span className="maqueta-boton">Ver precios →</span>
+      <span className="s-etiqueta">Categoría · Región</span>
+      <b>Un titular claro, en una línea.</b>
+      <span className="maqueta-boton">Acción →</span>
     </div>
   );
 }
 
 const PROYECTOS: DatosProyecto[] = [
   {
-    titulo: "Monitor de precios",
-    descripcion: "Panel que sigue precios y stock de un catálogo en todas las tiendas del país, con historial y alertas. Diseño, datos y desarrollo.",
-    cliente: "Proyecto de ejemplo", rol: "Diseño y desarrollo", anio: 2026, etiquetas: ["React", "Firebase", "BigQuery", "Scraping"],
-    medio: { url: "monitor.ejemplo.cl", proporcion: "16 / 10", maqueta: <MaquetaPanel /> },
+    titulo: "Proyecto uno",
+    descripcion: "Descripción breve del proyecto: qué es, para quién y qué se hizo. El medio puede ser una captura, un video o una maqueta.",
+    cliente: "Cliente de ejemplo", rol: "Rol en el proyecto", anio: 2026, etiquetas: ["Etiqueta", "Tecnología", "Área"],
+    medio: { url: "uno.ejemplo.com", proporcion: "16 / 10", maqueta: <MaquetaPanel /> },
   },
   {
-    titulo: "Radar de reciclaje",
-    descripcion: "Sitio que reúne precios de compra de material reciclable, actores y normativa de una región, actualizado solo cada día.",
-    cliente: "Proyecto de ejemplo", rol: "Producto y desarrollo", anio: 2026, etiquetas: ["Vite", "Mapas", "Automatización"],
-    medio: { url: "radar.ejemplo.cl", proporcion: "16 / 10", maqueta: <MaquetaLanding /> },
+    titulo: "Proyecto dos",
+    descripcion: "Los proyectos se alternan: texto a un lado y el marco de navegador al otro.",
+    cliente: "Cliente de ejemplo", rol: "Rol en el proyecto", anio: 2026, etiquetas: ["Etiqueta", "Tecnología"],
+    medio: { url: "dos.ejemplo.com", proporcion: "16 / 10", maqueta: <MaquetaLanding /> },
   },
   {
-    titulo: "Sitios de demo para clientes",
-    descripcion: "Espacio para trabajos hechos para clientes: aquí irá la captura o el video del sitio de demo.",
-    cliente: "Cliente", rol: "Frontend", anio: 2025, etiquetas: ["Captura pendiente"],
-    medio: { url: "demo.cliente.com", proporcion: "16 / 10" },
+    titulo: "Proyecto tres",
+    descripcion: "Sin captura todavía: el marco muestra un espacio vacío hasta que haya imagen o video.",
+    cliente: "Cliente de ejemplo", rol: "Rol en el proyecto", anio: 2025, etiquetas: ["Captura pendiente"],
+    medio: { url: "tres.ejemplo.com", proporcion: "16 / 10" },
   },
 ];
 
@@ -81,15 +81,15 @@ function Hero({ modo, setModo }: { modo: ModoFondo; setModo: (m: ModoFondo) => v
       <FondoAnimado modo={modo} desvanecer />
       <div className="s-ancho s-hero-grid">
         <div className="s-hero-texto">
-          <span className="s-estado" data-reveal="">Disponible para proyectos · Biobío, Chile</span>
+          <span className="s-estado" data-reveal="">Ejemplo de la línea sitio</span>
           <div className="hero-quien" data-reveal="" style={{ "--delay": "80ms" } as CSSProperties}>
-            <Avatar iniciales="LV" tamano={84} saludo="Hola" />
-            <h1 className="s-display s-nombre"><span>Lucas </span><span>Vergara</span></h1>
+            <Avatar iniciales="Aa" tamano={84} saludo="Hola" />
+            <h1 className="s-display s-nombre"><span>Línea </span><span>sitio</span></h1>
           </div>
-          <Palabras modo="stagger" como="p" className="s-subtitulo" texto="Diseño y desarrollo de productos web *claros*, con datos que se entienden." />
+          <Palabras modo="stagger" como="p" className="s-subtitulo" texto="Estilos para sitios y portafolios: tipografía grande, color de día y *movimiento* donde ayuda." />
           <div className="s-hero-acciones" data-reveal="" style={{ "--delay": "300ms" } as CSSProperties}>
             <a className="s-boton" href="#proyectos" data-magnetico="0.25" onClick={() => sonidos.clic()}>Ver proyectos <span className="s-flecha" aria-hidden="true">→</span></a>
-            <a className="s-boton-borde" href="#contacto" data-magnetico="0.25" onClick={() => sonidos.clic()}>Escríbeme</a>
+            <a className="s-boton-borde" href="#contacto" data-magnetico="0.25" onClick={() => sonidos.clic()}>Contacto</a>
           </div>
         </div>
         <div className="hero-objeto" data-reveal="escala" style={{ "--delay": "200ms" } as CSSProperties}>
@@ -111,12 +111,12 @@ function Hero({ modo, setModo }: { modo: ModoFondo; setModo: (m: ModoFondo) => v
 }
 
 const PANELES = [
-  { t: "Entrada al sitio", d: "Saludos en varios idiomas y una pantalla que sube con borde curvo. Una vez por visita.", ref: "Dennis Snellenberg" },
-  { t: "Telón entre páginas", d: "El menú cambia de página detrás de un telón con el nombre del destino.", ref: "Dennis Snellenberg" },
-  { t: "Scroll horizontal", d: "Esta misma sección: queda fija y avanza hacia el lado mientras bajas.", ref: "Rauno" },
-  { t: "Navegación viva", d: "La píldora del menú se desliza hacia donde está el cursor y vuelve a la página actual.", ref: "Josh Comeau" },
-  { t: "Fondos vivos", d: "Manchas, malla de puntos y ondas en canvas. Se pausan fuera de pantalla.", ref: "Cassie Evans, Keita Yamada" },
-  { t: "3D y sonido", d: "Un objeto que rebota al tocarlo y una grilla infinita. Sonidos generados, apagados por defecto.", ref: "Bruno Simon, Henry Heffernan" },
+  { t: "Entrada al sitio", d: "Saludos en varios idiomas y una pantalla que sube con borde curvo. Una vez por visita." },
+  { t: "Telón entre páginas", d: "El menú cambia de página detrás de un telón con el nombre del destino." },
+  { t: "Scroll horizontal", d: "Esta misma sección: queda fija y avanza hacia el lado mientras bajas." },
+  { t: "Navegación viva", d: "La píldora del menú se desliza hacia donde está el cursor y vuelve a la página actual." },
+  { t: "Fondos vivos", d: "Manchas, malla de puntos y ondas en canvas. Se pausan fuera de pantalla." },
+  { t: "3D y sonido", d: "Un objeto que rebota al tocarlo y una grilla infinita. Sonidos generados, apagados por defecto." },
 ];
 
 function Sitio() {
@@ -140,12 +140,11 @@ function Sitio() {
     <>
       <Entrada key={entrada} unaVezPorSesion={entrada === 0} />
       <Telon />
-      <Cursor />
       <div className="s-progreso" data-progreso-scroll="" aria-hidden="true" />
 
       <header className="s-cabecera" data-ocultable="">
         <a className="s-marca" href="#inicio" onClick={(e) => { e.preventDefault(); ir("inicio", "Inicio"); }}>
-          <span className="marca-punto" aria-hidden="true" />Lucas Vergara
+          <span className="marca-punto" aria-hidden="true" />Línea sitio
         </a>
         <NavPildora enlaces={ENLACES} activo={activo} onIr={(e) => ir(e.id, e.texto)} />
         <div className="s-cabecera-acciones">
@@ -162,7 +161,7 @@ function Sitio() {
         <section className="s-seccion">
           <div className="s-ancho s-pila">
             <span className="s-etiqueta" data-reveal="">Manifiesto</span>
-            <Palabras modo="scroll" como="p" className="s-manifiesto" texto="Me gusta hacer herramientas que se entienden a la primera: datos claros, interfaces limpias y un poco de *movimiento* donde ayuda." />
+            <Palabras modo="scroll" como="p" className="s-manifiesto" texto="Un párrafo grande que se ilumina palabra por palabra al bajar. Sirve para una declaración breve con una palabra *destacada*." />
           </div>
         </section>
 
@@ -195,7 +194,6 @@ function Sitio() {
                   <div className="s-pila" style={{ gap: 10 }}>
                     <h3 className="s-subtitulo">{p.t}</h3>
                     <p className="s-texto">{p.d}</p>
-                    <span className="s-chico">Referencia: {p.ref}</span>
                   </div>
                 </article>
               ))}
@@ -215,13 +213,13 @@ function Sitio() {
         <section className="s-seccion">
           <div className="s-ancho">
             <div className="s-seccion-cabecera">
-              <div><span className="s-etiqueta">Servicios</span><h2 className="s-titulo" data-reveal="">Qué hago</h2></div>
+              <div><span className="s-etiqueta">Servicios</span><h2 className="s-titulo" data-reveal="">Tarjetas</h2></div>
             </div>
             <div className="tarjetas">
               {[
-                ["Paneles de datos", "Monitores y tableros que cualquiera entiende en segundos."],
-                ["Sitios y portafolios", "Webs claras, rápidas y con movimiento donde suma."],
-                ["Automatización", "Recolección de datos y tareas que corren solas cada día."],
+                ["Primer servicio", "Texto breve que explica el servicio. La tarjeta se inclina hacia el cursor."],
+                ["Segundo servicio", "Texto breve que explica el servicio. El brillo sigue al puntero."],
+                ["Tercer servicio", "Texto breve que explica el servicio. Aparecen en cascada al bajar."],
               ].map(([t, d], i) => (
                 <article className="s-tarjeta s-inclinable" data-inclinar="5" data-reveal="" style={{ "--delay": `${i * 90}ms` } as CSSProperties} key={t}>
                   <span className="s-brillo" aria-hidden="true" />
@@ -236,7 +234,7 @@ function Sitio() {
 
         <section className="s-marquesina" aria-hidden="true">
           <div className="s-marquesina-linea" data-marquee="left">
-            Datos · <span className="s-contorno">Producto</span> · Diseño · <span className="s-acento">Automatización</span> · Datos · <span className="s-contorno">Producto</span>
+            Tipografía · <span className="s-contorno">Color</span> · Movimiento · <span className="s-acento">3D</span> · Tipografía · <span className="s-contorno">Color</span>
           </div>
         </section>
 
@@ -257,8 +255,8 @@ function Sitio() {
             </div>
             <form className="formulario" onSubmit={(e) => { e.preventDefault(); sonidos.activar(); setAviso("Mensaje de ejemplo: no se envió nada"); setTimeout(() => setAviso(""), 3200); }}>
               <label className="s-campo"><span>Nombre</span><input id="nombre" placeholder="Tu nombre" /></label>
-              <label className="s-campo"><span>Correo</span><input id="correo" type="email" placeholder="tu@correo.cl" /></label>
-              <label className="s-campo ancho"><span>Mensaje</span><textarea id="mensaje" rows={3} placeholder="Cuéntame del proyecto" /></label>
+              <label className="s-campo"><span>Correo</span><input id="correo" type="email" placeholder="tu@correo.com" /></label>
+              <label className="s-campo ancho"><span>Mensaje</span><textarea id="mensaje" rows={3} placeholder="Escribe tu mensaje" /></label>
               <div className="ancho"><button className="s-boton" data-magnetico="0.2">Enviar <span className="s-flecha" aria-hidden="true">→</span></button></div>
             </form>
           </div>
@@ -266,9 +264,9 @@ function Sitio() {
       </main>
 
       <footer className="s-pie">
-        <div className="s-wordmark" data-px="0.06">Lucas Vergara</div>
+        <div className="s-wordmark" data-px="0.06">Línea sitio</div>
         <div className="s-pie-fila">
-          <span>Biobío, Chile · <CreditoEstilos /></span>
+          <span>Sitio de ejemplo · contenido de muestra</span>
           <nav aria-label="Otras líneas">
             <a href="./">Línea panel</a>
             <a href="sitio-disenadora.html">Línea sitio diseñadora</a>
@@ -277,9 +275,9 @@ function Sitio() {
         </div>
       </footer>
 
-      <a className="s-flotante" href="#contacto" aria-label="Escríbeme" data-magnetico="0.15">
+      <a className="s-flotante" href="#contacto" aria-label="Contacto" data-magnetico="0.15">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
-        <span>Escríbeme</span>
+        <span>Contacto</span>
       </a>
       {aviso && <div className="s-aviso" role="status">{aviso}</div>}
     </>

@@ -29,7 +29,7 @@ Las líneas se pueden **mezclar**: cada una vive bajo su propia clase y prefijo 
 | Tailwind | `tailwind.css` | Puente para proyectos con Tailwind v4 (`bg-superficie`, `text-acento`…) sobre las mismas variables |
 | Componentes | `@lucas-vergara/estilos` | `Indicador`, `Variacion`, `Estado`, `Frescura`, `Vacio`, `Segmentado`, `Pestanas`, `ThOrden`, esqueletos, `BotonTema`, `useOrden`… |
 | Gráficos | `@lucas-vergara/estilos/graficos` | `GraficoLinea`, `GraficoBarras`, `GraficoBanda`, `Sparkline` (requiere `recharts`) |
-| Sitio (React) | `@lucas-vergara/estilos/sitio` | `Entrada`, `Telon` + `irCon`, `NavPildora` + `useSeccionActiva`, `Avatar`, `FondoAnimado`, `MarcoNavegador`, `Proyecto`, `Ola`, `BotonSonido` + `sonidos`, `Palabras`, `Acento`, `Cursor`, `iniciarMovimiento`, `iniciarInteracciones`, `SCRIPT_MOVIMIENTO`, `conTransicion` |
+| Sitio (React) | `@lucas-vergara/estilos/sitio` | `Entrada`, `Telon` + `irCon`, `NavPildora` + `useSeccionActiva`, `Avatar`, `FondoAnimado`, `MarcoNavegador`, `Proyecto`, `Ola`, `BotonSonido` + `sonidos`, `Palabras`, `Acento`, `Cursor` (solo sitio diseñadora), `iniciarMovimiento`, `iniciarInteracciones`, `SCRIPT_MOVIMIENTO`, `conTransicion` |
 | 3D (React) | `@lucas-vergara/estilos/3d` | `Objeto3D` (burbuja, nudo, anillos), `Grilla3D` (requiere `three`) |
 
 ## Usarlo en un proyecto
@@ -90,7 +90,7 @@ Sonidos: generados con Web Audio, **apagados por defecto**; el visitante los act
 
 ### Línea sitio diseñadora
 
-La misma idea con clases `sd-…` bajo `.sitio-disenadora` (variante clara: `sd-claro`). Componentes compartidos con `prefijo="sd"`: `<Palabras prefijo="sd" …>`, `<Acento prefijo="sd" …>`, `<Cursor prefijo="sd" />`.
+La misma idea con clases `sd-…` bajo `.sitio-disenadora` (variante clara: `sd-claro`). Componentes compartidos con `prefijo="sd"`: `<Palabras prefijo="sd" …>`, `<Acento prefijo="sd" …>`, `<Cursor />` (solo existe en esta línea).
 
 **Regla:** el `estilos.css` del proyecto solo tiene lo que es de ese proyecto. Si algo sirve para otros, se sube aquí.
 

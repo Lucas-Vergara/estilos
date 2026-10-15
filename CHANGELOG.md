@@ -1,5 +1,10 @@
 # Cambios
 
+## v0.5.0 — 2026-10-15
+
+- Línea sitio: se quita el cursor propio (punto que sigue al puntero en toda la página; clase `s-cursor`). `Cursor` queda solo para sitio diseñadora y su prefijo por defecto pasa a `"sd"`. `Proyecto` ya no marca su medio con `data-cursor`.
+- Vitrina de la línea sitio: contenido genérico, sin nombres de personas ni referencias; ya no parece un portafolio personal.
+
 ## v0.4.0 — 2026-10-15
 
 **Cambio que rompe:** la línea "sitio" anterior pasa a llamarse **"sitio diseñadora"** (creada junto con Franservice, https://franservice.cl): archivo `lineas/sitio-disenadora.css`, alcance `.sitio-disenadora`, clases `sd-…`, variables `--sd-…`, variante `sd-claro`. Quien la usaba debe renombrar clases (`s-` → `sd-`) o quedarse en v0.3.0. Ningún proyecto la usaba.
