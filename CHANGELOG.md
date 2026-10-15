@@ -1,5 +1,9 @@
 # Cambios
 
+## v0.2.1 — 2026-10-15
+
+- Los imports internos llevan extensión `.js`: el paquete también funciona en Node ESM estricto (SSR, pruebas), no solo con Vite o Next. Sin cambios visuales.
+
 ## v0.2.0 — 2026-10-15
 
 Nueva **línea sitio** (webs de presentación), con ideas del rediseño de Franservice. Sin cambios en la línea panel.

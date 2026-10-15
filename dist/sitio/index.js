@@ -1,2 +1,2 @@
-export * from "./componentes";
-export * from "./movimiento";
+export * from "./componentes.js";
+export * from "./movimiento.js";

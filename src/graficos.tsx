@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { Area, Bar, BarChart, CartesianGrid, Cell, ComposedChart, Line, LineChart, ReferenceDot, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { EsqueletoGrafico, Vacio } from "./componentes";
-import { diaCorto } from "./fechas";
+import { EsqueletoGrafico, Vacio } from "./componentes.js";
+import { diaCorto } from "./fechas.js";
 
 // Gráficos con Recharts, coloreados con las variables CSS (--serie-1, --grilla, --eje…): siguen el acento y el modo oscuro.
 

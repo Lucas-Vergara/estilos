@@ -1,5 +1,5 @@
 import { type CSSProperties, type ReactNode } from "react";
-import type { Direccion, Orden } from "./orden";
+import type { Direccion, Orden } from "./orden.js";
 /** Estado sí/no/sin dato: siempre ícono + texto, nunca solo color. */
 export declare function Estado({ valor, si, no, na }: {
     valor: boolean | null | undefined;

@@ -1,6 +1,6 @@
 import { useRef, type CSSProperties, type KeyboardEvent, type ReactNode } from "react";
-import { fechaHora, haceCuanto, horasDesde } from "./fechas";
-import type { Direccion, Orden } from "./orden";
+import { fechaHora, haceCuanto, horasDesde } from "./fechas.js";
+import type { Direccion, Orden } from "./orden.js";
 
 // Componentes de la línea "panel". Las clases que usan están en css/base.css. Los gráficos (Recharts) están en graficos.tsx.
 

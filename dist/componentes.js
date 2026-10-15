@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import { useRef } from "react";
-import { fechaHora, haceCuanto, horasDesde } from "./fechas";
+import { fechaHora, haceCuanto, horasDesde } from "./fechas.js";
 // Componentes de la línea "panel". Las clases que usan están en css/base.css. Los gráficos (Recharts) están en graficos.tsx.
 /** Estado sí/no/sin dato: siempre ícono + texto, nunca solo color. */
 export function Estado({ valor, si = "Sí", no = "No", na = "Sin dato" }) {

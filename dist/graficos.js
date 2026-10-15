@@ -1,8 +1,8 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { Area, Bar, BarChart, CartesianGrid, Cell, ComposedChart, Line, LineChart, ReferenceDot, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { EsqueletoGrafico, Vacio } from "./componentes";
-import { diaCorto } from "./fechas";
+import { EsqueletoGrafico, Vacio } from "./componentes.js";
+import { diaCorto } from "./fechas.js";
 // Gráficos con Recharts, coloreados con las variables CSS (--serie-1, --grilla, --eje…): siguen el acento y el modo oscuro.
 const IconoLinea = () => (_jsxs("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": "true", children: [_jsx("path", { d: "M3 3v16a2 2 0 0 0 2 2h16" }), _jsx("path", { d: "m19 9-5 5-4-4-3 3" })] }));
 const IconoBarras = () => (_jsxs("svg", { width: "20", height: "20", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": "true", children: [_jsx("path", { d: "M3 3v16a2 2 0 0 0 2 2h16" }), _jsx("path", { d: "M18 17V9" }), _jsx("path", { d: "M13 17V5" }), _jsx("path", { d: "M8 17v-3" })] }));
