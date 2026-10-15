@@ -19,8 +19,10 @@ Cuando un estilo mejora en un proyecto, se sube aquí y los demás proyectos lo 
 ## Usarlo en un proyecto
 
 ```bash
-npm install github:Lucas-Vergara/estilos#v0.1.0
+npm install https://github.com/Lucas-Vergara/estilos/archive/refs/tags/v0.1.0.tar.gz
 ```
+
+Se instala desde el tarball HTTPS de la etiqueta (no con `github:…`): así `npm ci` funciona en GitHub Actions sin llaves SSH, y el lockfile guarda un hash de integridad.
 
 ```ts
 // main.tsx — el orden importa: tokens → acento → base → estilos propios del proyecto
@@ -44,14 +46,14 @@ En `index.html`: la fuente Inter y el script que aplica el tema antes de pintar 
 
 ## Versiones: actualizar, no actualizar o volver atrás
 
-Cada proyecto fija una versión exacta (el `#v0.1.0` del `package.json`). **Nada cambia en un proyecto hasta que tú cambies ese número.**
+Cada proyecto fija una versión exacta (el `v0.1.0.tar.gz` del `package.json`). **Nada cambia en un proyecto hasta que tú cambies ese número.**
 
 | Quiero… | Hago… |
 |---|---|
 | Ver qué cambió | Leer [CHANGELOG.md](CHANGELOG.md) y mirar la vitrina |
-| Actualizar un proyecto | `npm install github:Lucas-Vergara/estilos#v0.2.0` |
+| Actualizar un proyecto | `npm install https://github.com/Lucas-Vergara/estilos/archive/refs/tags/v0.2.0.tar.gz` |
 | **No** actualizarlo | Nada: se queda en su versión para siempre |
-| Volver a una versión anterior | `npm install github:Lucas-Vergara/estilos#v0.1.0` |
+| Volver a una versión anterior | `npm install https://github.com/Lucas-Vergara/estilos/archive/refs/tags/v0.1.0.tar.gz` |
 | Quedarme con lo nuevo salvo un detalle | Sobrescribir esa variable o clase en el `estilos.css` del proyecto (p. ej. `:root { --radio: 8px; }`) |
 
 Números de versión (semver):
