@@ -1,0 +1,371 @@
+/*! @lucas-vergara/estilos · github.com/Lucas-Vergara/estilos · Licencia MIT con atribución visible: "Estilos: Lucas Vergara" */
+/*
+ * Línea "sitio diseñadora": creada junto con Franservice (https://franservice.cl), a partir del rediseño de su web
+ * hecho con su diseñadora (octubre 2026). Oscura por defecto, tipografía display enorme, etiquetas en mono mayúscula,
+ * mucho aire y movimiento ligado al scroll. Las ideas que siguen vigentes pasaron, aclaradas, a la línea "sitio".
+ *
+ * Todo vive bajo la clase .sitio-disenadora (en <body> o en una sección) con clases sd-, así que convive con la línea
+ * panel y con la línea sitio: dentro de ella, los tokens comunes (--plano, --tinta, --acento…) toman sus valores.
+ * Variante clara: class="sitio-disenadora sd-claro".
+ *
+ * Requiere tokens.css. Fuentes: Geist y Geist Mono. Movimiento: iniciarMovimiento() de "@lucas-vergara/estilos/sitio"
+ * (data-reveal, data-words, data-marquee, data-px, data-sx). Componentes Palabras, Acento y Cursor con prefijo="sd".
+ */
+
+.sitio-disenadora {
+  color-scheme: dark;
+
+  /* Paleta: casi negro con tinte verde, blanco cálido y un acento menta */
+  --sd-fondo: #0b0c0b;
+  --sd-superficie: #121412;
+  --sd-imagen: #151715;          /* fondo de marcos mientras carga la imagen */
+  --sd-tinta: #f2f4f1;
+  --sd-tinta-2: #c9cfca;
+  --sd-tenue: #a9b0aa;
+  --sd-linea: rgba(242, 244, 241, 0.14);
+  --sd-linea-suave: rgba(242, 244, 241, 0.08);
+  --sd-borde-control: rgba(242, 244, 241, 0.25);
+  --sd-borde-boton: rgba(242, 244, 241, 0.3);
+  --sd-acento: #9df7c0;
+  --sd-peligro: #ffb3b3;
+  --sd-cabecera-fondo: rgba(11, 12, 11, 0.86);
+
+  /* Ritmo: márgenes y separaciones que crecen con la pantalla */
+  --sd-pad-x: clamp(18px, 3vw, 40px);
+  --sd-gap: clamp(14px, 1.6vw, 24px);
+  --sd-seccion: clamp(90px, 12vw, 170px);
+  --sd-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  /* Multiplica todos los títulos grandes (1 = tamaño aprobado) */
+  --sd-escala-titulos: 1;
+
+  --sd-fuente: "Geist", Helvetica, Arial, sans-serif;
+  --sd-mono: "Geist Mono", ui-monospace, monospace;
+
+  /* Tokens comunes con los valores del sitio: lo de la línea panel que se use dentro se ve coherente */
+  --plano: var(--sd-fondo);
+  --superficie: var(--sd-superficie);
+  --superficie-2: #181b18;
+  --superficie-3: #202420;
+  --tinta: var(--sd-tinta);
+  --tinta-2: var(--sd-tinta-2);
+  --tinta-3: var(--sd-tenue);
+  --borde: var(--sd-linea);
+  --borde-campo: var(--sd-borde-control);
+  --grilla: var(--sd-linea-suave);
+  --eje: var(--sd-linea);
+  --acento: var(--sd-acento);
+  --sobre-acento: var(--sd-fondo);
+  --acento-suave: color-mix(in srgb, var(--sd-acento) 16%, transparent);
+  --sobre-acento-suave: var(--sd-acento);
+  --serie-1: var(--sd-acento);
+
+  background: var(--sd-fondo);
+  color: var(--sd-tinta);
+  font-family: var(--sd-fuente);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Variante clara (p. ej. un admin o una sección invertida): mismo sistema, verde más profundo como acento */
+.sitio-disenadora.sd-claro {
+  color-scheme: light;
+  --sd-fondo: #f4f5f2;
+  --sd-superficie: #ffffff;
+  --sd-imagen: #e4e7e2;
+  --sd-tinta: #141614;
+  --sd-tinta-2: #3a403b;
+  --sd-tenue: #687068;
+  --sd-linea: rgba(20, 22, 20, 0.14);
+  --sd-linea-suave: rgba(20, 22, 20, 0.08);
+  --sd-borde-control: rgba(20, 22, 20, 0.25);
+  --sd-borde-boton: rgba(20, 22, 20, 0.3);
+  --sd-acento: #0d8a53;
+  --sd-peligro: #b42318;
+  --sd-cabecera-fondo: rgba(244, 245, 242, 0.9);
+  --superficie-2: #f0f2ee;
+  --superficie-3: #e6e9e4;
+  --sobre-acento: #ffffff;
+}
+
+/* Sin scroll horizontal aunque el wordmark y la marquesina se desborden a propósito */
+html:has(> body.sitio-disenadora), body.sitio-disenadora, .sitio-disenadora { overflow-x: clip; }
+/* Reglas de elementos con especificidad mínima (:where), para que cualquier clase sd- las pueda cambiar */
+.sitio-disenadora :where(a) { color: inherit; text-decoration: none; transition: color 0.2s; }
+.sitio-disenadora :where(a:hover) { color: var(--sd-acento); }
+.sitio-disenadora :where(img) { display: block; max-width: 100%; }
+.sitio-disenadora :where(button, input, select, textarea) { font: inherit; color: inherit; }
+.sitio-disenadora ::selection { background: var(--sd-acento); color: var(--sd-fondo); }
+.sitio-disenadora :focus-visible { outline: 1px solid var(--sd-acento); outline-offset: 3px; }
+.sitio-disenadora :where(h1, h2, h3, p) { margin: 0; }
+
+/* ---------- Tipografía ---------- */
+
+/* Etiquetas, índices, navegación, botones: mono en mayúscula con aire */
+.sd-mono { font-family: var(--sd-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+/* Rótulo de sección, p. ej. "(01) Trabajos" */
+.sd-etiqueta { font-family: var(--sd-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--sd-acento); }
+/* Palabra destacada dentro de un título: itálica liviana en el acento */
+.sd-acento { font-style: italic; font-weight: 300; color: var(--sd-acento); }
+
+.sd-display {
+  font-size: calc(clamp(56px, 12vw, 200px) * var(--sd-escala-titulos));
+  line-height: 0.86; letter-spacing: -0.055em; font-weight: 500;
+}
+.sd-titulo {
+  font-size: calc(clamp(44px, 9vw, 150px) * var(--sd-escala-titulos));
+  line-height: 0.9; letter-spacing: -0.05em; font-weight: 500;
+}
+/* Párrafo-manifiesto: grande, de lectura lenta (combina con data-words="scroll") */
+.sd-manifiesto {
+  font-size: calc(clamp(34px, 5.6vw, 92px) * var(--sd-escala-titulos));
+  line-height: 1.02; letter-spacing: -0.035em; font-weight: 400; text-wrap: pretty;
+}
+.sd-manifiesto .sd-acento { font-weight: 400; }
+.sd-subtitulo {
+  font-size: calc(clamp(32px, 5.4vw, 88px) * var(--sd-escala-titulos));
+  line-height: 0.95; letter-spacing: -0.045em; font-weight: 400;
+}
+.sd-lead { font-size: clamp(18px, 1.6vw, 22px); line-height: 1.45; color: var(--sd-tinta-2); text-wrap: pretty; }
+.sd-texto { font-size: 15px; line-height: 1.6; color: var(--sd-tenue); }
+/* Nombre gigante a todo el ancho (pie de página o portada) */
+.sd-wordmark { font-size: clamp(64px, 17.5vw, 330px); line-height: 0.8; letter-spacing: -0.07em; font-weight: 600; white-space: nowrap; }
+/* Número de orden en mono acento: "01" */
+.sd-indice { font-family: var(--sd-mono); font-size: 12px; color: var(--sd-acento); margin-right: 12px; }
+/* Cantidad como superíndice de un título grande: "Trabajos¹²" */
+.sd-contador { font-family: var(--sd-mono); font-size: 0.18em; letter-spacing: 0; vertical-align: top; color: var(--sd-acento); font-weight: 400; }
+/* Texto solo con contorno (marquesinas, números grandes) */
+.sd-contorno { color: transparent; -webkit-text-stroke: 1px var(--sd-tinta); }
+
+/* ---------- Estructura ---------- */
+
+.sd-cabecera {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  padding: 22px var(--sd-pad-x); font-size: 14px; letter-spacing: 0.01em;
+  background: var(--sd-cabecera-fondo); border-bottom: 1px solid var(--sd-linea-suave);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+/* Sobre un hero a pantalla completa: fija y transparente, con un degradado para leer los enlaces */
+.sd-cabecera.sd-cabecera-sobre {
+  position: fixed; left: 0; right: 0; background: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent);
+  border-bottom-color: transparent; -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+/* Pasado el hero se vuelve sólida (iniciarMovimiento le pone data-solida) */
+.sd-cabecera.sd-cabecera-sobre[data-solida] {
+  background: var(--sd-cabecera-fondo); border-bottom-color: var(--sd-linea-suave);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+.sd-cabecera-sobre { transition: background 0.3s, border-color 0.3s; }
+.sd-marca { font-weight: 600; font-size: 15px; letter-spacing: 0.02em; }
+.sd-nav { display: flex; gap: clamp(14px, 2.4vw, 36px); flex-wrap: wrap; justify-content: flex-end; font-family: var(--sd-mono); font-size: 12px; text-transform: uppercase; }
+/* Página actual: subrayado fino, el color se mantiene */
+.sd-nav [aria-current="page"] { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+.sd-nav .sd-nav-destacado { color: var(--sd-acento); }
+
+.sd-pagina { flex: 1; padding: clamp(60px, 9vw, 130px) var(--sd-pad-x) clamp(80px, 10vw, 140px); }
+.sd-seccion { padding: var(--sd-seccion) var(--sd-pad-x); }
+.sd-seccion.sd-angosta { max-width: 1500px; margin: 0 auto; }
+/* Encabezado de sección: línea arriba, título a la izquierda y nota a la derecha, alineados abajo */
+.sd-seccion-cabecera {
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap;
+  border-top: 1px solid var(--sd-linea); padding-top: 28px; margin-bottom: clamp(36px, 5vw, 64px);
+}
+.sd-nota-lateral { max-width: 320px; line-height: 1.6; color: var(--sd-tenue); }
+
+.sd-pie { padding: 0 var(--sd-pad-x) 36px; }
+.sd-pie-fila {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px;
+  padding-top: 22px; border-top: 1px solid var(--sd-linea);
+  font-family: var(--sd-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--sd-tenue);
+}
+.sd-pie-fila a { color: var(--sd-tinta); }
+.sd-pie-fila > :last-child { text-align: right; }
+@media (max-width: 720px) { .sd-pie-fila > :last-child { text-align: left; } }
+
+/* ---------- Controles ---------- */
+
+/* Botón píldora: borde fino y texto mono; al pasar el cursor se llena con el acento */
+.sd-pildora {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 16px;
+  border-radius: 999px; border: 1px solid var(--sd-borde-boton); background: transparent; color: var(--sd-tinta);
+  font-family: var(--sd-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em;
+  cursor: pointer; white-space: nowrap; transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.sd-pildora:hover { background: var(--sd-acento); color: var(--sd-fondo); border-color: var(--sd-acento); }
+.sd-pildora:disabled { opacity: 0.4; cursor: not-allowed; }
+.sd-pildora.sd-solida { height: 48px; padding: 0 22px; border: 0; background: var(--sd-acento); color: var(--sd-fondo); font-size: 12px; }
+.sd-pildora.sd-solida:hover { background: var(--sd-tinta); color: var(--sd-fondo); }
+.sd-pildora.sd-grande { height: 54px; width: 100%; letter-spacing: 0.05em; }
+/* Enlace con subrayado de borde (más aire que text-decoration) */
+.sd-subrayado { border-bottom: 1px solid currentColor; padding-bottom: 4px; }
+
+.sd-campo { display: grid; gap: 8px; }
+.sd-campo > span { font-family: var(--sd-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--sd-tenue); }
+.sd-campo :is(input, textarea, select) {
+  background: transparent; border: 0; border-bottom: 1px solid var(--sd-borde-control); border-radius: 0;
+  padding: 10px 0; font-size: 18px; color: var(--sd-tinta); transition: border-color 0.2s;
+}
+.sd-campo :is(input, textarea, select):focus { outline: none; border-bottom-color: var(--sd-acento); }
+
+/* ---------- Hero a pantalla completa ---------- */
+
+.sd-hero { position: relative; height: 100vh; height: 100svh; min-height: 560px; overflow: hidden; background: #000; }
+.sd-hero-medio { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* Oscurece arriba (cabecera) y abajo (textos) sin tocar el centro */
+.sd-hero-sombra {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, transparent 26%, transparent 62%, rgba(0, 0, 0, 0.75) 100%);
+}
+.sd-hero-pie {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 4; display: flex; flex-direction: column; gap: 16px;
+  padding: 0 var(--sd-pad-x) 26px; letter-spacing: 0.05em;
+}
+.sd-hero-fila { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; }
+.sd-hero-titulo { font-size: clamp(22px, 2.6vw, 40px); letter-spacing: -0.02em; line-height: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* Barra de progreso en segmentos (una por diapositiva); el relleno se anima con --progreso (0–1) */
+.sd-segmentos { display: flex; gap: 6px; }
+.sd-segmentos > span { flex: 1; height: 2px; background: rgba(242, 244, 241, 0.22); overflow: hidden; }
+.sd-segmentos > span::after {
+  content: ""; display: block; height: 100%; width: calc(var(--progreso, 0) * 100%);
+  background: var(--sd-acento); box-shadow: 0 0 8px var(--sd-acento);
+}
+/* Indicador "REC ●" con punto que brilla */
+.sd-rec { display: inline-flex; gap: 8px; align-items: center; color: var(--sd-tinta-2); font-variant-numeric: tabular-nums; }
+.sd-rec::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--sd-acento); box-shadow: 0 0 10px var(--sd-acento); animation: sd-latido 2s ease-in-out infinite; }
+@keyframes sd-latido { 50% { opacity: 0.35; } }
+
+/* ---------- Trabajos / galería ---------- */
+
+/* Grilla de 12 columnas: cada obra elige su ancho (--span) y un desfase vertical (--desfase) para un ritmo editorial */
+.sd-galeria { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(36px, 4vw, 64px) var(--sd-gap); align-items: start; }
+.sd-obra { display: flex; flex-direction: column; gap: 14px; grid-column: span var(--span, 6); margin-top: var(--desfase, 0px); }
+@media (max-width: 1024px) { .sd-obra { grid-column: span 6; margin-top: 0; } }
+@media (max-width: 640px) { .sd-obra { grid-column: 1 / -1; } }
+.sd-marco { aspect-ratio: var(--proporcion, auto); overflow: hidden; background: var(--sd-imagen); }
+.sd-marco :is(img, video) { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--sd-ease), filter 0.6s; }
+.sd-obra:hover .sd-marco :is(img, video) { transform: scale(1.035); }
+.sd-leyenda { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; }
+.sd-categoria { font-family: var(--sd-mono); font-size: 12px; text-transform: uppercase; color: var(--sd-tenue); text-align: right; }
+
+/* Lista de servicios: número, título grande y categoría, separados por líneas */
+.sd-lista { display: grid; }
+.sd-fila { display: grid; grid-template-columns: 60px minmax(0, 1fr) auto; gap: 20px; align-items: baseline; padding: 26px 0; border-top: 1px solid var(--sd-linea); }
+.sd-fila:last-child { border-bottom: 1px solid var(--sd-linea); }
+.sd-fila > :nth-child(2) { min-width: 0; overflow: hidden; }
+@media (max-width: 640px) {
+  .sd-fila { grid-template-columns: 36px minmax(0, 1fr); }
+  .sd-fila > :nth-child(3) { grid-column: 2; text-align: left; }
+}
+/* Enlace "siguiente": título enorme que se enciende con el acento */
+.sd-siguiente { display: block; padding: var(--sd-seccion) var(--sd-pad-x); border-top: 1px solid var(--sd-linea); }
+.sd-siguiente .sd-titulo { transition: color 0.3s; }
+.sd-siguiente:hover { color: inherit; }
+.sd-siguiente:hover .sd-titulo { color: var(--sd-acento); }
+
+/* Marquesina: una línea enorme que recorre su ancho con el scroll (data-marquee) */
+.sd-marquesina { overflow: hidden; padding: clamp(30px, 5vw, 70px) 0; border-top: 1px solid var(--sd-linea); border-bottom: 1px solid var(--sd-linea); }
+.sd-marquesina-linea {
+  width: max-content; padding: 0 var(--sd-pad-x); white-space: nowrap; will-change: transform;
+  font-size: clamp(56px, 11vw, 190px); line-height: 1; letter-spacing: -0.05em; font-weight: 500;
+}
+
+/* Rejilla de logos o miniaturas cuadradas */
+.sd-rejilla { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: clamp(10px, 1.2vw, 18px); }
+.sd-rejilla img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+
+/* ---------- Flotantes ---------- */
+
+/* Botón flotante (WhatsApp, contacto): círculo que se abre con su etiqueta al pasar el cursor */
+.sd-flotante {
+  position: fixed; right: clamp(14px, 2vw, 28px); bottom: clamp(14px, 2vw, 28px); z-index: 60;
+  display: flex; align-items: center; gap: 0; height: 52px; padding: 0 14px; border-radius: 999px;
+  background: var(--sd-acento); color: var(--sd-fondo); box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+  transition: gap 0.3s var(--sd-ease), padding 0.3s var(--sd-ease), transform 0.3s var(--sd-ease), opacity 0.3s;
+}
+.sd-flotante:hover { color: var(--sd-fondo); gap: 10px; padding: 0 20px 0 14px; }
+.sd-flotante svg { width: 24px; height: 24px; flex: none; }
+.sd-flotante > span { max-width: 0; overflow: hidden; white-space: nowrap; font-family: var(--sd-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; transition: max-width 0.35s var(--sd-ease); }
+.sd-flotante:hover > span { max-width: 220px; }
+.sd-flotante[data-oculto] { opacity: 0; transform: translateY(16px); pointer-events: none; }
+@media print { .sd-flotante { display: none; } }
+
+/* Aviso (toast) en píldora acento, abajo al centro */
+.sd-aviso {
+  position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); z-index: 60;
+  display: flex; gap: 14px; align-items: center; max-width: calc(100vw - 32px); padding: 12px 12px 12px 20px;
+  border-radius: 999px; background: var(--sd-acento); color: var(--sd-fondo);
+  font-family: var(--sd-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em;
+  animation: sd-aviso-entra 0.35s var(--sd-ease);
+}
+.sd-aviso a { flex-shrink: 0; background: var(--sd-fondo); color: var(--sd-tinta); border-radius: 999px; padding: 7px 12px; }
+@keyframes sd-aviso-entra { from { opacity: 0; transform: translate(-50%, 12px); } }
+
+/* Menú móvil a pantalla completa: enlaces enormes que entran escalonados (--i en cada uno) */
+.sd-menu {
+  position: fixed; inset: 0; z-index: 49; display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 90px var(--sd-pad-x) 40px; background: var(--sd-fondo); animation: sd-aparece 0.35s var(--sd-ease);
+}
+.sd-menu a {
+  display: flex; align-items: baseline; gap: 16px; padding: 14px 0; border-top: 1px solid var(--sd-linea);
+  font-size: clamp(40px, 12vw, 64px); line-height: 1; letter-spacing: -0.045em;
+  animation: sd-sube 0.6s var(--sd-ease) both; animation-delay: calc(var(--i, 0) * 50ms);
+}
+@keyframes sd-aparece { from { opacity: 0; } }
+@keyframes sd-sube { from { opacity: 0; transform: translateY(24px); } }
+
+/* Cursor propio (solo mouse): punto acento que se agranda con una etiqueta sobre [data-cursor="Ver"]. Ver Cursor. */
+.sd-cursor { position: fixed; top: 0; left: 0; z-index: 200; width: 0; height: 0; pointer-events: none; opacity: 0; transition: opacity 0.3s; }
+.sd-cursor[data-on] { opacity: 1; }
+.sd-cursor::before {
+  content: ""; position: absolute; left: -5px; top: -5px; width: 10px; height: 10px; border-radius: 50%;
+  background: var(--sd-acento); mix-blend-mode: difference; transition: transform 0.35s var(--sd-ease);
+}
+.sd-cursor[data-grande]::before { transform: scale(8.4); mix-blend-mode: normal; }
+.sd-cursor span {
+  position: absolute; transform: translate(-50%, -50%); color: var(--sd-fondo); opacity: 0; transition: opacity 0.2s;
+  font-family: var(--sd-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;
+}
+.sd-cursor[data-grande] span { opacity: 1; transition-delay: 0.1s; }
+
+/* Trazo que se dibuja (logos SVG en pantallas de carga): stroke-dasharray según el largo del trazo */
+.sd-trazo path { stroke-dasharray: var(--largo, 260); stroke-dashoffset: var(--largo, 260); animation: sd-dibuja 1.1s var(--sd-ease) forwards; }
+@keyframes sd-dibuja { to { stroke-dashoffset: 0; } }
+
+/* ---------- Movimiento ligado al scroll ----------
+   html.js se agrega antes de pintar; sin JS o con movimiento reducido, todo queda visible. */
+
+html.js [data-reveal] {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 1s var(--sd-ease) var(--delay, 0ms), transform 1.1s var(--sd-ease) var(--delay, 0ms), color 0.2s;
+}
+html.js [data-reveal][data-shown] { opacity: 1; transform: none; }
+
+[data-w] { display: inline-block; }
+html.js [data-words="stagger"] [data-w] {
+  opacity: 0; transform: translateY(0.35em);
+  transition: opacity 0.9s var(--sd-ease) calc(var(--i) * 110ms), transform 1s var(--sd-ease) calc(var(--i) * 110ms);
+}
+html.js [data-words="stagger"][data-shown] [data-w] { opacity: 1; transform: none; }
+html.js [data-words="scroll"] [data-w] { opacity: 0.14; }
+[data-sx] { display: inline-block; }
+
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-reveal], html.js [data-words] [data-w] { opacity: 1 !important; transform: none !important; transition: none !important; }
+  [data-px], [data-sx] { transform: none !important; }
+  .sd-rec::before, .sd-trazo path { animation: none; stroke-dashoffset: 0; }
+}
+
+/* ---------- Transición entre páginas (View Transitions; html[data-transicion="fundido|telon"]) ---------- */
+
+html[data-transicion] ::view-transition-old(root) { animation-duration: 0s; }
+html[data-transicion="fundido"] ::view-transition-old(root) { animation: 180ms ease-in both sd-vt-fundido reverse; }
+html[data-transicion="fundido"] ::view-transition-new(root) { animation: 380ms var(--sd-ease, ease-out) 120ms both sd-vt-fundido, 380ms var(--sd-ease, ease-out) 120ms both sd-vt-sube; }
+html[data-transicion="telon"] ::view-transition-old(root) { animation: 520ms ease-in both sd-vt-atenua; }
+html[data-transicion="telon"] ::view-transition-new(root) { animation: 620ms cubic-bezier(0.7, 0, 0.2, 1) both sd-vt-telon; }
+@keyframes sd-vt-fundido { from { opacity: 0; } }
+@keyframes sd-vt-sube { from { translate: 0 18px; } }
+@keyframes sd-vt-atenua { to { opacity: 0.3; scale: 0.97; } }
+@keyframes sd-vt-telon { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
+@media (prefers-reduced-motion: reduce) { ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
+
+/* Crédito de la biblioteca en la línea sitio: mono mayúscula como el resto del pie */
+.sitio-disenadora .credito-estilos { font-family: var(--sd-mono); text-transform: uppercase; letter-spacing: 0.04em; color: var(--sd-tenue); }

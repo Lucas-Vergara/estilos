@@ -3,7 +3,7 @@
 Mi biblioteca de estilos: una sola fuente para el look and feel de mis proyectos.
 Cuando un estilo mejora en un proyecto, se sube aquí y los demás proyectos lo reciben **cuando yo decida**.
 
-**Vitrina:** [línea panel](https://lucas-vergara.github.io/estilos/) · [línea sitio](https://lucas-vergara.github.io/estilos/sitio.html) · local: `npm install && npm run vitrina`
+**Vitrina:** [línea panel](https://lucas-vergara.github.io/estilos/) · [línea sitio](https://lucas-vergara.github.io/estilos/sitio.html) · [línea sitio diseñadora](https://lucas-vergara.github.io/estilos/sitio-disenadora.html) · local: `npm install && npm run vitrina`
 
 ## Líneas
 
@@ -12,9 +12,10 @@ Una **línea** es un lenguaje visual completo para un tipo de proyecto. Todas co
 | Línea | Archivo | Para qué | Cómo se ve |
 |---|---|---|---|
 | **panel** | `base.css` (o `lineas/panel.css`) | Paneles de datos: monitores, dashboards, herramientas | Fondo gris claro, tarjetas blancas, densidad compacta, Inter |
-| **sitio** | `lineas/sitio.css` | Webs de presentación: estudio, portafolio, marca | Oscura, títulos enormes, mono en mayúscula, movimiento con el scroll, Geist |
+| **sitio** | `lineas/sitio.css` | Webs de presentación y portafolio | Clara y limpia, con personalidad: avatar, fondos vivos, 3D opcional, entrada, telón entre páginas, scroll con movimiento. Bricolage Grotesque + Geist |
+| **sitio diseñadora** | `lineas/sitio-disenadora.css` | Webs de estudio o marca, oscuras | Creada junto con Franservice ([franservice.cl](https://franservice.cl)): oscura, títulos enormes, mono en mayúscula, acento menta. Geist |
 
-Las líneas se pueden **mezclar**: la línea sitio vive bajo la clase `.sitio` con clases `s-…`. Dentro de `.sitio`, los tokens comunes toman los colores del sitio, así que una `.tarjeta`, un `Indicador` o un `GraficoLinea` de la línea panel se ven coherentes (ver la sección "Mezcla" de la vitrina). Para una línea nueva: `css/lineas/<nombre>.css`, con alcance propio (`.<nombre>`) y prefijo de clases propio.
+Las líneas se pueden **mezclar**: cada una vive bajo su propia clase y prefijo (`.sitio` con `s-…`, `.sitio-disenadora` con `sd-…`). Dentro de ellas, los tokens comunes toman los colores de la línea, así que una `.tarjeta`, un `Indicador` o un `GraficoLinea` de la línea panel se ven coherentes (ver "Proyectos" en la vitrina de sitio). Para una línea nueva: `css/lineas/<nombre>.css`, con alcance propio (`.<nombre>`) y prefijo de clases propio.
 
 ## Qué trae
 
@@ -23,11 +24,13 @@ Las líneas se pueden **mezclar**: la línea sitio vive bajo la clase `.sitio` c
 | Tokens | `tokens.css` | Superficies, bordes, estados, sombras, radios, escalas de texto y espaciado, modo oscuro |
 | Acento | `acentos/verde.css`, `acentos/azul.css` | Lo que distingue a cada proyecto: acento, tinte del texto, superficies oscuras, paletas de gráficos |
 | Base | `base.css` | Reset y clases de la línea **panel**: `.barra`, `.tarjeta`, `.boton`, `.campo`, `.segmentado`, tablas, pestañas, chips, avisos… |
-| Línea sitio | `lineas/sitio.css` | Tipografía display, píldoras, hero, galería editorial, marquesina, cursor, flotantes, transiciones de página |
+| Línea sitio | `lineas/sitio.css` | Tipografía, cabecera que se esconde, navegación en píldora, avatar, hero con fondo vivo, entrada, telón, proyectos en marco de navegador, scroll horizontal, tarjetas inclinables, marquesina, galería, variantes noche y simple |
+| Línea sitio diseñadora | `lineas/sitio-disenadora.css` | La línea oscura creada con Franservice (clases `sd-`) |
 | Tailwind | `tailwind.css` | Puente para proyectos con Tailwind v4 (`bg-superficie`, `text-acento`…) sobre las mismas variables |
 | Componentes | `@lucas-vergara/estilos` | `Indicador`, `Variacion`, `Estado`, `Frescura`, `Vacio`, `Segmentado`, `Pestanas`, `ThOrden`, esqueletos, `BotonTema`, `useOrden`… |
 | Gráficos | `@lucas-vergara/estilos/graficos` | `GraficoLinea`, `GraficoBarras`, `GraficoBanda`, `Sparkline` (requiere `recharts`) |
-| Sitio (React) | `@lucas-vergara/estilos/sitio` | `Palabras`, `Acento`, `Cursor`, `iniciarMovimiento`, `SCRIPT_MOVIMIENTO`, `conTransicion` |
+| Sitio (React) | `@lucas-vergara/estilos/sitio` | `Entrada`, `Telon` + `irCon`, `NavPildora` + `useSeccionActiva`, `Avatar`, `FondoAnimado`, `MarcoNavegador`, `Proyecto`, `Ola`, `BotonSonido` + `sonidos`, `Palabras`, `Acento`, `Cursor`, `iniciarMovimiento`, `iniciarInteracciones`, `SCRIPT_MOVIMIENTO`, `conTransicion` |
+| 3D (React) | `@lucas-vergara/estilos/3d` | `Objeto3D` (burbuja, nudo, anillos), `Grilla3D` (requiere `three`) |
 
 ## Usarlo en un proyecto
 
@@ -58,27 +61,36 @@ En `index.html`: la fuente Inter y el script que aplica el tema antes de pintar 
 ### Línea sitio
 
 ```html
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <script>document.documentElement.classList.add("js");</script>
-<body class="sitio" data-transicion="fundido">…</body>
-```
-
-```ts
-import "@lucas-vergara/estilos/tokens.css";
-import "@lucas-vergara/estilos/lineas/sitio.css";
-// Para mezclar con la línea panel: agrega acentos/<acento>.css y base.css ANTES de sitio.css
-import { Palabras, Cursor, iniciarMovimiento } from "@lucas-vergara/estilos/sitio";
-
-useEffect(() => iniciarMovimiento(), []); // data-reveal, data-words, data-marquee, data-px, data-sx
+<body class="sitio">…</body>   <!-- noche: class="sitio s-oscuro" · sin movimiento: class="sitio s-simple" -->
 ```
 
 ```tsx
-<h2 className="s-titulo" data-reveal="">Trabajos<span className="s-contador">12</span></h2>
-<Palabras modo="scroll" como="p" className="s-manifiesto" texto="Una imagen con *carácter*." />
-<a className="s-pildora s-solida" href="/contacto">Escríbeme</a>
+import "@lucas-vergara/estilos/tokens.css";
+import "@lucas-vergara/estilos/lineas/sitio.css";   // para mezclar con panel: acentos/<acento>.css y base.css ANTES
+import { Entrada, Telon, irCon, NavPildora, useSeccionActiva, Avatar, FondoAnimado, Proyecto, BotonSonido,
+  iniciarMovimiento, iniciarInteracciones } from "@lucas-vergara/estilos/sitio";
+import { Objeto3D, Grilla3D } from "@lucas-vergara/estilos/3d";  // solo si instalas three
+
+useEffect(() => { const p = [iniciarMovimiento(), iniciarInteracciones()]; return () => p.forEach((f) => f()); }, []);
 ```
 
-Variables para ajustar por proyecto (en `.sitio`): `--s-acento`, `--s-fondo`, `--s-tinta`, `--s-fuente`, `--s-escala-titulos` (multiplica todos los títulos grandes). Variante clara: `class="sitio sitio-claro"` (también en una sola sección).
+```tsx
+<Entrada />  <Telon />
+<header className="s-cabecera" data-ocultable=""> … <NavPildora enlaces={…} activo={…} onIr={(e) => irCon(e.texto, () => …)} /> <BotonSonido /></header>
+<section className="s-hero"><FondoAnimado modo="manchas" desvanecer /> … <Avatar iniciales="LV" /> <Objeto3D forma="burbuja" /></section>
+<div className="s-proyectos">{proyectos.map((p, i) => <Proyecto key={p.titulo} p={p} indice={i + 1} />)}</div>
+<a className="s-boton" data-magnetico="0.25">Ver proyectos <span className="s-flecha">→</span></a>
+```
+
+Atributos de movimiento: `data-reveal` (`""`, `escala`, `izquierda`, `derecha`), `data-words="stagger|scroll"`, `data-marquee`, `data-px`, `data-horizontal` (sección `.s-horizontal`), `data-progreso-scroll` (barra `.s-progreso`), `data-magnetico`, `data-inclinar` (tarjeta `.s-inclinable`).
+Variables para ajustar por proyecto (en `.sitio`): `--s-acento`, `--s-destello`, `--s-fondo`, `--s-tinta`, `--s-display`, `--s-escala-titulos`.
+Sonidos: generados con Web Audio, **apagados por defecto**; el visitante los activa con `BotonSonido`.
+
+### Línea sitio diseñadora
+
+La misma idea con clases `sd-…` bajo `.sitio-disenadora` (variante clara: `sd-claro`). Componentes compartidos con `prefijo="sd"`: `<Palabras prefijo="sd" …>`, `<Acento prefijo="sd" …>`, `<Cursor prefijo="sd" />`.
 
 **Regla:** el `estilos.css` del proyecto solo tiene lo que es de ese proyecto. Si algo sirve para otros, se sube aquí.
 

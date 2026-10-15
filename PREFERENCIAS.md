@@ -16,9 +16,9 @@ Lo que me gusta, lo que descarté y por qué. Claude lo lee antes de diseñar al
 - **Pestañas fijas** bajo la barra, con los filtros a la derecha.
 - Escala tipográfica cerrada (7 tamaños) y espaciado en múltiplos de 4.
 
-## Me gusta — línea sitio
+## Me gusta — línea sitio diseñadora
 
-Tomado del rediseño de Franservice (con su diseñadora), octubre 2026:
+Creada junto con Franservice (https://franservice.cl), a partir del rediseño hecho con su diseñadora, octubre 2026:
 
 - **Oscuro casi negro con tinte verde** (`#0b0c0b`) y **un solo acento menta** (`#9df7c0`); nada más de color.
 - **Títulos enormes y apretados** (interletrado muy negativo, interlineado < 1), con **una palabra en itálica liviana** en el acento ("imagen con *carácter*").
@@ -31,6 +31,26 @@ Tomado del rediseño de Franservice (con su diseñadora), octubre 2026:
 - Detalles: cursor-punto que se agranda con "Ver", botón flotante que se abre con su etiqueta, wordmark gigante en el pie, transiciones de página suaves.
 - Todo el movimiento respeta "reducir movimiento".
 
+## Me gusta — línea sitio (oficial, desde v0.4.0)
+
+Síntesis de la revisión de 20 portafolios (15-10-2026; marcas y notas en https://claude.ai/artifact/Eq4Be2PjdZQQe1xbjVVHEM).
+**Me gusta:** Dennis Snellenberg, Rauno, Josh Comeau, Robb Owen, Bruno Simon, Henry Heffernan.
+**Tal vez:** Maxime Heckel, Rafa, Matt Farley, Adham Dannaway, Cassie, Keita Yamada.
+**No:** Emil Kowalski, Paco, Linus Rogge, Brian Lovin, Brittany Chiang, Lee Robinson, Anthony Fu, Jhey.
+
+1. **Claridad, limpieza y tonos de día.** Aparece en casi todos los "me gusta". Descartados los oscuros y densos y lo "cargado" (incluida la fuente de Josh).
+2. **Movimiento con intención.** Entrada al sitio y transiciones entre páginas (Dennis), movimiento con el scroll (Rauno), interacciones de la barra de navegación (Josh), efectos y transiciones (Robb).
+3. **No al minimalismo de solo texto.** Los cuatro del grupo descartados: hace falta algo de personalidad (avatar, animación, fondo vivo).
+4. **Efectos sí, complejidad no.** Animaciones 3D, audios y fondos generativos como recursos (Bruno, Henry, Cassie, Keita); no un sitio-juego ni la metáfora del computador 3D.
+
+Ideas pedidas para la biblioteca:
+- Sección de **3D y animación** (Bruno, Henry), con sonidos de interfaz.
+- **Fondos animados** (Cassie, Keita).
+- **Vitrina de proyectos** con capturas o videos hacia abajo (Maxime), también para trabajos de clientes (ozmo: el contrato lo permite; capturas de los sitios de demo, pendientes).
+- **Opción de estilo simple** (Rafa).
+- **Avatar** como toque personal (Josh, Robb, Matt).
+- Rendimiento: que cargue rápido (Adham tarda demasiado).
+
 ## Descartado
 
 - **MUI**: trae su propio look y pelea con el mío (solo se usó en etexScrapF, antiguo).
@@ -38,7 +58,7 @@ Tomado del rediseño de Franservice (con su diseñadora), octubre 2026:
 ## Pendiente de decidir
 
 - Fondo animado de la Store de Franservice (glitter/glitch en canvas): es código de la diseñadora (`design_handoff_store_fx/bg-fx.js`); no se copió a esta biblioteca pública. Si ella está de acuerdo, se puede sumar como efecto de la línea sitio.
-- Acento de la línea sitio para proyectos propios (el menta es de Franservice): ¿mantenerlo o usar uno propio en el portafolio?
+- Acento de la línea sitio oficial: hoy índigo (#3d5afe) con amarillo de destello (#ffd84d), elegido a partir de las referencias (Rauno, Robb, Josh). Confirmar o cambiar al revisar la vitrina.
 
 - Paletas de gráficos del acento azul: no están validadas con el validador de dataviz.
 - Servir Inter desde la app (`@fontsource-variable/inter`) en vez de Google Fonts.
@@ -47,7 +67,7 @@ Tomado del rediseño de Franservice (con su diseñadora), octubre 2026:
 
 ## Ideas por venir
 
-- **Portafolio propio**: línea sitio para la presentación + casos de estudio con la línea panel adentro (ver "Mezcla" en la vitrina de sitio).
+- **Portafolio propio**: línea sitio (oficial) para la presentación + casos de estudio con la línea panel adentro. Pendiente: avatar o foto, capturas de los sitios de demo de ozmo (con credenciales de admin), textos y proyectos reales.
 
 ## Proyectos y su versión
 

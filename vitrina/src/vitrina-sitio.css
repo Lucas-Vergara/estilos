@@ -1,15 +1,37 @@
-/* Solo para la vitrina de la línea sitio: imágenes de ejemplo hechas con degradados y algunos ajustes de maqueta. */
-.demo-medio { background: radial-gradient(120% 90% at 30% 20%, hsl(160 45% 28%), #050605 70%); transition: background 1.2s; }
-.demo-medio-1 { background: radial-gradient(120% 90% at 70% 30%, hsl(210 40% 26%), #050605 70%); }
-.demo-medio-2 { background: radial-gradient(120% 90% at 50% 70%, hsl(30 45% 24%), #050605 70%); }
-.demo-hero-logo { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; pointer-events: none; }
-.demo-hero-logo .s-wordmark { font-size: clamp(56px, 13vw, 240px); }
-.demo-imagen { width: 100%; height: 100%; background: linear-gradient(135deg, hsl(var(--tono) 40% 32%), hsl(calc(var(--tono) + 40) 35% 14%)); transition: transform 1s var(--s-ease); }
-.s-obra:hover .demo-imagen { transform: scale(1.035); }
-.demo-manifiesto { margin-top: 40px; }
-.demo-formulario { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px 32px; max-width: 900px; }
-.demo-ancho { grid-column: 1 / -1; }
-.demo-wordmark { margin: clamp(60px, 10vw, 140px) 0 24px; }
-#contacto { padding-top: var(--s-seccion); }
-/* Que el botón flotante no tape el crédito del pie */
-.s-pie { padding-bottom: 100px; }
+/* Solo para la vitrina de la línea sitio: maquetas de proyectos, selectores de demostración y ajustes de maqueta. */
+.marca-punto { width: 12px; height: 12px; border-radius: 50%; background: var(--s-acento); box-shadow: 4px 4px 0 var(--s-destello); }
+.hero-quien { display: flex; align-items: center; gap: clamp(16px, 2.4vw, 28px); flex-wrap: wrap; }
+.hero-objeto { position: relative; aspect-ratio: 1; max-width: 100%; width: min(100%, 460px); justify-self: center; }
+.selector { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 4px; border-radius: 999px; background: var(--s-superficie); border: 1px solid var(--s-linea); box-shadow: var(--s-sombra); }
+.selector button { border: 0; background: none; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 500; color: var(--s-tinta-2); cursor: pointer; }
+.selector button[aria-pressed="true"] { background: var(--s-tinta); color: var(--s-fondo); }
+.hero-objeto .selector { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); }
+.selector-fondo { position: absolute; right: var(--s-pad-x); bottom: 16px; }
+@media (max-width: 860px) { .selector-fondo { position: static; margin-top: 24px; } }
+
+.maqueta-panel { height: 100%; padding: 18px; background: var(--plano); display: grid; gap: 12px; align-content: start; font-size: 13px; }
+.maqueta-panel .indicadores { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.maqueta-panel .indicador-valor { font-size: 1.5rem; }
+.maqueta-barra { display: flex; justify-content: space-between; color: var(--tinta-2); }
+.maqueta-landing {
+  height: 100%; padding: clamp(20px, 4vw, 44px); display: grid; gap: 14px; align-content: center; justify-items: start;
+  background: radial-gradient(80% 90% at 85% 15%, var(--s-acento-suave), transparent 60%), var(--s-superficie);
+}
+.maqueta-landing b { font-family: var(--s-display); font-size: clamp(22px, 3.2vw, 40px); line-height: 1; letter-spacing: -0.03em; max-width: 14ch; }
+.maqueta-boton { padding: 8px 16px; border-radius: 999px; background: var(--s-tinta); color: var(--s-fondo); font-size: 13px; font-weight: 600; }
+
+.grilla-seccion { position: relative; height: clamp(420px, 70vh, 680px); overflow: hidden; }
+.grilla-seccion canvas { position: absolute; inset: 0; }
+.grilla-texto { position: relative; display: grid; gap: 16px; padding: clamp(40px, 7vw, 90px) var(--s-pad-x); pointer-events: none; }
+
+.tarjetas { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: var(--s-gap); }
+.ola-envoltura { color: #0f1117; margin-bottom: -2px; }
+.formulario { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 20px 24px; max-width: 860px; }
+.formulario .ancho { grid-column: 1 / -1; }
+.boton-texto { border: 0; background: none; padding: 0; color: var(--s-acento-texto); cursor: pointer; font-size: 14px; }
+.sitio code { font-family: var(--s-mono); font-size: 0.85em; padding: 1px 6px; border-radius: 6px; background: var(--s-hundido); }
+.maqueta-filas { display: grid; gap: 8px; padding: 12px 14px; border-radius: 12px; background: var(--superficie); border: 1px solid var(--borde); }
+.maqueta-filas > div { display: grid; grid-template-columns: 110px 1fr 28px; align-items: center; gap: 10px; color: var(--tinta-2); }
+.maqueta-filas .barra-pista { width: 100%; }
+.maqueta-filas b { text-align: right; font-variant-numeric: tabular-nums; }
+.s-pie { padding-bottom: 104px; } /* que el botón flotante no tape los enlaces del pie */

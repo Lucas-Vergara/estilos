@@ -1,5 +1,16 @@
 # Cambios
 
+## v0.4.0 — 2026-10-15
+
+**Cambio que rompe:** la línea "sitio" anterior pasa a llamarse **"sitio diseñadora"** (creada junto con Franservice, https://franservice.cl): archivo `lineas/sitio-disenadora.css`, alcance `.sitio-disenadora`, clases `sd-…`, variables `--sd-…`, variante `sd-claro`. Quien la usaba debe renombrar clases (`s-` → `sd-`) o quedarse en v0.3.0. Ningún proyecto la usaba.
+
+**Nueva línea "sitio" oficial**, clara por defecto, a partir de la revisión de 20 portafolios (ver PREFERENCIAS.md):
+- `lineas/sitio.css`: paleta de día (índigo + amarillo de destello) y variantes `s-oscuro` y `s-simple`; tipografía Bricolage Grotesque + Geist; cabecera que se esconde al bajar; navegación en píldora; avatar; hero con fondo vivo; entrada al sitio; telón entre páginas; proyectos en marco de navegador; scroll horizontal; barra de progreso; tarjetas inclinables; botones magnéticos; y lo rescatado de sitio diseñadora (marquesina, galería editorial, lista de servicios, flotante, aviso, cursor).
+- `@lucas-vergara/estilos/sitio`: `Entrada`, `Telon` + `irCon`, `NavPildora` + `useSeccionActiva`, `Avatar`, `FondoAnimado` (manchas, malla, ondas), `MarcoNavegador`, `Proyecto`, `Ola`, `sonidos` + `BotonSonido` (Web Audio, apagados por defecto), `iniciarInteracciones`. `iniciarMovimiento` suma scroll horizontal, progreso y cabecera ocultable. `Palabras`, `Acento` y `Cursor` aceptan `prefijo` ("s" o "sd").
+- `@lucas-vergara/estilos/3d` (requiere `three`, dependencia opcional): `Objeto3D` (burbuja, nudo, anillos; rebota al tocarlo) y `Grilla3D`.
+- `Palabras`: la puntuación pegada a una palabra destacada ya no se separa.
+- Vitrina: `sitio.html` (línea nueva) y `sitio-disenadora.html` (la anterior).
+
 ## v0.3.0 — 2026-10-15
 
 - **Licencia nueva: MIT con atribución visible.** Quien use la biblioteca en una web o app pública debe mostrar "Estilos: Lucas Vergara" enlazado al repo (pie de página o página de créditos). Rige desde esta versión.

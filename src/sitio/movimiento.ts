@@ -7,7 +7,10 @@
  *  - data-px="0.15"         parallax horizontal según la distancia al centro de la pantalla.
  *  - data-px-hero="0.25"    sube con el scroll y se desvanece (logo sobre un hero).
  *  - data-sx                se desliza desde la izquierda al entrar.
- *  - .s-cabecera-sobre      recibe data-solida al pasar el hero (fondo sólido).
+ *  - .s-cabecera-sobre / .sd-cabecera-sobre  reciben data-solida al pasar el hero (fondo sólido).
+ *  - .s-cabecera[data-ocultable]  se esconde al bajar y vuelve al subir; recibe data-con-borde al dejar el inicio.
+ *  - data-horizontal        en una sección .s-horizontal: queda fija y su .s-horizontal-pista avanza hacia el lado.
+ *  - data-progreso-scroll   barra (.s-progreso) que se llena según el avance de la página.
  * Respeta prefers-reduced-motion (todo visible, sin desplazamientos).
  */
 function movimiento() {
@@ -16,6 +19,7 @@ function movimiento() {
   const limitar = (v: number, a = 0, b = 1) => Math.max(a, Math.min(b, v));
   const todos = (sel: string) => document.querySelectorAll<HTMLElement>(sel);
   let raf = 0;
+  let ultimoY = window.scrollY;
 
   const actualizar = () => {
     raf = 0;
@@ -23,14 +27,40 @@ function movimiento() {
     const vw = document.documentElement.clientWidth;
 
     // Cabecera transparente sobre un hero: sólida una vez que el hero quedó atrás.
-    todos(".s-cabecera-sobre").forEach((el) => el.toggleAttribute("data-solida", window.scrollY > vh * 0.85));
+    const y = window.scrollY;
+    todos(".s-cabecera-sobre, .sd-cabecera-sobre").forEach((el) => el.toggleAttribute("data-solida", y > vh * 0.85));
+    // Cabecera que se esconde al bajar y vuelve al subir (con un margen para no temblar).
+    const cambio = Math.abs(y - ultimoY) > 6;
+    todos(".s-cabecera[data-ocultable]").forEach((el) => {
+      el.toggleAttribute("data-con-borde", y > 8);
+      if (cambio) el.toggleAttribute("data-oculta", y > ultimoY && y > 120 && !el.contains(document.activeElement));
+    });
+    if (cambio) ultimoY = y;
+    // Progreso de lectura de la página.
+    todos("[data-progreso-scroll]").forEach((el) => {
+      const max = document.documentElement.scrollHeight - vh;
+      el.style.transform = `scaleX(${max > 0 ? limitar(y / max) : 0})`;
+    });
 
     todos("[data-reveal]:not([data-shown]), [data-words='stagger']:not([data-shown])").forEach((el) => {
       if (reducido || el.getBoundingClientRect().top < vh * 0.9) {
-        requestAnimationFrame(() => requestAnimationFrame(() => el.setAttribute("data-shown", "")));
+        // Dos cuadros de espera para que la transición se vea; con la pestaña oculta no hay cuadros: se muestra ya.
+        if (document.hidden) el.setAttribute("data-shown", "");
+        else requestAnimationFrame(() => requestAnimationFrame(() => el.setAttribute("data-shown", "")));
       }
     });
     if (reducido) return;
+
+    // Sección fija con pista horizontal: la altura de la sección es el recorrido de la pista.
+    todos("[data-horizontal]").forEach((el) => {
+      const pista = el.querySelector<HTMLElement>(".s-horizontal-pista");
+      if (!pista) return;
+      const recorrido = Math.max(0, pista.scrollWidth - vw);
+      const alto = `${vh + recorrido}px`;
+      if (el.style.height !== alto) el.style.height = alto;
+      const p = limitar(-el.getBoundingClientRect().top / (recorrido || 1));
+      pista.style.transform = `translate3d(${-p * recorrido}px,0,0)`;
+    });
 
     todos("[data-words='scroll']").forEach((el) => {
       const r = el.getBoundingClientRect();
@@ -72,6 +102,7 @@ function movimiento() {
   };
 
   const programar = () => {
+    if (document.hidden) { actualizar(); return; }
     if (!raf) raf = requestAnimationFrame(actualizar);
   };
 

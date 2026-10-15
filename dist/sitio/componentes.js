@@ -1,26 +1,27 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import { useEffect, useRef } from "react";
-// Componentes de la línea "sitio". Las clases están en css/lineas/sitio.css.
-/** Texto con las palabras entre *asteriscos* en itálica acento (.s-acento). */
-export function Acento({ texto }) {
-    return (_jsx(_Fragment, { children: texto.split(/(\*[^*]+\*)/g).map((parte, i) => parte.startsWith("*") && parte.endsWith("*") ? _jsx("span", { className: "s-acento", children: parte.slice(1, -1) }, i) : parte) }));
+/** Texto con las palabras entre *asteriscos* destacadas con la clase acento de la línea (.s-acento / .sd-acento). */
+export function Acento({ texto, prefijo = "s" }) {
+    return (_jsx(_Fragment, { children: texto.split(/(\*[^*]+\*)/g).map((parte, i) => parte.startsWith("*") && parte.endsWith("*") ? _jsx("span", { className: `${prefijo}-acento`, children: parte.slice(1, -1) }, i) : parte) }));
 }
 /**
  * Divide un texto en palabras animables ([data-w]) para el movimiento de scroll: "stagger" entran escalonadas al
  * aparecer; "scroll" se encienden con el avance. "*con carácter*" va en itálica acento como un solo bloque.
  */
-export function Palabras({ texto, modo, como: Etiqueta = "h2", className }) {
-    const piezas = texto.match(/\*[^*]+\*|\S+/g) ?? [];
+export function Palabras({ texto, modo, como: Etiqueta = "h2", className, prefijo = "s" }) {
+    // Una palabra destacada conserva la puntuación pegada a ella ("*claros*," → "claros,").
+    const piezas = texto.match(/\*[^*]+\*[^\s*]*|\S+/g) ?? [];
     return (_jsx(Etiqueta, { "data-words": modo, className: className, children: piezas.map((p, i) => {
             const acento = p.startsWith("*");
-            return (_jsxs("span", { children: [_jsx("span", { "data-w": "", className: acento ? "s-acento" : undefined, style: modo === "stagger" ? { "--i": i } : undefined, children: acento ? p.slice(1, -1) : p }), i < piezas.length - 1 ? " " : null] }, i));
+            const cierre = acento ? p.indexOf("*", 1) : -1;
+            return (_jsxs("span", { children: [_jsx("span", { "data-w": "", style: modo === "stagger" ? { "--i": i } : undefined, children: acento ? _jsxs(_Fragment, { children: [_jsx("span", { className: `${prefijo}-acento`, children: p.slice(1, cierre) }), p.slice(cierre + 1)] }) : p }), i < piezas.length - 1 ? " " : null] }, i));
         }) }));
 }
 /**
  * Cursor propio (solo escritorio con mouse): un punto acento que sigue al puntero y se agranda con una etiqueta sobre
  * los elementos con data-cursor="Ver". No reemplaza el cursor del sistema, así nada deja de funcionar.
  */
-export function Cursor() {
+export function Cursor({ prefijo = "s" }) {
     const punto = useRef(null);
     const etiqueta = useRef(null);
     useEffect(() => {
@@ -62,7 +63,7 @@ export function Cursor() {
             document.documentElement.removeEventListener("pointerleave", salir);
         };
     }, []);
-    return (_jsx("div", { ref: punto, className: "s-cursor", "aria-hidden": "true", children: _jsx("span", { ref: etiqueta }) }));
+    return (_jsx("div", { ref: punto, className: `${prefijo}-cursor`, "aria-hidden": "true", children: _jsx("span", { ref: etiqueta }) }));
 }
 /**
  * Navega con una transición de página (View Transitions) si el navegador la soporta y el usuario no pidió menos

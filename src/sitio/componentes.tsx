@@ -1,13 +1,16 @@
 import { useEffect, useRef, type CSSProperties } from "react";
 
-// Componentes de la línea "sitio". Las clases están en css/lineas/sitio.css.
+// Componentes de las líneas "sitio" (clases s-, css/lineas/sitio.css) y "sitio diseñadora" (clases sd-,
+// css/lineas/sitio-disenadora.css): elige la línea con `prefijo` ("s" por defecto, "sd" para sitio diseñadora).
 
-/** Texto con las palabras entre *asteriscos* en itálica acento (.s-acento). */
-export function Acento({ texto }: { texto: string }) {
+type Prefijo = "s" | "sd";
+
+/** Texto con las palabras entre *asteriscos* destacadas con la clase acento de la línea (.s-acento / .sd-acento). */
+export function Acento({ texto, prefijo = "s" }: { texto: string; prefijo?: Prefijo }) {
   return (
     <>
       {texto.split(/(\*[^*]+\*)/g).map((parte, i) =>
-        parte.startsWith("*") && parte.endsWith("*") ? <span key={i} className="s-acento">{parte.slice(1, -1)}</span> : parte,
+        parte.startsWith("*") && parte.endsWith("*") ? <span key={i} className={`${prefijo}-acento`}>{parte.slice(1, -1)}</span> : parte,
       )}
     </>
   );
@@ -17,21 +20,24 @@ export function Acento({ texto }: { texto: string }) {
  * Divide un texto en palabras animables ([data-w]) para el movimiento de scroll: "stagger" entran escalonadas al
  * aparecer; "scroll" se encienden con el avance. "*con carácter*" va en itálica acento como un solo bloque.
  */
-export function Palabras({ texto, modo, como: Etiqueta = "h2", className }: {
+export function Palabras({ texto, modo, como: Etiqueta = "h2", className, prefijo = "s" }: {
   texto: string;
   modo: "stagger" | "scroll";
   como?: "h1" | "h2" | "h3" | "p";
   className?: string;
+  prefijo?: Prefijo;
 }) {
-  const piezas = texto.match(/\*[^*]+\*|\S+/g) ?? [];
+  // Una palabra destacada conserva la puntuación pegada a ella ("*claros*," → "claros,").
+  const piezas = texto.match(/\*[^*]+\*[^\s*]*|\S+/g) ?? [];
   return (
     <Etiqueta data-words={modo} className={className}>
       {piezas.map((p, i) => {
         const acento = p.startsWith("*");
+        const cierre = acento ? p.indexOf("*", 1) : -1;
         return (
           <span key={i}>
-            <span data-w="" className={acento ? "s-acento" : undefined} style={modo === "stagger" ? ({ "--i": i } as CSSProperties) : undefined}>
-              {acento ? p.slice(1, -1) : p}
+            <span data-w="" style={modo === "stagger" ? ({ "--i": i } as CSSProperties) : undefined}>
+              {acento ? <><span className={`${prefijo}-acento`}>{p.slice(1, cierre)}</span>{p.slice(cierre + 1)}</> : p}
             </span>
             {i < piezas.length - 1 ? " " : null}
           </span>
@@ -45,7 +51,7 @@ export function Palabras({ texto, modo, como: Etiqueta = "h2", className }: {
  * Cursor propio (solo escritorio con mouse): un punto acento que sigue al puntero y se agranda con una etiqueta sobre
  * los elementos con data-cursor="Ver". No reemplaza el cursor del sistema, así nada deja de funcionar.
  */
-export function Cursor() {
+export function Cursor({ prefijo = "s" }: { prefijo?: Prefijo }) {
   const punto = useRef<HTMLDivElement>(null);
   const etiqueta = useRef<HTMLSpanElement>(null);
 
@@ -84,7 +90,7 @@ export function Cursor() {
   }, []);
 
   return (
-    <div ref={punto} className="s-cursor" aria-hidden="true">
+    <div ref={punto} className={`${prefijo}-cursor`} aria-hidden="true">
       <span ref={etiqueta} />
     </div>
   );
