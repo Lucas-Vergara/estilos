@@ -1,3 +1,4 @@
+/*! @lucas-vergara/estilos · github.com/Lucas-Vergara/estilos · Licencia MIT con atribución visible: "Estilos: Lucas Vergara" */
 /*
  * Tokens comunes a todos los proyectos: superficies claras, bordes, estados, sombras, radios y escalas.
  * Lo que cambia entre proyectos (acento, tinte del texto, superficies oscuras, paletas de gráficos)
@@ -52,6 +53,9 @@
   --div-alza-1: #f6c9c3; --div-alza-2: #e0705f; --div-alza-3: #b3261e;
 
   --fuente: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Huella: identifica la biblioteca y su versión en cualquier sitio que la use (se actualiza con npm version) */
+  --estilos-lv: "0.2.1";
 }
 
 :root[data-theme="dark"] {
@@ -70,3 +74,7 @@
   --div-igual: #2a302b;
   --div-alza-1: #5a2620; --div-alza-2: #d4574a; --div-alza-3: #ffb4ab;
 }
+
+/* Crédito requerido por la licencia (ver <CreditoEstilos />): chico y discreto, en cualquier línea */
+.credito-estilos { font-size: 11px; line-height: 1.4; color: var(--tinta-3); text-decoration: none; opacity: 0.85; white-space: nowrap; }
+.credito-estilos:hover { text-decoration: underline; opacity: 1; }

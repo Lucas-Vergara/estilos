@@ -1,7 +1,7 @@
 import { StrictMode, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
-  BotonDescarga, BotonTema, Esqueleto, EsqueletoTabla, Estado, Frescura, Indicador, PanelPestana, Pestanas, Segmentado,
+  BotonDescarga, BotonTema, CreditoEstilos, Esqueleto, EsqueletoTabla, Estado, Frescura, Indicador, PanelPestana, Pestanas, Segmentado,
   ThOrden, Vacio, Variacion, ordenar, useOrden,
 } from "../../src";
 import { GraficoBanda, GraficoBarras, GraficoLinea, Sparkline } from "../../src/graficos";
@@ -313,6 +313,7 @@ function Vitrina() {
           </Seccion>
         </div>
       </main>
+      <footer className="pie-vitrina"><span>Vitrina de la línea panel</span><CreditoEstilos /></footer>
     </>
   );
 }

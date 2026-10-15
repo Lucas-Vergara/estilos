@@ -1,6 +1,6 @@
 import { StrictMode, useEffect, useState, type CSSProperties } from "react";
 import { createRoot } from "react-dom/client";
-import { Indicador, Variacion } from "../../src";
+import { CreditoEstilos, Indicador, Variacion } from "../../src";
 import { GraficoLinea } from "../../src/graficos";
 import { Acento, Cursor, Palabras, iniciarMovimiento } from "../../src/sitio";
 import "../../css/tokens.css";
@@ -198,7 +198,7 @@ function Sitio() {
           <span>Biobío, Chile · <Hora /></span>
           <a href="#">Instagram</a>
           <a href="./">Línea panel</a>
-          <span>© 2026</span>
+          <span>© 2026 · <CreditoEstilos /></span>
         </div>
       </footer>
 

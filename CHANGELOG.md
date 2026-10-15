@@ -1,5 +1,12 @@
 # Cambios
 
+## v0.3.0 — 2026-10-15
+
+- **Licencia nueva: MIT con atribución visible.** Quien use la biblioteca en una web o app pública debe mostrar "Estilos: Lucas Vergara" enlazado al repo (pie de página o página de créditos). Rige desde esta versión.
+- `<CreditoEstilos />` y la clase `.credito-estilos` (en `tokens.css`, sirve en todas las líneas; en la línea sitio va en mono mayúscula).
+- Huella: comentario `/*! … */` y variable `--estilos-lv` con la versión, que sobreviven a la minificación.
+- Sin cambios visuales en las líneas panel y sitio.
+
 ## v0.2.1 — 2026-10-15
 
 - Los imports internos llevan extensión `.js`: el paquete también funciona en Node ESM estricto (SSR, pruebas), no solo con Vite o Next. Sin cambios visuales.

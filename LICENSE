@@ -1,9 +1,62 @@
-MIT License
+Licencia MIT con atribución visible
+Copyright (c) 2026 Lucas Vergara — https://github.com/Lucas-Vergara/estilos
 
-Copyright (c) 2026 Lucas Vergara
+(English version below.)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Se concede permiso, libre de cargos, a cualquier persona que obtenga una copia de este software y de los archivos
+de documentación asociados (el "Software"), para usar, copiar, modificar, fusionar, publicar, distribuir,
+sublicenciar y/o vender copias del Software, y para permitir lo mismo a las personas a quienes se les entregue,
+sujeto a las siguientes condiciones:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+1. El aviso de copyright anterior y este aviso de permiso deben incluirse en todas las copias o partes sustanciales
+   del Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+2. Atribución visible. Todo sitio web, aplicación u otra interfaz pública que use el Software, o una parte
+   sustancial de él (incluidas versiones modificadas), debe mostrar un crédito visible con el texto
+   "Estilos: Lucas Vergara" (o su traducción, p. ej. "Styles: Lucas Vergara") enlazado a
+   https://github.com/Lucas-Vergara/estilos. El crédito debe estar en el pie de página o en una página de
+   créditos accesible desde todas las páginas, y ser legible; puede ser pequeño y discreto. El componente
+   <CreditoEstilos /> incluido en el Software cumple esta condición.
+
+3. Si la condición 2 no se cumple, el permiso concedido por esta licencia termina automáticamente para ese uso.
+   El titular puede eximir de la condición 2 por escrito.
+
+EL SOFTWARE SE PROPORCIONA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O IMPLÍCITA, INCLUYENDO PERO NO
+LIMITADO A GARANTÍAS DE COMERCIALIZACIÓN, IDONEIDAD PARA UN PROPÓSITO PARTICULAR E INCUMPLIMIENTO. EN NINGÚN CASO
+LOS AUTORES O TITULARES DEL COPYRIGHT SERÁN RESPONSABLES DE NINGUNA RECLAMACIÓN, DAÑOS U OTRAS RESPONSABILIDADES,
+YA SEA EN UNA ACCIÓN DE CONTRATO, AGRAVIO O CUALQUIER OTRO MOTIVO, DERIVADAS DE, FUERA DE O EN CONEXIÓN CON EL
+SOFTWARE O SU USO U OTRO TIPO DE ACCIONES EN EL SOFTWARE.
+
+Las versiones v0.1.0 a v0.2.1 se publicaron bajo la licencia MIT sin la condición 2; esta licencia rige desde la
+versión v0.3.0.
+
+-------------------------------------------------------------------------------------------------------------------
+
+MIT License with visible attribution
+Copyright (c) 2026 Lucas Vergara — https://github.com/Lucas-Vergara/estilos
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+1. The above copyright notice and this permission notice shall be included in all copies or substantial portions
+   of the Software.
+
+2. Visible attribution. Any website, application or other public interface that uses the Software, or a
+   substantial portion of it (including modified versions), must display a visible credit reading
+   "Styles: Lucas Vergara" (or "Estilos: Lucas Vergara") linked to https://github.com/Lucas-Vergara/estilos.
+   The credit must appear in the footer or on a credits page reachable from every page, and must be legible; it
+   may be small and unobtrusive. The <CreditoEstilos /> component included in the Software satisfies this
+   condition.
+
+3. If condition 2 is not met, the permission granted by this license terminates automatically for that use. The
+   copyright holder may waive condition 2 in writing.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Versions v0.1.0 through v0.2.1 were released under the MIT License without condition 2; this license applies from
+version v0.3.0 onward.

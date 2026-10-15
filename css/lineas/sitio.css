@@ -1,3 +1,4 @@
+/*! @lucas-vergara/estilos · github.com/Lucas-Vergara/estilos · Licencia MIT con atribución visible: "Estilos: Lucas Vergara" */
 /*
  * Línea "sitio": webs de presentación (estudio, portafolio, marca). Oscura por defecto, tipografía display enorme,
  * etiquetas en mono mayúscula, mucho aire y movimiento ligado al scroll. Ideas tomadas del rediseño de Franservice
@@ -365,3 +366,6 @@ html[data-transicion="telon"] ::view-transition-new(root) { animation: 620ms cub
 @keyframes s-vt-atenua { to { opacity: 0.3; scale: 0.97; } }
 @keyframes s-vt-telon { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
 @media (prefers-reduced-motion: reduce) { ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
+
+/* Crédito de la biblioteca en la línea sitio: mono mayúscula como el resto del pie */
+.sitio .credito-estilos { font-family: var(--s-mono); text-transform: uppercase; letter-spacing: 0.04em; color: var(--s-tenue); }

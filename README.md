@@ -82,6 +82,22 @@ Variables para ajustar por proyecto (en `.sitio`): `--s-acento`, `--s-fondo`, `-
 
 **Regla:** el `estilos.css` del proyecto solo tiene lo que es de ese proyecto. Si algo sirve para otros, se sube aquí.
 
+## Uso por terceros: crédito obligatorio
+
+La biblioteca se puede usar libremente con una condición ([LICENSE](LICENSE)): toda web o app pública que la use
+debe mostrar un crédito pequeño, **"Estilos: Lucas Vergara"**, enlazado a este repo, en el pie de página o en una
+página de créditos. La forma más simple:
+
+```tsx
+import { CreditoEstilos } from "@lucas-vergara/estilos";
+
+<footer>… <CreditoEstilos /></footer>   // en inglés: <CreditoEstilos texto="Styles: Lucas Vergara" />
+```
+
+Sin React: `<a class="credito-estilos" href="https://github.com/Lucas-Vergara/estilos">Estilos: Lucas Vergara</a>`.
+
+Las versiones v0.1.0 a v0.2.1 se publicaron con MIT sin esta condición. Los proyectos del autor no la necesitan.
+
 ## Versiones: actualizar, no actualizar o volver atrás
 
 Cada proyecto fija una versión exacta (el `v0.1.0.tar.gz` del `package.json`). **Nada cambia en un proyecto hasta que tú cambies ese número.**
