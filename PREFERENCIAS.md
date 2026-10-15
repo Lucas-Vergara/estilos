@@ -59,6 +59,8 @@ Desde v0.6.0 hay siete, todas claras y limpias, con selector en la vitrina: índ
 
 Lucas quiere los objetos 3D en su propia línea, no en el hero de sitio. Referencias revisadas: galerías de sitios con Three.js (Awwwards, mesh3d), Bruno Simon y Henry Heffernan (de su revisión), y técnicas comunes en sitios premiados: morphing de partículas sincronizado con scroll, vidrio con transmisión y refracción sobre texto, orbes con shader de ruido, paisajes de puntos, túneles por scroll y carruseles cilíndricos. Todo sin modelos externos, con los colores de la paleta.
 
+Le gustan todas las escenas de la línea 3d: se mantienen para ir probando.
+
 ## Descartado
 
 - **Objeto 3D en el hero de la línea sitio**: se movió a la línea 3d.

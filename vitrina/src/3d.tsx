@@ -2,8 +2,8 @@ import { StrictMode, useEffect, useState, type CSSProperties, type ReactNode } f
 import { createRoot } from "react-dom/client";
 import { BotonSonido, NavPildora, Palabras, iniciarMovimiento, sonidos, useSeccionActiva } from "../../src/sitio";
 import {
-  Bloques3D, Carrusel3D, FORMAS_PARTICULAS, Grilla3D, Objeto3D, Orbe3D, Particulas3D, Terreno3D, Tunel3D, Vidrio3D,
-  type EstiloTerreno, type FormaObjeto, type FormaParticulas, type FormaVidrio,
+  Bloques3D, Carrusel3D, Silueta3D, FORMAS_PARTICULAS, Grilla3D, Objeto3D, Orbe3D, Particulas3D, Terreno3D, Tunel3D, Vidrio3D,
+  type DatosSilueta, type EstiloTerreno, type FormaObjeto, type FormaParticulas, type FormaVidrio,
 } from "../../src/3d";
 import { SelectorPaleta, usePaleta } from "./paletas";
 import "../../css/tokens.css";
@@ -22,6 +22,20 @@ const ENLACES = [
   { id: "espacios", texto: "Espacios" },
   { id: "recorrido", texto: "Recorrido" },
 ];
+
+// Mariposa genérica dibujada para la demo (viewBox 100): cuatro alas que aletean, cuerpo y antenas.
+const MARIPOSA: DatosSilueta = {
+  formas: [
+    "M48,44 C40,28 24,16 10,20 C8,32 16,44 30,48 C38,50 44,49 48,48 Z",
+    "M52,44 C60,28 76,16 90,20 C92,32 84,44 70,48 C62,50 56,49 52,48 Z",
+    "M48,50 C40,52 28,58 24,70 C28,80 40,76 48,56 Z",
+    "M52,50 C60,52 72,58 76,70 C72,80 60,76 52,56 Z",
+    "M50,36 C53,36 54,40 54,46 L53,70 Q50,76 47,70 L46,46 C46,40 47,36 50,36 Z",
+  ],
+  lineas: ["M49,37 C47,30 44,26 40,24", "M51,37 C53,30 56,26 60,24", "M16,24 L28,32 L40,40", "M84,24 L72,32 L60,40"],
+  nodos: [[40, 24, 1.8], [60, 24, 1.8]],
+  aletean: [0, 1, 2, 3],
+};
 
 function Selector<T extends string>({ opciones, valor, setValor, etiqueta }: { opciones: readonly T[]; valor: T; setValor: (v: T) => void; etiqueta: string }) {
   return (
@@ -157,12 +171,21 @@ function Tresd() {
           </div>
         </section>
 
+        <section className="s-seccion">
+          <div className="s-ancho td-dueto">
+            <Ficha indice="09 · Silueta" titulo="Un dibujo SVG en 3D" texto="Toma los trazos de un ícono o logo y les da volumen, con un contorno de neón que se dibuja al aparecer y otra vez al tocarlo. Las alas aletean." chips={["Silueta3D", "SVG", "Contorno"]} />
+            <div className="td-escenario" style={{ "--td-proporcion": "1" } as CSSProperties} data-reveal="escala">
+              <Silueta3D datos={MARIPOSA} />
+            </div>
+          </div>
+        </section>
+
         <section className="td-recorrido" data-recorrido="" id="recorrido">
           <div className="td-recorrido-fijo">
             <Tunel3D etiquetas={["Idea", "Boceto", "Diseño", "Código", "Lanzamiento"]} />
             <div className="td-sobre">
               <div className="s-ancho"><div className="td-panel s-pila" style={{ gap: 12 }}>
-                <span className="s-etiqueta">08 · Recorrido</span>
+                <span className="s-etiqueta">10 · Recorrido</span>
                 <h2 className="s-titulo">Un túnel que avanza al bajar</h2>
                 <p className="s-lead">La sección es alta y el lienzo queda fijo: la cámara avanza con el scroll y pasa junto a las tarjetas.</p>
               </div></div>

@@ -1,5 +1,10 @@
 # Cambios
 
+## v0.8.0 — 2026-10-15
+
+- `@lucas-vergara/estilos/3d`: `Silueta3D`, que convierte trazos SVG (formas, líneas y nodos) en un objeto con volumen y contorno de neón que se dibuja al aparecer y al tocarlo; las formas indicadas en `aletean` se mueven como alas. Por defecto usa la tinta y el destello de la paleta; acepta colores propios (p. ej. los de una marca).
+- Vitrina 3d: escena "Silueta" con una mariposa genérica.
+
 ## v0.7.0 — 2026-10-15
 
 - **Nueva línea "3d"** (`lineas/3d.css`, clases `td-`, sobre la línea sitio): escenarios en caja, a todo el ancho y con recorrido por scroll; escena y texto lado a lado; panel translúcido para texto sobre la escena; selector de opciones.
