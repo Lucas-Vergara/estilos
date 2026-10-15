@@ -29,10 +29,24 @@ Lo que me gusta, lo que descarté y por qué. Claude lo lee antes de diseñar al
 
 ## Proyectos y su versión
 
-| Proyecto | Acento | Usa la biblioteca |
-|---|---|---|
-| monitor Sodimac (meyer/scrap2.0/web) | verde | v0.1.0 |
-| radar de reciclaje | verde | no (copia antigua) |
-| monitor de proyectos | azul | no (copia antigua) |
-| oportunidades | azul | no (copia antigua) |
-| Liss/axis, fases, calculadora-termica | Tailwind | no |
+| Proyecto | Acento | Versión | Notas |
+|---|---|---|---|
+| monitor Sodimac (meyer/scrap2.0/web) | verde | v0.1.0 | origen de la biblioteca |
+| radar de reciclaje | verde | v0.1.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura); usa el Indicador de la biblioteca |
+| monitor de proyectos | azul | v0.1.0 | ídem |
+| oportunidades | azul | v0.1.0 | ídem |
+
+### Fuera de la biblioteca (por decidir)
+
+| Proyecto | Por qué no se migró |
+|---|---|
+| trote-app | Diseño propio (violeta, CSS modules) de una app de entrenamiento: adoptar la biblioteca sería un rediseño. |
+| franservice (web) | Sitio de marca de un cliente: probablemente necesita una línea propia ("sitio"), no la de panel. |
+| meyer/calculadora-termica | Calculadora con la marca Gyplac (cliente), en Tailwind; además tiene cambios sin commitear. |
+| Liss/axis, Liss/axis-2, fases, semillas | Tailwind con estilos propios; se podrían migrar con `tailwind.css` si se quiere la misma línea. |
+| etexScrapF | Antiguo, en MUI. |
+| ozmo | De trabajo: excluido. |
+
+## Pendiente: unificar componentes
+
+Radar, monitor de proyectos y oportunidades aún tienen su propio `Segmentado` (prop `onCambio`, opciones con `etiqueta`) y su propia `Frescura` (prop `iso`), con otra API que la de la biblioteca. Cuando se toquen, conviene migrarlos a los componentes de la biblioteca.
