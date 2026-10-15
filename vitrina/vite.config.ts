@@ -1,9 +1,16 @@
+import { resolve } from "node:path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 // La vitrina usa el código fuente directo (../src, ../css): lo que ves aquí es lo que se publicará.
+// Una página por línea: index.html (panel) y sitio.html (sitio).
 export default defineConfig({
   root: "vitrina",
   base: "/estilos/",
   plugins: [react()],
+  build: {
+    rollupOptions: {
+      input: { panel: resolve(import.meta.dirname, "index.html"), sitio: resolve(import.meta.dirname, "sitio.html") },
+    },
+  },
 });

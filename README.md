@@ -3,7 +3,18 @@
 Mi biblioteca de estilos: una sola fuente para el look and feel de mis proyectos.
 Cuando un estilo mejora en un proyecto, se sube aquí y los demás proyectos lo reciben **cuando yo decida**.
 
-**Vitrina:** https://lucas-vergara.github.io/estilos/ · local: `npm install && npm run vitrina`
+**Vitrina:** [línea panel](https://lucas-vergara.github.io/estilos/) · [línea sitio](https://lucas-vergara.github.io/estilos/sitio.html) · local: `npm install && npm run vitrina`
+
+## Líneas
+
+Una **línea** es un lenguaje visual completo para un tipo de proyecto. Todas comparten `tokens.css`.
+
+| Línea | Archivo | Para qué | Cómo se ve |
+|---|---|---|---|
+| **panel** | `base.css` (o `lineas/panel.css`) | Paneles de datos: monitores, dashboards, herramientas | Fondo gris claro, tarjetas blancas, densidad compacta, Inter |
+| **sitio** | `lineas/sitio.css` | Webs de presentación: estudio, portafolio, marca | Oscura, títulos enormes, mono en mayúscula, movimiento con el scroll, Geist |
+
+Las líneas se pueden **mezclar**: la línea sitio vive bajo la clase `.sitio` con clases `s-…`. Dentro de `.sitio`, los tokens comunes toman los colores del sitio, así que una `.tarjeta`, un `Indicador` o un `GraficoLinea` de la línea panel se ven coherentes (ver la sección "Mezcla" de la vitrina). Para una línea nueva: `css/lineas/<nombre>.css`, con alcance propio (`.<nombre>`) y prefijo de clases propio.
 
 ## Qué trae
 
@@ -12,9 +23,11 @@ Cuando un estilo mejora en un proyecto, se sube aquí y los demás proyectos lo 
 | Tokens | `tokens.css` | Superficies, bordes, estados, sombras, radios, escalas de texto y espaciado, modo oscuro |
 | Acento | `acentos/verde.css`, `acentos/azul.css` | Lo que distingue a cada proyecto: acento, tinte del texto, superficies oscuras, paletas de gráficos |
 | Base | `base.css` | Reset y clases de la línea **panel**: `.barra`, `.tarjeta`, `.boton`, `.campo`, `.segmentado`, tablas, pestañas, chips, avisos… |
+| Línea sitio | `lineas/sitio.css` | Tipografía display, píldoras, hero, galería editorial, marquesina, cursor, flotantes, transiciones de página |
 | Tailwind | `tailwind.css` | Puente para proyectos con Tailwind v4 (`bg-superficie`, `text-acento`…) sobre las mismas variables |
 | Componentes | `@lucas-vergara/estilos` | `Indicador`, `Variacion`, `Estado`, `Frescura`, `Vacio`, `Segmentado`, `Pestanas`, `ThOrden`, esqueletos, `BotonTema`, `useOrden`… |
 | Gráficos | `@lucas-vergara/estilos/graficos` | `GraficoLinea`, `GraficoBarras`, `GraficoBanda`, `Sparkline` (requiere `recharts`) |
+| Sitio (React) | `@lucas-vergara/estilos/sitio` | `Palabras`, `Acento`, `Cursor`, `iniciarMovimiento`, `SCRIPT_MOVIMIENTO`, `conTransicion` |
 
 ## Usarlo en un proyecto
 
@@ -41,6 +54,31 @@ En `index.html`: la fuente Inter y el script que aplica el tema antes de pintar 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <script>try { if (localStorage.getItem("tema") === "dark") document.documentElement.dataset.theme = "dark"; } catch {}</script>
 ```
+
+### Línea sitio
+
+```html
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script>document.documentElement.classList.add("js");</script>
+<body class="sitio" data-transicion="fundido">…</body>
+```
+
+```ts
+import "@lucas-vergara/estilos/tokens.css";
+import "@lucas-vergara/estilos/lineas/sitio.css";
+// Para mezclar con la línea panel: agrega acentos/<acento>.css y base.css ANTES de sitio.css
+import { Palabras, Cursor, iniciarMovimiento } from "@lucas-vergara/estilos/sitio";
+
+useEffect(() => iniciarMovimiento(), []); // data-reveal, data-words, data-marquee, data-px, data-sx
+```
+
+```tsx
+<h2 className="s-titulo" data-reveal="">Trabajos<span className="s-contador">12</span></h2>
+<Palabras modo="scroll" como="p" className="s-manifiesto" texto="Una imagen con *carácter*." />
+<a className="s-pildora s-solida" href="/contacto">Escríbeme</a>
+```
+
+Variables para ajustar por proyecto (en `.sitio`): `--s-acento`, `--s-fondo`, `--s-tinta`, `--s-fuente`, `--s-escala-titulos` (multiplica todos los títulos grandes). Variante clara: `class="sitio sitio-claro"` (también en una sola sección).
 
 **Regla:** el `estilos.css` del proyecto solo tiene lo que es de ese proyecto. Si algo sirve para otros, se sube aquí.
 
@@ -74,6 +112,3 @@ git push --follow-tags
 
 `dist/` va en el repo a propósito: así instalar desde GitHub no requiere compilar nada.
 
-## Líneas
-
-Hoy hay una: **panel** (paneles de datos densos). Si nace otra (p. ej. una landing más amplia), irá como `css/lineas/<nombre>.css` sobre los mismos tokens. Ver [PREFERENCIAS.md](PREFERENCIAS.md).

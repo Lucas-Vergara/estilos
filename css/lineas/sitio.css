@@ -1,0 +1,367 @@
+/*
+ * Línea "sitio": webs de presentación (estudio, portafolio, marca). Oscura por defecto, tipografía display enorme,
+ * etiquetas en mono mayúscula, mucho aire y movimiento ligado al scroll. Ideas tomadas del rediseño de Franservice
+ * (trabajo conjunto con su diseñadora).
+ *
+ * Todo vive bajo la clase .sitio (en <body> o en una sección), y las clases llevan prefijo s-, así que puede convivir
+ * con la línea panel (base.css) en la misma página: dentro de .sitio, los tokens comunes (--plano, --tinta, --acento…)
+ * toman los valores del sitio, y una .tarjeta de panel se ve coherente con el resto.
+ *
+ * Requiere tokens.css. Fuentes: Geist y Geist Mono (ver README). Movimiento: iniciarMovimiento() de
+ * "@lucas-vergara/estilos/sitio" activa los atributos data-reveal, data-words, data-marquee, data-px y data-sx.
+ */
+
+.sitio {
+  color-scheme: dark;
+
+  /* Paleta: casi negro con tinte verde, blanco cálido y un acento menta */
+  --s-fondo: #0b0c0b;
+  --s-superficie: #121412;
+  --s-imagen: #151715;          /* fondo de marcos mientras carga la imagen */
+  --s-tinta: #f2f4f1;
+  --s-tinta-2: #c9cfca;
+  --s-tenue: #a9b0aa;
+  --s-linea: rgba(242, 244, 241, 0.14);
+  --s-linea-suave: rgba(242, 244, 241, 0.08);
+  --s-borde-control: rgba(242, 244, 241, 0.25);
+  --s-borde-boton: rgba(242, 244, 241, 0.3);
+  --s-acento: #9df7c0;
+  --s-peligro: #ffb3b3;
+  --s-cabecera-fondo: rgba(11, 12, 11, 0.86);
+
+  /* Ritmo: márgenes y separaciones que crecen con la pantalla */
+  --s-pad-x: clamp(18px, 3vw, 40px);
+  --s-gap: clamp(14px, 1.6vw, 24px);
+  --s-seccion: clamp(90px, 12vw, 170px);
+  --s-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  /* Multiplica todos los títulos grandes (1 = tamaño aprobado) */
+  --s-escala-titulos: 1;
+
+  --s-fuente: "Geist", Helvetica, Arial, sans-serif;
+  --s-mono: "Geist Mono", ui-monospace, monospace;
+
+  /* Tokens comunes con los valores del sitio: lo de la línea panel que se use dentro se ve coherente */
+  --plano: var(--s-fondo);
+  --superficie: var(--s-superficie);
+  --superficie-2: #181b18;
+  --superficie-3: #202420;
+  --tinta: var(--s-tinta);
+  --tinta-2: var(--s-tinta-2);
+  --tinta-3: var(--s-tenue);
+  --borde: var(--s-linea);
+  --borde-campo: var(--s-borde-control);
+  --grilla: var(--s-linea-suave);
+  --eje: var(--s-linea);
+  --acento: var(--s-acento);
+  --sobre-acento: var(--s-fondo);
+  --acento-suave: color-mix(in srgb, var(--s-acento) 16%, transparent);
+  --sobre-acento-suave: var(--s-acento);
+  --serie-1: var(--s-acento);
+
+  background: var(--s-fondo);
+  color: var(--s-tinta);
+  font-family: var(--s-fuente);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Variante clara (p. ej. un admin o una sección invertida): mismo sistema, verde más profundo como acento */
+.sitio.sitio-claro {
+  color-scheme: light;
+  --s-fondo: #f4f5f2;
+  --s-superficie: #ffffff;
+  --s-imagen: #e4e7e2;
+  --s-tinta: #141614;
+  --s-tinta-2: #3a403b;
+  --s-tenue: #687068;
+  --s-linea: rgba(20, 22, 20, 0.14);
+  --s-linea-suave: rgba(20, 22, 20, 0.08);
+  --s-borde-control: rgba(20, 22, 20, 0.25);
+  --s-borde-boton: rgba(20, 22, 20, 0.3);
+  --s-acento: #0d8a53;
+  --s-peligro: #b42318;
+  --s-cabecera-fondo: rgba(244, 245, 242, 0.9);
+  --superficie-2: #f0f2ee;
+  --superficie-3: #e6e9e4;
+  --sobre-acento: #ffffff;
+}
+
+/* Sin scroll horizontal aunque el wordmark y la marquesina se desborden a propósito */
+html:has(> body.sitio), body.sitio, .sitio { overflow-x: clip; }
+/* Reglas de elementos con especificidad mínima (:where), para que cualquier clase s- las pueda cambiar */
+.sitio :where(a) { color: inherit; text-decoration: none; transition: color 0.2s; }
+.sitio :where(a:hover) { color: var(--s-acento); }
+.sitio :where(img) { display: block; max-width: 100%; }
+.sitio :where(button, input, select, textarea) { font: inherit; color: inherit; }
+.sitio ::selection { background: var(--s-acento); color: var(--s-fondo); }
+.sitio :focus-visible { outline: 1px solid var(--s-acento); outline-offset: 3px; }
+.sitio :where(h1, h2, h3, p) { margin: 0; }
+
+/* ---------- Tipografía ---------- */
+
+/* Etiquetas, índices, navegación, botones: mono en mayúscula con aire */
+.s-mono { font-family: var(--s-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+/* Rótulo de sección, p. ej. "(01) Trabajos" */
+.s-etiqueta { font-family: var(--s-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--s-acento); }
+/* Palabra destacada dentro de un título: itálica liviana en el acento */
+.s-acento { font-style: italic; font-weight: 300; color: var(--s-acento); }
+
+.s-display {
+  font-size: calc(clamp(56px, 12vw, 200px) * var(--s-escala-titulos));
+  line-height: 0.86; letter-spacing: -0.055em; font-weight: 500;
+}
+.s-titulo {
+  font-size: calc(clamp(44px, 9vw, 150px) * var(--s-escala-titulos));
+  line-height: 0.9; letter-spacing: -0.05em; font-weight: 500;
+}
+/* Párrafo-manifiesto: grande, de lectura lenta (combina con data-words="scroll") */
+.s-manifiesto {
+  font-size: calc(clamp(34px, 5.6vw, 92px) * var(--s-escala-titulos));
+  line-height: 1.02; letter-spacing: -0.035em; font-weight: 400; text-wrap: pretty;
+}
+.s-manifiesto .s-acento { font-weight: 400; }
+.s-subtitulo {
+  font-size: calc(clamp(32px, 5.4vw, 88px) * var(--s-escala-titulos));
+  line-height: 0.95; letter-spacing: -0.045em; font-weight: 400;
+}
+.s-lead { font-size: clamp(18px, 1.6vw, 22px); line-height: 1.45; color: var(--s-tinta-2); text-wrap: pretty; }
+.s-texto { font-size: 15px; line-height: 1.6; color: var(--s-tenue); }
+/* Nombre gigante a todo el ancho (pie de página o portada) */
+.s-wordmark { font-size: clamp(64px, 17.5vw, 330px); line-height: 0.8; letter-spacing: -0.07em; font-weight: 600; white-space: nowrap; }
+/* Número de orden en mono acento: "01" */
+.s-indice { font-family: var(--s-mono); font-size: 12px; color: var(--s-acento); margin-right: 12px; }
+/* Cantidad como superíndice de un título grande: "Trabajos¹²" */
+.s-contador { font-family: var(--s-mono); font-size: 0.18em; letter-spacing: 0; vertical-align: top; color: var(--s-acento); font-weight: 400; }
+/* Texto solo con contorno (marquesinas, números grandes) */
+.s-contorno { color: transparent; -webkit-text-stroke: 1px var(--s-tinta); }
+
+/* ---------- Estructura ---------- */
+
+.s-cabecera {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  padding: 22px var(--s-pad-x); font-size: 14px; letter-spacing: 0.01em;
+  background: var(--s-cabecera-fondo); border-bottom: 1px solid var(--s-linea-suave);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+/* Sobre un hero a pantalla completa: fija y transparente, con un degradado para leer los enlaces */
+.s-cabecera.s-cabecera-sobre {
+  position: fixed; left: 0; right: 0; background: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent);
+  border-bottom-color: transparent; -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+/* Pasado el hero se vuelve sólida (iniciarMovimiento le pone data-solida) */
+.s-cabecera.s-cabecera-sobre[data-solida] {
+  background: var(--s-cabecera-fondo); border-bottom-color: var(--s-linea-suave);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+.s-cabecera-sobre { transition: background 0.3s, border-color 0.3s; }
+.s-marca { font-weight: 600; font-size: 15px; letter-spacing: 0.02em; }
+.s-nav { display: flex; gap: clamp(14px, 2.4vw, 36px); flex-wrap: wrap; justify-content: flex-end; font-family: var(--s-mono); font-size: 12px; text-transform: uppercase; }
+/* Página actual: subrayado fino, el color se mantiene */
+.s-nav [aria-current="page"] { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+.s-nav .s-nav-destacado { color: var(--s-acento); }
+
+.s-pagina { flex: 1; padding: clamp(60px, 9vw, 130px) var(--s-pad-x) clamp(80px, 10vw, 140px); }
+.s-seccion { padding: var(--s-seccion) var(--s-pad-x); }
+.s-seccion.s-angosta { max-width: 1500px; margin: 0 auto; }
+/* Encabezado de sección: línea arriba, título a la izquierda y nota a la derecha, alineados abajo */
+.s-seccion-cabecera {
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap;
+  border-top: 1px solid var(--s-linea); padding-top: 28px; margin-bottom: clamp(36px, 5vw, 64px);
+}
+.s-nota-lateral { max-width: 320px; line-height: 1.6; color: var(--s-tenue); }
+
+.s-pie { padding: 0 var(--s-pad-x) 36px; }
+.s-pie-fila {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px;
+  padding-top: 22px; border-top: 1px solid var(--s-linea);
+  font-family: var(--s-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--s-tenue);
+}
+.s-pie-fila a { color: var(--s-tinta); }
+.s-pie-fila > :last-child { text-align: right; }
+@media (max-width: 720px) { .s-pie-fila > :last-child { text-align: left; } }
+
+/* ---------- Controles ---------- */
+
+/* Botón píldora: borde fino y texto mono; al pasar el cursor se llena con el acento */
+.s-pildora {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 16px;
+  border-radius: 999px; border: 1px solid var(--s-borde-boton); background: transparent; color: var(--s-tinta);
+  font-family: var(--s-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em;
+  cursor: pointer; white-space: nowrap; transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.s-pildora:hover { background: var(--s-acento); color: var(--s-fondo); border-color: var(--s-acento); }
+.s-pildora:disabled { opacity: 0.4; cursor: not-allowed; }
+.s-pildora.s-solida { height: 48px; padding: 0 22px; border: 0; background: var(--s-acento); color: var(--s-fondo); font-size: 12px; }
+.s-pildora.s-solida:hover { background: var(--s-tinta); color: var(--s-fondo); }
+.s-pildora.s-grande { height: 54px; width: 100%; letter-spacing: 0.05em; }
+/* Enlace con subrayado de borde (más aire que text-decoration) */
+.s-subrayado { border-bottom: 1px solid currentColor; padding-bottom: 4px; }
+
+.s-campo { display: grid; gap: 8px; }
+.s-campo > span { font-family: var(--s-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--s-tenue); }
+.s-campo :is(input, textarea, select) {
+  background: transparent; border: 0; border-bottom: 1px solid var(--s-borde-control); border-radius: 0;
+  padding: 10px 0; font-size: 18px; color: var(--s-tinta); transition: border-color 0.2s;
+}
+.s-campo :is(input, textarea, select):focus { outline: none; border-bottom-color: var(--s-acento); }
+
+/* ---------- Hero a pantalla completa ---------- */
+
+.s-hero { position: relative; height: 100vh; height: 100svh; min-height: 560px; overflow: hidden; background: #000; }
+.s-hero-medio { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* Oscurece arriba (cabecera) y abajo (textos) sin tocar el centro */
+.s-hero-sombra {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, transparent 26%, transparent 62%, rgba(0, 0, 0, 0.75) 100%);
+}
+.s-hero-pie {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 4; display: flex; flex-direction: column; gap: 16px;
+  padding: 0 var(--s-pad-x) 26px; letter-spacing: 0.05em;
+}
+.s-hero-fila { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; }
+.s-hero-titulo { font-size: clamp(22px, 2.6vw, 40px); letter-spacing: -0.02em; line-height: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* Barra de progreso en segmentos (una por diapositiva); el relleno se anima con --progreso (0–1) */
+.s-segmentos { display: flex; gap: 6px; }
+.s-segmentos > span { flex: 1; height: 2px; background: rgba(242, 244, 241, 0.22); overflow: hidden; }
+.s-segmentos > span::after {
+  content: ""; display: block; height: 100%; width: calc(var(--progreso, 0) * 100%);
+  background: var(--s-acento); box-shadow: 0 0 8px var(--s-acento);
+}
+/* Indicador "REC ●" con punto que brilla */
+.s-rec { display: inline-flex; gap: 8px; align-items: center; color: var(--s-tinta-2); font-variant-numeric: tabular-nums; }
+.s-rec::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--s-acento); box-shadow: 0 0 10px var(--s-acento); animation: s-latido 2s ease-in-out infinite; }
+@keyframes s-latido { 50% { opacity: 0.35; } }
+
+/* ---------- Trabajos / galería ---------- */
+
+/* Grilla de 12 columnas: cada obra elige su ancho (--span) y un desfase vertical (--desfase) para un ritmo editorial */
+.s-galeria { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(36px, 4vw, 64px) var(--s-gap); align-items: start; }
+.s-obra { display: flex; flex-direction: column; gap: 14px; grid-column: span var(--span, 6); margin-top: var(--desfase, 0px); }
+@media (max-width: 1024px) { .s-obra { grid-column: span 6; margin-top: 0; } }
+@media (max-width: 640px) { .s-obra { grid-column: 1 / -1; } }
+.s-marco { aspect-ratio: var(--proporcion, auto); overflow: hidden; background: var(--s-imagen); }
+.s-marco :is(img, video) { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--s-ease), filter 0.6s; }
+.s-obra:hover .s-marco :is(img, video) { transform: scale(1.035); }
+.s-leyenda { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; }
+.s-categoria { font-family: var(--s-mono); font-size: 12px; text-transform: uppercase; color: var(--s-tenue); text-align: right; }
+
+/* Lista de servicios: número, título grande y categoría, separados por líneas */
+.s-lista { display: grid; }
+.s-fila { display: grid; grid-template-columns: 60px minmax(0, 1fr) auto; gap: 20px; align-items: baseline; padding: 26px 0; border-top: 1px solid var(--s-linea); }
+.s-fila:last-child { border-bottom: 1px solid var(--s-linea); }
+.s-fila > :nth-child(2) { min-width: 0; overflow: hidden; }
+@media (max-width: 640px) {
+  .s-fila { grid-template-columns: 36px minmax(0, 1fr); }
+  .s-fila > :nth-child(3) { grid-column: 2; text-align: left; }
+}
+/* Enlace "siguiente": título enorme que se enciende con el acento */
+.s-siguiente { display: block; padding: var(--s-seccion) var(--s-pad-x); border-top: 1px solid var(--s-linea); }
+.s-siguiente .s-titulo { transition: color 0.3s; }
+.s-siguiente:hover { color: inherit; }
+.s-siguiente:hover .s-titulo { color: var(--s-acento); }
+
+/* Marquesina: una línea enorme que recorre su ancho con el scroll (data-marquee) */
+.s-marquesina { overflow: hidden; padding: clamp(30px, 5vw, 70px) 0; border-top: 1px solid var(--s-linea); border-bottom: 1px solid var(--s-linea); }
+.s-marquesina-linea {
+  width: max-content; padding: 0 var(--s-pad-x); white-space: nowrap; will-change: transform;
+  font-size: clamp(56px, 11vw, 190px); line-height: 1; letter-spacing: -0.05em; font-weight: 500;
+}
+
+/* Rejilla de logos o miniaturas cuadradas */
+.s-rejilla { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: clamp(10px, 1.2vw, 18px); }
+.s-rejilla img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+
+/* ---------- Flotantes ---------- */
+
+/* Botón flotante (WhatsApp, contacto): círculo que se abre con su etiqueta al pasar el cursor */
+.s-flotante {
+  position: fixed; right: clamp(14px, 2vw, 28px); bottom: clamp(14px, 2vw, 28px); z-index: 60;
+  display: flex; align-items: center; gap: 0; height: 52px; padding: 0 14px; border-radius: 999px;
+  background: var(--s-acento); color: var(--s-fondo); box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+  transition: gap 0.3s var(--s-ease), padding 0.3s var(--s-ease), transform 0.3s var(--s-ease), opacity 0.3s;
+}
+.s-flotante:hover { color: var(--s-fondo); gap: 10px; padding: 0 20px 0 14px; }
+.s-flotante svg { width: 24px; height: 24px; flex: none; }
+.s-flotante > span { max-width: 0; overflow: hidden; white-space: nowrap; font-family: var(--s-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; transition: max-width 0.35s var(--s-ease); }
+.s-flotante:hover > span { max-width: 220px; }
+.s-flotante[data-oculto] { opacity: 0; transform: translateY(16px); pointer-events: none; }
+@media print { .s-flotante { display: none; } }
+
+/* Aviso (toast) en píldora acento, abajo al centro */
+.s-aviso {
+  position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); z-index: 60;
+  display: flex; gap: 14px; align-items: center; max-width: calc(100vw - 32px); padding: 12px 12px 12px 20px;
+  border-radius: 999px; background: var(--s-acento); color: var(--s-fondo);
+  font-family: var(--s-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em;
+  animation: s-aviso-entra 0.35s var(--s-ease);
+}
+.s-aviso a { flex-shrink: 0; background: var(--s-fondo); color: var(--s-tinta); border-radius: 999px; padding: 7px 12px; }
+@keyframes s-aviso-entra { from { opacity: 0; transform: translate(-50%, 12px); } }
+
+/* Menú móvil a pantalla completa: enlaces enormes que entran escalonados (--i en cada uno) */
+.s-menu {
+  position: fixed; inset: 0; z-index: 49; display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 90px var(--s-pad-x) 40px; background: var(--s-fondo); animation: s-aparece 0.35s var(--s-ease);
+}
+.s-menu a {
+  display: flex; align-items: baseline; gap: 16px; padding: 14px 0; border-top: 1px solid var(--s-linea);
+  font-size: clamp(40px, 12vw, 64px); line-height: 1; letter-spacing: -0.045em;
+  animation: s-sube 0.6s var(--s-ease) both; animation-delay: calc(var(--i, 0) * 50ms);
+}
+@keyframes s-aparece { from { opacity: 0; } }
+@keyframes s-sube { from { opacity: 0; transform: translateY(24px); } }
+
+/* Cursor propio (solo mouse): punto acento que se agranda con una etiqueta sobre [data-cursor="Ver"]. Ver Cursor. */
+.s-cursor { position: fixed; top: 0; left: 0; z-index: 200; width: 0; height: 0; pointer-events: none; opacity: 0; transition: opacity 0.3s; }
+.s-cursor[data-on] { opacity: 1; }
+.s-cursor::before {
+  content: ""; position: absolute; left: -5px; top: -5px; width: 10px; height: 10px; border-radius: 50%;
+  background: var(--s-acento); mix-blend-mode: difference; transition: transform 0.35s var(--s-ease);
+}
+.s-cursor[data-grande]::before { transform: scale(8.4); mix-blend-mode: normal; }
+.s-cursor span {
+  position: absolute; transform: translate(-50%, -50%); color: var(--s-fondo); opacity: 0; transition: opacity 0.2s;
+  font-family: var(--s-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;
+}
+.s-cursor[data-grande] span { opacity: 1; transition-delay: 0.1s; }
+
+/* Trazo que se dibuja (logos SVG en pantallas de carga): stroke-dasharray según el largo del trazo */
+.s-trazo path { stroke-dasharray: var(--largo, 260); stroke-dashoffset: var(--largo, 260); animation: s-dibuja 1.1s var(--s-ease) forwards; }
+@keyframes s-dibuja { to { stroke-dashoffset: 0; } }
+
+/* ---------- Movimiento ligado al scroll ----------
+   html.js se agrega antes de pintar; sin JS o con movimiento reducido, todo queda visible. */
+
+html.js [data-reveal] {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 1s var(--s-ease) var(--delay, 0ms), transform 1.1s var(--s-ease) var(--delay, 0ms), color 0.2s;
+}
+html.js [data-reveal][data-shown] { opacity: 1; transform: none; }
+
+[data-w] { display: inline-block; }
+html.js [data-words="stagger"] [data-w] {
+  opacity: 0; transform: translateY(0.35em);
+  transition: opacity 0.9s var(--s-ease) calc(var(--i) * 110ms), transform 1s var(--s-ease) calc(var(--i) * 110ms);
+}
+html.js [data-words="stagger"][data-shown] [data-w] { opacity: 1; transform: none; }
+html.js [data-words="scroll"] [data-w] { opacity: 0.14; }
+[data-sx] { display: inline-block; }
+
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-reveal], html.js [data-words] [data-w] { opacity: 1 !important; transform: none !important; transition: none !important; }
+  [data-px], [data-sx] { transform: none !important; }
+  .s-rec::before, .s-trazo path { animation: none; stroke-dashoffset: 0; }
+}
+
+/* ---------- Transición entre páginas (View Transitions; html[data-transicion="fundido|telon"]) ---------- */
+
+html[data-transicion] ::view-transition-old(root) { animation-duration: 0s; }
+html[data-transicion="fundido"] ::view-transition-old(root) { animation: 180ms ease-in both s-vt-fundido reverse; }
+html[data-transicion="fundido"] ::view-transition-new(root) { animation: 380ms var(--s-ease, ease-out) 120ms both s-vt-fundido, 380ms var(--s-ease, ease-out) 120ms both s-vt-sube; }
+html[data-transicion="telon"] ::view-transition-old(root) { animation: 520ms ease-in both s-vt-atenua; }
+html[data-transicion="telon"] ::view-transition-new(root) { animation: 620ms cubic-bezier(0.7, 0, 0.2, 1) both s-vt-telon; }
+@keyframes s-vt-fundido { from { opacity: 0; } }
+@keyframes s-vt-sube { from { translate: 0 18px; } }
+@keyframes s-vt-atenua { to { opacity: 0.3; scale: 0.97; } }
+@keyframes s-vt-telon { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
+@media (prefers-reduced-motion: reduce) { ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }

@@ -1,5 +1,15 @@
 # Cambios
 
+## v0.2.0 — 2026-10-15
+
+Nueva **línea sitio** (webs de presentación), con ideas del rediseño de Franservice. Sin cambios en la línea panel.
+
+- `lineas/sitio.css`: paleta oscura (y variante `.sitio-claro`), tipografía display (`s-display`, `s-titulo`, `s-manifiesto`, `s-wordmark`, `s-etiqueta`, `s-acento`), cabecera con desenfoque, píldoras, campos con línea inferior, hero con segmentos de progreso y REC, galería editorial de 12 columnas, lista de servicios, marquesina, botón flotante, aviso, menú móvil, cursor propio, trazo que se dibuja, movimiento con el scroll y transiciones de página.
+- `@lucas-vergara/estilos/sitio`: `Palabras`, `Acento`, `Cursor`, `iniciarMovimiento` / `SCRIPT_MOVIMIENTO`, `conTransicion`.
+- Dentro de `.sitio`, los tokens comunes toman los colores del sitio: se puede mezclar con la línea panel.
+- `lineas/panel.css`: alias de `base.css` con nombre de línea.
+- Vitrina: página nueva `sitio.html`.
+
 ## v0.1.0 — 2026-10-15
 
 Primera versión, extraída de monitor Sodimac (meyer/scrap2.0/web) sin cambios visuales.

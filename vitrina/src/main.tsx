@@ -109,6 +109,7 @@ function Vitrina() {
             <a href="#tokens" className="activo">Tokens</a>
             <a href="#componentes">Componentes</a>
             <a href="#graficos">Gráficos</a>
+            <a href="sitio.html">Línea sitio →</a>
           </nav>
         </div>
         <div className="usuario">

@@ -1,0 +1,13 @@
+/* Solo para la vitrina de la línea sitio: imágenes de ejemplo hechas con degradados y algunos ajustes de maqueta. */
+.demo-medio { background: radial-gradient(120% 90% at 30% 20%, hsl(160 45% 28%), #050605 70%); transition: background 1.2s; }
+.demo-medio-1 { background: radial-gradient(120% 90% at 70% 30%, hsl(210 40% 26%), #050605 70%); }
+.demo-medio-2 { background: radial-gradient(120% 90% at 50% 70%, hsl(30 45% 24%), #050605 70%); }
+.demo-hero-logo { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; pointer-events: none; }
+.demo-hero-logo .s-wordmark { font-size: clamp(56px, 13vw, 240px); }
+.demo-imagen { width: 100%; height: 100%; background: linear-gradient(135deg, hsl(var(--tono) 40% 32%), hsl(calc(var(--tono) + 40) 35% 14%)); transition: transform 1s var(--s-ease); }
+.s-obra:hover .demo-imagen { transform: scale(1.035); }
+.demo-manifiesto { margin-top: 40px; }
+.demo-formulario { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px 32px; max-width: 900px; }
+.demo-ancho { grid-column: 1 / -1; }
+.demo-wordmark { margin: clamp(60px, 10vw, 140px) 0 24px; }
+#contacto { padding-top: var(--s-seccion); }
