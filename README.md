@@ -98,6 +98,11 @@ Sin React: `<a class="credito-estilos" href="https://github.com/Lucas-Vergara/es
 
 Las versiones v0.1.0 a v0.2.1 se publicaron con MIT sin esta condición. Los proyectos del autor no la necesitan.
 
+**Revisión mensual:** el workflow [Revisar uso](.github/workflows/revisar-uso.yml) busca cada mes en GitHub repos ajenos
+con señales de la biblioteca (la huella `--estilos-lv`, el nombre del paquete, el enlace al repo o clases propias) y
+revisa si dan el crédito. Si encuentra algo, abre o comenta un issue con la etiqueta `uso-detectado`. Para correrlo a
+mano: pestaña Actions → Revisar uso → Run workflow, o `GITHUB_TOKEN=$(gh auth token) node scripts/revisar-uso.mjs --seco`.
+
 ## Versiones: actualizar, no actualizar o volver atrás
 
 Cada proyecto fija una versión exacta (el `v0.1.0.tar.gz` del `package.json`). **Nada cambia en un proyecto hasta que tú cambies ese número.**

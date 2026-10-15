@@ -1,0 +1,24 @@
+name: Revisar uso
+
+# Una vez al mes busca en GitHub repos ajenos que usen o copien la biblioteca y revisa si dan el crédito.
+# Si encuentra algo, abre (o comenta) un issue con la etiqueta "uso-detectado" y GitHub avisa por correo.
+on:
+  schedule:
+    - cron: "0 13 1 * *" # día 1 de cada mes, 10:00 en Chile
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  revisar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/revisar-uso.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
