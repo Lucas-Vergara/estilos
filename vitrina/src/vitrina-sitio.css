@@ -11,3 +11,5 @@
 .demo-ancho { grid-column: 1 / -1; }
 .demo-wordmark { margin: clamp(60px, 10vw, 140px) 0 24px; }
 #contacto { padding-top: var(--s-seccion); }
+/* Que el botón flotante no tape el crédito del pie */
+.s-pie { padding-bottom: 100px; }
