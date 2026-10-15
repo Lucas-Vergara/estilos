@@ -55,7 +55,7 @@
   --fuente: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   /* Huella: identifica la biblioteca y su versión en cualquier sitio que la use (se actualiza con npm version) */
-  --estilos-lv: "0.2.1";
+  --estilos-lv: "0.3.0";
 }
 
 :root[data-theme="dark"] {
