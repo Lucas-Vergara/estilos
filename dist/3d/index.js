@@ -12,4 +12,5 @@ export { Terreno3D } from "./terreno.js";
 export { Tunel3D } from "./tunel.js";
 export { Carrusel3D } from "./carrusel.js";
 export { Bloques3D } from "./bloques.js";
+export { Silueta3D } from "./silueta.js";
 export { usarEscena, avanceEnPantalla, avanceRecorrido, texturaTexto } from "./escena.js";
