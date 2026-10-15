@@ -1,0 +1,8 @@
+/* Solo para la vitrina: muestras de color y escala tipográfica. */
+.muestras { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: var(--e-3); }
+.muestra { display: flex; align-items: center; gap: var(--e-2); font-size: var(--texto-sm); }
+.muestra-color { width: 32px; height: 32px; border-radius: var(--radio-campo); border: 1px solid var(--borde); flex: none; }
+.muestra code, .fila-tipo code { color: var(--tinta-2); font-size: var(--texto-xs); }
+.paleta { display: flex; gap: 2px; }
+.paleta span { flex: 1; max-width: 72px; height: 28px; border-radius: 4px; }
+.fila-tipo { display: grid; grid-template-columns: 110px 1fr; align-items: baseline; gap: var(--e-3); }

@@ -1,0 +1,47 @@
+/*
+ * Acento verde (esmeralda sobrio, tomado de Gyplac). Usado en: monitor Sodimac, radar de reciclaje.
+ * Tiñe levemente el texto y las superficies oscuras. Paletas de gráficos validadas con el validador de dataviz.
+ */
+:root {
+  --tinta: #26302b;          /* texto principal: casi negro con tinte verde, menos duro que el negro */
+  --tinta-2: #4f5b53;
+  --tinta-3: #6a746e;
+  --acento: #1a7d4a;         /* texto, links y botones (contraste 5:1 sobre blanco) */
+  --sobre-acento: #ffffff;
+  --acento-suave: #e3f4e9;
+  --sobre-acento-suave: #1a6b40;
+  --serie-1: #2fa865;        /* gráficos y barras */
+  --serie-2: #e0742a;
+  /* Categórica en orden fijo: verde, azul, naranja */
+  --cat-1: #2fa865; --cat-2: #2a78d6; --cat-3: #e0742a;
+  /* Secuencial (magnitud, p. ej. mapa de calor): un solo verde, claro → oscuro */
+  --sec-1: #e3f4e9; --sec-2: #b5e3c5; --sec-3: #84cfa0; --sec-4: #52b87a; --sec-5: #2f9a5e; --sec-6: #1f7a47; --sec-7: #145a34;
+  /* Ordinal (niveles bajo / medio / alto): el paso más claro aún se distingue del fondo */
+  --ord-1: #6cc490; --ord-2: #2fa865; --ord-3: #1a6b40;
+}
+
+/* Oscuro: superficies casi negras con leve tinte verde, verde claro como acento */
+:root[data-theme="dark"] {
+  --plano: #0f1210;
+  --superficie: #181c19;
+  --superficie-2: #202521;
+  --superficie-3: #2a302b;
+  --tinta: #e2e3df;
+  --tinta-2: #bfcabd;
+  --tinta-3: #8a9688;
+  --grilla: #262b27;
+  --eje: #3c4a3b;
+  --borde: rgba(191, 202, 189, 0.12);
+  --borde-campo: rgba(191, 202, 189, 0.2);
+  --barra-fondo: rgba(15, 18, 16, 0.8);
+  --acento: #5fd885;
+  --sobre-acento: #00391a;
+  --acento-suave: #1d4a2b;
+  --sobre-acento-suave: #b1f2ba;
+  --serie-1: #5fd885;
+  --serie-2: #e0682c;
+  --cat-1: #2f9e5c; --cat-2: #3987e5; --cat-3: #e0682c;
+  --sec-1: #1f2a22; --sec-2: #203a2a; --sec-3: #24543a; --sec-4: #2a7048; --sec-5: #3b9160; --sec-6: #5fb880; --sec-7: #9be3b4;
+  --ord-1: #2a8a52; --ord-2: #4cc47c; --ord-3: #9be3b4;
+  --dato-vacio: #3a413c;
+}

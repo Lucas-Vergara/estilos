@@ -1,0 +1,72 @@
+/*
+ * Tokens comunes a todos los proyectos: superficies claras, bordes, estados, sombras, radios y escalas.
+ * Lo que cambia entre proyectos (acento, tinte del texto, superficies oscuras, paletas de gráficos)
+ * va en acentos/*.css, que se importa DESPUÉS de este archivo.
+ *
+ * Modo oscuro: solo si el usuario lo elige (<html data-theme="dark">); el claro es el predeterminado.
+ */
+:root {
+  color-scheme: light;
+  --alto-barra: 58px;        /* alto de la barra superior fija (las pestañas se pegan justo debajo) */
+  --plano: #f4f5f7;          /* fondo de página: gris neutro para que las tarjetas se separen */
+  --superficie: #ffffff;     /* tarjetas */
+  --superficie-2: #f6f7f8;   /* campos, hover, filas abiertas */
+  --superficie-3: #eceef1;   /* pistas de barras */
+  --grilla: #eef0f2;
+  --eje: #d9dde1;
+  --borde: #e3e6ea;
+  --borde-campo: #d6dade;
+  --barra-fondo: rgba(255, 255, 255, 0.85);
+
+  /* Estados: siempre acompañados de ícono o texto, nunca solo color */
+  --bueno: #00a344;
+  --bueno-texto: #1a7d4a;
+  --bueno-suave: #e3f4e9;
+  --critico: #ba1a1a;
+  --critico-suave: #ffdad6;
+  --advertencia: #fab219;
+  --advertencia-texto: #8a5a00;
+
+  --sombra: 0 1px 2px rgba(16, 24, 40, 0.04);
+  --sombra-boton: 0 1px 2px rgba(16, 24, 40, 0.1);
+  --sombra-flotante: 0 8px 24px rgba(16, 24, 40, 0.12);
+  --radio: 12px;
+  --radio-campo: 8px;
+
+  /* Escala tipográfica: solo estos tamaños */
+  --texto-xs: 0.75rem;     /* notas de ejes, chips, encabezados de tabla */
+  --texto-sm: 0.8125rem;   /* notas, leyendas, tooltips, controles chicos */
+  --texto-base: 0.875rem;  /* tablas, botones, cuerpo */
+  --texto-md: 1rem;        /* títulos de tarjeta */
+  --texto-lg: 1.25rem;
+  --texto-xl: 1.625rem;    /* título de página */
+  --texto-kpi: 2rem;       /* número grande de los indicadores */
+  /* Escala de espaciado (múltiplos de 4) */
+  --e-1: 4px; --e-2: 8px; --e-3: 12px; --e-4: 16px; --e-5: 20px; --e-6: 24px; --e-8: 32px;
+
+  /* "Nada" en un gráfico (p. ej. tiendas sin stock): gris neutro, no un color de estado */
+  --dato-vacio: #cdd2d7;
+  /* Divergente (variación): verde = bajó (bueno), gris = igual, rojo = subió. Es semántico, no depende del acento. */
+  --div-baja-3: #1f7a47; --div-baja-2: #52b87a; --div-baja-1: #b5e3c5;
+  --div-igual: #e6e8eb;
+  --div-alza-1: #f6c9c3; --div-alza-2: #e0705f; --div-alza-3: #b3261e;
+
+  --fuente: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bueno: #5fd885;
+  --bueno-texto: #5fd885;
+  --bueno-suave: #1d3a27;
+  --critico: #ffb4ab;
+  --critico-suave: #4a1410;
+  --advertencia-texto: #fab219;
+  --sombra: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --sombra-boton: none;
+  --sombra-flotante: 0 10px 30px rgba(0, 0, 0, 0.5);
+  /* En fondo oscuro, más = más claro */
+  --div-baja-3: #9be3b4; --div-baja-2: #4cc47c; --div-baja-1: #24543a;
+  --div-igual: #2a302b;
+  --div-alza-1: #5a2620; --div-alza-2: #d4574a; --div-alza-3: #ffb4ab;
+}

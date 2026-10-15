@@ -1,0 +1,52 @@
+/*
+ * Puente para proyectos con Tailwind v4: las utilidades usan las MISMAS variables que los proyectos con CSS propio.
+ * Uso (después de @import "tailwindcss"):
+ *   @import "@lucas-vergara/estilos/tokens.css";
+ *   @import "@lucas-vergara/estilos/acentos/verde.css";
+ *   @import "@lucas-vergara/estilos/tailwind.css";
+ * Ejemplos: bg-superficie, text-tinta-2, border-borde, text-acento, rounded-tarjeta, shadow-flotante, text-kpi.
+ */
+@theme inline {
+  --color-plano: var(--plano);
+  --color-superficie: var(--superficie);
+  --color-superficie-2: var(--superficie-2);
+  --color-superficie-3: var(--superficie-3);
+  --color-tinta: var(--tinta);
+  --color-tinta-2: var(--tinta-2);
+  --color-tinta-3: var(--tinta-3);
+  --color-grilla: var(--grilla);
+  --color-eje: var(--eje);
+  --color-borde: var(--borde);
+  --color-borde-campo: var(--borde-campo);
+  --color-acento: var(--acento);
+  --color-sobre-acento: var(--sobre-acento);
+  --color-acento-suave: var(--acento-suave);
+  --color-sobre-acento-suave: var(--sobre-acento-suave);
+  --color-serie-1: var(--serie-1);
+  --color-serie-2: var(--serie-2);
+  --color-bueno: var(--bueno);
+  --color-bueno-texto: var(--bueno-texto);
+  --color-bueno-suave: var(--bueno-suave);
+  --color-critico: var(--critico);
+  --color-critico-suave: var(--critico-suave);
+  --color-advertencia: var(--advertencia);
+  --color-advertencia-texto: var(--advertencia-texto);
+
+  --font-sans: var(--fuente);
+  --text-xs: var(--texto-xs);
+  --text-sm: var(--texto-sm);
+  --text-base: var(--texto-base);
+  --text-md: var(--texto-md);
+  --text-lg: var(--texto-lg);
+  --text-xl: var(--texto-xl);
+  --text-kpi: var(--texto-kpi);
+
+  --radius-tarjeta: var(--radio);
+  --radius-campo: var(--radio-campo);
+  --shadow-sutil: var(--sombra);
+  --shadow-boton: var(--sombra-boton);
+  --shadow-flotante: var(--sombra-flotante);
+}
+
+/* El modo oscuro se activa con <html data-theme="dark">, igual que en los proyectos sin Tailwind */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));

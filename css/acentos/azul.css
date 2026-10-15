@@ -1,0 +1,44 @@
+/*
+ * Acento azul. Usado en: monitor de proyectos, oportunidades.
+ * Tiñe levemente el texto y las superficies oscuras.
+ * Pendiente: las paletas de gráficos (cat/sec/ord) aún no pasan por el validador de dataviz.
+ */
+:root {
+  --tinta: #262a33;          /* texto principal: casi negro con tinte azul */
+  --tinta-2: #4d5566;
+  --tinta-3: #6a7080;
+  --acento: #3451b2;         /* texto, links y botones (contraste 7:1 sobre blanco) */
+  --sobre-acento: #ffffff;
+  --acento-suave: #e8ecfb;
+  --sobre-acento-suave: #2a3f8f;
+  --serie-1: #4c6ef5;
+  --serie-2: #d4731b;
+  --cat-1: #4c6ef5; --cat-2: #2fa865; --cat-3: #e0742a;
+  --sec-1: #e8ecfb; --sec-2: #c5d0f7; --sec-3: #9db0f2; --sec-4: #7590ea; --sec-5: #4c6ef5; --sec-6: #3451b2; --sec-7: #22357a;
+  --ord-1: #7590ea; --ord-2: #4c6ef5; --ord-3: #2a3f8f;
+}
+
+:root[data-theme="dark"] {
+  --plano: #0f1115;
+  --superficie: #171a20;
+  --superficie-2: #1f232b;
+  --superficie-3: #2a2f39;
+  --tinta: #e2e3df;
+  --tinta-2: #bcc3d1;
+  --tinta-3: #8890a0;
+  --grilla: #252a33;
+  --eje: #3a4150;
+  --borde: rgba(188, 195, 209, 0.12);
+  --borde-campo: rgba(188, 195, 209, 0.2);
+  --barra-fondo: rgba(15, 17, 21, 0.8);
+  --acento: #9db0ff;
+  --sobre-acento: #10205a;
+  --acento-suave: #24305a;
+  --sobre-acento-suave: #d3dcff;
+  --serie-1: #9db0ff;
+  --serie-2: #f0a35e;
+  --cat-1: #7f9cff; --cat-2: #4cc47c; --cat-3: #e0682c;
+  --sec-1: #1c2233; --sec-2: #22305a; --sec-3: #2a4080; --sec-4: #3a55a8; --sec-5: #5a78d0; --sec-6: #8aa3f0; --sec-7: #c0cfff;
+  --ord-1: #3a55a8; --ord-2: #6f8cf0; --ord-3: #c0cfff;
+  --dato-vacio: #3a3f4a;
+}
