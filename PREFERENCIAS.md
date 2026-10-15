@@ -31,7 +31,7 @@ Lo que me gusta, lo que descarté y por qué. Claude lo lee antes de diseñar al
 
 | Proyecto | Acento | Usa la biblioteca |
 |---|---|---|
-| monitor Sodimac (meyer/scrap2.0/web) | verde | v0.1.0 (rama `estilos-compartidos`, PR pendiente) |
+| monitor Sodimac (meyer/scrap2.0/web) | verde | v0.1.0 |
 | radar de reciclaje | verde | no (copia antigua) |
 | monitor de proyectos | azul | no (copia antigua) |
 | oportunidades | azul | no (copia antigua) |
