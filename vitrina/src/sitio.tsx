@@ -6,7 +6,8 @@ import {
   Avatar, BotonSonido, Entrada, FondoAnimado, NavPildora, Ola, Palabras, Proyecto, Telon,
   iniciarInteracciones, iniciarMovimiento, irCon, sonidos, useSeccionActiva, type DatosProyecto, type ModoFondo,
 } from "../../src/sitio";
-import { Grilla3D, Objeto3D, type FormaObjeto } from "../../src/3d";
+import { Grilla3D } from "../../src/3d";
+import { SelectorPaleta, usePaleta } from "./paletas";
 import "../../css/tokens.css";
 import "../../css/acentos/azul.css";
 import "../../css/base.css";
@@ -21,35 +22,6 @@ const ENLACES = [
   { id: "laboratorio", texto: "Laboratorio" },
   { id: "contacto", texto: "Contacto" },
 ];
-
-// Paletas de la línea (clases .s-paleta-… en sitio.css). Los colores aquí son solo para las muestras del selector.
-const PALETAS = [
-  { id: "indigo", nombre: "Índigo", acento: "#3d5afe", destello: "#ffd84d", fondo: "#fafafa" },
-  { id: "grafito", nombre: "Grafito", acento: "#18181b", destello: "#d9f84a", fondo: "#fbfbfa" },
-  { id: "ciruela", nombre: "Ciruela", acento: "#6d3ee8", destello: "#ff8fc2", fondo: "#fcfbff" },
-  { id: "coral", nombre: "Coral", acento: "#cc4128", destello: "#ffd166", fondo: "#fffaf5" },
-  { id: "bosque", nombre: "Bosque", acento: "#1d7a4c", destello: "#f2d45c", fondo: "#f8faf7" },
-  { id: "oceano", nombre: "Océano", acento: "#0b7189", destello: "#ffb84d", fondo: "#f6fafb" },
-  { id: "arena", nombre: "Arena", acento: "#2a241d", destello: "#ff7a45", fondo: "#f6f2eb" },
-];
-
-function leerPaleta() {
-  try { const v = localStorage.getItem("estilos-paleta"); return PALETAS.some((p) => p.id === v) ? v! : "indigo"; } catch { return "indigo"; }
-}
-
-function SelectorPaleta({ paleta, setPaleta }: { paleta: string; setPaleta: (p: string) => void }) {
-  const actual = PALETAS.find((p) => p.id === paleta)!;
-  return (
-    <div className="paletas" role="group" aria-label="Paleta de colores">
-      <span className="paletas-nombre">{actual.nombre}</span>
-      {PALETAS.map((p) => (
-        <button key={p.id} type="button" className="paleta-muestra" aria-pressed={paleta === p.id} aria-label={`Paleta ${p.nombre}`} title={p.nombre}
-          style={{ "--m-acento": p.acento, "--m-destello": p.destello, "--m-fondo": p.fondo } as CSSProperties}
-          onClick={() => { setPaleta(p.id); sonidos.clic(); }} />
-      ))}
-    </div>
-  );
-}
 
 const clp = new Intl.NumberFormat("es-CL", { style: "currency", currency: "CLP", maximumFractionDigits: 0 });
 
@@ -104,11 +76,10 @@ const PROYECTOS: DatosProyecto[] = [
 ];
 
 function Hero({ modo, setModo }: { modo: ModoFondo; setModo: (m: ModoFondo) => void }) {
-  const [forma, setForma] = useState<FormaObjeto>("burbuja");
   return (
     <section className="s-hero" id="inicio">
       <FondoAnimado modo={modo} desvanecer />
-      <div className="s-ancho s-hero-grid">
+      <div className="s-ancho">
         <div className="s-hero-texto">
           <span className="s-estado" data-reveal="">Ejemplo de la línea sitio</span>
           <div className="hero-quien" data-reveal="" style={{ "--delay": "80ms" } as CSSProperties}>
@@ -119,14 +90,6 @@ function Hero({ modo, setModo }: { modo: ModoFondo; setModo: (m: ModoFondo) => v
           <div className="s-hero-acciones" data-reveal="" style={{ "--delay": "300ms" } as CSSProperties}>
             <a className="s-boton" href="#proyectos" data-magnetico="0.25" onClick={() => sonidos.clic()}>Ver proyectos <span className="s-flecha" aria-hidden="true">→</span></a>
             <a className="s-boton-borde" href="#contacto" data-magnetico="0.25" onClick={() => sonidos.clic()}>Contacto</a>
-          </div>
-        </div>
-        <div className="hero-objeto" data-reveal="escala" style={{ "--delay": "200ms" } as CSSProperties}>
-          <Objeto3D forma={forma} />
-          <div className="selector" role="group" aria-label="Forma del objeto 3D">
-            {(["burbuja", "nudo", "anillos"] as FormaObjeto[]).map((f) => (
-              <button key={f} type="button" aria-pressed={forma === f} onClick={() => { setForma(f); sonidos.clic(); }}>{f}</button>
-            ))}
           </div>
         </div>
       </div>
@@ -152,7 +115,7 @@ function Sitio() {
   const activo = useSeccionActiva(ENLACES.map((e) => e.id));
   const [modo, setModo] = useState<ModoFondo>("manchas");
   const [noche, setNoche] = useState(false);
-  const [paleta, setPaleta] = useState(leerPaleta);
+  const [paleta, setPaleta] = usePaleta();
   const [aviso, setAviso] = useState("");
   const [entrada, setEntrada] = useState(0);
 
@@ -161,10 +124,6 @@ function Sitio() {
     return () => parar.forEach((f) => f());
   }, []);
   useEffect(() => { document.body.classList.toggle("s-oscuro", noche); }, [noche]);
-  useEffect(() => {
-    PALETAS.forEach((p) => document.body.classList.toggle(`s-paleta-${p.id}`, p.id === paleta));
-    try { localStorage.setItem("estilos-paleta", paleta); } catch { /* sin almacenamiento: no se recuerda */ }
-  }, [paleta]);
 
   const ir = (id: string, texto: string) => irCon(texto, () => {
     document.getElementById(id)?.scrollIntoView({ behavior: "instant" as ScrollBehavior });
@@ -303,6 +262,7 @@ function Sitio() {
           <span>Sitio de ejemplo · contenido de muestra</span>
           <nav aria-label="Otras líneas">
             <a href="./">Línea panel</a>
+            <a href="3d.html">Línea 3d</a>
             <a href="sitio-disenadora.html">Línea sitio diseñadora</a>
             <button type="button" className="boton-texto" onClick={() => { try { sessionStorage.removeItem("estilos-entrada"); } catch { /* */ } setEntrada((n) => n + 1); }}>Ver la entrada otra vez</button>
           </nav>

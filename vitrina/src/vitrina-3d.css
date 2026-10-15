@@ -1,0 +1,9 @@
+/* Solo para la vitrina de la línea 3d. */
+.marca-cubo { width: 13px; height: 13px; border-radius: 3px; background: var(--s-acento); box-shadow: 4px -4px 0 var(--s-destello); transform: rotate(8deg); }
+.vt-hero { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
+@media (max-width: 860px) { .vt-hero { grid-template-columns: minmax(0, 1fr); } }
+.td-panel .s-titulo { font-size: clamp(30px, 4vw, 52px); }
+.vt-sin-caja { background: none; border: 0; }
+.td-recorrido .td-sobre { align-content: start; padding-top: clamp(90px, 14vh, 140px); }
+.sitio code { font-family: var(--s-mono); font-size: 0.85em; padding: 1px 6px; border-radius: 6px; background: var(--s-hundido); }
+.s-pie { padding-bottom: 104px; } /* que el selector de paleta no tape el pie */

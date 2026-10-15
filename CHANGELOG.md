@@ -1,5 +1,11 @@
 # Cambios
 
+## v0.7.0 — 2026-10-15
+
+- **Nueva línea "3d"** (`lineas/3d.css`, clases `td-`, sobre la línea sitio): escenarios en caja, a todo el ancho y con recorrido por scroll; escena y texto lado a lado; panel translúcido para texto sobre la escena; selector de opciones.
+- `@lucas-vergara/estilos/3d`: escenas nuevas `Orbe3D` (degradado con ruido en shader), `Vidrio3D` (vidrio con refracción y dispersión sobre un texto), `Particulas3D` (nube que se transforma entre esfera, cubo, toro, ola y espiral), `Terreno3D` (paisaje de puntos o malla), `Bloques3D` (piso de columnas), `Carrusel3D` (tarjetas en cilindro que se arrastran) y `Tunel3D` (túnel que avanza con el scroll). Se exportan `usarEscena`, `avanceEnPantalla`, `avanceRecorrido` y `texturaTexto` para escenas propias. Las texturas con texto se redibujan cuando cargan las fuentes.
+- Vitrina: página `3d.html`. En `sitio.html` el hero ya no lleva el objeto 3D (ahora vive en la línea 3d); la paleta por defecto de la vitrina es grafito y va primera en el selector.
+
 ## v0.6.0 — 2026-10-15
 
 - Línea sitio: **paletas** `s-paleta-indigo` (por defecto), `grafito`, `ciruela`, `coral`, `bosque`, `oceano` y `arena`. Todas claras; cada una trae su acento para el modo noche. Se ponen en `<body>` o en un contenedor y las secciones `.sitio` de adentro las heredan (los colores salen de variables `--p-…`).

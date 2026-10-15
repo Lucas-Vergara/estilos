@@ -53,10 +53,15 @@ Ideas pedidas para la biblioteca:
 
 ## Paletas de la línea sitio (para probar)
 
-Desde v0.6.0 hay siete, todas claras y limpias, con selector en la vitrina: índigo (por defecto), grafito (blanco y negro con lima, en la línea de Rauno), ciruela (violeta con rosado, en la línea de Josh Comeau), coral (cálida, en la línea de Robb Owen), bosque, océano y arena (papel cálido, editorial). Pendiente: elegir la del portafolio y descartar las que no gusten.
+Desde v0.6.0 hay siete, todas claras y limpias, con selector en la vitrina: índigo (por defecto), grafito (blanco y negro con lima, en la línea de Rauno), ciruela (violeta con rosado, en la línea de Josh Comeau), coral (cálida, en la línea de Robb Owen), bosque, océano y arena (papel cálido, editorial). Le gustan todas: se mantienen como opciones. La vitrina parte en grafito.
+
+## Línea 3d (desde v0.7.0)
+
+Lucas quiere los objetos 3D en su propia línea, no en el hero de sitio. Referencias revisadas: galerías de sitios con Three.js (Awwwards, mesh3d), Bruno Simon y Henry Heffernan (de su revisión), y técnicas comunes en sitios premiados: morphing de partículas sincronizado con scroll, vidrio con transmisión y refracción sobre texto, orbes con shader de ruido, paisajes de puntos, túneles por scroll y carruseles cilíndricos. Todo sin modelos externos, con los colores de la paleta.
 
 ## Descartado
 
+- **Objeto 3D en el hero de la línea sitio**: se movió a la línea 3d.
 - **Punto que sigue al cursor en toda la página** (línea sitio): no me gusta. Sí me gustan los efectos de cursor dentro de una sección (p. ej. la grilla 3D con la bola que sigue al puntero).
 - **MUI**: trae su propio look y pelea con el mío (solo se usó en etexScrapF, antiguo).
 

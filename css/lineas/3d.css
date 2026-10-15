@@ -1,0 +1,68 @@
+/*! @lucas-vergara/estilos · github.com/Lucas-Vergara/estilos · Licencia MIT con atribución visible: "Estilos: Lucas Vergara" */
+/*
+ * Línea "3d": escenarios para las escenas de "@lucas-vergara/estilos/3d" (Three.js). Se apoya en la línea sitio
+ * (tipografía, colores y paletas): importa tokens.css y lineas/sitio.css antes, y usa clases td- dentro de .sitio.
+ *
+ *  - .td-escenario         caja con fondo hundido y bordes redondos donde vive un lienzo 3D (tamaño por proporción)
+ *  - .td-escenario-pleno   a todo el ancho, sin bordes, para un hero o el fondo de una sección
+ *  - .td-sobre             texto encima de la escena (no bloquea el puntero, salvo enlaces y botones)
+ *  - .td-panel             caja translúcida con desenfoque para que el texto se lea sobre la escena
+ *  - .td-recorrido         sección alta con el lienzo fijo (sticky): la escena avanza con el scroll (data-recorrido)
+ *  - .td-dueto             escena y texto lado a lado (se apilan en celular)
+ *  - .td-ficha             nombre, descripción y controles de una escena
+ *  - .td-selector          botones de opciones en píldora, sobre la escena
+ */
+
+.td-escenario {
+  position: relative; isolation: isolate; overflow: hidden; width: 100%;
+  aspect-ratio: var(--td-proporcion, 16 / 10); min-height: 320px; max-height: 82vh;
+  border-radius: var(--s-radio); background: var(--s-hundido); border: 1px solid var(--s-linea);
+}
+.td-escenario > canvas { position: absolute; inset: 0; }
+.td-escenario-pleno { position: relative; isolation: isolate; overflow: hidden; width: 100%; height: var(--td-alto, clamp(460px, 86vh, 820px)); }
+.td-escenario-pleno > canvas { position: absolute; inset: 0; z-index: -1; }
+
+.td-sobre { position: absolute; inset: 0; display: grid; align-content: end; gap: 14px; padding: clamp(20px, 4vw, 56px); pointer-events: none; }
+.td-sobre :where(a, button) { pointer-events: auto; }
+.td-panel {
+  max-width: 560px; padding: clamp(18px, 2.4vw, 28px); border-radius: var(--s-radio);
+  background: color-mix(in srgb, var(--s-fondo) 72%, transparent); backdrop-filter: blur(14px) saturate(1.2); -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  border: 1px solid var(--s-linea); box-shadow: var(--s-sombra);
+}
+.td-sobre-centro { align-content: center; justify-items: center; text-align: center; }
+
+.td-recorrido { position: relative; height: var(--td-largo, 380vh); }
+.td-recorrido-fijo { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.td-recorrido-fijo > canvas { position: absolute; inset: 0; }
+
+.td-dueto { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: clamp(24px, 5vw, 72px); align-items: center; }
+.td-dueto-invertido { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+.td-dueto-invertido > :first-child { order: 2; }
+@media (max-width: 860px) {
+  .td-dueto, .td-dueto-invertido { grid-template-columns: minmax(0, 1fr); }
+  .td-dueto-invertido > :first-child { order: 0; }
+}
+
+.td-ficha { display: grid; gap: 16px; align-content: start; }
+.td-ficha .s-chips { margin-top: 4px; }
+
+.td-selector {
+  position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 2; max-width: calc(100% - 24px);
+  display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 4px; padding: 4px; border-radius: 999px;
+  background: color-mix(in srgb, var(--s-superficie) 88%, transparent); backdrop-filter: blur(10px);
+  border: 1px solid var(--s-linea); box-shadow: var(--s-sombra);
+}
+.td-selector button {
+  border: 0; background: none; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 500;
+  color: var(--s-tinta-2); cursor: pointer; transition: background 0.2s, color 0.2s;
+}
+.td-selector button:hover { color: var(--s-tinta); }
+.td-selector button[aria-pressed="true"] { background: var(--s-tinta); color: var(--s-fondo); }
+
+/* Pista para arrastrar (carrusel) */
+.td-pista { font-size: 13px; color: var(--s-tenue); display: inline-flex; gap: 8px; align-items: center; }
+.td-pista::before { content: "↔"; font-size: 15px; color: var(--s-acento-texto); }
+@media (max-width: 560px) {
+  .td-selector { flex-wrap: nowrap; bottom: 10px; }
+  .td-selector button { padding: 5px 9px; font-size: 12px; }
+}

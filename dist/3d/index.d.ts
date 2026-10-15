@@ -1,18 +1,10 @@
-export type FormaObjeto = "nudo" | "burbuja" | "anillos";
-/**
- * Objeto 3D brillante que flota, gira despacio, mira hacia el cursor y rebota al tocarlo (con sonido si está
- * activado). Pensado para el hero, al lado del texto. El contenedor define el tamaño (p. ej. aspect-ratio: 1).
- */
-export declare function Objeto3D({ forma, className, etiqueta }: {
-    forma?: FormaObjeto;
-    className?: string;
-    etiqueta?: string;
-}): import("react").JSX.Element;
-/**
- * Piso de grilla infinito con niebla y un punto de luz que sigue al cursor (al estilo de Bruno Simon), para el fondo
- * de una sección. La cámara deriva despacio hacia el puntero.
- */
-export declare function Grilla3D({ className, etiqueta }: {
-    className?: string;
-    etiqueta?: string;
-}): import("react").JSX.Element;
+export { Objeto3D, type FormaObjeto } from "./objeto.js";
+export { Grilla3D } from "./grilla.js";
+export { Particulas3D, FORMAS_PARTICULAS, type FormaParticulas } from "./particulas.js";
+export { Orbe3D } from "./orbe.js";
+export { Vidrio3D, type FormaVidrio } from "./vidrio.js";
+export { Terreno3D, type EstiloTerreno } from "./terreno.js";
+export { Tunel3D } from "./tunel.js";
+export { Carrusel3D, type TarjetaCarrusel } from "./carrusel.js";
+export { Bloques3D } from "./bloques.js";
+export { usarEscena, avanceEnPantalla, avanceRecorrido, texturaTexto, type Escena } from "./escena.js";
