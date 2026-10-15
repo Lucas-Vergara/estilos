@@ -18,19 +18,30 @@ const BUSQUEDAS = [
 ];
 const CREDITO = ['"Estilos: Lucas Vergara"', '"Styles: Lucas Vergara"', "CreditoEstilos"];
 
-async function gh(ruta, opciones = {}) {
-  const r = await fetch(`https://api.github.com${ruta}`, {
-    ...opciones,
-    headers: { Accept: "application/vnd.github+json", Authorization: `Bearer ${TOKEN}`, "X-GitHub-Api-Version": "2022-11-28", ...opciones.headers },
-  });
-  if (!r.ok) throw new Error(`${r.status} ${ruta}: ${await r.text()}`);
-  return r.json();
-}
 const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
 
-// La búsqueda de código permite ~10 consultas por minuto: espaciar las llamadas.
+async function gh(ruta, opciones = {}) {
+  for (let intento = 1; ; intento++) {
+    const r = await fetch(`https://api.github.com${ruta}`, {
+      ...opciones,
+      headers: { Accept: "application/vnd.github+json", Authorization: `Bearer ${TOKEN}`, "X-GitHub-Api-Version": "2022-11-28", ...opciones.headers },
+    });
+    if (r.ok) return r.json();
+    const texto = await r.text();
+    // Límite de búsquedas: esperar lo que pide GitHub (Retry-After o "try again in Ns") y reintentar
+    if ((r.status === 429 || r.status === 403) && intento < 6) {
+      const segundos = Number(r.headers.get("retry-after")) || Number(texto.match(/try again in ([\d.]+)s/)?.[1]) || 30;
+      console.log(`Límite de GitHub (${r.status}); reintento en ${Math.ceil(segundos) + 2} s…`);
+      await esperar((Math.ceil(segundos) + 2) * 1000);
+      continue;
+    }
+    throw new Error(`${r.status} ${ruta}: ${texto}`);
+  }
+}
+
+// La búsqueda de código tiene un límite bajo por minuto: espaciar las llamadas.
 async function buscar(q) {
-  await esperar(7000);
+  await esperar(10000);
   const datos = await gh(`/search/code?per_page=100&q=${encodeURIComponent(q)}`);
   return datos.items ?? [];
 }
