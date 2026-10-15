@@ -7,6 +7,7 @@
  *  - data-px="0.15"         parallax horizontal según la distancia al centro de la pantalla.
  *  - data-px-hero="0.25"    sube con el scroll y se desvanece (logo sobre un hero).
  *  - data-sx                se desliza desde la izquierda al entrar.
+ *  - .s-cabecera-sobre      recibe data-solida al pasar el hero (fondo sólido).
  * Respeta prefers-reduced-motion (todo visible, sin desplazamientos).
  */
 function movimiento() {
@@ -19,6 +20,8 @@ function movimiento() {
         raf = 0;
         const vh = window.innerHeight;
         const vw = document.documentElement.clientWidth;
+        // Cabecera transparente sobre un hero: sólida una vez que el hero quedó atrás.
+        todos(".s-cabecera-sobre").forEach((el) => el.toggleAttribute("data-solida", window.scrollY > vh * 0.85));
         todos("[data-reveal]:not([data-shown]), [data-words='stagger']:not([data-shown])").forEach((el) => {
             if (reducido || el.getBoundingClientRect().top < vh * 0.9) {
                 requestAnimationFrame(() => requestAnimationFrame(() => el.setAttribute("data-shown", "")));
