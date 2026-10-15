@@ -29,7 +29,7 @@ async function gh(ruta, opciones = {}) {
     if (r.ok) return r.json();
     const texto = await r.text();
     // Límite de búsquedas: esperar lo que pide GitHub (Retry-After o "try again in Ns") y reintentar
-    if ((r.status === 429 || r.status === 403) && intento < 6) {
+    if ((r.status === 429 || r.status === 403) && intento < 15) {
       const segundos = Number(r.headers.get("retry-after")) || Number(texto.match(/try again in ([\d.]+)s/)?.[1]) || 30;
       console.log(`Límite de GitHub (${r.status}); reintento en ${Math.ceil(segundos) + 2} s…`);
       await esperar((Math.ceil(segundos) + 2) * 1000);
@@ -39,9 +39,9 @@ async function gh(ruta, opciones = {}) {
   }
 }
 
-// La búsqueda de código tiene un límite bajo por minuto: espaciar las llamadas.
+// La búsqueda de código tiene un límite muy bajo con el token de Actions: espaciar bien las llamadas (corre una vez al mes, no importa que tarde).
 async function buscar(q) {
-  await esperar(10000);
+  await esperar(30000);
   const datos = await gh(`/search/code?per_page=100&q=${encodeURIComponent(q)}`);
   return datos.items ?? [];
 }
