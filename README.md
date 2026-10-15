@@ -32,7 +32,7 @@ Las líneas se pueden **mezclar**: cada una vive bajo su propia clase y prefijo 
 | Componentes | `@lucas-vergara/estilos` | `Indicador`, `Variacion`, `Estado`, `Frescura`, `Vacio`, `Segmentado`, `Pestanas`, `ThOrden`, esqueletos, `BotonTema`, `useOrden`… |
 | Gráficos | `@lucas-vergara/estilos/graficos` | `GraficoLinea`, `GraficoBarras`, `GraficoBanda`, `Sparkline` (requiere `recharts`) |
 | Sitio (React) | `@lucas-vergara/estilos/sitio` | `Entrada`, `Telon` + `irCon`, `NavPildora` + `useSeccionActiva`, `Avatar`, `FondoAnimado`, `MarcoNavegador`, `Proyecto`, `Ola`, `BotonSonido` + `sonidos`, `Palabras`, `Acento`, `Cursor` (solo sitio diseñadora), `iniciarMovimiento`, `iniciarInteracciones`, `SCRIPT_MOVIMIENTO`, `conTransicion` |
-| 3D (React) | `@lucas-vergara/estilos/3d` | `Objeto3D` (burbuja, nudo, anillos), `Orbe3D`, `Vidrio3D`, `Particulas3D`, `Terreno3D`, `Bloques3D`, `Carrusel3D`, `Tunel3D`, `Silueta3D` (trazos SVG con volumen y contorno de neón), `Grilla3D`, y `usarEscena` para escenas propias (requiere `three`) |
+| 3D (React) | `@lucas-vergara/estilos/3d` | `Objeto3D` (burbuja, nudo, anillos), `Orbe3D`, `Vidrio3D`, `Particulas3D`, `Terreno3D`, `Bloques3D`, `Carrusel3D`, `Tunel3D`, `Silueta3D` (trazos SVG con volumen: neón, cromo u holograma), `Grilla3D`, y `usarEscena` para escenas propias (requiere `three`) |
 
 ## Usarlo en un proyecto
 

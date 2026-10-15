@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BotonSonido, NavPildora, Palabras, iniciarMovimiento, sonidos, useSeccionActiva } from "../../src/sitio";
 import {
   Bloques3D, Carrusel3D, Silueta3D, FORMAS_PARTICULAS, Grilla3D, Objeto3D, Orbe3D, Particulas3D, Terreno3D, Tunel3D, Vidrio3D,
-  type DatosSilueta, type EstiloTerreno, type FormaObjeto, type FormaParticulas, type FormaVidrio,
+  type DatosSilueta, type EstiloSilueta, type EstiloTerreno, type FormaObjeto, type FormaParticulas, type FormaVidrio,
 } from "../../src/3d";
 import { SelectorPaleta, usePaleta } from "./paletas";
 import "../../css/tokens.css";
@@ -65,6 +65,7 @@ function Tresd() {
   const [objeto, setObjeto] = useState<FormaObjeto>("burbuja");
   const [vidrio, setVidrio] = useState<FormaVidrio>("prisma");
   const [terreno, setTerreno] = useState<EstiloTerreno>("puntos");
+  const [silueta, setSilueta] = useState<EstiloSilueta>("neon");
 
   useEffect(() => iniciarMovimiento(), []);
   useEffect(() => { document.body.classList.toggle("s-oscuro", noche); }, [noche]);
@@ -173,9 +174,10 @@ function Tresd() {
 
         <section className="s-seccion">
           <div className="s-ancho td-dueto">
-            <Ficha indice="09 · Silueta" titulo="Un dibujo SVG en 3D" texto="Toma los trazos de un ícono o logo y les da volumen, con un contorno de neón que se dibuja al aparecer y otra vez al tocarlo. Las alas aletean." chips={["Silueta3D", "SVG", "Contorno"]} />
+            <Ficha indice="09 · Silueta" titulo="Un dibujo SVG en 3D" texto="Toma los trazos de un ícono o logo y les da volumen; el contorno se dibuja al aparecer y al tocarlo. Neón, cromo iridiscente u holograma con barrido y glitch. Las alas aletean y las cintas se mecen." chips={["Silueta3D", "SVG", "Neón · cromo · holograma"]} />
             <div className="td-escenario" style={{ "--td-proporcion": "1" } as CSSProperties} data-reveal="escala">
-              <Silueta3D datos={MARIPOSA} />
+              <Silueta3D datos={MARIPOSA} estilo={silueta} />
+              <Selector etiqueta="Material de la silueta" opciones={["neon", "cromo", "holograma"] as const} valor={silueta} setValor={setSilueta} />
             </div>
           </div>
         </section>

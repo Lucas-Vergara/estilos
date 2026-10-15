@@ -12,5 +12,5 @@ export { Terreno3D, type EstiloTerreno } from "./terreno.js";
 export { Tunel3D } from "./tunel.js";
 export { Carrusel3D, type TarjetaCarrusel } from "./carrusel.js";
 export { Bloques3D } from "./bloques.js";
-export { Silueta3D, type DatosSilueta } from "./silueta.js";
+export { Silueta3D, type DatosSilueta, type EstiloSilueta } from "./silueta.js";
 export { usarEscena, avanceEnPantalla, avanceRecorrido, texturaTexto, type Escena } from "./escena.js";

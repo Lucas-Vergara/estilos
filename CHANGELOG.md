@@ -1,5 +1,10 @@
 # Cambios
 
+## v0.9.0 — 2026-10-15
+
+- `Silueta3D`: estilos `cromo` (metal oscuro iridiscente con dos luces de color que giran) y `holograma` (translúcido con bordes que brillan, barrido y cortes de glitch; tocar provoca uno), además de `neon`. Nuevos: `ondean` (formas que cuelgan y se mecen como cintas), `aleteo` (amplitud) y `colorSecundario`. Bisel en los bordes para cromo y holograma.
+- Vitrina 3d: selector de estilo en la escena Silueta.
+
 ## v0.8.0 — 2026-10-15
 
 - `@lucas-vergara/estilos/3d`: `Silueta3D`, que convierte trazos SVG (formas, líneas y nodos) en un objeto con volumen y contorno de neón que se dibuja al aparecer y al tocarlo; las formas indicadas en `aletean` se mueven como alas. Por defecto usa la tinta y el destello de la paleta; acepta colores propios (p. ej. los de una marca).
