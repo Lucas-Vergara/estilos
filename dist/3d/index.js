@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { sonidos } from "../sitio/sonidos.js";
 function leerColor(el, nombre, respaldo) {
@@ -11,11 +11,32 @@ function leerColor(el, nombre, respaldo) {
         return new THREE.Color(respaldo);
     }
 }
+const VARIABLES_COLOR = ["--s-acento", "--s-destello", "--s-fondo", "--s-tinta"];
+/** Colores actuales del lienzo como texto; cambia cuando cambia el tema o la paleta (clases en la página). */
+function useClaveColores(ref) {
+    const [clave, setClave] = useState("");
+    useEffect(() => {
+        const leer = () => {
+            const el = ref.current;
+            if (!el)
+                return;
+            const cs = getComputedStyle(el);
+            setClave(VARIABLES_COLOR.map((n) => cs.getPropertyValue(n).trim()).join("|"));
+        };
+        leer();
+        const mo = new MutationObserver(leer);
+        mo.observe(document.documentElement, { attributes: true, subtree: true, attributeFilter: ["class", "style", "data-theme"] });
+        return () => mo.disconnect();
+    }, [ref]);
+    return clave;
+}
 /** Monta una escena en el lienzo: tamaño, pausa fuera de pantalla, puntero y limpieza. `paso` dibuja cada cuadro. */
 function usarEscena(ref, preparar, deps) {
+    // Al cambiar los colores (modo noche, paleta) la escena se vuelve a armar con los nuevos.
+    const clave = useClaveColores(ref);
     useEffect(() => {
         const lienzo = ref.current;
-        if (!lienzo)
+        if (!lienzo || !clave)
             return;
         let renderer;
         try {
@@ -91,7 +112,7 @@ function usarEscena(ref, preparar, deps) {
             liberar();
             renderer.dispose();
         };
-    }, deps); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [...deps, clave]); // eslint-disable-line react-hooks/exhaustive-deps
 }
 /**
  * Objeto 3D brillante que flota, gira despacio, mira hacia el cursor y rebota al tocarlo (con sonido si está
