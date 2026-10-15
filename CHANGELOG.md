@@ -1,5 +1,11 @@
 # Cambios
 
+## v0.6.0 — 2026-10-15
+
+- Línea sitio: **paletas** `s-paleta-indigo` (por defecto), `grafito`, `ciruela`, `coral`, `bosque`, `oceano` y `arena`. Todas claras; cada una trae su acento para el modo noche. Se ponen en `<body>` o en un contenedor y las secciones `.sitio` de adentro las heredan (los colores salen de variables `--p-…`).
+- `Objeto3D` y `Grilla3D` toman los colores nuevos al cambiar de paleta o de modo noche (antes los leían una sola vez).
+- Vitrina de la línea sitio: selector de paleta abajo a la izquierda; se recuerda en el navegador.
+
 ## v0.5.0 — 2026-10-15
 
 - Línea sitio: se quita el cursor propio (punto que sigue al puntero en toda la página; clase `s-cursor`). `Cursor` queda solo para sitio diseñadora y su prefijo por defecto pasa a `"sd"`. `Proyecto` ya no marca su medio con `data-cursor`.

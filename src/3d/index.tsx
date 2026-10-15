@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { sonidos } from "../sitio/sonidos.js";
 
@@ -6,7 +6,7 @@ import { sonidos } from "../sitio/sonidos.js";
  * Escenas 3D de la línea "sitio" con Three.js (dependencia opcional: instala `three` solo si usas este módulo).
  * Recursos, no un sitio-juego: un objeto que da personalidad al hero (Objeto3D) y un piso de grilla para una sección
  * (Grilla3D), al estilo de Bruno Simon y Henry Heffernan. Toman los colores de la línea (--s-acento, --s-destello,
- * --s-fondo, --s-tinta); se pausan fuera de pantalla; con movimiento reducido muestran un cuadro quieto.
+ * --s-fondo, --s-tinta) y se rearman si cambian; se pausan fuera de pantalla; con movimiento reducido muestran un cuadro quieto.
  */
 
 type Escena = {
@@ -23,15 +23,37 @@ function leerColor(el: Element, nombre: string, respaldo: string) {
   try { return new THREE.Color(v || respaldo); } catch { return new THREE.Color(respaldo); }
 }
 
+const VARIABLES_COLOR = ["--s-acento", "--s-destello", "--s-fondo", "--s-tinta"];
+
+/** Colores actuales del lienzo como texto; cambia cuando cambia el tema o la paleta (clases en la página). */
+function useClaveColores(ref: React.RefObject<HTMLCanvasElement | null>) {
+  const [clave, setClave] = useState("");
+  useEffect(() => {
+    const leer = () => {
+      const el = ref.current;
+      if (!el) return;
+      const cs = getComputedStyle(el);
+      setClave(VARIABLES_COLOR.map((n) => cs.getPropertyValue(n).trim()).join("|"));
+    };
+    leer();
+    const mo = new MutationObserver(leer);
+    mo.observe(document.documentElement, { attributes: true, subtree: true, attributeFilter: ["class", "style", "data-theme"] });
+    return () => mo.disconnect();
+  }, [ref]);
+  return clave;
+}
+
 /** Monta una escena en el lienzo: tamaño, pausa fuera de pantalla, puntero y limpieza. `paso` dibuja cada cuadro. */
 function usarEscena(
   ref: React.RefObject<HTMLCanvasElement | null>,
   preparar: (e: Escena) => { paso: (t: number, dt: number) => void; tocar?: () => void; liberar: () => void },
   deps: unknown[],
 ) {
+  // Al cambiar los colores (modo noche, paleta) la escena se vuelve a armar con los nuevos.
+  const clave = useClaveColores(ref);
   useEffect(() => {
     const lienzo = ref.current;
-    if (!lienzo) return;
+    if (!lienzo || !clave) return;
     let renderer: THREE.WebGLRenderer;
     try {
       renderer = new THREE.WebGLRenderer({ canvas: lienzo, antialias: true, alpha: true, powerPreference: "low-power" });
@@ -104,7 +126,7 @@ function usarEscena(
       liberar();
       renderer.dispose();
     };
-  }, deps); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [...deps, clave]); // eslint-disable-line react-hooks/exhaustive-deps
 }
 
 export type FormaObjeto = "nudo" | "burbuja" | "anillos";

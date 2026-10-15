@@ -22,6 +22,35 @@ const ENLACES = [
   { id: "contacto", texto: "Contacto" },
 ];
 
+// Paletas de la línea (clases .s-paleta-… en sitio.css). Los colores aquí son solo para las muestras del selector.
+const PALETAS = [
+  { id: "indigo", nombre: "Índigo", acento: "#3d5afe", destello: "#ffd84d", fondo: "#fafafa" },
+  { id: "grafito", nombre: "Grafito", acento: "#18181b", destello: "#d9f84a", fondo: "#fbfbfa" },
+  { id: "ciruela", nombre: "Ciruela", acento: "#6d3ee8", destello: "#ff8fc2", fondo: "#fcfbff" },
+  { id: "coral", nombre: "Coral", acento: "#cc4128", destello: "#ffd166", fondo: "#fffaf5" },
+  { id: "bosque", nombre: "Bosque", acento: "#1d7a4c", destello: "#f2d45c", fondo: "#f8faf7" },
+  { id: "oceano", nombre: "Océano", acento: "#0b7189", destello: "#ffb84d", fondo: "#f6fafb" },
+  { id: "arena", nombre: "Arena", acento: "#2a241d", destello: "#ff7a45", fondo: "#f6f2eb" },
+];
+
+function leerPaleta() {
+  try { const v = localStorage.getItem("estilos-paleta"); return PALETAS.some((p) => p.id === v) ? v! : "indigo"; } catch { return "indigo"; }
+}
+
+function SelectorPaleta({ paleta, setPaleta }: { paleta: string; setPaleta: (p: string) => void }) {
+  const actual = PALETAS.find((p) => p.id === paleta)!;
+  return (
+    <div className="paletas" role="group" aria-label="Paleta de colores">
+      <span className="paletas-nombre">{actual.nombre}</span>
+      {PALETAS.map((p) => (
+        <button key={p.id} type="button" className="paleta-muestra" aria-pressed={paleta === p.id} aria-label={`Paleta ${p.nombre}`} title={p.nombre}
+          style={{ "--m-acento": p.acento, "--m-destello": p.destello, "--m-fondo": p.fondo } as CSSProperties}
+          onClick={() => { setPaleta(p.id); sonidos.clic(); }} />
+      ))}
+    </div>
+  );
+}
+
 const clp = new Intl.NumberFormat("es-CL", { style: "currency", currency: "CLP", maximumFractionDigits: 0 });
 
 // Maquetas hechas con la propia biblioteca, mientras no haya capturas reales.
@@ -123,6 +152,7 @@ function Sitio() {
   const activo = useSeccionActiva(ENLACES.map((e) => e.id));
   const [modo, setModo] = useState<ModoFondo>("manchas");
   const [noche, setNoche] = useState(false);
+  const [paleta, setPaleta] = useState(leerPaleta);
   const [aviso, setAviso] = useState("");
   const [entrada, setEntrada] = useState(0);
 
@@ -131,6 +161,10 @@ function Sitio() {
     return () => parar.forEach((f) => f());
   }, []);
   useEffect(() => { document.body.classList.toggle("s-oscuro", noche); }, [noche]);
+  useEffect(() => {
+    PALETAS.forEach((p) => document.body.classList.toggle(`s-paleta-${p.id}`, p.id === paleta));
+    try { localStorage.setItem("estilos-paleta", paleta); } catch { /* sin almacenamiento: no se recuerda */ }
+  }, [paleta]);
 
   const ir = (id: string, texto: string) => irCon(texto, () => {
     document.getElementById(id)?.scrollIntoView({ behavior: "instant" as ScrollBehavior });
@@ -279,6 +313,7 @@ function Sitio() {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
         <span>Contacto</span>
       </a>
+      <SelectorPaleta paleta={paleta} setPaleta={setPaleta} />
       {aviso && <div className="s-aviso" role="status">{aviso}</div>}
     </>
   );

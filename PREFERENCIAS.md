@@ -51,6 +51,10 @@ Ideas pedidas para la biblioteca:
 - **Avatar** como toque personal (Josh, Robb, Matt).
 - Rendimiento: que cargue rápido (Adham tarda demasiado).
 
+## Paletas de la línea sitio (para probar)
+
+Desde v0.6.0 hay siete, todas claras y limpias, con selector en la vitrina: índigo (por defecto), grafito (blanco y negro con lima, en la línea de Rauno), ciruela (violeta con rosado, en la línea de Josh Comeau), coral (cálida, en la línea de Robb Owen), bosque, océano y arena (papel cálido, editorial). Pendiente: elegir la del portafolio y descartar las que no gusten.
+
 ## Descartado
 
 - **Punto que sigue al cursor en toda la página** (línea sitio): no me gusta. Sí me gustan los efectos de cursor dentro de una sección (p. ej. la grilla 3D con la bola que sigue al puntero).

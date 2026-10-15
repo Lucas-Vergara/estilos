@@ -35,3 +35,23 @@
 .maqueta-filas .barra-pista { width: 100%; }
 .maqueta-filas b { text-align: right; font-variant-numeric: tabular-nums; }
 .s-pie { padding-bottom: 104px; } /* que el botón flotante no tape los enlaces del pie */
+
+/* Selector de paleta (solo vitrina): abajo a la izquierda, el flotante de contacto queda a la derecha */
+.paletas {
+  position: fixed; left: calc(clamp(14px, 2vw, 28px) + env(safe-area-inset-left, 0px)); bottom: calc(clamp(14px, 2vw, 28px) + env(safe-area-inset-bottom, 0px)); z-index: 60;
+  display: flex; align-items: center; gap: 6px; padding: 6px 8px 6px 14px; border-radius: 999px;
+  background: var(--s-superficie); border: 1px solid var(--s-linea); box-shadow: var(--s-sombra-alta);
+}
+.paletas-nombre { font-size: 13px; font-weight: 600; min-width: 4.6em; }
+.paleta-muestra {
+  width: 26px; height: 26px; padding: 0; border-radius: 50%; cursor: pointer; border: 2px solid var(--s-superficie);
+  background: linear-gradient(135deg, var(--m-acento) 0 58%, var(--m-destello) 58% 100%);
+  box-shadow: 0 0 0 1px var(--s-linea-fuerte); transition: transform 0.2s var(--s-ease), box-shadow 0.2s;
+}
+.paleta-muestra:hover { transform: scale(1.12); }
+.paleta-muestra[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--s-tinta); }
+@media (max-width: 560px) {
+  .paletas { gap: 4px; padding: 5px 6px; }
+  .paletas-nombre { display: none; }
+  .paleta-muestra { width: 22px; height: 22px; }
+}

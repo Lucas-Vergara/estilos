@@ -8,6 +8,7 @@
  * Todo vive bajo la clase .sitio (en <body> o en una sección) con clases s-, así que convive con la línea panel:
  * dentro de .sitio los tokens comunes (--plano, --tinta, --acento…) toman los valores del sitio.
  * Variantes: .s-oscuro (noche) y .s-simple (sin movimiento, más aire; al estilo de Rafa Conde).
+ * Paletas: .s-paleta-<nombre> en <body> o en cualquier contenedor (ver el final del archivo); sin clase, índigo.
  *
  * Requiere tokens.css. Fuentes: Bricolage Grotesque, Geist y Geist Mono (ver README).
  * JS: iniciarMovimiento() e iniciarInteracciones() de "@lucas-vergara/estilos/sitio".
@@ -16,21 +17,22 @@
 .sitio {
   color-scheme: light;
 
-  /* Paleta de día: blanco neutro, tinta casi negra, un índigo vivo y un amarillo de destello para lo puntual */
-  --s-fondo: #fafafa;
-  --s-superficie: #ffffff;
-  --s-hundido: #f1f2f4;          /* bloques secundarios, pistas, marcos */
-  --s-tinta: #15171c;
-  --s-tinta-2: #4a4f5a;
-  --s-tenue: #7c828d;
+  /* Paleta de día: blanco neutro, tinta casi negra, un índigo vivo y un amarillo de destello para lo puntual.
+     Cada color sale de una variable --p-… que define la paleta elegida (.s-paleta-…); estos son los de índigo. */
+  --s-fondo: var(--p-fondo, #fafafa);
+  --s-superficie: var(--p-superficie, #ffffff);
+  --s-hundido: var(--p-hundido, #f1f2f4);          /* bloques secundarios, pistas, marcos */
+  --s-tinta: var(--p-tinta, #15171c);
+  --s-tinta-2: var(--p-tinta-2, #4a4f5a);
+  --s-tenue: var(--p-tenue, #7c828d);
   --s-linea: rgba(21, 23, 28, 0.1);
   --s-linea-fuerte: rgba(21, 23, 28, 0.2);
-  --s-acento: #3d5afe;           /* fondos de botones, indicadores */
-  --s-acento-texto: #2c45d6;     /* texto y enlaces en acento (contraste 6:1 sobre blanco) */
-  --s-sobre-acento: #ffffff;
-  --s-acento-suave: #e8ecff;
-  --s-destello: #ffd84d;         /* marcador amarillo: una palabra, la selección, un detalle */
-  --s-cabecera-fondo: rgba(250, 250, 250, 0.82);
+  --s-acento: var(--p-acento, #3d5afe);           /* fondos de botones, indicadores */
+  --s-acento-texto: var(--p-acento-texto, #2c45d6); /* texto y enlaces en acento (contraste 6:1 sobre blanco) */
+  --s-sobre-acento: var(--p-sobre-acento, #ffffff);
+  --s-acento-suave: var(--p-acento-suave, #e8ecff);
+  --s-destello: var(--p-destello, #ffd84d);       /* marcador: una palabra, la selección, un detalle */
+  --s-cabecera-fondo: color-mix(in srgb, var(--s-fondo) 82%, transparent);
   --s-sombra: 0 1px 2px rgba(21, 23, 28, 0.05), 0 8px 24px rgba(21, 23, 28, 0.06);
   --s-sombra-alta: 0 2px 6px rgba(21, 23, 28, 0.06), 0 24px 60px rgba(21, 23, 28, 0.12);
   --s-radio: 18px;
@@ -53,7 +55,7 @@
   /* Tokens comunes con los valores del sitio: la línea panel usada dentro se ve coherente */
   --plano: var(--s-fondo);
   --superficie: var(--s-superficie);
-  --superficie-2: #f6f7f8;
+  --superficie-2: color-mix(in srgb, var(--s-superficie) 50%, var(--s-hundido));
   --superficie-3: var(--s-hundido);
   --tinta: var(--s-tinta);
   --tinta-2: var(--s-tinta-2);
@@ -87,11 +89,10 @@
   --s-tenue: #8a91a0;
   --s-linea: rgba(238, 240, 244, 0.1);
   --s-linea-fuerte: rgba(238, 240, 244, 0.2);
-  --s-acento: #7d91ff;
-  --s-acento-texto: #a4b2ff;
-  --s-sobre-acento: #0f1117;
-  --s-acento-suave: #222a4d;
-  --s-cabecera-fondo: rgba(15, 17, 23, 0.82);
+  --s-acento: var(--p-oscuro-acento, #7d91ff);
+  --s-acento-texto: var(--p-oscuro-acento-texto, #a4b2ff);
+  --s-sobre-acento: var(--p-oscuro-sobre-acento, #0f1117);
+  --s-acento-suave: var(--p-oscuro-acento-suave, #222a4d);
   --s-sombra: 0 1px 2px rgba(0, 0, 0, 0.3);
   --s-sombra-alta: 0 24px 60px rgba(0, 0, 0, 0.45);
   --superficie-2: #1b1f28;
@@ -477,3 +478,57 @@ html[data-transicion="fundido"] ::view-transition-new(root) { animation: 420ms c
 
 /* Crédito de la biblioteca en la línea sitio */
 .sitio .credito-estilos { color: var(--s-tenue); font-size: 13px; }
+
+/* ---------- Paletas ----------
+ * Todas claras y limpias; cambian fondo, tintas, acento y destello, y traen su acento para el modo noche.
+ * Se ponen en <body> (junto a .sitio) o en un contenedor, y las secciones .sitio de adentro las heredan.
+ * Índigo es la paleta por defecto (sin clase). Inspiración en PREFERENCIAS.md.
+ */
+.s-paleta-indigo { /* los valores por defecto, explícitos para poder volver a ellos dentro de otra paleta */
+  --p-fondo: #fafafa; --p-superficie: #ffffff; --p-hundido: #f1f2f4;
+  --p-tinta: #15171c; --p-tinta-2: #4a4f5a; --p-tenue: #7c828d;
+  --p-acento: #3d5afe; --p-acento-texto: #2c45d6; --p-sobre-acento: #ffffff; --p-acento-suave: #e8ecff; --p-destello: #ffd84d;
+  --p-oscuro-acento: #7d91ff; --p-oscuro-acento-texto: #a4b2ff; --p-oscuro-sobre-acento: #0f1117; --p-oscuro-acento-suave: #222a4d;
+}
+/* Grafito: blanco y negro casi puro, con un verde lima como único color */
+.s-paleta-grafito {
+  --p-fondo: #fbfbfa; --p-superficie: #ffffff; --p-hundido: #f0f0ee;
+  --p-tinta: #18181b; --p-tinta-2: #4b4b52; --p-tenue: #7e7e86;
+  --p-acento: #18181b; --p-acento-texto: #18181b; --p-sobre-acento: #ffffff; --p-acento-suave: #ececea; --p-destello: #d9f84a;
+  --p-oscuro-acento: #e7e7ea; --p-oscuro-acento-texto: #f4f4f5; --p-oscuro-sobre-acento: #111113; --p-oscuro-acento-suave: #26262b;
+}
+/* Ciruela: violeta con destello rosado, juguetón pero ordenado */
+.s-paleta-ciruela {
+  --p-fondo: #fcfbff; --p-superficie: #ffffff; --p-hundido: #f3f0fa;
+  --p-tinta: #1b1530; --p-tinta-2: #4d4763; --p-tenue: #7f7a93;
+  --p-acento: #6d3ee8; --p-acento-texto: #5a2fd0; --p-sobre-acento: #ffffff; --p-acento-suave: #efe8fe; --p-destello: #ff8fc2;
+  --p-oscuro-acento: #a68bff; --p-oscuro-acento-texto: #c3b2ff; --p-oscuro-sobre-acento: #120e1f; --p-oscuro-acento-suave: #2a2148;
+}
+/* Coral: cálido, fondo crema y un rojo coral con amarillo */
+.s-paleta-coral {
+  --p-fondo: #fffaf5; --p-superficie: #ffffff; --p-hundido: #f8efe6;
+  --p-tinta: #1f1a17; --p-tinta-2: #554a43; --p-tenue: #8a7d74;
+  --p-acento: #cc4128; --p-acento-texto: #b7381f; --p-sobre-acento: #ffffff; --p-acento-suave: #fde6df; --p-destello: #ffd166;
+  --p-oscuro-acento: #ff8b72; --p-oscuro-acento-texto: #ffab99; --p-oscuro-sobre-acento: #1a0f0b; --p-oscuro-acento-suave: #3a231d;
+}
+/* Bosque: verde profundo sobre blanco verdoso, destello mostaza */
+.s-paleta-bosque {
+  --p-fondo: #f8faf7; --p-superficie: #ffffff; --p-hundido: #ecf1ea;
+  --p-tinta: #142019; --p-tinta-2: #45524a; --p-tenue: #77847b;
+  --p-acento: #1d7a4c; --p-acento-texto: #17663f; --p-sobre-acento: #ffffff; --p-acento-suave: #e1f1e7; --p-destello: #f2d45c;
+  --p-oscuro-acento: #55c58c; --p-oscuro-acento-texto: #86dcae; --p-oscuro-sobre-acento: #0c1711; --p-oscuro-acento-suave: #17301f;
+}
+/* Océano: azul petróleo con destello naranja */
+.s-paleta-oceano {
+  --p-fondo: #f6fafb; --p-superficie: #ffffff; --p-hundido: #e9f1f3;
+  --p-tinta: #0f1d23; --p-tinta-2: #42545b; --p-tenue: #74868d;
+  --p-acento: #0b7189; --p-acento-texto: #085d71; --p-sobre-acento: #ffffff; --p-acento-suave: #ddf1f6; --p-destello: #ffb84d;
+  --p-oscuro-acento: #3fc1dc; --p-oscuro-acento-texto: #86d9ea; --p-oscuro-sobre-acento: #071419; --p-oscuro-acento-suave: #132f38;
+}
+/* Arena: papel cálido y tinta café oscura, editorial, con un naranja como destello */
+.s-paleta-arena {
+  --p-fondo: #f6f2eb; --p-superficie: #fffdf9; --p-hundido: #ebe4d8;
+  --p-tinta: #2a241d; --p-tinta-2: #5b5247; --p-tenue: #8b8175;
+  --p-acento: #2a241d; --p-acento-texto: #2a241d; --p-sobre-acento: #f6f2eb; --p-acento-suave: #e8e0d2; --p-destello: #ff7a45;
+  --p-oscuro-acento: #efe7da; --p-oscuro-acento-texto: #efe7da; --p-oscuro-sobre-acento: #17140f; --p-oscuro-acento-suave: #2e2a24;
+}

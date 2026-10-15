@@ -64,6 +64,7 @@ En `index.html`: la fuente Inter y el script que aplica el tema antes de pintar 
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <script>document.documentElement.classList.add("js");</script>
 <body class="sitio">…</body>   <!-- noche: class="sitio s-oscuro" · sin movimiento: class="sitio s-simple" -->
+<body class="sitio s-paleta-coral">…</body>   <!-- paletas: indigo (por defecto), grafito, ciruela, coral, bosque, oceano, arena -->
 ```
 
 ```tsx
