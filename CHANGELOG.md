@@ -1,5 +1,9 @@
 # Cambios
 
+## v0.10.0 — 2026-10-15
+
+- `Carrusel3D`: eje `horizontal` (gira como rueda, arriba y abajo), `proporcion` de las tarjetas (p. ej. 2/3 para fotos de producto), `ajustar` (se detiene con una tarjeta al frente), `rueda` (rueda del mouse sobre el lienzo, una tarjeta por paso), `activo` y `onActivo` para sincronizarlo con una ficha o una lista, y tocar una tarjeta la trae al frente. Las tarjetas lejos del frente se oscurecen.
+
 ## v0.9.0 — 2026-10-15
 
 - `Silueta3D`: estilos `cromo` (metal oscuro iridiscente con dos luces de color que giran) y `holograma` (translúcido con bordes que brillan, barrido y cortes de glitch; tocar provoca uno), además de `neon`. Nuevos: `ondean` (formas que cuelgan y se mecen como cintas), `aleteo` (amplitud) y `colorSecundario`. Bisel en los bordes para cromo y holograma.
