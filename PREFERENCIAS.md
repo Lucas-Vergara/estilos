@@ -89,6 +89,7 @@ Le gustan todas las escenas de la línea 3d: se mantienen para ir probando.
 | radar de reciclaje | verde | v0.1.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura); usa el Indicador de la biblioteca |
 | monitor de proyectos | azul | v0.1.0 | ídem |
 | oportunidades | azul | v0.1.0 | ídem |
+| cv (PDF del currículum) | azul | v0.10.0 | solo tokens, copiados en `cv/estilos/`; hoja de impresión propia (`cv.css`) mientras se decide si va una línea "documento" |
 
 ### Fuera de la biblioteca (por decidir)
 
