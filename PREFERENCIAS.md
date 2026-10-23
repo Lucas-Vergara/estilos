@@ -116,11 +116,11 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 
 | Proyecto | Acento | Versión | Notas |
 |---|---|---|---|
-| monitor Sodimac (meyer/scrap2.0/web) | verde | v0.1.0 | origen de la biblioteca |
-| radar de reciclaje | verde | v0.1.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura); usa el Indicador de la biblioteca |
-| monitor de proyectos | azul | v0.1.0 | ídem |
-| oportunidades | azul | v0.1.0 | ídem |
-| cv (PDF del currículum) | azul | v0.10.0 | solo tokens, copiados en `cv/estilos/`; hoja de impresión propia (`cv.css`) mientras se decide si va una línea "documento" |
+| monitor Sodimac (meyer/scrap2.0/web) | verde | v0.11.0 | origen de la biblioteca; la subida va en el PR #13, por mergear |
+| radar de reciclaje | verde | v0.11.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura); usa el Indicador de la biblioteca |
+| monitor de proyectos | azul | v0.11.0 | ídem |
+| oportunidades | azul | v0.11.0 | ídem |
+| cv (PDF del currículum) | azul | v0.11.0 | solo tokens, copiados en `cv/estilos/`; hoja de impresión propia (`cv.css`) mientras se decide si va una línea "documento" |
 
 ### Fuera de la biblioteca (por decidir)
 
