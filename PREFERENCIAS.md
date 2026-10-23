@@ -61,6 +61,34 @@ Lucas quiere los objetos 3D en su propia línea, no en el hero de sitio. Referen
 
 Le gustan todas las escenas de la línea 3d: se mantienen para ir probando.
 
+## Reglas adoptadas de Impeccable y Taste (23-10-2026)
+
+Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus/impeccable) y [Taste](https://github.com/Leonxlnx/taste-skill), contra estas preferencias. No las instalamos: traen su propia dirección estética y pelearían con la biblioteca. Me quedé con estas reglas, que se suman a lo que ya tenía:
+
+**Todas las líneas**
+- **Lo que dibuja el navegador también lleva la paleta**: selección de texto, cursor de texto, barras de desplazamiento, foco (desde v0.11.0 en panel; sitio y diseñadora ya lo hacían).
+- **Títulos con `text-wrap: balance`, párrafos con `pretty`.**
+- **Movimiento de interfaz con los tokens** `--dur-rapida`, `--dur`, `--dur-lenta` y `--curva`: la salida, más rápida que la entrada; nunca rebote. Los momentos con autoría de cada línea (entrada, telón, manifiesto) conservan sus propios tiempos.
+- **Un momento de movimiento por página**, no el mismo fade-up en cada sección. Las vitrinas muestran todas las variantes a propósito; en un proyecto real se elige una.
+- **Botones que nombran su acción** ("Descargar CSV", no "Aceptar"); **errores que dicen qué pasó y cómo salir**. Nada de "Comenzar", "Saber más", "potencia", "sin fricción", "todo en uno" ni "no es solo X, es Y".
+- **Contraste verificado, no a ojo**: `npm run contraste` (texto 4,5:1; foco y controles 3:1; ambos temas).
+- **Interletrado de títulos hasta −0,04em.** Excepciones: los wordmarks gigantes y la línea diseñadora (interletrado muy negativo, elegido con la diseñadora).
+
+**Línea panel**
+- **Un dato repetido es una sola variable**; los totales se suman con los valores redondeados que se muestran, para que la pantalla cuadre a mano.
+- **Un h1 sustantivo** ("Precios", el nombre del objeto), no un saludo, y debajo **una línea con el hallazgo** ("12 productos bajaron esta semana"), no una descripción de la pantalla.
+- **Lo que más se hace, a un clic**, y la evidencia al lado de la respuesta (la cifra con su tendencia).
+
+**Línea sitio (y sitios de clientes)**
+- **Inventario del cliente antes de diseñar**: 8 a 12 cosas que son solo suyas (nombre y lo que significa, lugar, números, materiales, rituales). **Prueba del competidor**: si la idea sirve igual para el de al lado, es de la categoría, no del cliente.
+- **Una cosa que el visitante pueda hacer**, hecha con el contenido del cliente: funciona con el pulgar, tiene alternativa sin script y es una sola.
+
+**Al revisar**
+- **Mirar a tres anchos de una vez** (390, 768, 1440 px), corregir todo y recién ahí volver a mirar.
+- **Casos extremos** (lista en el README): nombres larguísimos, sin red, mil filas, doble envío, todo vacío.
+
+**Revisado y se mantiene lo mío** (las skills lo marcan, pero es una decisión): mono en mayúscula, "(01) Trabajos" y bordes finos en la línea diseñadora; la palabra en itálica del título; fondo gris con un acento en el panel; Inter; cuerpo de 14 px en el panel; radio de 12 px.
+
 ## Descartado
 
 - **Objeto 3D en el hero de la línea sitio**: se movió a la línea 3d.
@@ -76,9 +104,12 @@ Le gustan todas las escenas de la línea 3d: se mantienen para ir probando.
 - Servir Inter desde la app (`@fontsource-variable/inter`) en vez de Google Fonts.
 - Radix UI o Base UI para diálogos, menús y tooltips, cuando un proyecto los necesite.
 - Si los acentos deberían teñir también `--plano` y los bordes en modo claro.
+- **Toda cifra relativa dice contra qué** ("+12 % vs. la semana pasada"): hacer obligatoria la referencia de `Variacion`, o dejarlo como regla.
+- **Borde de los campos**: `--borde-campo` sobre blanco da 1,4:1 y la norma pide 3:1 para identificar un control. Subirlo oscurece todos los bordes de campos; decidir si se cambia o si basta con el fondo y la etiqueta.
 
 ## Ideas por venir
 
+- **Línea para leer** (documentación, artículos, CV): la que falta junto a panel (operar), sitio (persuadir) y 3d/diseñadora (experiencia). Medida de 65ch, interlineado según el ancho, impresión. Puede ser la línea "documento" del CV.
 - **Portafolio propio**: línea sitio (oficial) para la presentación + casos de estudio con la línea panel adentro. Pendiente: avatar o foto, capturas de los sitios de demo de ozmo (con credenciales de admin), textos y proyectos reales.
 
 ## Proyectos y su versión

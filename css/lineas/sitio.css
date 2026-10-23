@@ -114,7 +114,7 @@ html:has(> body.sitio), body.sitio, .sitio { overflow-x: clip; }
 .s-display {
   font-family: var(--s-display); font-weight: 700;
   font-size: calc(clamp(52px, 10vw, 168px) * var(--s-escala-titulos));
-  line-height: 0.9; letter-spacing: -0.045em; text-wrap: balance;
+  line-height: 0.9; letter-spacing: -0.04em; text-wrap: balance;
 }
 .s-titulo {
   font-family: var(--s-display); font-weight: 700;
@@ -384,7 +384,7 @@ html:not(.js) .s-horizontal-fijo, .s-simple .s-horizontal-fijo { position: stati
 .s-marquesina { overflow: hidden; padding-block: clamp(28px, 4vw, 56px); border-block: 1px solid var(--s-linea); }
 .s-marquesina-linea {
   width: max-content; padding-inline: var(--s-pad-x); white-space: nowrap; will-change: transform;
-  font-family: var(--s-display); font-weight: 700; font-size: clamp(48px, 9vw, 150px); line-height: 1; letter-spacing: -0.045em;
+  font-family: var(--s-display); font-weight: 700; font-size: clamp(48px, 9vw, 150px); line-height: 1; letter-spacing: -0.04em;
 }
 /* Galería editorial de 12 columnas: cada obra elige su ancho (--span) y desfase (--desfase) */
 .s-galeria { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(32px, 4vw, 56px) var(--s-gap); align-items: start; }

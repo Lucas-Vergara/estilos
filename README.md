@@ -22,7 +22,7 @@ Las líneas se pueden **mezclar**: cada una vive bajo su propia clase y prefijo 
 
 | Capa | Archivo | Para qué |
 |---|---|---|
-| Tokens | `tokens.css` | Superficies, bordes, estados, sombras, radios, escalas de texto y espaciado, modo oscuro |
+| Tokens | `tokens.css` | Superficies, bordes, estados, sombras, radios, escalas de texto y espaciado, duraciones y curva de movimiento, modo oscuro |
 | Acento | `acentos/verde.css`, `acentos/azul.css` | Lo que distingue a cada proyecto: acento, tinte del texto, superficies oscuras, paletas de gráficos |
 | Base | `base.css` | Reset y clases de la línea **panel**: `.barra`, `.tarjeta`, `.boton`, `.campo`, `.segmentado`, tablas, pestañas, chips, avisos… |
 | Línea sitio | `lineas/sitio.css` | Tipografía, cabecera que se esconde, navegación en píldora, avatar, hero con fondo vivo, entrada, telón, proyectos en marco de navegador, scroll horizontal, tarjetas inclinables, marquesina, galería, variantes noche y simple |
@@ -155,11 +155,18 @@ Números de versión (semver):
 
 ```bash
 # 1. Cambiar css/ o src/, revisar en la vitrina (npm run vitrina)
-# 2. Anotar el cambio en CHANGELOG.md
-# 3. Crear la versión: compila dist/, hace el commit y la etiqueta
+# 2. Si cambió algún color: npm run contraste
+# 3. Anotar el cambio en CHANGELOG.md
+# 4. Crear la versión: compila dist/, hace el commit y la etiqueta
 npm version minor   # o patch / major
 git push --follow-tags
 ```
 
 `dist/` va en el repo a propósito: así instalar desde GitHub no requiere compilar nada.
+
+## Revisar una pantalla antes de darla por terminada
+
+- **Contraste**: `npm run contraste` revisa los pares de tokens de la línea panel con cada acento y en ambos temas (texto 4,5:1; foco y controles 3:1).
+- **Tres anchos de una vez**: mirar el resultado a 390, 768 y 1440 px en un solo pase, corregir todo lo que se vio y recién ahí volver a mirar.
+- **Casos extremos**: un nombre de más de 100 caracteres, emoji en los campos, sin red, más de 1.000 filas, diez clics seguidos en enviar, errores forzados de la API, todo vacío, un arrastre cortado a la mitad (soltar fuera, cambiar de ventana).
 

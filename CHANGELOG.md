@@ -1,5 +1,16 @@
 # Cambios
 
+## v0.11.0 — 2026-10-23
+
+Reglas adoptadas tras revisar dos skills de diseño externas (Impeccable y Taste); ver PREFERENCIAS.md.
+
+- Tokens de movimiento: `--dur-rapida` (150 ms), `--dur` (200 ms), `--dur-lenta` (400 ms) y `--curva` (desaceleración, sin rebote). La línea panel los usa en todas sus transiciones (antes 120–180 ms sueltos).
+- Línea panel: la selección de texto, el cursor de texto y las barras de desplazamiento toman la paleta; títulos con `text-wrap: balance` y notas y estados vacíos con `text-wrap: pretty`.
+- Línea sitio: interletrado de `.s-display` y de la marquesina de −0,045em a −0,04em.
+- Acento verde: `--tinta-3` claro de `#6a746e` a `#67716b` (sobre `--plano` quedaba en 4,44:1; ahora 4,64:1).
+- `npm run contraste`: revisa los pares de tokens con cada acento y en ambos temas.
+- README: cómo revisar una pantalla (contraste, tres anchos, casos extremos).
+
 ## v0.10.0 — 2026-10-15
 
 - `Carrusel3D`: eje `horizontal` (gira como rueda, arriba y abajo), `proporcion` de las tarjetas (p. ej. 2/3 para fotos de producto), `ajustar` (se detiene con una tarjeta al frente), `rueda` (rueda del mouse sobre el lienzo, una tarjeta por paso), `activo` y `onActivo` para sincronizarlo con una ficha o una lista, y tocar una tarjeta la trae al frente. Las tarjetas lejos del frente se oscurecen.

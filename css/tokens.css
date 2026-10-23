@@ -52,6 +52,12 @@
   --div-igual: #e6e8eb;
   --div-alza-1: #f6c9c3; --div-alza-2: #e0705f; --div-alza-3: #b3261e;
 
+  /* Movimiento de interfaz (cambios de estado, no momentos con autoría): la salida, más rápida que la entrada; nunca rebote */
+  --dur-rapida: 150ms;       /* respuesta inmediata: hover, presionar, mostrar un ícono */
+  --dur: 200ms;              /* cambio de estado: pestañas, desplegar, cargar */
+  --dur-lenta: 400ms;        /* capas y vistas: diálogos, paneles laterales */
+  --curva: cubic-bezier(0.16, 1, 0.3, 1);  /* desaceleración natural */
+
   --fuente: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   /* Huella: identifica la biblioteca y su versión en cualquier sitio que la use (se actualiza con npm version) */
