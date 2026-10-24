@@ -120,6 +120,7 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 | radar de reciclaje | verde | v0.11.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura); usa el Indicador de la biblioteca |
 | monitor de proyectos | azul | v0.11.0 | ídem |
 | oportunidades | azul | v0.11.0 | ídem |
+| finanzas | verde | v0.11.0 | app de finanzas personales (Firebase); estilos propios mínimos en `src/estilos.css` |
 | cv (PDF del currículum) | azul | v0.11.0 | solo tokens, copiados en `cv/estilos/`; hoja de impresión propia (`cv.css`) mientras se decide si va una línea "documento" |
 
 ### Fuera de la biblioteca (por decidir)
