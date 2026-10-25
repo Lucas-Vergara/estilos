@@ -1,0 +1,212 @@
+/*! @lucas-vergara/estilos · github.com/Lucas-Vergara/estilos · Licencia MIT con atribución visible: "Estilos: Lucas Vergara" */
+/*
+ * Línea "luz": interfaces de tocar y encender, como el Every Day Calendar de Simone Giertz. Cada cosa cumplida es una
+ * luz que se prende con un destello corto y queda brillando; lo pendiente es un hueco apagado. Pensada para pantallas
+ * táctiles vistas de lejos (una pantalla en la sala, un celular) y para registros diarios (hábitos, rachas, rutinas).
+ *
+ * Dos estados de la misma pantalla:
+ *  - de día (por defecto): papel claro y cálido, las luces encendidas en su color con un halo suave.
+ *  - reposo (.l-reposo): casi negro; solo se ven las luces encendidas, tenues, y el contorno de las apagadas.
+ *    Es la pantalla "dormida": no se lee, se mira de pasada.
+ *
+ * Todo vive bajo .luz (en <body> o en un contenedor) con clases l-:
+ *  - .l-tablero        grilla de luces grandes (una por cosa por hacer hoy)
+ *  - .l-luz            botón redondo que se enciende: aria-pressed="true" (o .l-encendida) = cumplido
+ *  - .l-nombre         etiqueta bajo la luz; .l-detalle, una línea más chica
+ *  - .l-calendario     grilla de puntos (semana, mes o año): .l-punto, .l-punto.l-encendido, .l-punto.l-hoy
+ *  - .l-fila           una fila de puntos con su etiqueta a la izquierda (un hábito por fila)
+ *  - .l-color-<nombre> pone el color de una luz o de un contenedor (ambar, coral, rosa, violeta, azul, cian, menta, lima)
+ *                      o, si el color viene de los datos: style="--l-color: #…"
+ *
+ * Requiere tokens.css. Fuente: Inter (la misma de la línea panel). Se mezcla con la línea panel (tarjetas, campos,
+ * botones): dentro de .luz, los tokens comunes toman los colores de la línea.
+ */
+
+.luz {
+  color-scheme: light;
+
+  /* Papel cálido de día */
+  --l-fondo: #f5f3ee;
+  --l-superficie: #fffdf9;
+  --l-hueco: #e9e5dc;            /* luz apagada: un hueco hundido en el papel */
+  --l-hueco-borde: #d9d3c6;
+  --l-tinta: #1f1d19;
+  --l-tinta-2: #4a463f;
+  --l-tenue: #6b665c;
+  --l-linea: rgba(31, 29, 25, 0.12);
+  --l-foco: #1f1d19;
+
+  /* Colores de las luces: vivos, se leen encendidos sobre claro y sobre negro */
+  --l-ambar: #ffb020;
+  --l-coral: #ff6b4a;
+  --l-rosa: #ff5c9a;
+  --l-violeta: #9b6bff;
+  --l-azul: #4d8dff;
+  --l-cian: #22c3e6;
+  --l-menta: #2fd39a;
+  --l-lima: #a6d93a;
+  --l-color: var(--l-ambar);
+
+  /* Cuánto brilla una luz encendida (0 = sin halo) y tamaños */
+  --l-brillo: 1;
+  --l-tam-luz: clamp(64px, 18vmin, 132px);
+  --l-tam-punto: 14px;
+  --l-separacion: clamp(16px, 4vmin, 40px);
+
+  /* Tiempos: el destello al encender es el único momento con autoría; lo demás usa los tokens de movimiento */
+  --l-destello: 520ms;
+  --l-transicion-reposo: 1200ms;
+
+  /* Tokens comunes: lo de la línea panel que se use dentro se ve coherente */
+  --plano: var(--l-fondo);
+  --superficie: var(--l-superficie);
+  --superficie-2: #f8f6f1;
+  --superficie-3: var(--l-hueco);
+  --tinta: var(--l-tinta);
+  --tinta-2: var(--l-tinta-2);
+  --tinta-3: var(--l-tenue);
+  --borde: var(--l-linea);
+  --borde-campo: #cfc8ba;
+  --acento: var(--l-tinta);
+  --sobre-acento: var(--l-fondo);
+  --acento-suave: rgba(31, 29, 25, 0.08);
+  --sobre-acento-suave: var(--l-tinta);
+
+  background: var(--l-fondo);
+  color: var(--l-tinta);
+  font-family: var(--fuente);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color var(--l-transicion-reposo) var(--curva), color var(--l-transicion-reposo) var(--curva);
+}
+
+/* Reposo: la pantalla dormida. Casi negro; las luces encendidas quedan tenues y las apagadas son solo un contorno. */
+.luz.l-reposo {
+  color-scheme: dark;
+  --l-fondo: #070706;
+  --l-superficie: #10100e;
+  --l-hueco: transparent;
+  --l-hueco-borde: rgba(233, 229, 220, 0.1);
+  --l-tinta: #e9e5dc;
+  --l-tinta-2: #b9b3a7;
+  --l-tenue: #8d877c;
+  --l-linea: rgba(233, 229, 220, 0.1);
+  --l-foco: #e9e5dc;
+  --l-brillo: 0.8;
+  --superficie-2: #151513;
+  --borde-campo: rgba(233, 229, 220, 0.25);
+  --acento-suave: rgba(233, 229, 220, 0.1);
+}
+.luz.l-reposo .l-luz[aria-pressed="true"],
+.luz.l-reposo .l-luz.l-encendida,
+.luz.l-reposo .l-punto.l-encendido { filter: brightness(0.7) saturate(1.1); }
+.luz.l-reposo :where(.l-nombre, .l-detalle, .l-titulo, .l-fecha) { opacity: 0.35; }
+
+/* Colores con nombre */
+.l-color-ambar { --l-color: var(--l-ambar); }
+.l-color-coral { --l-color: var(--l-coral); }
+.l-color-rosa { --l-color: var(--l-rosa); }
+.l-color-violeta { --l-color: var(--l-violeta); }
+.l-color-azul { --l-color: var(--l-azul); }
+.l-color-cian { --l-color: var(--l-cian); }
+.l-color-menta { --l-color: var(--l-menta); }
+.l-color-lima { --l-color: var(--l-lima); }
+
+/* Encabezado mínimo: la fecha grande y una línea con cuánto va del día */
+.l-encabezado { display: grid; gap: 4px; text-align: center; }
+.l-fecha { font-size: clamp(1.25rem, 3.4vmin, 1.75rem); font-weight: 600; letter-spacing: -0.02em; text-wrap: balance; }
+.l-titulo { font-size: var(--texto-base); color: var(--l-tenue); text-wrap: pretty; }
+
+/* Tablero: las luces del día, centradas, en filas que se reparten solas */
+.l-tablero {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: start;
+  gap: var(--l-separacion);
+}
+.l-casilla { display: grid; justify-items: center; gap: 10px; width: calc(var(--l-tam-luz) + 24px); text-align: center; }
+.l-nombre { font-size: var(--texto-md); font-weight: 500; line-height: 1.25; color: var(--l-tinta); text-wrap: balance; overflow-wrap: anywhere; }
+.l-detalle { font-size: var(--texto-sm); color: var(--l-tenue); font-variant-numeric: tabular-nums; }
+.l-nombre, .l-detalle { transition: opacity var(--l-transicion-reposo) var(--curva); }
+
+/* La luz */
+.l-luz {
+  position: relative; display: grid; place-items: center;
+  width: var(--l-tam-luz); aspect-ratio: 1; padding: 0; border-radius: 50%;
+  border: 1.5px solid var(--l-hueco-borde);
+  background: var(--l-hueco);
+  box-shadow: inset 0 2px 6px rgba(31, 29, 25, 0.08);
+  color: var(--l-tinta); font: inherit; cursor: pointer; touch-action: manipulation;
+  transition: background-color var(--dur) var(--curva), border-color var(--dur) var(--curva),
+    box-shadow var(--dur-lenta) var(--curva), filter var(--l-transicion-reposo) var(--curva), transform var(--dur-rapida) var(--curva);
+}
+.l-luz:active { transform: scale(0.96); }
+.l-luz:focus-visible { outline: 2px solid var(--l-foco); outline-offset: 4px; }
+/* Ícono o inicial dentro de la luz (opcional) */
+.l-luz > :where(svg, .l-icono) { width: 38%; height: 38%; opacity: 0.45; transition: opacity var(--dur) var(--curva), color var(--dur) var(--curva); }
+
+.l-luz[aria-pressed="true"], .l-luz.l-encendida {
+  border-color: transparent;
+  background: radial-gradient(circle at 50% 38%, color-mix(in srgb, var(--l-color) 55%, #fff) 0%, var(--l-color) 62%);
+  box-shadow:
+    0 0 calc(18px * var(--l-brillo)) color-mix(in srgb, var(--l-color) calc(70% * var(--l-brillo)), transparent),
+    0 0 calc(56px * var(--l-brillo)) color-mix(in srgb, var(--l-color) calc(42% * var(--l-brillo)), transparent),
+    inset 0 -6px 14px color-mix(in srgb, var(--l-color) 60%, #000 10%);
+  color: #1f1d19;
+}
+.l-luz[aria-pressed="true"] > :where(svg, .l-icono), .l-luz.l-encendida > :where(svg, .l-icono) { opacity: 0.8; }
+/* Marca de cumplido (✓): el estado no queda solo en el color. Se muestra únicamente con la luz encendida. */
+.l-luz > .l-marca { opacity: 0; transform: scale(0.6); transition: opacity var(--dur) var(--curva), transform var(--dur-lenta) var(--curva); }
+.l-luz[aria-pressed="true"] > .l-marca, .l-luz.l-encendida > .l-marca { opacity: 0.75; transform: none; }
+
+/* Destello al encender: un anillo que se abre y se apaga. Se activa con .l-destellando (lo pone el código al tocar). */
+.l-luz::after {
+  content: ""; position: absolute; inset: -2px; border-radius: 50%; pointer-events: none;
+  box-shadow: 0 0 0 0 var(--l-color); opacity: 0;
+}
+.l-luz.l-destellando::after { animation: l-destello var(--l-destello) var(--curva); }
+@keyframes l-destello {
+  0% { opacity: 0.9; box-shadow: 0 0 0 0 var(--l-color); }
+  100% { opacity: 0; box-shadow: 0 0 0 calc(var(--l-tam-luz) * 0.28) transparent; }
+}
+
+/* Calendario: puntos chicos que se encienden igual, para ver la semana, el mes o el año */
+.l-calendario {
+  display: grid; gap: calc(var(--l-tam-punto) * 0.5);
+  grid-template-columns: repeat(var(--l-columnas, 7), var(--l-tam-punto));
+}
+.l-punto {
+  width: var(--l-tam-punto); aspect-ratio: 1; border-radius: 50%; padding: 0;
+  background: var(--l-hueco); border: 1px solid var(--l-hueco-borde);
+  transition: background-color var(--dur) var(--curva), box-shadow var(--dur-lenta) var(--curva), filter var(--l-transicion-reposo) var(--curva);
+}
+button.l-punto { cursor: pointer; touch-action: manipulation; }
+button.l-punto:focus-visible { outline: 2px solid var(--l-foco); outline-offset: 2px; }
+.l-punto.l-encendido {
+  border-color: transparent; background: var(--l-color);
+  box-shadow: 0 0 calc(8px * var(--l-brillo)) color-mix(in srgb, var(--l-color) calc(65% * var(--l-brillo)), transparent);
+}
+.l-punto.l-hoy { outline: 1.5px solid var(--l-tenue); outline-offset: 2px; }
+.l-punto.l-fuera { visibility: hidden; }   /* días antes del 1 o después del último del mes */
+
+/* Fila: etiqueta + puntos, para ver varios hábitos en el tiempo */
+.l-filas { display: grid; gap: 10px; }
+.l-fila { display: grid; grid-template-columns: minmax(6rem, 10rem) auto; align-items: center; gap: 14px; }
+.l-fila > .l-nombre { font-size: var(--texto-base); text-align: right; }
+.l-fila > .l-calendario { grid-auto-flow: column; grid-template-columns: none; grid-template-rows: var(--l-tam-punto); }
+@media (max-width: 480px) {
+  .l-filas { --l-tam-punto: 8px; }   /* cuatro semanas caben en 360 px */
+  .l-fila { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .l-fila > .l-nombre { text-align: left; }
+}
+
+/* Progreso del día como fila de puntos chicos (p. ej. 3 de 5) */
+.l-progreso { display: inline-flex; gap: 6px; }
+.l-progreso > span { width: 8px; height: 8px; border-radius: 50%; background: var(--l-hueco-borde); }
+.l-progreso > span.l-encendido { background: var(--l-color); box-shadow: 0 0 6px color-mix(in srgb, var(--l-color) 60%, transparent); }
+
+.luz ::selection { background: color-mix(in srgb, var(--l-ambar) 40%, transparent); color: var(--l-tinta); }
+
+@media (prefers-reduced-motion: reduce) {
+  .luz, .l-luz, .l-punto, .l-nombre, .l-detalle { transition: none; }
+  .l-luz.l-destellando::after { animation: none; }
+  .l-luz:active { transform: none; }
+}

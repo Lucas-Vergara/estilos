@@ -264,6 +264,7 @@ function Sitio() {
             <a href="./">Línea panel</a>
             <a href="3d.html">Línea 3d</a>
             <a href="sitio-disenadora.html">Línea sitio diseñadora</a>
+            <a href="luz.html">Línea luz</a>
             <button type="button" className="boton-texto" onClick={() => { try { sessionStorage.removeItem("estilos-entrada"); } catch { /* */ } setEntrada((n) => n + 1); }}>Ver la entrada otra vez</button>
           </nav>
         </div>

@@ -1,0 +1,35 @@
+/* Solo la vitrina de la línea luz: diagramación de la página de ejemplo */
+body { margin: 0; min-height: 100vh; }
+* { box-sizing: border-box; }
+
+.vl-pagina { max-width: 1040px; margin: 0 auto; padding: 0 16px 120px; display: grid; gap: clamp(64px, 10vw, 120px); }
+
+.vl-tablero { min-height: 100vh; min-height: 100svh; display: grid; align-content: center; gap: clamp(32px, 7vmin, 64px); padding: 48px 0 96px; }
+
+.vl-seccion { display: grid; gap: 28px; justify-items: center; }
+.vl-texto { max-width: 60ch; text-align: center; display: grid; gap: 8px; }
+.vl-texto h2 { margin: 0; font-size: var(--texto-xl); font-weight: 600; letter-spacing: -0.02em; text-wrap: balance; }
+.vl-texto p { margin: 0; color: var(--l-tinta-2); line-height: 1.6; text-wrap: pretty; }
+.vl-texto code, .vl-codigo { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.85em; }
+.vl-texto code { background: var(--acento-suave); padding: 1px 5px; border-radius: 4px; }
+
+.vl-anio { display: grid; gap: 8px; --l-tam-punto: clamp(9px, 2.2vw, 14px); }
+.vl-meses { display: grid; grid-template-columns: repeat(12, var(--l-tam-punto)); gap: calc(var(--l-tam-punto) * 0.5); font-size: var(--texto-xs); color: var(--l-tenue); text-align: center; }
+
+.vl-colores { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+
+.vl-codigo { width: 100%; max-width: 640px; margin: 0; padding: 20px; border-radius: var(--radio); background: var(--l-superficie); border: 1px solid var(--l-linea); overflow-x: auto; line-height: 1.6; color: var(--l-tinta-2); }
+
+.vl-pie { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; max-width: 1040px; margin: 0 auto; padding: 24px 16px 96px; border-top: 1px solid var(--l-linea); font-size: var(--texto-sm); color: var(--l-tenue); }
+.vl-pie nav { display: flex; flex-wrap: wrap; gap: 16px; }
+.vl-pie a { color: var(--l-tinta-2); }
+
+.vl-controles {
+  position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 5; max-width: calc(100% - 32px);
+  display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 4px; padding: 4px; border-radius: 999px;
+  background: color-mix(in srgb, var(--l-superficie) 90%, transparent); backdrop-filter: blur(10px);
+  border: 1px solid var(--l-linea); box-shadow: var(--sombra-flotante);
+}
+.vl-controles button { border: 0; background: none; padding: 8px 14px; border-radius: 999px; font: inherit; font-size: var(--texto-sm); font-weight: 500; color: var(--l-tinta-2); cursor: pointer; }
+.vl-controles button[aria-pressed="true"] { background: var(--l-tinta); color: var(--l-fondo); }
+.vl-controles button:focus-visible { outline: 2px solid var(--l-foco); outline-offset: 2px; }

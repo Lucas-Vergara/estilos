@@ -1,5 +1,10 @@
 # Cambios
 
+## v0.12.0 — 2026-10-24
+
+- **Nueva línea "luz"** (`lineas/luz.css`, clases `l-` bajo `.luz`): interfaces de tocar y encender, inspiradas en la sensación del Every Day Calendar de Simone Giertz. Papel claro y cálido de día; **reposo** (`.l-reposo`) casi negro, con las luces tenues, para pantallas que pasan el día dormidas. Luces grandes (`.l-luz` con `aria-pressed`) con halo de su color, ✓ de cumplido (`.l-marca`) y destello corto al encender (`.l-destellando`); calendario de puntos (`.l-calendario`, `.l-punto`) para la semana, el mes o el año; filas por hábito (`.l-fila`); ocho colores (`.l-color-ambar` … `.l-color-lima`) o `--l-color` desde los datos. Nació con el proyecto de hábitos.
+- Vitrina: página `luz.html`, con control de día, reposo y "dormir a los 8 s".
+
 ## v0.11.0 — 2026-10-23
 
 Reglas adoptadas tras revisar dos skills de diseño externas (Impeccable y Taste); ver PREFERENCIAS.md.

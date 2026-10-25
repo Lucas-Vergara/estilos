@@ -3,7 +3,7 @@
 Mi biblioteca de estilos: una sola fuente para el look and feel de mis proyectos.
 Cuando un estilo mejora en un proyecto, se sube aquí y los demás proyectos lo reciben **cuando yo decida**.
 
-**Vitrina:** [línea panel](https://lucas-vergara.github.io/estilos/) · [línea sitio](https://lucas-vergara.github.io/estilos/sitio.html) · [línea 3d](https://lucas-vergara.github.io/estilos/3d.html) · [línea sitio diseñadora](https://lucas-vergara.github.io/estilos/sitio-disenadora.html) · local: `npm install && npm run vitrina`
+**Vitrina:** [línea panel](https://lucas-vergara.github.io/estilos/) · [línea sitio](https://lucas-vergara.github.io/estilos/sitio.html) · [línea 3d](https://lucas-vergara.github.io/estilos/3d.html) · [línea sitio diseñadora](https://lucas-vergara.github.io/estilos/sitio-disenadora.html) · [línea luz](https://lucas-vergara.github.io/estilos/luz.html) · local: `npm install && npm run vitrina`
 
 ## Líneas
 
@@ -15,6 +15,7 @@ Una **línea** es un lenguaje visual completo para un tipo de proyecto. Todas co
 | **sitio** | `lineas/sitio.css` | Webs de presentación y portafolio | Clara y limpia, con personalidad: avatar, fondos vivos, paletas, entrada, telón entre páginas, scroll con movimiento. Bricolage Grotesque + Geist |
 | **3d** | `lineas/3d.css` (sobre sitio) | Secciones y heros con escenas 3D | Escenarios para las escenas de `@lucas-vergara/estilos/3d` (Three.js): objetos, orbe, vidrio, partículas, paisaje, bloques, carrusel y túnel con scroll. Usa la tipografía y las paletas de sitio |
 | **sitio diseñadora** | `lineas/sitio-disenadora.css` | Webs de estudio o marca, oscuras | Creada junto con Franservice ([franservice.cl](https://franservice.cl)): oscura, títulos enormes, mono en mayúscula, acento menta. Geist |
+| **luz** | `lineas/luz.css` | Pantallas de tocar y encender: hábitos, rutinas, registros diarios | Papel claro de día y casi negro en reposo; luces de colores con halo que se encienden con un destello. Inter |
 
 Las líneas se pueden **mezclar**: cada una vive bajo su propia clase y prefijo (`.sitio` con `s-…`, `.sitio-disenadora` con `sd-…`). Dentro de ellas, los tokens comunes toman los colores de la línea, así que una `.tarjeta`, un `Indicador` o un `GraficoLinea` de la línea panel se ven coherentes (ver "Proyectos" en la vitrina de sitio). Para una línea nueva: `css/lineas/<nombre>.css`, con alcance propio (`.<nombre>`) y prefijo de clases propio.
 
@@ -28,6 +29,7 @@ Las líneas se pueden **mezclar**: cada una vive bajo su propia clase y prefijo 
 | Línea sitio | `lineas/sitio.css` | Tipografía, cabecera que se esconde, navegación en píldora, avatar, hero con fondo vivo, entrada, telón, proyectos en marco de navegador, scroll horizontal, tarjetas inclinables, marquesina, galería, variantes noche y simple |
 | Línea 3d | `lineas/3d.css` | Escenarios para escenas 3D (clases `td-`): `td-escenario`, `td-escenario-pleno`, `td-recorrido` (con scroll), `td-dueto`, `td-sobre` + `td-panel`, `td-selector` |
 | Línea sitio diseñadora | `lineas/sitio-disenadora.css` | La línea oscura creada con Franservice (clases `sd-`) |
+| Línea luz | `lineas/luz.css` | Luces que se encienden, calendario de puntos, filas por hábito y modo reposo (clases `l-`) |
 | Tailwind | `tailwind.css` | Puente para proyectos con Tailwind v4 (`bg-superficie`, `text-acento`…) sobre las mismas variables |
 | Componentes | `@lucas-vergara/estilos` | `Indicador`, `Variacion`, `Estado`, `Frescura`, `Vacio`, `Segmentado`, `Pestanas`, `ThOrden`, esqueletos, `BotonTema`, `useOrden`… |
 | Gráficos | `@lucas-vergara/estilos/graficos` | `GraficoLinea`, `GraficoBarras`, `GraficoBanda`, `Sparkline` (requiere `recharts`) |
@@ -109,6 +111,27 @@ Cada escena ocupa su contenedor, toma los colores de la paleta (y se rearma si c
 ### Línea sitio diseñadora
 
 La misma idea con clases `sd-…` bajo `.sitio-disenadora` (variante clara: `sd-claro`). Componentes compartidos con `prefijo="sd"`: `<Palabras prefijo="sd" …>`, `<Acento prefijo="sd" …>`, `<Cursor />` (solo existe en esta línea).
+
+### Línea luz
+
+```tsx
+import "@lucas-vergara/estilos/tokens.css";
+import "@lucas-vergara/estilos/lineas/luz.css";
+```
+
+```html
+<body class="luz">   <!-- dormida: class="luz l-reposo" -->
+  <div class="l-tablero">
+    <div class="l-casilla l-color-menta">
+      <button class="l-luz" aria-pressed="true"><svg class="l-marca">…</svg></button>
+      <span class="l-nombre">Caminar</span><span class="l-detalle">30 min</span>
+    </div>
+  </div>
+  <div class="l-calendario l-color-menta"><span class="l-punto l-encendido"></span><span class="l-punto l-hoy"></span>…</div>
+</body>
+```
+
+Al encender, poner `.l-destellando` en la luz y quitarla en `animationend`. Variables por proyecto: `--l-color`, `--l-tam-luz`, `--l-tam-punto`, `--l-columnas`, `--l-brillo`.
 
 **Regla:** el `estilos.css` del proyecto solo tiene lo que es de ese proyecto. Si algo sirve para otros, se sube aquí.
 

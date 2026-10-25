@@ -61,6 +61,15 @@ Lucas quiere los objetos 3D en su propia línea, no en el hero de sitio. Referen
 
 Le gustan todas las escenas de la línea 3d: se mantienen para ir probando.
 
+## Línea luz (desde v0.12.0)
+
+Creada para la app de hábitos (24-10-2026), con la **sensación** del Every Day Calendar de Simone Giertz (no su look): tocar algo cumplido y que se prenda una luz, como un premio chico y físico.
+
+- **Claro de día, oscuro solo en reposo.** Respeta que prefiero tonos claros: el negro aparece cuando la pantalla está "dormida" y no se lee, solo se mira de pasada.
+- **Luces de colores vivos con halo** y un ✓ (el estado no queda solo en el color); lo pendiente es un hueco hundido en el papel.
+- **Un solo momento de movimiento**: el destello al encender.
+- Pensada para pantallas táctiles vistas de lejos (pantalla en la sala, celular): blancos grandes, poco texto.
+
 ## Reglas adoptadas de Impeccable y Taste (23-10-2026)
 
 Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus/impeccable) y [Taste](https://github.com/Leonxlnx/taste-skill), contra estas preferencias. No las instalamos: traen su propia dirección estética y pelearían con la biblioteca. Me quedé con estas reglas, que se suman a lo que ya tenía:
@@ -121,6 +130,7 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 | monitor de proyectos | azul | v0.11.0 | ídem |
 | oportunidades | azul | v0.11.0 | ídem |
 | finanzas | verde | v0.11.0 | app de finanzas personales (Firebase); estilos propios mínimos en `src/estilos.css` |
+| habitos (web) | — (línea luz) | v0.12.0 | app de hábitos; la pantalla ESP32 replica la línea en su firmware |
 | cv (PDF del currículum) | azul | v0.11.0 | solo tokens, copiados en `cv/estilos/`; hoja de impresión propia (`cv.css`) mientras se decide si va una línea "documento" |
 
 ### Fuera de la biblioteca (por decidir)
@@ -130,7 +140,7 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 | trote-app | Diseño propio (violeta, CSS modules) de una app de entrenamiento: adoptar la biblioteca sería un rediseño. |
 | franservice (web) | Sitio de un cliente: es la fuente de la línea sitio, pero se deja tal cual (no carga la biblioteca). |
 | meyer/calculadora-termica | Calculadora con la marca Gyplac (cliente), en Tailwind; además tiene cambios sin commitear. |
-| Liss/axis, Liss/axis-2, fases, semillas | Tailwind con estilos propios; se podrían migrar con `tailwind.css` si se quiere la misma línea. |
+| Liss/axis, Liss/axis-2, fases | Tailwind con estilos propios; se podrían migrar con `tailwind.css` si se quiere la misma línea. |
 | etexScrapF | Antiguo, en MUI. |
 | ozmo | De trabajo: excluido. |
 
