@@ -125,7 +125,7 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 
 | Proyecto | Acento | Versión | Notas |
 |---|---|---|---|
-| monitor Sodimac (meyer/scrap2.0/web) | verde | v0.11.0 | origen de la biblioteca; la subida va en el PR #13, por mergear |
+| monitor Sodimac (meyer/scrap2.0/web) | verde | v0.12.1 | origen de la biblioteca; el arreglo de leyendas de v0.12.1 salió de aquí |
 | radar de reciclaje | verde | v0.11.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura); usa el Indicador de la biblioteca |
 | monitor de proyectos | azul | v0.11.0 | ídem |
 | oportunidades | azul | v0.11.0 | ídem |
