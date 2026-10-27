@@ -9,7 +9,7 @@ export declare function Estado({ valor, si, no, na }: {
 }): import("react").JSX.Element;
 /** Indicador: etiqueta con ícono, número grande, variación en chip y tendencia a todo el ancho abajo. */
 export declare function Indicador({ etiqueta, icono, valor, variacion, detalle, tendencia }: {
-    etiqueta: string;
+    etiqueta: ReactNode;
     icono?: ReactNode;
     valor: ReactNode;
     /** Cambio contra el inicio del período (ver <Variacion>). */
@@ -19,10 +19,25 @@ export declare function Indicador({ etiqueta, icono, valor, variacion, detalle, 
     tendencia?: ReactNode;
 }): import("react").JSX.Element;
 /**
+ * Ayuda (i) junto a un título: la definición o la metodología aparece al pasar el cursor o al enfocarla.
+ * Reemplaza las notas largas bajo los títulos; el subtítulo queda libre para decir el hallazgo.
+ */
+export declare function Ayuda({ texto }: {
+    texto: string;
+}): import("react").JSX.Element;
+/** Línea de tiempo: cambios agrupados por día, con la fecha a la izquierda. `contenido` suele ser una lista. */
+export declare function LineaTiempo({ dias }: {
+    dias: {
+        id: string;
+        dia: ReactNode;
+        contenido: ReactNode;
+    }[];
+}): import("react").JSX.Element;
+/**
  * Cambio entre dos valores: "▼ $2.000 (−11%) vs. hace 30 días".
  * Verde si el cambio es bueno y rojo si es malo, según `subirEsBueno`; siempre con flecha, no solo color.
  */
-export declare function Variacion({ actual, anterior, formato, texto, subirEsBueno, compacta }: {
+export declare function Variacion({ actual, anterior, formato, texto, subirEsBueno, compacta, chipPorcentaje }: {
     actual: number | null | undefined;
     anterior: number | null | undefined;
     formato: (n: number) => string;
@@ -31,6 +46,8 @@ export declare function Variacion({ actual, anterior, formato, texto, subirEsBue
     subirEsBueno: boolean;
     /** Sin el texto de referencia (para tablas); sin datos muestra "—". */
     compacta?: boolean;
+    /** El chip lleva solo el porcentaje ("▲ 10,1%") y el monto pasa al texto ("+$670 vs. 28 sept"). Para indicadores. */
+    chipPorcentaje?: boolean;
 }): import("react").JSX.Element | null;
 /**
  * Qué tan reciente es el dato: verde, ámbar o rojo según `umbrales` (horas). El predeterminado [26, 72] sirve para

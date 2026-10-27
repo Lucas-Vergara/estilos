@@ -21,7 +21,7 @@ export interface Serie {
 /** En los datos, `${clave}${SIN_RESPALDO}: true` marca un punto sin respaldo (p. ej. un precio antiguo); el tooltip lo indica. */
 export declare const SIN_RESPALDO = "__sinRespaldo";
 interface PropsLinea {
-    titulo: string;
+    titulo: ReactNode;
     nota?: ReactNode;
     /** Controles a la derecha del título. */
     acciones?: ReactNode;
@@ -37,8 +37,21 @@ interface PropsLinea {
     escalonado?: boolean;
     /** Title de los valores marcados con SIN_RESPALDO. */
     textoSinRespaldo?: string;
+    /** La cifra de hoy bajo el título (que pasa a etiqueta), p. ej. "36.806" con su variación. */
+    cifra?: ReactNode;
+    /** Tope real del valor (p. ej. 72 tiendas): línea discontinua con su etiqueta; el eje llega al menos hasta ahí. */
+    tope?: {
+        valor: number;
+        etiqueta: string;
+    };
+    /** Relleno en degradado bajo la primera serie (para una sola serie). */
+    area?: boolean;
+    /** Punto y valor al final de cada serie (no de las referencias), en vez de buscarlo en el eje. */
+    etiquetaFinal?: boolean;
+    /** Cantidad de marcas del eje Y (por defecto 5). */
+    marcas?: number;
 }
-export declare function GraficoLinea({ titulo, nota, acciones, alto, datos, series, formato, formatoEje, cargando, desdeCero, escalonado, textoSinRespaldo }: PropsLinea): import("react").JSX.Element;
+export declare function GraficoLinea({ titulo, nota, acciones, alto, datos, series, formato, formatoEje, cargando, desdeCero, escalonado, textoSinRespaldo, cifra, tope, area, etiquetaFinal, marcas }: PropsLinea): import("react").JSX.Element;
 export interface BarraDato {
     /** Identificador estable (p. ej. el nombre completo de la región). */
     id: string;
@@ -51,7 +64,7 @@ export interface BarraDato {
     nombre?: string;
 }
 interface PropsBarras {
-    titulo: string;
+    titulo: ReactNode;
     nota?: string;
     /** En el orden en que se dibujan, de izquierda a derecha. */
     datos: BarraDato[];
@@ -83,7 +96,7 @@ export interface PuntoBanda {
 }
 /** Evolución de un rango (banda mín–máx) con una línea dentro y marcas donde la línea cambia. */
 export declare function GraficoBanda({ titulo, nota, acciones, datos, nombres, formato, cargando, alto }: {
-    titulo: string;
+    titulo: ReactNode;
     nota?: ReactNode;
     /** Controles a la derecha del título. */
     acciones?: ReactNode;

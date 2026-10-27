@@ -17,6 +17,8 @@ Lo que me gusta, lo que descarté y por qué. Claude lo lee antes de diseñar al
 - Escala tipográfica cerrada (7 tamaños) y espaciado en múltiplos de 4.
 - **Página ancha en escritorio** (1440 px, desde v0.13.0) con la barra superior alineada al contenido: 1200 px dejaba demasiado margen a los lados en un panel con gráficos.
 - **Cifras y títulos con peso 650** e interletrado cerrado; chips de contorno para listas largas de nombres; en los gráficos de barras, solo el máximo en color pleno cuando ayuda a leer el hallazgo.
+- **Menos ruido (v0.14.0)**: la nota bajo un título dice el hallazgo y la metodología va en (i); los indicadores en una sola tarjeta; los cambios como línea de tiempo con la fecha a la izquierda; la cifra de hoy al final de la línea; tablas agrupadas en vez de repetir la región; columnas que no discriminan, fuera. Revisado en https://claude.ai/artifact/7SYf3ziNuwaW2ta9jPCyLn.
+- **Las propuestas se muestran en modo día**: los clientes usan el claro; el oscuro se revisa después.
 
 ## Me gusta — línea sitio diseñadora
 
@@ -127,7 +129,7 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 
 | Proyecto | Acento | Versión | Notas |
 |---|---|---|---|
-| monitor Sodimac (meyer/scrap2.0/web) | verde | v0.13.0 | origen de la biblioteca; de aquí salieron el arreglo de leyendas (v0.12.1) y el pulido de escritorio (v0.13.0) |
+| monitor Sodimac (meyer/scrap2.0/web) | verde | v0.14.0 | origen de la biblioteca; de aquí salieron el arreglo de leyendas (v0.12.1), el pulido de escritorio (v0.13.0) y el de menos ruido (v0.14.0) |
 | radar de reciclaje | verde | v0.11.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura); usa el Indicador de la biblioteca |
 | monitor de proyectos | azul | v0.11.0 | ídem |
 | oportunidades | azul | v0.11.0 | ídem |

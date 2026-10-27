@@ -48,9 +48,9 @@
   /* "Nada" en un gráfico (p. ej. tiendas sin stock): gris neutro, no un color de estado */
   --dato-vacio: #cdd2d7;
   /* Divergente (variación): verde = bajó (bueno), gris = igual, rojo = subió. Es semántico, no depende del acento. */
-  --div-baja-3: #1f7a47; --div-baja-2: #52b87a; --div-baja-1: #b5e3c5;
-  --div-igual: #e6e8eb;
-  --div-alza-1: #f6c9c3; --div-alza-2: #e0705f; --div-alza-3: #b3261e;
+  --div-baja-3: #2e8f57; --div-baja-2: #7cc79a; --div-baja-1: #cdebd8;
+  --div-igual: #f1f3f4;
+  --div-alza-1: #f8d8d2; --div-alza-2: #ec9a8c; --div-alza-3: #d4513f;
 
   /* Movimiento de interfaz (cambios de estado, no momentos con autoría): la salida, más rápida que la entrada; nunca rebote */
   --dur-rapida: 150ms;       /* respuesta inmediata: hover, presionar, mostrar un ícono */

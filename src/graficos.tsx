@@ -1,5 +1,5 @@
-import { useState, type ReactNode } from "react";
-import { Area, Bar, BarChart, CartesianGrid, Cell, ComposedChart, Line, LineChart, ReferenceDot, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { useId, useState, type ReactNode } from "react";
+import { Area, Bar, BarChart, CartesianGrid, Cell, ComposedChart, Line, LineChart, ReferenceDot, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { EsqueletoGrafico, Vacio } from "./componentes.js";
 import { diaCorto } from "./fechas.js";
 
@@ -28,17 +28,28 @@ export function Sparkline({ valores, color = "var(--serie-1)", escalonado, ancho
   /** Ocupa todo el ancho disponible, con un relleno suave bajo la línea (indicadores). */
   fluido?: boolean;
 }) {
+  const id = useId();
   const datos = valores.map((v, i) => ({ i, v }));
+  const ultimo = datos.findLast((d) => d.v != null);
   if (valores.filter((v) => v != null).length < 2)
     return fluido ? <div style={{ height: alto }} /> : <span className="muted" style={{ display: "inline-block", width: ancho }}>—</span>;
   if (fluido)
     return (
       <div style={{ height: alto }} role="img" aria-label={etiqueta}>
         <ResponsiveContainer width="100%" height={alto}>
-          <ComposedChart data={datos} margin={{ top: 3, right: 1, bottom: 1, left: 1 }}>
+          <ComposedChart data={datos} margin={{ top: 5, right: 5, bottom: 1, left: 1 }}>
+            {/* Relleno en degradado y punto en el último valor: la cifra de hoy queda anclada a su historia */}
+            <defs>
+              <linearGradient id={`spark${id}`} x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0" stopColor={color} stopOpacity={0.18} />
+                <stop offset="1" stopColor={color} stopOpacity={0} />
+              </linearGradient>
+            </defs>
             <YAxis hide domain={["dataMin", "dataMax"]} />
-            <Area dataKey="v" type={escalonado ? "stepAfter" : "monotone"} fill={color} fillOpacity={0.1} stroke="none" connectNulls isAnimationActive={false} />
+            <XAxis hide dataKey="i" type="number" domain={["dataMin", "dataMax"]} />
+            <Area dataKey="v" type={escalonado ? "stepAfter" : "monotone"} fill={`url(#spark${id})`} stroke="none" connectNulls isAnimationActive={false} />
             <Line dataKey="v" type={escalonado ? "stepAfter" : "monotone"} stroke={color} strokeWidth={2} dot={false} connectNulls isAnimationActive={false} />
+            {ultimo && <ReferenceDot x={ultimo.i} y={ultimo.v!} r={3.5} fill={color} stroke="var(--superficie)" strokeWidth={1.5} />}
           </ComposedChart>
         </ResponsiveContainer>
       </div>
@@ -67,7 +78,7 @@ export interface Serie {
 export const SIN_RESPALDO = "__sinRespaldo";
 
 interface PropsLinea {
-  titulo: string;
+  titulo: ReactNode;
   nota?: ReactNode;
   /** Controles a la derecha del título. */
   acciones?: ReactNode;
@@ -83,6 +94,16 @@ interface PropsLinea {
   escalonado?: boolean;
   /** Title de los valores marcados con SIN_RESPALDO. */
   textoSinRespaldo?: string;
+  /** La cifra de hoy bajo el título (que pasa a etiqueta), p. ej. "36.806" con su variación. */
+  cifra?: ReactNode;
+  /** Tope real del valor (p. ej. 72 tiendas): línea discontinua con su etiqueta; el eje llega al menos hasta ahí. */
+  tope?: { valor: number; etiqueta: string };
+  /** Relleno en degradado bajo la primera serie (para una sola serie). */
+  area?: boolean;
+  /** Punto y valor al final de cada serie (no de las referencias), en vez de buscarlo en el eje. */
+  etiquetaFinal?: boolean;
+  /** Cantidad de marcas del eje Y (por defecto 5). */
+  marcas?: number;
 }
 
 function TooltipLinea({ active, payload, label, series, formato, textoSinRespaldo }: {
@@ -131,12 +152,15 @@ function escalaRedonda(datos: Record<string, unknown>[], claves: string[], marca
   return { ticks };
 }
 
-export function GraficoLinea({ titulo, nota, acciones, alto = 200, datos, series, formato, formatoEje, cargando, desdeCero, escalonado, textoSinRespaldo = "Dato sin respaldo" }: PropsLinea) {
+export function GraficoLinea({ titulo, nota, acciones, alto = 200, datos, series, formato, formatoEje, cargando, desdeCero, escalonado, textoSinRespaldo = "Dato sin respaldo", cifra, tope, area, etiquetaFinal, marcas = 5 }: PropsLinea) {
+  const id = useId();
   const unSoloPunto = datos.length === 1;
-  const escala = desdeCero ? undefined : escalaRedonda(datos, series.map((s) => s.clave));
+  const escala = desdeCero ? undefined : escalaRedonda(datos, series.map((s) => s.clave), marcas);
+  const ultimoIndice = (clave: string) => datos.findLastIndex((d) => typeof d[clave] === "number");
   return (
-    <figure className={`grafico ${cargando && datos.length ? "cargando-suave" : ""}`} style={{ margin: 0 }}>
+    <figure className={`grafico ${cifra != null ? "con-cifra" : ""} ${cargando && datos.length ? "cargando-suave" : ""}`} style={{ margin: 0 }}>
       <div className="grafico-cabecera"><h3>{titulo}</h3>{acciones}</div>
+      {cifra != null && <div className="grafico-cifra">{cifra}</div>}
       {nota && <div className="nota">{nota}</div>}
       {series.length > 1 && (
         <div className="leyenda">
@@ -149,8 +173,17 @@ export function GraficoLinea({ titulo, nota, acciones, alto = 200, datos, series
         cargando ? <EsqueletoGrafico /> : <Vacio icono={<IconoLinea />} titulo="Sin datos en este período" texto="Prueba con un período más largo." />
       ) : (
         <ResponsiveContainer width="100%" height={alto}>
-          <LineChart data={datos} margin={{ top: 8, right: 12, bottom: 0, left: 0 }}>
-            <CartesianGrid stroke="var(--grilla)" vertical={false} />
+          <ComposedChart data={datos} margin={{ top: 8, right: etiquetaFinal || tope ? 64 : 12, bottom: 0, left: 0 }}>
+            {area && (
+              <defs>
+                <linearGradient id={`area${id}`} x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stopColor={series[0]?.color} stopOpacity={0.16} />
+                  <stop offset="1" stopColor={series[0]?.color} stopOpacity={0} />
+                </linearGradient>
+              </defs>
+            )}
+            {/* Grilla punteada y liviana: guía sin competir con las líneas */}
+            <CartesianGrid stroke="var(--grilla)" strokeDasharray="2 4" vertical={false} />
             <XAxis
               dataKey="fecha"
               tickFormatter={diaCorto}
@@ -166,10 +199,22 @@ export function GraficoLinea({ titulo, nota, acciones, alto = 200, datos, series
               tickLine={false}
               axisLine={false}
               width={72}
-              domain={escala ? [escala.ticks[0], escala.ticks.at(-1)!] : [0, "auto"]}
+              domain={escala ? [escala.ticks[0], escala.ticks.at(-1)!] : [0, tope ? (max: number) => Math.max(max, tope.valor) : "auto"]}
               ticks={escala?.ticks}
+              tickCount={escala ? undefined : marcas}
               allowDecimals={false}
             />
+            {tope && (
+              <ReferenceLine
+                y={tope.valor}
+                stroke="var(--eje)"
+                strokeDasharray="4 4"
+                label={{ value: tope.etiqueta, position: "right", fill: "var(--tinta-3)", fontSize: 11 }}
+              />
+            )}
+            {area && series[0] && (
+              <Area dataKey={series[0].clave} type={escalonado ? "stepAfter" : "monotone"} fill={`url(#area${id})`} stroke="none" connectNulls isAnimationActive={false} tooltipType="none" activeDot={false} />
+            )}
             <Tooltip
               cursor={{ stroke: "var(--eje)", strokeWidth: 1 }}
               content={<TooltipLinea series={series} formato={formato} textoSinRespaldo={textoSinRespaldo} />}
@@ -187,14 +232,29 @@ export function GraficoLinea({ titulo, nota, acciones, alto = 200, datos, series
                 strokeDasharray={s.referencia ? "5 4" : undefined}
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                // Con pocos puntos se muestran marcadores; con muchos, solo al pasar el cursor.
-                dot={!s.referencia && (unSoloPunto || datos.length < 8) ? { r: 4, fill: s.color, stroke: "var(--superficie)", strokeWidth: 2 } : false}
+                // Con pocos puntos se muestran marcadores; con muchos, solo al pasar el cursor (y el último, con etiquetaFinal).
+                dot={
+                  !s.referencia && (unSoloPunto || datos.length < 8)
+                    ? { r: 4, fill: s.color, stroke: "var(--superficie)", strokeWidth: 2 }
+                    : etiquetaFinal && !s.referencia
+                      ? (p: { cx?: number; cy?: number; index?: number; value?: number }) =>
+                          p.index === ultimoIndice(s.clave) && p.cx != null && p.cy != null ? (
+                            <g key={`fin-${s.clave}`}>
+                              <circle cx={p.cx} cy={p.cy} r={7} fill={s.color} opacity={0.18} />
+                              <circle cx={p.cx} cy={p.cy} r={3.5} fill={s.color} stroke="var(--superficie)" strokeWidth={1.5} />
+                              <text x={p.cx + 10} y={p.cy + 4} fill="var(--tinta)" fontSize={12} fontWeight={650} style={{ fontVariantNumeric: "tabular-nums" }}>
+                                {typeof p.value === "number" ? formato(p.value) : ""}
+                              </text>
+                            </g>
+                          ) : <g key={`p-${s.clave}-${p.index}`} />
+                      : false
+                }
                 activeDot={s.referencia ? { r: 3, fill: s.color, stroke: "none" } : { r: 5, fill: s.color, stroke: "var(--superficie)", strokeWidth: 2 }}
                 connectNulls
                 isAnimationActive={false}
               />
             ))}
-          </LineChart>
+          </ComposedChart>
         </ResponsiveContainer>
       )}
     </figure>
@@ -216,7 +276,7 @@ export interface BarraDato {
 }
 
 interface PropsBarras {
-  titulo: string;
+  titulo: ReactNode;
   nota?: string;
   /** En el orden en que se dibujan, de izquierda a derecha. */
   datos: BarraDato[];
@@ -375,7 +435,7 @@ function TooltipBanda({ active, payload, label, nombres, formato }: {
 
 /** Evolución de un rango (banda mín–máx) con una línea dentro y marcas donde la línea cambia. */
 export function GraficoBanda({ titulo, nota, acciones, datos, nombres, formato, cargando, alto = 200 }: {
-  titulo: string;
+  titulo: ReactNode;
   nota?: ReactNode;
   /** Controles a la derecha del título. */
   acciones?: ReactNode;

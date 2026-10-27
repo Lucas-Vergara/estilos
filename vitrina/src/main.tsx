@@ -1,7 +1,7 @@
 import { StrictMode, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
-  BotonDescarga, BotonTema, CreditoEstilos, Esqueleto, EsqueletoTabla, Estado, Frescura, Indicador, PanelPestana, Pestanas, Segmentado,
+  Ayuda, BotonDescarga, BotonTema, CreditoEstilos, Esqueleto, EsqueletoTabla, Estado, Frescura, Indicador, LineaTiempo, PanelPestana, Pestanas, Segmentado,
   ThOrden, Vacio, Variacion, ordenar, useOrden,
 } from "../../src";
 import { GraficoBanda, GraficoBarras, GraficoLinea, Sparkline } from "../../src/graficos";
@@ -160,16 +160,16 @@ function Vitrina() {
           </div>
         </Seccion>
 
-        <div className="indicadores" id="componentes">
+        <div className="indicadores indicadores-unidos" id="componentes">
           <Indicador
             etiqueta="Precio típico"
             icono={<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>}
             valor={precio(precioA.at(-1)!)}
-            variacion={<Variacion actual={precioA.at(-1)} anterior={precioA[0]} formato={precio} texto="vs. hace 30 días" subirEsBueno={false} />}
+            variacion={<Variacion actual={precioA.at(-1)} anterior={precioA[0]} formato={precio} texto="vs. hace 30 días" subirEsBueno={false} chipPorcentaje />}
             tendencia={<Sparkline valores={precioA} escalonado fluido alto={36} etiqueta="Tendencia del precio" />}
           />
           <Indicador
-            etiqueta="Tiendas con stock"
+            etiqueta={<>Tiendas con stock<Ayuda texto="Tiendas con al menos una unidad" /></>}
             valor={<>38 <span className="indicador-de">de 45</span></>}
             variacion={<Variacion actual={38} anterior={41} formato={numero} texto="vs. ayer" subirEsBueno />}
             tendencia={<Sparkline valores={[41, 41, 40, 40, 39, 41, 40, 38, 38]} fluido alto={36} color="var(--serie-2)" />}
@@ -286,6 +286,30 @@ function Vitrina() {
               escalonado
             />
             <GraficoBanda titulo="Rango y precio típico" datos={datosBanda} nombres={{ min: "Mínimo", max: "Máximo", linea: "Típico" }} formato={precio} />
+          </div>
+          <div className="graficos" style={{ marginTop: 24 }}>
+            <GraficoLinea
+              titulo={<>Tiendas con stock<Ayuda texto="Con cifra, tope, área y etiqueta al final" /></>}
+              cifra={<>38 de 45 <Variacion actual={38} anterior={41} formato={numero} texto="vs. hace 9 días" subirEsBueno chipPorcentaje /></>}
+              datos={[41, 41, 40, 40, 39, 41, 40, 38, 38].map((v, i) => ({ fecha: datosLinea[i]?.fecha, v }))}
+              series={[{ clave: "v", nombre: "Tiendas", color: "var(--serie-1)" }]}
+              formato={numero}
+              desdeCero
+              area
+              etiquetaFinal
+              marcas={3}
+              tope={{ valor: 45, etiqueta: "45 tiendas" }}
+            />
+            <div className="grafico">
+              <h3>Qué cambió</h3>
+              <div className="nota">Línea de tiempo: la fecha a la izquierda, agrupada por día</div>
+              <LineaTiempo
+                dias={[
+                  { id: "hoy", dia: "Hoy", contenido: <ul><li>Se agotó en 1 tienda <span className="tenue">· Temuco</span></li><li>Volvió el stock en 1 tienda <span className="tenue">· Quilicura</span></li></ul> },
+                  { id: "ayer", dia: "Ayer", contenido: <ul><li>Bajó $650 (−9,1%) en 22 comunas <span className="tenue">· Los Lagos</span></li></ul> },
+                ]}
+              />
+            </div>
           </div>
           <div className="graficos" style={{ marginTop: 24 }}>
             <GraficoBarras

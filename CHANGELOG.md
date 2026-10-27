@@ -1,5 +1,19 @@
 # Cambios
 
+## v0.14.0 — 2026-10-27
+
+Menos ruido y un look más actual en la línea panel, a partir de la exploración del monitor Sodimac (referencias: Stripe, Linear, Plausible, Our World in Data, FT Visual Vocabulary, Tufte y Few).
+
+- **Inter con tamaño óptico**: el enlace de la fuente pasa a `Inter:opsz,wght@14..32,400..700`; las cifras grandes y los títulos usan el corte de pantalla (ver README).
+- **`Ayuda`**: ícono (i) junto a un título, con la definición o la metodología en un tooltip (cursor o foco). Reemplaza las notas largas bajo los títulos, que quedan para el hallazgo.
+- **`LineaTiempo`** y `.linea-tiempo`: cambios agrupados por día, con la fecha a la izquierda.
+- **Indicadores unidos** (`.indicadores.indicadores-unidos`): una sola tarjeta con divisores finos en lugar de una caja por cifra. `Indicador` acepta un `ReactNode` como etiqueta (p. ej. con `Ayuda`).
+- `Variacion` con `chipPorcentaje`: el chip lleva solo el porcentaje ("▲ 10,1%") y el monto pasa al texto ("+$670 vs. el 28 sept").
+- `Sparkline fluido`: relleno en degradado y punto en el último valor.
+- `GraficoLinea`: grilla punteada y nuevas opciones `cifra` (la cifra de hoy bajo el título, que pasa a etiqueta), `etiquetaFinal` (punto y valor al final de cada serie), `area` (degradado bajo la serie), `tope` (línea con el máximo real, p. ej. 72 tiendas) y `marcas` (cantidad de marcas del eje Y). `titulo` acepta un `ReactNode` en los tres gráficos.
+- **Mapa de calor** en la biblioteca (`.calor`, `.calor-celda`, `.calor-fila-titulo`, `.calor-final`, `.calor-leyenda`): celdas con aire y esquinas redondeadas, y al final de cada fila cómo quedó. La paleta divergente clara (`--div-*`) baja un tono: lo "igual" casi desaparece y el rojo más fuerte deja de dominar.
+- Tablas: encabezados con línea más suave, `.tenue` para columnas secundarias, `tr.grupo` para filas de grupo con subtotal y `.boton-marca` (estrella de favorito que aparece al pasar el cursor y queda fija si está marcada).
+
 ## v0.13.0 — 2026-10-27
 
 Pulido de la línea panel en escritorio, a partir del monitor Sodimac.

@@ -1,4 +1,4 @@
-import { useRef, type CSSProperties, type KeyboardEvent, type ReactNode } from "react";
+import { Fragment, useRef, type CSSProperties, type KeyboardEvent, type ReactNode } from "react";
 import { fechaHora, haceCuanto, horasDesde } from "./fechas.js";
 import type { Direccion, Orden } from "./orden.js";
 
@@ -29,7 +29,7 @@ export function Estado({ valor, si = "Sí", no = "No", na = "Sin dato" }: { valo
 
 /** Indicador: etiqueta con ícono, número grande, variación en chip y tendencia a todo el ancho abajo. */
 export function Indicador({ etiqueta, icono, valor, variacion, detalle, tendencia }: {
-  etiqueta: string;
+  etiqueta: ReactNode;
   icono?: ReactNode;
   valor: ReactNode;
   /** Cambio contra el inicio del período (ver <Variacion>). */
@@ -54,10 +54,32 @@ export function Indicador({ etiqueta, icono, valor, variacion, detalle, tendenci
 }
 
 /**
+ * Ayuda (i) junto a un título: la definición o la metodología aparece al pasar el cursor o al enfocarla.
+ * Reemplaza las notas largas bajo los títulos; el subtítulo queda libre para decir el hallazgo.
+ */
+export function Ayuda({ texto }: { texto: string }) {
+  return <span className="ayuda" tabIndex={0} role="img" aria-label={texto} data-texto={texto}>i</span>;
+}
+
+/** Línea de tiempo: cambios agrupados por día, con la fecha a la izquierda. `contenido` suele ser una lista. */
+export function LineaTiempo({ dias }: { dias: { id: string; dia: ReactNode; contenido: ReactNode }[] }) {
+  return (
+    <div className="linea-tiempo">
+      {dias.map((d) => (
+        <Fragment key={d.id}>
+          <div className="linea-tiempo-dia">{d.dia}</div>
+          <div className="linea-tiempo-items">{d.contenido}</div>
+        </Fragment>
+      ))}
+    </div>
+  );
+}
+
+/**
  * Cambio entre dos valores: "▼ $2.000 (−11%) vs. hace 30 días".
  * Verde si el cambio es bueno y rojo si es malo, según `subirEsBueno`; siempre con flecha, no solo color.
  */
-export function Variacion({ actual, anterior, formato, texto, subirEsBueno, compacta }: {
+export function Variacion({ actual, anterior, formato, texto, subirEsBueno, compacta, chipPorcentaje }: {
   actual: number | null | undefined;
   anterior: number | null | undefined;
   formato: (n: number) => string;
@@ -66,6 +88,8 @@ export function Variacion({ actual, anterior, formato, texto, subirEsBueno, comp
   subirEsBueno: boolean;
   /** Sin el texto de referencia (para tablas); sin datos muestra "—". */
   compacta?: boolean;
+  /** El chip lleva solo el porcentaje ("▲ 10,1%") y el monto pasa al texto ("+$670 vs. 28 sept"). Para indicadores. */
+  chipPorcentaje?: boolean;
 }) {
   if (actual == null || anterior == null) return compacta ? <span className="muted">—</span> : null;
   const d = actual - anterior;
@@ -74,6 +98,13 @@ export function Variacion({ actual, anterior, formato, texto, subirEsBueno, comp
     return compacta ? <span className="variacion igual">Sin cambios</span> : <><span className="variacion igual variacion-chip">Sin cambios</span>{ref}</>;
   const rel = anterior ? Math.round((Math.abs(d) / anterior) * 1000) / 10 : null;
   const bueno = d > 0 === subirEsBueno;
+  if (chipPorcentaje && !compacta && rel != null)
+    return (
+      <>
+        <span className={`variacion ${bueno ? "buena" : "mala"} variacion-chip`}>{d > 0 ? "▲" : "▼"} {rel.toLocaleString("es-CL")}%</span>
+        <span className="variacion-ref">{d > 0 ? "+" : "−"}{formato(Math.abs(d))}{texto && ` ${texto}`}</span>
+      </>
+    );
   const cambio = (
     <span className={`variacion ${bueno ? "buena" : "mala"} ${compacta ? "" : "variacion-chip"}`}>
       {d > 0 ? "▲" : "▼"} {formato(Math.abs(d))}

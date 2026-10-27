@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 import { fechaHora, haceCuanto, horasDesde } from "./fechas.js";
 // Componentes de la línea "panel". Las clases que usan están en css/base.css. Los gráficos (Recharts) están en graficos.tsx.
 /** Estado sí/no/sin dato: siempre ícono + texto, nunca solo color. */
@@ -13,10 +13,21 @@ export function Indicador({ etiqueta, icono, valor, variacion, detalle, tendenci
     return (_jsxs("div", { className: "tarjeta indicador", children: [_jsxs("div", { className: "indicador-cabecera", children: [icono, _jsx("span", { children: etiqueta })] }), _jsx("div", { className: "indicador-valor", children: valor }), (variacion || detalle) && (_jsxs("div", { className: "indicador-pie", children: [variacion, detalle && _jsx("span", { className: "detalle", children: detalle })] })), tendencia && _jsx("div", { className: "indicador-tendencia", children: tendencia })] }));
 }
 /**
+ * Ayuda (i) junto a un título: la definición o la metodología aparece al pasar el cursor o al enfocarla.
+ * Reemplaza las notas largas bajo los títulos; el subtítulo queda libre para decir el hallazgo.
+ */
+export function Ayuda({ texto }) {
+    return _jsx("span", { className: "ayuda", tabIndex: 0, role: "img", "aria-label": texto, "data-texto": texto, children: "i" });
+}
+/** Línea de tiempo: cambios agrupados por día, con la fecha a la izquierda. `contenido` suele ser una lista. */
+export function LineaTiempo({ dias }) {
+    return (_jsx("div", { className: "linea-tiempo", children: dias.map((d) => (_jsxs(Fragment, { children: [_jsx("div", { className: "linea-tiempo-dia", children: d.dia }), _jsx("div", { className: "linea-tiempo-items", children: d.contenido })] }, d.id))) }));
+}
+/**
  * Cambio entre dos valores: "▼ $2.000 (−11%) vs. hace 30 días".
  * Verde si el cambio es bueno y rojo si es malo, según `subirEsBueno`; siempre con flecha, no solo color.
  */
-export function Variacion({ actual, anterior, formato, texto, subirEsBueno, compacta }) {
+export function Variacion({ actual, anterior, formato, texto, subirEsBueno, compacta, chipPorcentaje }) {
     if (actual == null || anterior == null)
         return compacta ? _jsx("span", { className: "muted", children: "\u2014" }) : null;
     const d = actual - anterior;
@@ -25,6 +36,8 @@ export function Variacion({ actual, anterior, formato, texto, subirEsBueno, comp
         return compacta ? _jsx("span", { className: "variacion igual", children: "Sin cambios" }) : _jsxs(_Fragment, { children: [_jsx("span", { className: "variacion igual variacion-chip", children: "Sin cambios" }), ref] });
     const rel = anterior ? Math.round((Math.abs(d) / anterior) * 1000) / 10 : null;
     const bueno = d > 0 === subirEsBueno;
+    if (chipPorcentaje && !compacta && rel != null)
+        return (_jsxs(_Fragment, { children: [_jsxs("span", { className: `variacion ${bueno ? "buena" : "mala"} variacion-chip`, children: [d > 0 ? "▲" : "▼", " ", rel.toLocaleString("es-CL"), "%"] }), _jsxs("span", { className: "variacion-ref", children: [d > 0 ? "+" : "−", formato(Math.abs(d)), texto && ` ${texto}`] })] }));
     const cambio = (_jsxs("span", { className: `variacion ${bueno ? "buena" : "mala"} ${compacta ? "" : "variacion-chip"}`, children: [d > 0 ? "▲" : "▼", " ", formato(Math.abs(d)), rel != null && ` (${d > 0 ? "+" : "−"}${rel.toLocaleString("es-CL")}%)`] }));
     return compacta ? cambio : _jsxs(_Fragment, { children: [cambio, ref] });
 }
