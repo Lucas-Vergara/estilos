@@ -7,3 +7,9 @@
 .paleta span { flex: 1; max-width: 72px; height: 28px; border-radius: 4px; }
 .fila-tipo { display: grid; grid-template-columns: 110px 1fr; align-items: baseline; gap: var(--e-3); }
 .pie-vitrina { max-width: 1200px; margin: 0 auto; padding: 0 16px 32px; display: flex; justify-content: space-between; gap: 12px; color: var(--tinta-3); font-size: var(--texto-xs); }
+
+/* Navegación lateral en un recuadro (en una app ocupa el alto de la ventana) */
+.vitrina-lateral { border: 1px solid var(--borde); border-radius: var(--radio); overflow: hidden; }
+.vitrina-lateral .barra { position: relative; }
+.vitrina-lateral .con-lateral { min-height: 0; height: 340px; }
+.vitrina-lateral .lateral { position: relative; top: 0; height: 100%; visibility: visible; transform: none; box-shadow: none; width: auto; }

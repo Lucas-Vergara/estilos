@@ -2,7 +2,7 @@ import { StrictMode, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   Ayuda, BotonDescarga, BotonTema, CreditoEstilos, Esqueleto, EsqueletoTabla, Estado, Frescura, Indicador, LineaTiempo, PanelPestana, Pestanas, Segmentado,
-  ThOrden, Vacio, Variacion, ordenar, useOrden,
+  NavegacionLateral, ThOrden, Vacio, Variacion, ordenar, useOrden, type GrupoLateral, type PropsEnlaceLateral,
 } from "../../src";
 import { GraficoBanda, GraficoBarras, GraficoLinea, Sparkline } from "../../src/graficos";
 import "../../css/tokens.css";
@@ -326,6 +326,10 @@ function Vitrina() {
           </div>
         </section>
 
+        <Seccion id="lateral" titulo="Navegación lateral" nota="Expandida o compacta (botón de menú), con grupos que se despliegan; el grupo de la página actual se marca aunque esté plegado. Bajo 900 px, panel sobre el contenido.">
+          <DemoLateral />
+        </Seccion>
+
         <div className="graficos">
           <Seccion id="vacio" titulo="Estado vacío">
             <Vacio
@@ -344,6 +348,38 @@ function Vitrina() {
       </main>
       <footer className="pie-vitrina"><span>Vitrina de la línea panel</span><CreditoEstilos /></footer>
     </>
+  );
+}
+
+// Navegación lateral: en un recuadro, con enlaces que solo cambian la sección elegida (sin navegar).
+const icono = (d: string) => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={d} /></svg>;
+const GRUPOS_DEMO: GrupoLateral[] = [
+  { id: "datos", nombre: "Datos", icono: icono("M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3Zm0 0v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"), secciones: [{ ruta: "/", nombre: "Resumen" }] },
+  { id: "mercado", nombre: "Mercado", icono: icono("m22 7-8.5 8.5-5-5L2 17M16 7h6v6"), secciones: [{ ruta: "/mercado", nombre: "Panorama", exacta: true }, { ruta: "/mercado/precios", nombre: "Precios" }, { ruta: "/mercado/noticias", nombre: "Noticias" }] },
+  { id: "rep", nombre: "Ley REP", icono: icono("M12 3v18M5 21h14M3 7h18M6 7l-3 7a3 3 0 0 0 6 0Zm12 0-3 7a3 3 0 0 0 6 0Z"), secciones: [{ ruta: "/rep", nombre: "Resumen", exacta: true }, { ruta: "/rep/calendario", nombre: "Calendario" }, { ruta: "/rep/reportes", nombre: "Reportes" }] },
+];
+
+function DemoLateral() {
+  const [ruta, setRuta] = useState("/mercado/precios");
+  const [compacta, setCompacta] = useState(false);
+  const Enlace = ({ href, children, ...props }: PropsEnlaceLateral) => (
+    <a href={`#${href}`} {...props} onClick={(e) => { e.preventDefault(); setRuta(href); }}>{children}</a>
+  );
+  return (
+    <div className="vitrina-lateral">
+      <header className="barra barra-app">
+        <div className="barra-izquierda">
+          <button className="boton-menu" aria-label={compacta ? "Expandir menú" : "Contraer menú"} onClick={() => setCompacta(!compacta)}>
+            {icono("M4 6h16M4 12h16M4 18h16")}
+          </button>
+          <span className="marca">Mi app</span>
+        </div>
+      </header>
+      <div className={`con-lateral${compacta ? " compacta" : ""}`}>
+        <NavegacionLateral grupos={GRUPOS_DEMO} rutaActual={ruta} compacta={compacta} onExpandir={() => setCompacta(false)} Enlace={Enlace} />
+        <div className="con-lateral-principal"><div className="contenido"><p className="nota">Página: <code>{ruta}</code></p></div></div>
+      </div>
+    </div>
   );
 }
 

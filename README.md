@@ -31,7 +31,7 @@ Las líneas se pueden **mezclar**: cada una vive bajo su propia clase y prefijo 
 | Línea sitio diseñadora | `lineas/sitio-disenadora.css` | La línea oscura creada con Franservice (clases `sd-`) |
 | Línea luz | `lineas/luz.css` | Luces que se encienden, calendario de puntos, filas por hábito y modo reposo (clases `l-`) |
 | Tailwind | `tailwind.css` | Puente para proyectos con Tailwind v4 (`bg-superficie`, `text-acento`…) sobre las mismas variables |
-| Componentes | `@lucas-vergara/estilos` | `Indicador`, `Variacion`, `Estado`, `Frescura`, `Vacio`, `Segmentado`, `Pestanas`, `ThOrden`, esqueletos, `BotonTema`, `useOrden`… |
+| Componentes | `@lucas-vergara/estilos` | `Indicador`, `Variacion`, `Estado`, `Frescura`, `Vacio`, `Segmentado`, `Pestanas`, `NavegacionLateral`, `ThOrden`, esqueletos, `BotonTema`, `useOrden`… |
 | Gráficos | `@lucas-vergara/estilos/graficos` | `GraficoLinea`, `GraficoBarras`, `GraficoBanda`, `Sparkline` (requiere `recharts`) |
 | Sitio (React) | `@lucas-vergara/estilos/sitio` | `Entrada`, `Telon` + `irCon`, `NavPildora` + `useSeccionActiva`, `Avatar`, `FondoAnimado`, `MarcoNavegador`, `Proyecto`, `Ola`, `BotonSonido` + `sonidos`, `Palabras`, `Acento`, `Cursor` (solo sitio diseñadora), `iniciarMovimiento`, `iniciarInteracciones`, `SCRIPT_MOVIMIENTO`, `conTransicion` |
 | 3D (React) | `@lucas-vergara/estilos/3d` | `Objeto3D` (burbuja, nudo, anillos), `Orbe3D`, `Vidrio3D`, `Particulas3D`, `Terreno3D`, `Bloques3D`, `Carrusel3D`, `Tunel3D`, `Silueta3D` (trazos SVG con volumen: neón, cromo u holograma), `Grilla3D`, y `usarEscena` para escenas propias (requiere `three`) |
@@ -107,6 +107,34 @@ import { Orbe3D, Vidrio3D, Tunel3D } from "@lucas-vergara/estilos/3d";   // npm 
 ```
 
 Cada escena ocupa su contenedor, toma los colores de la paleta (y se rearma si cambian), se pausa fuera de pantalla y queda quieta con movimiento reducido.
+
+### Navegación lateral (línea panel)
+
+Al estilo del "mini variant drawer" de MUI: expandida o compacta (solo íconos), con grupos que se despliegan. No
+depende de un enrutador: recibe la ruta actual y un componente `Enlace` (por defecto, un `<a>`).
+
+```tsx
+import { NavegacionLateral, useLateralCompacta, usePantallaAngosta, type GrupoLateral } from "@lucas-vergara/estilos";
+
+const [compacta, setCompacta] = useLateralCompacta();          // recordado en el navegador
+const angosta = usePantallaAngosta();                           // < 900 px: panel que se abre
+const [abierta, setAbierta] = useState(false);
+const Enlace = ({ href, ...p }: PropsEnlaceLateral) => <Link to={href} {...p} />;   // react-router, opcional
+
+<header className="barra barra-app">
+  <div className="barra-izquierda">
+    <button className="boton-menu" onClick={() => (angosta ? setAbierta(!abierta) : setCompacta(!compacta))}>☰</button>
+    <a className="marca" href="/">Mi app</a>
+  </div>
+</header>
+<div className={`con-lateral${compacta ? " compacta" : ""}`}>
+  <NavegacionLateral grupos={grupos} rutaActual={pathname} compacta={compacta} onExpandir={() => setCompacta(false)}
+    abierta={abierta} onCerrar={() => setAbierta(false)} Enlace={Enlace} />
+  <div className="con-lateral-principal"><main className="contenido">…</main></div>
+</div>
+```
+
+Variables: `--ancho-lateral` (240 px), `--ancho-lateral-compacta` (64 px) y `--fondo-app` (fondo de la barra y la lateral).
 
 ### Línea sitio diseñadora
 

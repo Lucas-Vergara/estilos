@@ -482,3 +482,78 @@ button.calor-fila-titulo:hover, .calor-fila-titulo.elegida { color: var(--acento
 .calor-leyenda { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: var(--e-3); font-size: var(--texto-xs); color: var(--tinta-3); }
 .calor-leyenda span { display: inline-flex; align-items: center; gap: 5px; }
 .calor-leyenda i { width: 12px; height: 12px; }
+
+/* ---------- Navegación lateral (v0.15.0) ----------
+   Al estilo del "mini variant drawer" de MUI: expandida (ícono y texto) o compacta (solo íconos), con grupos que se
+   despliegan. Con .barra.barra-app arriba comparten fondo y borde, y el botón de menú y el logo quedan sobre la
+   columna de íconos: se leen como una "L". Bajo 900 px la lateral es un panel que se abre desde la barra.
+   Estructura: .barra.barra-app + .con-lateral(.compacta) > [NavegacionLateral] + .con-lateral-principal > .contenido */
+:root { --ancho-lateral: 240px; --ancho-lateral-compacta: 64px; --fondo-app: var(--superficie); }
+
+.barra.barra-app {
+  padding: 0 var(--margen-pagina) 0 12px; height: var(--alto-barra);
+  background: var(--fondo-app); -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+.barra-app .barra-izquierda { gap: 8px; }
+.boton-menu {
+  display: inline-grid; place-items: center; width: 40px; height: 40px; padding: 0; flex: none;
+  border: 0; border-radius: var(--radio-campo); background: none; color: var(--tinta-2); cursor: pointer;
+}
+.boton-menu:hover { background: var(--superficie-2); color: var(--tinta); }
+.boton-menu:focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; }
+
+.con-lateral {
+  display: grid; grid-template-columns: var(--ancho-lateral) minmax(0, 1fr); min-height: calc(100vh - var(--alto-barra));
+  transition: grid-template-columns var(--dur) var(--curva);
+}
+.con-lateral.compacta { grid-template-columns: var(--ancho-lateral-compacta) minmax(0, 1fr); }
+.con-lateral-principal { min-width: 0; }
+.con-lateral-principal .contenido { margin: 0; }
+
+.lateral {
+  position: sticky; top: var(--alto-barra); align-self: start; height: calc(100vh - var(--alto-barra));
+  overflow-x: hidden; overflow-y: auto; scrollbar-width: thin;
+  padding: var(--e-3) var(--e-2); background: var(--fondo-app); border-right: 1px solid var(--borde);
+}
+.lateral-lista, .lateral-sub { list-style: none; margin: 0; padding: 0; }
+.lateral-lista { display: grid; gap: 2px; }
+.lateral-titulo {
+  display: flex; align-items: center; gap: 14px; width: 100%; height: 40px; padding: 0 15px;
+  border: 0; border-radius: var(--radio-campo); background: none; cursor: pointer;
+  font: inherit; font-size: var(--texto-base); font-weight: 500; color: var(--tinta-2); text-align: left; white-space: nowrap;
+}
+.lateral-titulo svg { flex: none; color: var(--tinta-3); }
+.lateral-titulo:hover { background: var(--superficie-2); color: var(--tinta); text-decoration: none; }
+.lateral-texto { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.lateral-flecha { transition: transform var(--dur-rapida) var(--curva); }
+.lateral-titulo[aria-expanded="true"] .lateral-flecha { transform: rotate(180deg); }
+.lateral-grupo.activo > .lateral-titulo { color: var(--tinta); }
+.lateral-grupo.activo > .lateral-titulo > svg:first-child { color: var(--acento); }
+/* La página actual: el enlace directo, o el grupo plegado que la contiene */
+.lateral-titulo.actual { background: var(--acento-suave); color: var(--sobre-acento-suave); font-weight: 600; }
+.lateral-titulo.actual svg, .lateral-grupo.activo > .lateral-titulo.actual > svg:first-child { color: currentColor; }
+.lateral-sub { display: grid; gap: 1px; padding: 2px 0 6px; }
+.lateral-sub[hidden] { display: none; }
+.lateral-sub a {
+  display: block; padding: 7px 12px 7px 47px; border-radius: var(--radio-campo);
+  font-size: var(--texto-sm); color: var(--tinta-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.lateral-sub a:hover { background: var(--superficie-2); color: var(--tinta); text-decoration: none; }
+.lateral-sub a[aria-current="page"] { background: var(--acento-suave); color: var(--sobre-acento-suave); font-weight: 600; }
+.lateral a:focus-visible, .lateral button:focus-visible { outline: 2px solid var(--acento); outline-offset: -2px; }
+.lateral.compacta .lateral-texto, .lateral.compacta .lateral-flecha { display: none; }
+.lateral-fondo { display: none; }
+
+@media (max-width: 900px) {
+  .con-lateral, .con-lateral.compacta { grid-template-columns: minmax(0, 1fr); }
+  .lateral {
+    position: fixed; top: var(--alto-barra); left: 0; bottom: 0; height: auto; width: min(300px, 85vw); z-index: 20;
+    box-shadow: var(--sombra-flotante); transform: translateX(-100%); visibility: hidden;
+    transition: transform var(--dur-rapida) var(--curva), visibility 0s linear var(--dur-rapida);
+  }
+  .lateral.abierta { transform: none; visibility: visible; transition: transform var(--dur) var(--curva); }
+  .lateral-fondo.visible { display: block; position: fixed; inset: var(--alto-barra) 0 0 0; z-index: 15; background: rgb(0 0 0 / 0.28); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .con-lateral, .lateral, .lateral.abierta, .lateral-flecha { transition: none; }
+}

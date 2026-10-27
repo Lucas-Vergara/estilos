@@ -1,5 +1,15 @@
 # Cambios
 
+## v0.15.0 — 2026-10-27
+
+Navegación lateral para la línea panel, a partir de la app de inteligencia de datos de reciclaje (radar), tomando como referencia el "mini variant drawer" de MUI.
+
+- **`NavegacionLateral`**: grupos con ícono y secciones anidadas, plegados hasta que se abren. El grupo de la página actual se marca aunque esté plegado, y uno de una sola sección es un enlace directo. Funciona sin enrutador: recibe `rutaActual` y, opcionalmente, un componente `Enlace`. También se exportan `useLateralCompacta`, `usePantallaAngosta` y `grupoDe`.
+- **Expandida o compacta**: `.con-lateral` y `.con-lateral.compacta`, de 240 a 64 px con transición. En modo compacto solo se ven los íconos, y abrir un grupo expande la lateral.
+- **Una sola pieza con la barra**: `.barra.barra-app` comparte fondo (`--fondo-app`) y borde con la lateral, y `.boton-menu` y el logo quedan sobre la columna de íconos.
+- **Bajo 900 px** la lateral es un panel que se abre desde la barra y se cierra con Escape o tocando fuera (`.lateral-fondo`).
+- Solo clases nuevas: los proyectos que no usan la navegación lateral se ven igual.
+
 ## v0.14.0 — 2026-10-27
 
 Menos ruido y un look más actual en la línea panel, a partir de la exploración del monitor Sodimac (referencias: Stripe, Linear, Plausible, Our World in Data, FT Visual Vocabulary, Tufte y Few).

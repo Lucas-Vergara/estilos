@@ -18,6 +18,7 @@ Lo que me gusta, lo que descarté y por qué. Claude lo lee antes de diseñar al
 - **Página ancha en escritorio** (1440 px, desde v0.13.0) con la barra superior alineada al contenido: 1200 px dejaba demasiado margen a los lados en un panel con gráficos.
 - **Cifras y títulos con peso 650** e interletrado cerrado; chips de contorno para listas largas de nombres; en los gráficos de barras, solo el máximo en color pleno cuando ayuda a leer el hallazgo.
 - **Menos ruido (v0.14.0)**: la nota bajo un título dice el hallazgo y la metodología va en (i); los indicadores en una sola tarjeta; los cambios como línea de tiempo con la fecha a la izquierda; la cifra de hoy al final de la línea; tablas agrupadas en vez de repetir la región; columnas que no discriminan, fuera. Revisado en https://claude.ai/artifact/7SYf3ziNuwaW2ta9jPCyLn.
+- **Navegación lateral al estilo MUI (v0.15.0)** cuando hay varias áreas con secciones: expandible o compacta (solo íconos), con submenús plegados al inicio, y la misma pieza que la barra superior (mismo fondo y borde). Reemplazó las dos filas de pestañas (áreas y secciones), que se veían raras.
 - **Las propuestas se muestran en modo día**: los clientes usan el claro; el oscuro se revisa después.
 
 ## Me gusta — línea sitio diseñadora
