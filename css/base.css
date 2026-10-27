@@ -245,8 +245,9 @@ tr.apagada td { color: var(--tinta-3); }
 .grafico > .recharts-responsive-container, .grafico > .centro { margin-top: auto; }
 .grafico h3 { font-size: var(--texto-base); }
 .grafico .nota { margin-bottom: 8px; font-size: var(--texto-sm); color: var(--tinta-3); }
-.leyenda { display: flex; gap: 14px; font-size: var(--texto-sm); color: var(--tinta-2); margin: 2px 0 6px; }
-.leyenda span { display: inline-flex; align-items: center; gap: 6px; }
+/* Se ajusta en varias líneas: con 3 o 4 series no cabía en el celular. */
+.leyenda { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: var(--texto-sm); color: var(--tinta-2); margin: 2px 0 6px; }
+.leyenda span { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
 .leyenda i { width: 14px; height: 3px; border-radius: 2px; display: inline-block; }
 /* Línea de referencia en la leyenda: discontinua, en el color de la serie */
 .leyenda i.leyenda-referencia { height: 0; border-top: 2px dashed currentColor; border-radius: 0; opacity: 0.7; }

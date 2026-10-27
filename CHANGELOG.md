@@ -1,5 +1,9 @@
 # Cambios
 
+## v0.12.1 — 2026-10-27
+
+- Línea panel: la leyenda de los gráficos (`.leyenda`) pasa a varias líneas cuando no cabe y cada serie queda en una sola línea. Con 3 o 4 series se salía de la pantalla en el celular (visto en el monitor Sodimac).
+
 ## v0.12.0 — 2026-10-24
 
 - **Nueva línea "luz"** (`lineas/luz.css`, clases `l-` bajo `.luz`): interfaces de tocar y encender, inspiradas en la sensación del Every Day Calendar de Simone Giertz. Papel claro y cálido de día; **reposo** (`.l-reposo`) casi negro, con las luces tenues, para pantallas que pasan el día dormidas. Luces grandes (`.l-luz` con `aria-pressed`) con halo de su color, ✓ de cumplido (`.l-marca`) y destello corto al encender (`.l-destellando`); calendario de puntos (`.l-calendario`, `.l-punto`) para la semana, el mes o el año; filas por hábito (`.l-fila`); ocho colores (`.l-color-ambar` … `.l-color-lima`) o `--l-color` desde los datos. Nació con el proyecto de hábitos.
