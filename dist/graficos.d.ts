@@ -68,8 +68,10 @@ interface PropsBarras {
     alto?: number;
     /** Explicación cuando no hay datos. */
     textoVacio?: string;
+    /** Solo la barra más alta va en el color pleno; el resto, más suave. Se ignora si hay `resaltado`. */
+    destacarMaximo?: boolean;
 }
-export declare function GraficoBarras({ titulo, nota, datos, nombreValor, formato, resaltado, onClickBarra, acciones, pista, cargando, alto, textoVacio }: PropsBarras): import("react").JSX.Element;
+export declare function GraficoBarras({ titulo, nota, datos, nombreValor, formato, resaltado, onClickBarra, acciones, pista, cargando, alto, textoVacio, destacarMaximo }: PropsBarras): import("react").JSX.Element;
 export interface PuntoBanda {
     fecha: string;
     min: number | null;

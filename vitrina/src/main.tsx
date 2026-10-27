@@ -206,6 +206,7 @@ function Vitrina() {
             <div className="fila-nota" style={{ fontSize: "var(--texto-sm)" }}>
               <span className="chip">Chip</span>
               <span className="chip chip-neutro">Neutro</span>
+              <span className="chip chip-contorno">Contorno</span>
               <Frescura fecha={hace(3)} chip prefijo="Actualizado" />
               <Frescura fecha={hace(40)} />
               <Frescura fecha={hace(100)} />
@@ -296,6 +297,7 @@ function Vitrina() {
               resaltado={region}
               onClickBarra={(id) => setRegion((r) => (r === id ? undefined : id))}
               pista="Clic para resaltar"
+              destacarMaximo
             />
           </div>
         </section>

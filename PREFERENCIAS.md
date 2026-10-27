@@ -15,6 +15,8 @@ Lo que me gusta, lo que descarté y por qué. Claude lo lee antes de diseñar al
 - **Gráficos sin caja propia** dentro de la tarjeta; líneas escalonadas para precios; eje Y con valores redondos.
 - **Pestañas fijas** bajo la barra, con los filtros a la derecha.
 - Escala tipográfica cerrada (7 tamaños) y espaciado en múltiplos de 4.
+- **Página ancha en escritorio** (1440 px, desde v0.13.0) con la barra superior alineada al contenido: 1200 px dejaba demasiado margen a los lados en un panel con gráficos.
+- **Cifras y títulos con peso 650** e interletrado cerrado; chips de contorno para listas largas de nombres; en los gráficos de barras, solo el máximo en color pleno cuando ayuda a leer el hallazgo.
 
 ## Me gusta — línea sitio diseñadora
 
@@ -125,7 +127,7 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 
 | Proyecto | Acento | Versión | Notas |
 |---|---|---|---|
-| monitor Sodimac (meyer/scrap2.0/web) | verde | v0.12.1 | origen de la biblioteca; el arreglo de leyendas de v0.12.1 salió de aquí |
+| monitor Sodimac (meyer/scrap2.0/web) | verde | v0.13.0 | origen de la biblioteca; de aquí salieron el arreglo de leyendas (v0.12.1) y el pulido de escritorio (v0.13.0) |
 | radar de reciclaje | verde | v0.11.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura); usa el Indicador de la biblioteca |
 | monitor de proyectos | azul | v0.11.0 | ídem |
 | oportunidades | azul | v0.11.0 | ídem |

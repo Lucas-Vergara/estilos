@@ -233,6 +233,8 @@ interface PropsBarras {
   alto?: number;
   /** Explicación cuando no hay datos. */
   textoVacio?: string;
+  /** Solo la barra más alta va en el color pleno; el resto, más suave. Se ignora si hay `resaltado`. */
+  destacarMaximo?: boolean;
 }
 
 function TooltipBarras({ active, payload, nombreValor, formato, pista }: {
@@ -254,7 +256,8 @@ function TooltipBarras({ active, payload, nombreValor, formato, pista }: {
   );
 }
 
-export function GraficoBarras({ titulo, nota, datos, nombreValor, formato, resaltado, onClickBarra, acciones, pista, cargando, alto = 200, textoVacio = "No hay datos para mostrar." }: PropsBarras) {
+export function GraficoBarras({ titulo, nota, datos, nombreValor, formato, resaltado, onClickBarra, acciones, pista, cargando, alto = 200, textoVacio = "No hay datos para mostrar.", destacarMaximo }: PropsBarras) {
+  const maximo = Math.max(...datos.map((d) => d.valor));
   // Barra bajo el cursor y altura del cursor: el tooltip va siempre debajo del puntero, sin tapar las barras.
   const [hover, setHover] = useState<{ indice: number; y: number } | null>(null);
   // Si las barras quedan angostas, las etiquetas alternan en dos alturas para no pisarse
@@ -312,7 +315,7 @@ export function GraficoBarras({ titulo, nota, datos, nombreValor, formato, resal
             />
             <Bar
               dataKey="valor"
-              radius={[3, 3, 0, 0]}
+              radius={[4, 4, 0, 0]}
               isAnimationActive={false}
               style={onClickBarra ? { cursor: "pointer" } : undefined}
               onClick={(d) => onClickBarra?.((d as unknown as BarraDato).id)}
@@ -321,7 +324,7 @@ export function GraficoBarras({ titulo, nota, datos, nombreValor, formato, resal
                 <Cell
                   key={d.id}
                   fill="var(--serie-1)"
-                  fillOpacity={resaltado && resaltado !== d.id ? 0.35 : 1}
+                  fillOpacity={resaltado ? (resaltado === d.id ? 1 : 0.35) : destacarMaximo && d.valor < maximo ? 0.6 : 1}
                   className={`barra ${hover?.indice === i ? "activa" : ""}`}
                 />
               ))}

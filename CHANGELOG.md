@@ -1,5 +1,18 @@
 # Cambios
 
+## v0.13.0 — 2026-10-27
+
+Pulido de la línea panel en escritorio, a partir del monitor Sodimac.
+
+- **Página más ancha y alineada**: `.contenido` pasa de 1200 px a `--ancho-pagina` (1440 px) con un margen lateral fluido `--margen-pagina` (16–40 px). La barra superior usa la misma columna, así el logo queda alineado con el contenido (antes iba pegado al borde). Las dos variables se pueden sobrescribir en `:root` desde el proyecto.
+- La línea de `.barra-pestanas` queda del ancho de las tarjetas; antes sobresalía 16 px por lado.
+- **Cifras más firmes**: el h1 y `.indicador-valor` pasan a peso 650 con un interletrado más cerrado (−0,022em y −0,03em). Requiere Inter en rango variable (`wght@400..700`); el README ya lo indica.
+- **Títulos de tarjeta con más jerarquía**: `.tarjeta-cabecera h2` a peso 650, con más aire entre la cabecera y el contenido.
+- `.chip.chip-contorno`: chip liviano, solo con borde fino, para listas largas de nombres. Si es enlace, toma el acento al pasar el cursor.
+- Tablas: todas las filas se iluminan levemente al pasar el cursor; las clicables, como antes.
+- Modo oscuro: las tarjetas llevan un brillo interior de 1 px arriba.
+- `GraficoBarras`: barras con radio de 4 px y nueva opción `destacarMaximo`, que deja solo la barra más alta en color pleno y el resto al 60 %.
+
 ## v0.12.1 — 2026-10-27
 
 - Línea panel: la leyenda de los gráficos (`.leyenda`) pasa a varias líneas cuando no cabe y cada serie queda en una sola línea. Con 3 o 4 series se salía de la pantalla en el celular (visto en el monitor Sodimac).

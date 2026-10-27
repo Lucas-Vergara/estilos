@@ -55,10 +55,10 @@ import { Indicador, Variacion, BotonTema } from "@lucas-vergara/estilos";
 import { GraficoLinea } from "@lucas-vergara/estilos/graficos";
 ```
 
-En `index.html`: la fuente Inter y el script que aplica el tema antes de pintar (evita un destello):
+En `index.html`: la fuente Inter (rango variable 400..700: la línea panel usa pesos intermedios como 650) y el script que aplica el tema antes de pintar (evita un destello):
 
 ```html
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap" rel="stylesheet" />
 <script>try { if (localStorage.getItem("tema") === "dark") document.documentElement.dataset.theme = "dark"; } catch {}</script>
 ```
 
