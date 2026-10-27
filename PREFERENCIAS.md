@@ -130,12 +130,12 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 | Proyecto | Acento | Versión | Notas |
 |---|---|---|---|
 | monitor Sodimac (meyer/scrap2.0/web) | verde | v0.14.0 | origen de la biblioteca; de aquí salieron el arreglo de leyendas (v0.12.1), el pulido de escritorio (v0.13.0) y el de menos ruido (v0.14.0) |
-| radar de reciclaje | verde | v0.11.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura); usa el Indicador de la biblioteca |
-| monitor de proyectos | azul | v0.11.0 | ídem |
-| oportunidades | azul | v0.11.0 | ídem |
-| finanzas | verde | v0.11.0 | app de finanzas personales (Firebase); estilos propios mínimos en `src/estilos.css` |
-| habitos (web) | — (línea luz) | v0.12.0 | app de hábitos; la pantalla ESP32 replica la línea en su firmware |
-| cv (PDF del currículum) | azul | v0.11.0 | solo tokens, copiados en `cv/estilos/`; hoja de impresión propia (`cv.css`) mientras se decide si va una línea "documento" |
+| radar de reciclaje | verde | v0.14.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura); usa el Indicador de la biblioteca |
+| monitor de proyectos | azul | v0.14.0 | ídem |
+| oportunidades | azul | v0.14.0 | ídem |
+| finanzas | verde | v0.14.0 | app de finanzas personales (Firebase); estilos propios mínimos en `src/estilos.css` |
+| habitos (web) | — (línea luz) | v0.14.0 | app de hábitos; la pantalla ESP32 replica la línea en su firmware |
+| cv (PDF del currículum) | azul | v0.14.0 | solo tokens, copiados en `cv/estilos/`; hoja de impresión propia (`cv.css`) mientras se decide si va una línea "documento" |
 
 ### Fuera de la biblioteca (por decidir)
 
