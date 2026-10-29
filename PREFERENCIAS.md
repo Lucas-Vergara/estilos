@@ -73,6 +73,7 @@ Creada para la app de hábitos (24-10-2026), con la **sensación** del Every Day
 - **Claro de día, oscuro solo en reposo.** Respeta que prefiero tonos claros: el negro aparece cuando la pantalla está "dormida" y no se lee, solo se mira de pasada.
 - **Luces de colores vivos con halo** y un ✓ (el estado no queda solo en el color); lo pendiente es un hueco hundido en el papel.
 - **Un solo momento de movimiento**: el destello al encender.
+- **Sin ✓ y encendido lento (29-10-2026, en habitos):** encendida basta para decir "cumplido", así que el ✓ sobra (el estado sigue en `aria-pressed` para lectores de pantalla). El color entra despacio (~0,75 s) y el halo después (~1,3 s), para un efecto más zen; apagar sigue siendo rápido. La vista principal no muestra fecha, cuenta ni navegación: se cambia de vista deslizando el dedo. Por ahora vive en el `estilos.css` del proyecto; si otra app usa la línea luz, subirlo a la biblioteca.
 - Pensada para pantallas táctiles vistas de lejos (pantalla en la sala, celular): blancos grandes, poco texto.
 
 ## Reglas adoptadas de Impeccable y Taste (23-10-2026)
