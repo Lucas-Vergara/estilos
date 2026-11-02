@@ -17,7 +17,7 @@ Lo que me gusta, lo que descarté y por qué. Claude lo lee antes de diseñar al
 - Escala tipográfica cerrada (7 tamaños) y espaciado en múltiplos de 4.
 - **Página ancha en escritorio** (1440 px, desde v0.13.0) con la barra superior alineada al contenido: 1200 px dejaba demasiado margen a los lados en un panel con gráficos.
 - **Cifras y títulos con peso 650** e interletrado cerrado; chips de contorno para listas largas de nombres; en los gráficos de barras, solo el máximo en color pleno cuando ayuda a leer el hallazgo.
-- **Menos ruido (v0.14.0)**: la nota bajo un título dice el hallazgo y la metodología va en (i); los indicadores en una sola tarjeta; los cambios como línea de tiempo con la fecha a la izquierda; la cifra de hoy al final de la línea; tablas agrupadas en vez de repetir la región; columnas que no discriminan, fuera. Revisado en https://claude.ai/artifact/7SYf3ziNuwaW2ta9jPCyLn.
+- **Menos ruido (v0.14.0)**: la nota bajo un título dice el hallazgo y la metodología va en (i); los indicadores en una sola tarjeta; los cambios como línea de tiempo con la fecha a la izquierda; la cifra de hoy al final de la línea; tablas agrupadas en vez de repetir la región; columnas que no discriminan, fuera.
 - **Navegación lateral al estilo MUI (v0.15.0)** cuando hay varias áreas con secciones: expandible o compacta (solo íconos), con submenús plegados al inicio, y la misma pieza que la barra superior (mismo fondo y borde). Reemplazó las dos filas de pestañas (áreas y secciones), que se veían raras.
 - **Las propuestas se muestran en modo día**: los clientes usan el claro; el oscuro se revisa después.
 
@@ -38,7 +38,7 @@ Creada junto con Franservice (https://franservice.cl), a partir del rediseño he
 
 ## Me gusta — línea sitio (oficial, desde v0.4.0)
 
-Síntesis de la revisión de 20 portafolios (15-10-2026; marcas y notas en https://claude.ai/artifact/Eq4Be2PjdZQQe1xbjVVHEM).
+Síntesis de la revisión de 20 portafolios (15-10-2026).
 **Me gusta:** Dennis Snellenberg, Rauno, Josh Comeau, Robb Owen, Bruno Simon, Henry Heffernan.
 **Tal vez:** Maxime Heckel, Rafa, Matt Farley, Adham Dannaway, Cassie, Keita Yamada.
 **No:** Emil Kowalski, Paco, Linus Rogge, Brian Lovin, Brittany Chiang, Lee Robinson, Anthony Fu, Jhey.
@@ -73,7 +73,9 @@ Creada para la app de hábitos (24-10-2026), con la **sensación** del Every Day
 - **Claro de día, oscuro solo en reposo.** Respeta que prefiero tonos claros: el negro aparece cuando la pantalla está "dormida" y no se lee, solo se mira de pasada.
 - **Luces de colores vivos con halo** y un ✓ (el estado no queda solo en el color); lo pendiente es un hueco hundido en el papel.
 - **Un solo momento de movimiento**: el destello al encender.
-- **Sin ✓ y encendido lento (29-10-2026, en habitos):** encendida basta para decir "cumplido", así que el ✓ sobra (el estado sigue en `aria-pressed` para lectores de pantalla). El color entra despacio (~0,75 s) y el halo después (~1,3 s), para un efecto más zen; apagar sigue siendo rápido. La vista principal no muestra fecha, cuenta ni navegación: se cambia de vista deslizando el dedo. Por ahora vive en el `estilos.css` del proyecto; si otra app usa la línea luz, subirlo a la biblioteca.
+- **Sin ✓ y encendido lento (29-10-2026, en habitos; en la biblioteca desde v0.16.0):** encendida basta para decir "cumplido", así que el ✓ sobra (el estado sigue en `aria-pressed` para lectores de pantalla). El color entra despacio (~1,4 s) y el halo después (~2,2 s), para un efecto más zen; apagar sigue siendo rápido. La vista principal no muestra fecha, cuenta ni navegación: se cambia de vista deslizando el dedo.
+- **Fondos zen (02-11-2026, v0.16.0):** de 15 propuestos me quedé con 13 más el papel liso: el agua de piscina con la luz que se mueve muy despacio, gradientes suaves (amanecer, niebla, aurora, respiración, hora del día) y materia sobria (madera clara, arena rastrillada, washi). **Descartados:** la sombra de hojas que se mece, sola y sobre madera.
+- **Órdenes con forma (02-11-2026, v0.16.0):** me gustaron las cinco (equilibrio, figuras, círculo, piedras, sendero) y quedan todas como opción, junto con las filas de siempre. El usuario elige; las luces se acomodan solas según cuántas haya.
 - Pensada para pantallas táctiles vistas de lejos (pantalla en la sala, celular): blancos grandes, poco texto.
 
 ## Reglas adoptadas de Impeccable y Taste (23-10-2026)
@@ -136,7 +138,7 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 | monitor de proyectos | azul | v0.15.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
 | oportunidades | azul | v0.15.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
 | finanzas | verde | v0.15.0 | app de finanzas personales (Firebase); estilos propios mínimos en `src/estilos.css` |
-| habitos (web) | — (línea luz) | v0.15.0 | app de hábitos; la pantalla ESP32 replica la línea en su firmware |
+| habitos (web) | — (línea luz) | v0.16.0 | app de hábitos; de aquí salieron los fondos y órdenes de la línea luz (v0.16.0); la pantalla ESP32 replica la línea en su firmware |
 | cv (PDF del currículum) | azul | v0.15.0 | solo tokens, copiados en `cv/estilos/`; hoja de impresión propia (`cv.css`) mientras se decide si va una línea "documento" |
 
 ### Fuera de la biblioteca (por decidir)

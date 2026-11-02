@@ -1,5 +1,14 @@
 # Cambios
 
+## v0.16.0 — 2026-11-02
+
+Fondos y órdenes para la línea luz, a partir de la vista Hoy de la app de hábitos.
+
+- **Encendido lento por defecto**: el color llena la luz en ~1,4 s y el halo crece en ~2,2 s (`--l-encender`, `--l-halo`, `--l-curva-luz`); apagar sigue siendo rápido. El degradado de la luz encendida pasa a `::before` para poder animarlo. El ✓ (`.l-marca`) queda opcional y ya no se recomienda: encendida basta.
+- **Fondos** (`@lucas-vergara/estilos/luz`): `CapaFondo` pinta uno de 14 fondos detrás de las luces en una capa `.l-fondo` (`.l-fondo-fijo` para la ventana entera). Agua (piscina, piscina al atardecer, estanque, reflejo en el muro, gotas), gradientes (amanecer, niebla, aurora, respiración, hora del día) y materia (madera clara, arena rastrillada que rodea las luces, papel washi). Lo que se mueve lo hace muy despacio y solo mientras se ve; respeta "reducir movimiento". En reposo el fondo se apaga. `.l-con-fondo` deja ver el fondo a través de las luces apagadas.
+- **Órdenes con forma**: `acomodarLuces` (o el hook `useAcomodoLuces` con `lugarDeLuz`) pone cada luz en un punto según cuántas hay (1 a 8) y la forma del tablero: equilibrio, figuras, círculo, piedras y sendero, además de las filas de siempre. Elige el tamaño de luz más grande que no tape a otra ni a su nombre. Tablero: `.l-tablero.l-forma`.
+- **`Luz`**: el botón que se enciende, con su destello, como componente.
+
 ## v0.15.0 — 2026-10-27
 
 Navegación lateral para la línea panel, a partir de la app de inteligencia de datos de reciclaje (radar), tomando como referencia el "mini variant drawer" de MUI.

@@ -33,3 +33,12 @@ body { margin: 0; min-height: 100vh; }
 .vl-controles button { border: 0; background: none; padding: 8px 14px; border-radius: 999px; font: inherit; font-size: var(--texto-sm); font-weight: 500; color: var(--l-tinta-2); cursor: pointer; }
 .vl-controles button[aria-pressed="true"] { background: var(--l-tinta); color: var(--l-fondo); }
 .vl-controles button:focus-visible { outline: 2px solid var(--l-foco); outline-offset: 2px; }
+
+.vl-selectores { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 20px; font-size: var(--texto-sm); color: var(--l-tinta-2); }
+.vl-selectores label { display: inline-flex; align-items: center; gap: 8px; }
+.vl-selectores select { font: inherit; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--l-linea); background: var(--l-superficie); color: var(--l-tinta); }
+.vl-selectores output { font-variant-numeric: tabular-nums; min-width: 1ch; }
+.vl-pantalla { position: relative; width: 100%; aspect-ratio: 16 / 9; max-width: 100%; border-radius: var(--radio); overflow: hidden; border: 1px solid var(--l-linea); isolation: isolate; }
+.vl-pantalla > .l-tablero { position: absolute; inset: 0; z-index: 1; align-content: center; padding: 16px; }
+.vl-pantalla > .l-tablero.l-forma { padding: 0; }
+@media (max-width: 600px) { .vl-pantalla { aspect-ratio: 3 / 4; } }

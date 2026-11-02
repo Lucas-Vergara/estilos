@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import "../../css/tokens.css";
 import "../../css/lineas/luz.css";
 import "./vitrina-luz.css";
+import { CapaFondo, FONDOS_LUZ, Luz, NOMBRES_FONDO_LUZ, NOMBRES_ORDEN_LUZ, ORDENES_LUZ, lugarDeLuz, useAcomodoLuces, type FondoLuz, type OrdenLuz } from "../../src/luz/index.js";
 
 // Vitrina de la línea "luz" con datos de ejemplo: el tablero del día, el año de un hábito y las últimas semanas.
 
@@ -22,14 +23,6 @@ const hecho = (semilla: number, dia: number) => ((Math.sin(semilla * 97.3 + dia 
 
 const HOY = new Date(2026, 9, 24);
 const fechaLarga = (d: Date) => d.toLocaleDateString("es-CL", { weekday: "long", day: "numeric", month: "long" });
-
-function Marca() {
-  return (
-    <svg className="l-marca" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
 
 function Tablero() {
   const [hechos, setHechos] = useState<boolean[]>([true, false, true, false, false]);
@@ -59,13 +52,56 @@ function Tablero() {
               aria-label={`${h.nombre}: ${hechos[i] ? "hecho, tocar para apagar" : "pendiente, tocar para encender"}`}
               onClick={() => tocar(i)}
               onAnimationEnd={() => setDestello(null)}
-            >
-              <Marca />
-            </button>
+            />
             <span className="l-nombre">{h.nombre}</span>
             {h.detalle && <span className="l-detalle">{h.detalle}</span>}
           </div>
         ))}
+      </div>
+    </section>
+  );
+}
+
+// Fondo y orden: la pantalla de hoy con cualquiera de los fondos y de las formas, y de 1 a 8 luces
+function FondoYOrden() {
+  const [fondo, setFondo] = useState<FondoLuz>("piscina");
+  const [orden, setOrden] = useState<OrdenLuz>("equilibrio");
+  const [cantidad, setCantidad] = useState(5);
+  const [hechos, setHechos] = useState<boolean[]>([true, false, true, false, false, true, false, false]);
+  const tablero = useRef<HTMLDivElement>(null);
+  const acomodo = useAcomodoLuces(tablero, orden, cantidad, { etiqueta: 30, maximo: 110 });
+  const nombres = ["Leer", "Caminar", "Agua", "Meditar", "Dormir", "Estirar", "Escribir", "Sin pantalla"];
+  const colores = ["ambar", "menta", "cian", "violeta", "azul", "coral", "rosa", "lima"];
+  return (
+    <section className="vl-seccion" aria-labelledby="vl-fondo">
+      <div className="vl-texto">
+        <h2 id="vl-fondo">Fondo y orden</h2>
+        <p>Catorce fondos zen detrás de las luces (<code>CapaFondo</code>; el agua y las gotas se mueven muy despacio) y seis formas de acomodarlas según cuántas haya (<code>acomodarLuces</code> o <code>useAcomodoLuces</code>, con <code>.l-tablero.l-forma</code>). En reposo, el fondo se apaga.</p>
+      </div>
+      <div className="vl-selectores">
+        <label>Fondo
+          <select value={fondo} onChange={(e) => setFondo(e.target.value as FondoLuz)}>
+            {FONDOS_LUZ.map((f) => <option key={f} value={f}>{NOMBRES_FONDO_LUZ[f]}</option>)}
+          </select>
+        </label>
+        <label>Orden
+          <select value={orden} onChange={(e) => setOrden(e.target.value as OrdenLuz)}>
+            {ORDENES_LUZ.map((o) => <option key={o} value={o}>{NOMBRES_ORDEN_LUZ[o]}</option>)}
+          </select>
+        </label>
+        <label>Luces
+          <input type="range" min={1} max={8} value={cantidad} onChange={(e) => setCantidad(+e.target.value)} />
+          <output>{cantidad}</output>
+        </label>
+      </div>
+      <div className={`vl-pantalla${fondo !== "papel" ? " l-con-fondo" : ""}`}>
+        <CapaFondo fondo={fondo} luces={() => tablero.current} />
+        <div ref={tablero} className={`l-tablero${orden !== "filas" ? " l-forma" : ""}`}>
+          {nombres.slice(0, cantidad).map((n, i) => (
+            <Luz key={n} nombre={n} color={colores[i]} hecho={hechos[i]} {...lugarDeLuz(acomodo, i)}
+              onCambiar={(v) => setHechos((h) => h.map((x, j) => (j === i ? v : x)))} />
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -167,6 +203,7 @@ function Vitrina() {
     <>
       <main className="vl-pagina">
         <Tablero />
+        <FondoYOrden />
         <Anio />
         <Semanas />
         <Colores />
@@ -181,12 +218,13 @@ import "@lucas-vergara/estilos/lineas/luz.css";
 <body class="luz">   <!-- dormida: class="luz l-reposo" -->
   <div class="l-tablero">
     <div class="l-casilla l-color-menta">
-      <button class="l-luz" aria-pressed="true">
-        <svg class="l-marca">…✓…</svg>
-      </button>
+      <button class="l-luz" aria-pressed="true"></button>
       <span class="l-nombre">Caminar</span>
     </div>
-  </div>`}</pre>
+  </div>
+
+// React: la luz, el fondo y el orden con forma
+import { Luz, CapaFondo, useAcomodoLuces, lugarDeLuz } from "@lucas-vergara/estilos/luz";`}</pre>
         </section>
       </main>
       <footer className="vl-pie">

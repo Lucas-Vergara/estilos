@@ -15,6 +15,9 @@
  *  - .l-nombre         etiqueta bajo la luz; .l-detalle, una línea más chica
  *  - .l-calendario     grilla de puntos (semana, mes o año): .l-punto, .l-punto.l-encendido, .l-punto.l-hoy
  *  - .l-fila           una fila de puntos con su etiqueta a la izquierda (un hábito por fila)
+ *  - .l-fondo         capa detrás de las luces (fondos: CapaFondo de @lucas-vergara/estilos/luz); .l-con-fondo en el
+ *                      contenedor deja ver el fondo a través de las luces apagadas
+ *  - .l-tablero.l-forma  tablero con las luces en una forma (equilibrio, figuras, círculo, piedras, sendero: acomodarLuces)
  *  - .l-color-<nombre> pone el color de una luz o de un contenedor (ambar, coral, rosa, violeta, azul, cian, menta, lima)
  *                      o, si el color viene de los datos: style="--l-color: #…"
  *
@@ -54,8 +57,12 @@
   --l-separacion: clamp(16px, 4vmin, 40px);
 
   /* Tiempos: el destello al encender es el único momento con autoría; lo demás usa los tokens de movimiento */
-  --l-destello: 520ms;
+  --l-destello: 1400ms;
   --l-transicion-reposo: 1200ms;
+  /* Encender es lento a propósito (zen): el color llena la luz y el halo crece después. Apagar es rápido. */
+  --l-encender: 1400ms;
+  --l-halo: 2200ms;
+  --l-curva-luz: cubic-bezier(0.33, 0, 0.2, 1);
 
   /* Tokens comunes: lo de la línea panel que se use dentro se ve coherente */
   --plano: var(--l-fondo);
@@ -143,17 +150,27 @@
 /* Ícono o inicial dentro de la luz (opcional) */
 .l-luz > :where(svg, .l-icono) { width: 38%; height: 38%; opacity: 0.45; transition: opacity var(--dur) var(--curva), color var(--dur) var(--curva); }
 
+/* Encendida. El degradado no se puede animar, así que vive en ::before y lo que se anima es su opacidad. */
+.l-luz::before {
+  content: ""; position: absolute; inset: -1.5px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle at 50% 38%, color-mix(in srgb, var(--l-color) 55%, #fff) 0%, var(--l-color) 62%);
+  box-shadow: inset 0 -6px 14px color-mix(in srgb, var(--l-color) 60%, #000 10%);
+  opacity: 0; transition: opacity var(--dur) var(--curva);
+}
+.l-luz > * { position: relative; }
 .l-luz[aria-pressed="true"], .l-luz.l-encendida {
   border-color: transparent;
-  background: radial-gradient(circle at 50% 38%, color-mix(in srgb, var(--l-color) 55%, #fff) 0%, var(--l-color) 62%);
   box-shadow:
     0 0 calc(18px * var(--l-brillo)) color-mix(in srgb, var(--l-color) calc(70% * var(--l-brillo)), transparent),
-    0 0 calc(56px * var(--l-brillo)) color-mix(in srgb, var(--l-color) calc(42% * var(--l-brillo)), transparent),
-    inset 0 -6px 14px color-mix(in srgb, var(--l-color) 60%, #000 10%);
+    0 0 calc(56px * var(--l-brillo)) color-mix(in srgb, var(--l-color) calc(42% * var(--l-brillo)), transparent);
   color: #1f1d19;
+  transition: border-color var(--l-encender) var(--l-curva-luz), box-shadow var(--l-halo) var(--l-curva-luz),
+    filter var(--l-transicion-reposo) var(--curva), transform var(--dur-rapida) var(--curva);
 }
+.l-luz[aria-pressed="true"]::before, .l-luz.l-encendida::before { opacity: 1; transition: opacity var(--l-encender) var(--l-curva-luz); }
+.luz.l-reposo .l-luz[aria-pressed="true"], .luz.l-reposo .l-luz.l-encendida { background: transparent; }
 .l-luz[aria-pressed="true"] > :where(svg, .l-icono), .l-luz.l-encendida > :where(svg, .l-icono) { opacity: 0.8; }
-/* Marca de cumplido (✓): el estado no queda solo en el color. Se muestra únicamente con la luz encendida. */
+/* Marca de cumplido (✓), opcional: desde v0.16.0 la luz encendida basta y la marca no se recomienda. */
 .l-luz > .l-marca { opacity: 0; transform: scale(0.6); transition: opacity var(--dur) var(--curva), transform var(--dur-lenta) var(--curva); }
 .l-luz[aria-pressed="true"] > .l-marca, .l-luz.l-encendida > .l-marca { opacity: 0.75; transform: none; }
 
@@ -205,8 +222,43 @@ button.l-punto:focus-visible { outline: 2px solid var(--l-foco); outline-offset:
 
 .luz ::selection { background: color-mix(in srgb, var(--l-ambar) 40%, transparent); color: var(--l-tinta); }
 
+/* ——— Fondos (detrás de las luces). Los pinta CapaFondo de @lucas-vergara/estilos/luz; aquí, la capa y los de CSS ——— */
+.l-fondo { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background: var(--l-fondo);
+  transition: opacity var(--l-transicion-reposo) var(--curva); }
+.l-fondo.l-fondo-fijo { position: fixed; }
+.l-fondo > canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+/* En reposo el fondo se apaga: queda el negro */
+.luz.l-reposo .l-fondo { opacity: 0; }
+/* Sobre un fondo (.l-con-fondo en el contenedor), el hueco de una luz apagada deja ver lo de atrás */
+.luz:not(.l-reposo) .l-con-fondo, .luz.l-con-fondo:not(.l-reposo) { --l-hueco: rgba(70, 58, 36, 0.07); --l-hueco-borde: rgba(31, 29, 25, 0.14); }
+
+.l-fondo-manchas > i { position: absolute; border-radius: 50%; will-change: transform; }
+@keyframes l-deriva-a { from { transform: translate(-6%, -4%) scale(1); } to { transform: translate(8%, 6%) scale(1.12); } }
+@keyframes l-deriva-b { from { transform: translate(5%, 4%) scale(1.08); } to { transform: translate(-7%, -5%) scale(0.95); } }
+@keyframes l-deriva-c { from { transform: translate(-4%, 6%); } to { transform: translate(6%, -6%); } }
+.l-fondo-amanecer { background: linear-gradient(178deg, #f8e4d6 0%, #f6ede5 46%, #eef0ec 100%); }
+.l-fondo-amanecer::before {
+  content: ""; position: absolute; left: 50%; top: 62%; width: 150%; aspect-ratio: 1; margin-left: -75%;
+  background: radial-gradient(circle, rgba(255, 214, 170, 0.75) 0%, rgba(255, 228, 200, 0.35) 22%, transparent 48%);
+  animation: l-sube 90s var(--l-curva-luz) infinite alternate; will-change: transform;
+}
+@keyframes l-sube { from { transform: translateY(8%); } to { transform: translateY(-10%); } }
+.l-fondo-respira { background: #f3f0e9; }
+.l-fondo-respira::before {
+  content: ""; position: absolute; inset: -20%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 222, 176, 0.95) 0%, rgba(255, 236, 210, 0.5) 28%, transparent 58%);
+  animation: l-respira 10s ease-in-out infinite; will-change: transform, opacity;   /* seis respiraciones por minuto */
+}
+@keyframes l-respira { 0%, 100% { opacity: 0.18; transform: scale(0.9); } 50% { opacity: 0.85; transform: scale(1.06); } }
+
+/* ——— Orden con forma: el tablero ocupa su espacio y cada casilla va en su punto (acomodarLuces) ——— */
+.l-tablero.l-forma { display: block; position: relative; width: 100%; height: 100%; }
+.l-forma > .l-casilla { position: absolute; transform: translateX(-50%); transition: left 900ms var(--l-curva-luz), top 900ms var(--l-curva-luz); }
+
 @media (prefers-reduced-motion: reduce) {
   .luz, .l-luz, .l-punto, .l-nombre, .l-detalle { transition: none; }
+  .l-luz::before, .l-luz[aria-pressed="true"]::before, .l-forma > .l-casilla { transition: none; }
+  .l-fondo-manchas > i, .l-fondo-amanecer::before, .l-fondo-respira::before { animation: none !important; }
   .l-luz.l-destellando::after { animation: none; }
   .l-luz:active { transform: none; }
 }
