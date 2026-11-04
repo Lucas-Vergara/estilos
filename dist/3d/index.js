@@ -11,6 +11,7 @@ export { Vidrio3D } from "./vidrio.js";
 export { Terreno3D } from "./terreno.js";
 export { Tunel3D } from "./tunel.js";
 export { Carrusel3D } from "./carrusel.js";
+export { pasosDeslizar } from "./deslizar.js";
 export { Bloques3D } from "./bloques.js";
 export { Silueta3D } from "./silueta.js";
 export { usarEscena, avanceEnPantalla, avanceRecorrido, texturaTexto } from "./escena.js";

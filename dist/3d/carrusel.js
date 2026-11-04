@@ -2,6 +2,7 @@ import { jsx as _jsx } from "react/jsx-runtime";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { sonidos } from "../sitio/sonidos.js";
+import { pasosDeslizar } from "./deslizar.js";
 import { ESTILO_LIENZO, fuenteDisplay, texturaTexto, usarEscena } from "./escena.js";
 /**
  * Carrusel cilíndrico: tarjetas en círculo que se arrastran con el mouse o el dedo y siguen con inercia.
@@ -11,7 +12,8 @@ import { ESTILO_LIENZO, fuenteDisplay, texturaTexto, usarEscena } from "./escena
  *  - eje "horizontal": gira hacia arriba y abajo, como una rueda (p. ej. una tienda con la ficha al lado).
  *  - Con `ajustar`, al soltar se detiene con una tarjeta al frente; `onActivo` avisa cuál, y `activo` la lleva al
  *    frente desde afuera (una lista, flechas). `rueda` hace girar con la rueda del mouse sobre el lienzo.
- *    Tocar una tarjeta la trae al frente.
+ *    Tocar una tarjeta la trae al frente, y un deslizamiento corto pasa a la siguiente (o a varias más allá si es
+ *    largo o rápido; ver `pasosDeslizar`), sin tener que arrastrar todo el giro.
  */
 export function Carrusel3D({ tarjetas, eje = "vertical", proporcion = 0.8, autoGiro = true, ajustar = false, rueda = false, activo, onActivo, className, etiqueta = "Carrusel 3D de tarjetas", }) {
     const ref = useRef(null);
@@ -83,6 +85,8 @@ export function Carrusel3D({ tarjetas, eje = "vertical", proporcion = 0.8, autoG
         });
         const pasoAng = (Math.PI * 2) / n;
         let giro = 0, vel = autoGiro ? 0.15 : 0, arrastrando = false, ultimo = 0, recorrido = 0, ultimaTarjeta = -1, soltadoEn = 0;
+        // Dónde y cuándo empezó el gesto, y qué tarjeta estaba al frente: para pasar de a una con `ajustar`.
+        let inicio = { x: 0, y: 0, t: 0, frente: 0 };
         let destino = null;
         const mod = (a) => ((a % n) + n) % n;
         // Índice "continuo" de la tarjeta al frente: la tarjeta i está al frente cuando su ángulo más el giro es cero.
@@ -99,7 +103,15 @@ export function Carrusel3D({ tarjetas, eje = "vertical", proporcion = 0.8, autoG
             destino = -meta * pasoAng;
         };
         const coordenada = (ev) => (vertical ? ev.clientX / lienzo.clientWidth : ev.clientY / lienzo.clientHeight);
-        const abajo = (ev) => { arrastrando = true; destino = null; ultimo = coordenada(ev); recorrido = 0; vel = 0; lienzo.setPointerCapture(ev.pointerId); };
+        const abajo = (ev) => {
+            arrastrando = true;
+            destino = null;
+            ultimo = coordenada(ev);
+            recorrido = 0;
+            vel = 0;
+            lienzo.setPointerCapture(ev.pointerId);
+            inicio = { x: ev.clientX, y: ev.clientY, t: performance.now(), frente: mod(Math.round(frenteContinuo())) };
+        };
         const mover = (ev) => {
             if (!arrastrando)
                 return;
@@ -124,6 +136,18 @@ export function Carrusel3D({ tarjetas, eje = "vertical", proporcion = 0.8, autoG
                     irA(tocada.object.userData.indice);
                     vel = 0;
                     sonidos.clic();
+                }
+                return;
+            }
+            // Con `ajustar`, un deslizamiento claro pasa de a una tarjeta contando desde la que estaba al frente.
+            if (opciones.current.ajustar && !opciones.current.autoGiro && ev.type === "pointerup") {
+                const dx = ev.clientX - inicio.x, dy = ev.clientY - inicio.y;
+                const pasos = vertical
+                    ? pasosDeslizar(dx, dy, performance.now() - inicio.t, lienzo.clientWidth)
+                    : pasosDeslizar(dy, dx, performance.now() - inicio.t, lienzo.clientHeight);
+                if (pasos) {
+                    irA(mod(inicio.frente + pasos));
+                    vel = 0;
                 }
             }
         };

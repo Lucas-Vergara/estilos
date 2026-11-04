@@ -1,5 +1,11 @@
 # Cambios
 
+## v0.18.0 — 2026-11-04
+
+- **`Carrusel3D` con `ajustar`: un deslizamiento corto pasa a la siguiente tarjeta.** Antes, arrastrar un ancho de lienzo giraba un radián: con 4 tarjetas había que deslizar casi un ancho y medio para pasar una, mucho en un celular, y un gesto corto volvía a la misma. Ahora basta con un gesto claro hacia el lado (más de un 15 % del ancho, al menos 48 px, y más horizontal que vertical); cada 80 % del ancho, o un gesto rápido y largo, suma otra. Hacia la izquierda trae la siguiente (en el eje horizontal, hacia arriba). Tocar y la rueda siguen igual. Sin `ajustar` (o con `autoGiro`) no cambia nada.
+- **`pasosDeslizar`** (`@lucas-vergara/estilos/3d`): la cuenta anterior como función pura, para quien arme su propio carrusel.
+- Ajustado en Placa (la app de mascotas), probando en el celular.
+
 ## v0.17.0 — 2026-11-04
 
 - **Órdenes con forma hasta 10 luces** (antes 8), para la app de hábitos: equilibrio suma 4 sobre 5 y 3-4-3; figuras, una flor de ocho alrededor de una (9) y una pirámide 1-2-3-4 (10); piedras, dos jardines nuevos. Círculo y sendero ya servían para cualquier cantidad. `MAX_LUCES` dice cuántas sabe acomodar `acomodarLuces`.

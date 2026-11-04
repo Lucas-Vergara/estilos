@@ -12,7 +12,8 @@ export type EjeCarrusel = "vertical" | "horizontal";
  *  - eje "horizontal": gira hacia arriba y abajo, como una rueda (p. ej. una tienda con la ficha al lado).
  *  - Con `ajustar`, al soltar se detiene con una tarjeta al frente; `onActivo` avisa cuál, y `activo` la lleva al
  *    frente desde afuera (una lista, flechas). `rueda` hace girar con la rueda del mouse sobre el lienzo.
- *    Tocar una tarjeta la trae al frente.
+ *    Tocar una tarjeta la trae al frente, y un deslizamiento corto pasa a la siguiente (o a varias más allá si es
+ *    largo o rápido; ver `pasosDeslizar`), sin tener que arrastrar todo el giro.
  */
 export declare function Carrusel3D({ tarjetas, eje, proporcion, autoGiro, ajustar, rueda, activo, onActivo, className, etiqueta, }: {
     tarjetas: TarjetaCarrusel[];
