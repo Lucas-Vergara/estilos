@@ -4,7 +4,7 @@ import { PINTORES_FONDO_LUZ, type FondoLuz } from "./fondos.js";
 
 /**
  * Una luz: botón redondo que se enciende despacio, con un destello. Encendida basta: no lleva ✓ (el estado queda en
- * aria-pressed para los lectores de pantalla). `color` es uno de los de la línea (ambar, coral…). `tam` cambia el
+ * aria-pressed para los lectores de pantalla). `color` es uno de COLORES_LUZ (ambar, coral…). `tam` cambia el
  * diámetro (p. ej. "96px") y `estilo` posiciona la casilla dentro de un tablero con forma.
  */
 export function Luz({ nombre, detalle, color, hecho, onCambiar, tam, estilo }: {

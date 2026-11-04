@@ -3,12 +3,11 @@ import { createRoot } from "react-dom/client";
 import "../../css/tokens.css";
 import "../../css/lineas/luz.css";
 import "./vitrina-luz.css";
-import { CapaFondo, FONDOS_LUZ, Luz, NOMBRES_FONDO_LUZ, NOMBRES_ORDEN_LUZ, ORDENES_LUZ, lugarDeLuz, useAcomodoLuces, type FondoLuz, type OrdenLuz } from "../../src/luz/index.js";
+import { CapaFondo, COLORES_CLAROS_LUZ, COLORES_HONDOS_LUZ, COLORES_VIVOS_LUZ, NOMBRES_COLOR_LUZ, FONDOS_LUZ, Luz, NOMBRES_FONDO_LUZ, NOMBRES_ORDEN_LUZ, ORDENES_LUZ, lugarDeLuz, useAcomodoLuces, type FondoLuz, type OrdenLuz } from "../../src/luz/index.js";
 
 // Vitrina de la línea "luz" con datos de ejemplo: el tablero del día, el año de un hábito y las últimas semanas.
 
-const COLORES = ["ambar", "coral", "rosa", "violeta", "azul", "cian", "menta", "lima"] as const;
-type Color = (typeof COLORES)[number];
+type Color = (typeof COLORES_VIVOS_LUZ)[number];
 
 const HABITOS: { nombre: string; color: Color; detalle: string }[] = [
   { nombre: "Leer", color: "ambar", detalle: "20 min" },
@@ -164,16 +163,18 @@ function Colores() {
     <section className="vl-seccion" aria-labelledby="vl-colores">
       <div className="vl-texto">
         <h2 id="vl-colores">Colores de las luces</h2>
-        <p>Ocho colores vivos que se leen encendidos sobre el papel y sobre el negro del reposo. <code>.l-color-&lt;nombre&gt;</code>, o <code>style="--l-color: #…"</code> si el color viene de los datos.</p>
+        <p>Ocho colores vivos que se leen encendidos sobre el papel y sobre el negro del reposo, y de cada uno un tono claro y uno hondo: 24 en total (<code>COLORES_LUZ</code>). <code>.l-color-&lt;nombre&gt;</code>, o <code>style="--l-color: #…"</code> si el color viene de los datos.</p>
       </div>
-      <div className="vl-colores">
-        {COLORES.map((c) => (
-          <div key={c} className={`l-casilla l-color-${c}`} style={{ "--l-tam-luz": "56px" } as CSSProperties}>
-            <span className="l-luz l-encendida" aria-hidden="true" />
-            <span className="l-detalle">{c}</span>
-          </div>
-        ))}
-      </div>
+      {[COLORES_CLAROS_LUZ, COLORES_VIVOS_LUZ, COLORES_HONDOS_LUZ].map((fila, i) => (
+        <div key={i} className="vl-colores">
+          {fila.map((c) => (
+            <div key={c} className={`l-casilla l-color-${c}`} style={{ "--l-tam-luz": "56px" } as CSSProperties}>
+              <span className="l-luz l-encendida" aria-hidden="true" />
+              <span className="l-detalle">{NOMBRES_COLOR_LUZ[c]}</span>
+            </div>
+          ))}
+        </div>
+      ))}
     </section>
   );
 }

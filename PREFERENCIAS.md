@@ -76,6 +76,7 @@ Creada para la app de hábitos (24-10-2026), con la **sensación** del Every Day
 - **Sin ✓ y encendido lento (29-10-2026, en habitos; en la biblioteca desde v0.16.0):** encendida basta para decir "cumplido", así que el ✓ sobra (el estado sigue en `aria-pressed` para lectores de pantalla). El color entra despacio (~1,4 s) y el halo después (~2,2 s), para un efecto más zen; apagar sigue siendo rápido. La vista principal no muestra fecha, cuenta ni navegación: se cambia de vista deslizando el dedo.
 - **Fondos zen (02-11-2026, v0.16.0):** de 15 propuestos me quedé con 13 más el papel liso: el agua de piscina con la luz que se mueve muy despacio, gradientes suaves (amanecer, niebla, aurora, respiración, hora del día) y materia sobria (madera clara, arena rastrillada, washi). **Descartados:** la sombra de hojas que se mece, sola y sobre madera.
 - **Órdenes con forma (02-11-2026, v0.16.0):** me gustaron las cinco (equilibrio, figuras, círculo, piedras, sendero) y quedan todas como opción, junto con las filas de siempre. El usuario elige; las luces se acomodan solas según cuántas haya.
+- **24 colores (04-11-2026, v0.19.0):** pedí el triple de tonos. A cada uno de los ocho vivos se le sumó un tono claro y uno hondo, todos con saturación para seguir siendo luces (nada de pasteles grises ni oscuros apagados). En el selector de habitos van en tres filas: claros, vivos y hondos, cada columna un mismo color.
 - Pensada para pantallas táctiles vistas de lejos (pantalla en la sala, celular): blancos grandes, poco texto.
 
 ## Reglas adoptadas de Impeccable y Taste (23-10-2026)
@@ -138,7 +139,7 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 | monitor de proyectos | azul | v0.15.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
 | oportunidades | azul | v0.15.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
 | finanzas | verde | v0.15.0 | app de finanzas personales (Firebase); estilos propios mínimos en `src/estilos.css` |
-| habitos (web) | — (línea luz) | v0.17.0 | app de hábitos; de aquí salieron los fondos y órdenes de la línea luz (v0.16.0, hasta 10 luces en v0.17.0); la pantalla ESP32 replica la línea en su firmware |
+| habitos (web) | — (línea luz) | v0.19.0 | app de hábitos; de aquí salieron los fondos y órdenes de la línea luz (v0.16.0, hasta 10 luces en v0.17.0) y los 24 colores (v0.19.0); la pantalla ESP32 replica la línea en su firmware |
 | placa (app de mascotas) | — (línea «mascota», dirección Paseo) | v0.18.0 | la línea «mascota» vive por ahora en el proyecto (`src/estilos/lineas/mascota.css`), con Paseo elegida; falta subirla a la biblioteca. De aquí salió el deslizamiento de a una tarjeta de `Carrusel3D` (v0.18.0) |
 | cv (PDF del currículum) | azul | v0.15.0 | solo tokens, copiados en `cv/estilos/`; hoja de impresión propia (`cv.css`) mientras se decide si va una línea "documento" |
 

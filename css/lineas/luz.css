@@ -18,8 +18,11 @@
  *  - .l-fondo         capa detrás de las luces (fondos: CapaFondo de @lucas-vergara/estilos/luz); .l-con-fondo en el
  *                      contenedor deja ver el fondo a través de las luces apagadas
  *  - .l-tablero.l-forma  tablero con las luces en una forma (equilibrio, figuras, círculo, piedras, sendero: acomodarLuces)
- *  - .l-color-<nombre> pone el color de una luz o de un contenedor (ambar, coral, rosa, violeta, azul, cian, menta, lima)
- *                      o, si el color viene de los datos: style="--l-color: #…"
+ *  - .l-color-<nombre> pone el color de una luz o de un contenedor: los ocho vivos (ambar, coral, rosa, violeta, azul,
+ *                      cian, menta, lima), sus tonos claros (maiz, durazno, chicle, lavanda, cielo, agua, aguamarina,
+ *                      pistacho) y sus tonos hondos (ocre, tomate, frambuesa, uva, anil, petroleo, esmeralda, oliva).
+ *                      Las listas, en COLORES_LUZ de @lucas-vergara/estilos/luz. Si el color viene de los datos:
+ *                      style="--l-color: #…"
  *
  * Requiere tokens.css. Fuente: Inter (la misma de la línea panel). Se mezcla con la línea panel (tarjetas, campos,
  * botones): dentro de .luz, los tokens comunes toman los colores de la línea.
@@ -48,6 +51,23 @@
   --l-cian: #22c3e6;
   --l-menta: #2fd39a;
   --l-lima: #a6d93a;
+  /* Un tono claro y uno hondo de cada vivo, en el mismo orden: siguen siendo luces, no pasteles ni oscuros apagados */
+  --l-maiz: #ffd04d;
+  --l-durazno: #ffa07e;
+  --l-chicle: #ff94c2;
+  --l-lavanda: #bba0ff;
+  --l-cielo: #86b6ff;
+  --l-agua: #72dcf2;
+  --l-aguamarina: #7de6c0;
+  --l-pistacho: #c8e872;
+  --l-ocre: #e08a00;
+  --l-tomate: #e3442a;
+  --l-frambuesa: #d92a6c;
+  --l-uva: #7444e0;
+  --l-anil: #2c5fdb;
+  --l-petroleo: #0b93b5;
+  --l-esmeralda: #10a874;
+  --l-oliva: #7fae17;
   --l-color: var(--l-ambar);
 
   /* Cuánto brilla una luz encendida (0 = sin halo) y tamaños */
@@ -118,6 +138,22 @@
 .l-color-cian { --l-color: var(--l-cian); }
 .l-color-menta { --l-color: var(--l-menta); }
 .l-color-lima { --l-color: var(--l-lima); }
+.l-color-maiz { --l-color: var(--l-maiz); }
+.l-color-durazno { --l-color: var(--l-durazno); }
+.l-color-chicle { --l-color: var(--l-chicle); }
+.l-color-lavanda { --l-color: var(--l-lavanda); }
+.l-color-cielo { --l-color: var(--l-cielo); }
+.l-color-agua { --l-color: var(--l-agua); }
+.l-color-aguamarina { --l-color: var(--l-aguamarina); }
+.l-color-pistacho { --l-color: var(--l-pistacho); }
+.l-color-ocre { --l-color: var(--l-ocre); }
+.l-color-tomate { --l-color: var(--l-tomate); }
+.l-color-frambuesa { --l-color: var(--l-frambuesa); }
+.l-color-uva { --l-color: var(--l-uva); }
+.l-color-anil { --l-color: var(--l-anil); }
+.l-color-petroleo { --l-color: var(--l-petroleo); }
+.l-color-esmeralda { --l-color: var(--l-esmeralda); }
+.l-color-oliva { --l-color: var(--l-oliva); }
 
 /* Encabezado mínimo: la fecha grande y una línea con cuánto va del día */
 .l-encabezado { display: grid; gap: 4px; text-align: center; }

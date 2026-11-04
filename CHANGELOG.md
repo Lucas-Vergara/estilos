@@ -1,5 +1,10 @@
 # Cambios
 
+## v0.19.0 — 2026-11-04
+
+- **Tres veces más colores para las luces** (de 8 a 24), pedidos para la app de hábitos: cada color vivo suma un tono claro (maíz, durazno, chicle, lavanda, cielo, agua, aguamarina, pistacho) y uno hondo (ocre, tomate, frambuesa, uva, añil, petróleo, esmeralda, oliva). Siguen siendo luces: claros y hondos tienen saturación suficiente para el halo sobre el papel y sobre el negro del reposo. Tokens `--l-<nombre>` y clases `.l-color-<nombre>`.
+- **`COLORES_LUZ`** (`@lucas-vergara/estilos/luz`), con `COLORES_VIVOS_LUZ`, `COLORES_CLAROS_LUZ`, `COLORES_HONDOS_LUZ`, el tipo `ColorLuz` y `NOMBRES_COLOR_LUZ` (con tildes, para mostrar).
+
 ## v0.18.0 — 2026-11-04
 
 - **`Carrusel3D` con `ajustar`: un deslizamiento corto pasa a la siguiente tarjeta.** Antes, arrastrar un ancho de lienzo giraba un radián: con 4 tarjetas había que deslizar casi un ancho y medio para pasar una, mucho en un celular, y un gesto corto volvía a la misma. Ahora basta con un gesto claro hacia el lado (más de un 15 % del ancho, al menos 48 px, y más horizontal que vertical); cada 80 % del ancho, o un gesto rápido y largo, suma otra. Hacia la izquierda trae la siguiente (en el eje horizontal, hacia arriba). Tocar y la rueda siguen igual. Sin `ajustar` (o con `autoGiro`) no cambia nada.
