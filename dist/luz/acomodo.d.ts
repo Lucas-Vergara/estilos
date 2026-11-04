@@ -2,6 +2,8 @@ export declare const ORDENES_LUZ: readonly ["filas", "equilibrio", "figuras", "c
 export type OrdenLuz = (typeof ORDENES_LUZ)[number];
 export declare const NOMBRES_ORDEN_LUZ: Record<OrdenLuz, string>;
 export declare const NOTAS_ORDEN_LUZ: Record<OrdenLuz, string>;
+/** Cuántas luces sabe acomodar: con más, se acomodan las primeras. */
+export declare const MAX_LUCES = 10;
 type Punto = [number, number];
 export interface AcomodoLuz {
     /** Diámetro de las luces, en px */
