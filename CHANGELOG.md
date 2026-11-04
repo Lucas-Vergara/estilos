@@ -1,5 +1,9 @@
 # Cambios
 
+## v0.17.0 — 2026-11-04
+
+- **Órdenes con forma hasta 10 luces** (antes 8), para la app de hábitos: equilibrio suma 4 sobre 5 y 3-4-3; figuras, una flor de ocho alrededor de una (9) y una pirámide 1-2-3-4 (10); piedras, dos jardines nuevos. Círculo y sendero ya servían para cualquier cantidad. `MAX_LUCES` dice cuántas sabe acomodar `acomodarLuces`.
+
 ## v0.16.0 — 2026-11-02
 
 Fondos y órdenes para la línea luz, a partir de la vista Hoy de la app de hábitos.

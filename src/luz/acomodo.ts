@@ -23,6 +23,9 @@ export const NOTAS_ORDEN_LUZ: Record<OrdenLuz, string> = {
   sendero: "Piedras de paso en zigzag.",
 };
 
+/** Cuántas luces sabe acomodar: con más, se acomodan las primeras. */
+export const MAX_LUCES = 10;
+
 type Punto = [number, number];
 const S3 = Math.sqrt(3) / 2;
 
@@ -34,7 +37,7 @@ const anillo = (n: number, giro = -Math.PI / 2): Punto[] => {
 
 /** Posiciones en unidades abstractas: dos luces vecinas quedan a ~1 de distancia. */
 const ABSTRACTAS: Record<"equilibrio" | "figuras" | "circulo" | "sendero", (n: number) => Punto[]> = {
-  equilibrio: (n) => filas(({ 1: [1], 2: [2], 3: [2, 1], 4: [2, 2], 5: [2, 1, 2], 6: [3, 3], 7: [2, 3, 2], 8: [3, 2, 3] } as Record<number, number[]>)[n]),
+  equilibrio: (n) => filas(({ 1: [1], 2: [2], 3: [2, 1], 4: [2, 2], 5: [2, 1, 2], 6: [3, 3], 7: [2, 3, 2], 8: [3, 2, 3], 9: [4, 5], 10: [3, 4, 3] } as Record<number, number[]>)[n]),
   figuras: (n) => {
     switch (n) {
       case 1: return [[0, 0]];
@@ -44,7 +47,9 @@ const ABSTRACTAS: Record<"equilibrio" | "figuras" | "circulo" | "sendero", (n: n
       case 5: return [[0, -1], [-1, 0], [0, 0], [1, 0], [0, 1]];
       case 6: return filas([1, 2, 3]).map(([x, y]): Punto => [x * 1.05, y]);
       case 7: return [[0, 0], ...anillo(6, 0).map(([x, y]): Punto => [x * 1.05, y * 1.05])];
-      default: return [[0, -0.45], [0, 0.45], ...anillo(6, 0).map(([x, y]): Punto => [x * 1.55, y * 1.1])];
+      case 8: return [[0, -0.45], [0, 0.45], ...anillo(6, 0).map(([x, y]): Punto => [x * 1.55, y * 1.1])];
+      case 9: return [[0, 0], ...anillo(8)];
+      default: return filas([1, 2, 3, 4]).map(([x, y]): Punto => [x * 1.05, y]);
     }
   },
   circulo: (n) => (n === 1 ? [[0, 0]] : n === 2 ? [[-0.6, 0], [0.6, 0]] : anillo(n)),
@@ -61,8 +66,10 @@ const PIEDRAS: Punto[][] = [
   [[0.14, 0.4], [0.28, 0.7], [0.36, 0.3], [0.58, 0.56], [0.7, 0.26], [0.86, 0.66]],
   [[0.12, 0.36], [0.24, 0.7], [0.34, 0.3], [0.5, 0.62], [0.62, 0.28], [0.78, 0.5], [0.9, 0.78]],
   [[0.1, 0.36], [0.22, 0.7], [0.32, 0.28], [0.46, 0.62], [0.56, 0.24], [0.7, 0.52], [0.82, 0.22], [0.9, 0.74]],
+  [[0.09, 0.34], [0.2, 0.7], [0.3, 0.28], [0.42, 0.6], [0.52, 0.26], [0.62, 0.7], [0.72, 0.4], [0.84, 0.22], [0.91, 0.7]],
+  [[0.08, 0.36], [0.18, 0.72], [0.27, 0.28], [0.38, 0.58], [0.47, 0.22], [0.56, 0.74], [0.64, 0.44], [0.76, 0.22], [0.84, 0.62], [0.93, 0.32]],
 ];
-const TAM_PIEDRAS = [0.3, 0.27, 0.25, 0.23, 0.21, 0.2, 0.185, 0.17];
+const TAM_PIEDRAS = [0.3, 0.27, 0.25, 0.23, 0.21, 0.2, 0.185, 0.17, 0.16, 0.15];
 
 export interface AcomodoLuz {
   /** Diámetro de las luces, en px */
@@ -77,7 +84,7 @@ export interface AcomodoLuz {
  */
 export function acomodarLuces(orden: OrdenLuz, n: number, W: number, H: number, { etiqueta = 0, maximo = 132 }: { etiqueta?: number; maximo?: number } = {}): AcomodoLuz | null {
   if (orden === "filas" || n < 1 || W < 1 || H < 1) return null;
-  n = Math.min(n, 8);
+  n = Math.min(n, MAX_LUCES);
   const vertical = H > W * 1.05;
   const minimo = Math.min(W, H);
 

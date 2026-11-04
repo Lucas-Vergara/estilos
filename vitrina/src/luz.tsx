@@ -62,7 +62,7 @@ function Tablero() {
   );
 }
 
-// Fondo y orden: la pantalla de hoy con cualquiera de los fondos y de las formas, y de 1 a 8 luces
+// Fondo y orden: la pantalla de hoy con cualquiera de los fondos y de las formas, y de 1 a 10 luces
 function FondoYOrden() {
   const [fondo, setFondo] = useState<FondoLuz>("piscina");
   const [orden, setOrden] = useState<OrdenLuz>("equilibrio");
@@ -70,7 +70,7 @@ function FondoYOrden() {
   const [hechos, setHechos] = useState<boolean[]>([true, false, true, false, false, true, false, false]);
   const tablero = useRef<HTMLDivElement>(null);
   const acomodo = useAcomodoLuces(tablero, orden, cantidad, { etiqueta: 30, maximo: 110 });
-  const nombres = ["Leer", "Caminar", "Agua", "Meditar", "Dormir", "Estirar", "Escribir", "Sin pantalla"];
+  const nombres = ["Leer", "Caminar", "Agua", "Meditar", "Dormir", "Estirar", "Escribir", "Sin pantalla", "Cocinar", "Llamar"];
   const colores = ["ambar", "menta", "cian", "violeta", "azul", "coral", "rosa", "lima"];
   return (
     <section className="vl-seccion" aria-labelledby="vl-fondo">
@@ -90,7 +90,7 @@ function FondoYOrden() {
           </select>
         </label>
         <label>Luces
-          <input type="range" min={1} max={8} value={cantidad} onChange={(e) => setCantidad(+e.target.value)} />
+          <input type="range" min={1} max={10} value={cantidad} onChange={(e) => setCantidad(+e.target.value)} />
           <output>{cantidad}</output>
         </label>
       </div>

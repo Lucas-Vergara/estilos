@@ -138,7 +138,7 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 | monitor de proyectos | azul | v0.15.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
 | oportunidades | azul | v0.15.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
 | finanzas | verde | v0.15.0 | app de finanzas personales (Firebase); estilos propios mínimos en `src/estilos.css` |
-| habitos (web) | — (línea luz) | v0.16.0 | app de hábitos; de aquí salieron los fondos y órdenes de la línea luz (v0.16.0); la pantalla ESP32 replica la línea en su firmware |
+| habitos (web) | — (línea luz) | v0.17.0 | app de hábitos; de aquí salieron los fondos y órdenes de la línea luz (v0.16.0, hasta 10 luces en v0.17.0); la pantalla ESP32 replica la línea en su firmware |
 | cv (PDF del currículum) | azul | v0.15.0 | solo tokens, copiados en `cv/estilos/`; hoja de impresión propia (`cv.css`) mientras se decide si va una línea "documento" |
 
 ### Fuera de la biblioteca (por decidir)
