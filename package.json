@@ -30,6 +30,10 @@
       "types": "./dist/luz/index.d.ts",
       "default": "./dist/luz/index.js"
     },
+    "./club": {
+      "types": "./dist/club/index.d.ts",
+      "default": "./dist/club/index.js"
+    },
     "./tokens.css": "./css/tokens.css",
     "./base.css": "./css/base.css",
     "./tailwind.css": "./css/tailwind.css",

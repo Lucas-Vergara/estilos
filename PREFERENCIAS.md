@@ -79,6 +79,14 @@ Creada para la app de hábitos (24-10-2026), con la **sensación** del Every Day
 - **24 colores (04-11-2026, v0.19.0):** pedí el triple de tonos. A cada uno de los ocho vivos se le sumó un tono claro y uno hondo, todos con saturación para seguir siendo luces (nada de pasteles grises ni oscuros apagados). En el selector de habitos van en tres filas: claros, vivos y hondos, cada columna un mismo color.
 - Pensada para pantallas táctiles vistas de lejos (pantalla en la sala, celular): blancos grandes, poco texto.
 
+## Línea club (desde v0.20.0)
+
+Pedida el 05-11-2026 a partir de [stridechile.cl](https://www.stridechile.cl/), un run club de Concepción con planes mensuales, tienda y app de miembros (Next.js en Vercel, hecho a medida). Me gustó su diseño; la quise como línea para **servicios con suscripción**.
+
+- **Lo que se tomó:** papel cálido (`#efeeea`) con módulos casi negros de esquinas grandes que casi tocan los bordes; titulares redondos (Outfit 800) apretados con una frase en degradé; cifras condensadas (Instrument Sans al 75 % de ancho) para precios, pasos y descuentos; botones píldora con la flecha en un círculo; planes con lo incluido en negrita y un "+" en el acento; el teléfono con la app de miembros que cambia de pantalla con el scroll.
+- **Lo que se ajustó:** el degradé sobre el papel usa tonos hondos (el cian de Stride sobre su papel da 1,5:1); un solo momento de movimiento (palabras desenfocadas), no también carruseles 3D y galerías.
+- **Lo que no se tomó:** su marca, fotos y textos. La vitrina usa un club inventado (Roca, escalada) para mostrar que sirve más allá del running.
+
 ## Reglas adoptadas de Impeccable y Taste (23-10-2026)
 
 Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus/impeccable) y [Taste](https://github.com/Leonxlnx/taste-skill), contra estas preferencias. No las instalamos: traen su propia dirección estética y pelearían con la biblioteca. Me quedé con estas reglas, que se suman a lo que ya tenía:

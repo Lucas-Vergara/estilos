@@ -213,6 +213,7 @@ function Tresd() {
             <a href="sitio.html">Línea sitio</a>
             <a href="sitio-disenadora.html">Línea sitio diseñadora</a>
             <a href="luz.html">Línea luz</a>
+            <a href="club.html">Línea club</a>
           </nav>
         </div>
       </footer>

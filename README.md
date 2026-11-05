@@ -3,7 +3,7 @@
 Mi biblioteca de estilos: una sola fuente para el look and feel de mis proyectos.
 Cuando un estilo mejora en un proyecto, se sube aquí y los demás proyectos lo reciben **cuando yo decida**.
 
-**Vitrina:** [línea panel](https://lucas-vergara.github.io/estilos/) · [línea sitio](https://lucas-vergara.github.io/estilos/sitio.html) · [línea 3d](https://lucas-vergara.github.io/estilos/3d.html) · [línea sitio diseñadora](https://lucas-vergara.github.io/estilos/sitio-disenadora.html) · [línea luz](https://lucas-vergara.github.io/estilos/luz.html) · local: `npm install && npm run vitrina`
+**Vitrina:** [línea panel](https://lucas-vergara.github.io/estilos/) · [línea sitio](https://lucas-vergara.github.io/estilos/sitio.html) · [línea 3d](https://lucas-vergara.github.io/estilos/3d.html) · [línea sitio diseñadora](https://lucas-vergara.github.io/estilos/sitio-disenadora.html) · [línea luz](https://lucas-vergara.github.io/estilos/luz.html) · [línea club](https://lucas-vergara.github.io/estilos/club.html) · local: `npm install && npm run vitrina`
 
 ## Líneas
 
@@ -16,6 +16,7 @@ Una **línea** es un lenguaje visual completo para un tipo de proyecto. Todas co
 | **3d** | `lineas/3d.css` (sobre sitio) | Secciones y heros con escenas 3D | Escenarios para las escenas de `@lucas-vergara/estilos/3d` (Three.js): objetos, orbe, vidrio, partículas, paisaje, bloques, carrusel y túnel con scroll. Usa la tipografía y las paletas de sitio |
 | **sitio diseñadora** | `lineas/sitio-disenadora.css` | Webs de estudio o marca, oscuras | Creada junto con Franservice ([franservice.cl](https://franservice.cl)): oscura, títulos enormes, mono en mayúscula, acento menta. Geist |
 | **luz** | `lineas/luz.css` | Pantallas de tocar y encender: hábitos, rutinas, registros diarios | Papel claro de día y casi negro en reposo; luces de colores con halo que se encienden con un destello. Inter |
+| **club** | `lineas/club.css` | Servicios con membresía o suscripción: clubes, gimnasios, academias, estudios | Nacida de [stridechile.cl](https://www.stridechile.cl/): papel cálido con módulos casi negros, titulares redondos con una frase en degradé, cifras condensadas, planes, tienda de pago único y la app de miembros en un teléfono. Outfit + Instrument Sans |
 
 Las líneas se pueden **mezclar**: cada una vive bajo su propia clase y prefijo (`.sitio` con `s-…`, `.sitio-disenadora` con `sd-…`). Dentro de ellas, los tokens comunes toman los colores de la línea, así que una `.tarjeta`, un `Indicador` o un `GraficoLinea` de la línea panel se ven coherentes (ver "Proyectos" en la vitrina de sitio). Para una línea nueva: `css/lineas/<nombre>.css`, con alcance propio (`.<nombre>`) y prefijo de clases propio.
 
@@ -30,11 +31,13 @@ Las líneas se pueden **mezclar**: cada una vive bajo su propia clase y prefijo 
 | Línea 3d | `lineas/3d.css` | Escenarios para escenas 3D (clases `td-`): `td-escenario`, `td-escenario-pleno`, `td-recorrido` (con scroll), `td-dueto`, `td-sobre` + `td-panel`, `td-selector` |
 | Línea sitio diseñadora | `lineas/sitio-disenadora.css` | La línea oscura creada con Franservice (clases `sd-`) |
 | Línea luz | `lineas/luz.css` | Luces que se encienden, calendario de puntos, filas por hábito, modo reposo, capa de fondo y tablero con forma (clases `l-`) |
+| Línea club | `lineas/club.css` | Cabecera, módulos oscuros, hero con nombre gigante, datos y pasos, evento con inscripción por pasos, planes, agenda del mes, convenios, tienda, app de miembros, preguntas, cierre, pie, diálogo (clases `c-`) |
 | Tailwind | `tailwind.css` | Puente para proyectos con Tailwind v4 (`bg-superficie`, `text-acento`…) sobre las mismas variables |
 | Componentes | `@lucas-vergara/estilos` | `Indicador`, `Variacion`, `Estado`, `Frescura`, `Vacio`, `Segmentado`, `Pestanas`, `NavegacionLateral`, `ThOrden`, esqueletos, `BotonTema`, `useOrden`… |
 | Gráficos | `@lucas-vergara/estilos/graficos` | `GraficoLinea`, `GraficoBarras`, `GraficoBanda`, `Sparkline` (requiere `recharts`) |
 | Sitio (React) | `@lucas-vergara/estilos/sitio` | `Entrada`, `Telon` + `irCon`, `NavPildora` + `useSeccionActiva`, `Avatar`, `FondoAnimado`, `MarcoNavegador`, `Proyecto`, `Ola`, `BotonSonido` + `sonidos`, `Palabras`, `Acento`, `Cursor` (solo sitio diseñadora), `iniciarMovimiento`, `iniciarInteracciones`, `SCRIPT_MOVIMIENTO`, `conTransicion` |
 | Luz (React) | `@lucas-vergara/estilos/luz` | `Luz`, `CapaFondo` (14 fondos: agua, gradientes, madera, arena, washi), `acomodarLuces` / `useAcomodoLuces` + `lugarDeLuz` (equilibrio, figuras, círculo, piedras, sendero), y las listas `FONDOS_LUZ` y `ORDENES_LUZ` con sus nombres |
+| Club (React) | `@lucas-vergara/estilos/club` | `iniciarClub` (palabras que entran desenfocadas), `IndicadorPasos`, `Telefono`, `useProgresoFijo` (sección fija que avanza con el scroll) |
 | 3D (React) | `@lucas-vergara/estilos/3d` | `Objeto3D` (burbuja, nudo, anillos), `Orbe3D`, `Vidrio3D`, `Particulas3D`, `Terreno3D`, `Bloques3D`, `Carrusel3D`, `Tunel3D`, `Silueta3D` (trazos SVG con volumen: neón, cromo u holograma), `Grilla3D`, y `usarEscena` para escenas propias (requiere `three`) |
 
 ## Usarlo en un proyecto
@@ -161,6 +164,26 @@ import "@lucas-vergara/estilos/lineas/luz.css";
 ```
 
 Al encender, poner `.l-destellando` en la luz y quitarla en `animationend`. Variables por proyecto: `--l-color`, `--l-tam-luz`, `--l-tam-punto`, `--l-columnas`, `--l-brillo`.
+
+### Línea club
+
+```html
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&family=Outfit:wght@600..900&display=swap" rel="stylesheet" />
+<body class="club">   <!-- paletas: c-paleta-brasa · c-paleta-lima · c-paleta-marea (neón por defecto) -->
+```
+
+```tsx
+import "@lucas-vergara/estilos/tokens.css";
+import "@lucas-vergara/estilos/lineas/club.css";
+import { iniciarClub, IndicadorPasos, Telefono, useProgresoFijo } from "@lucas-vergara/estilos/club";
+
+useEffect(() => iniciarClub(), []);
+<h2 className="c-titulo" data-c-palabras="">Elige <span className="c-degrade">tu plan.</span></h2>
+<section className="c-modulo c-modulo-pad">…</section>          {/* bloque oscuro de esquinas grandes */}
+<a className="c-boton c-boton-acento">Elegir plan <span className="c-flecha">→</span></a>
+```
+
+Cada paleta trae un degradé vivo (`--c-degrade-vivo`, sobre el asfalto) y uno hondo (`--c-degrade`, sobre el papel, 3:1 o más para títulos grandes); `.c-degrade` elige solo según dónde esté. Dentro de un módulo, `.c-claro` vuelve a los colores del papel. Variables por proyecto: `--c-papel`, `--c-tinta`, `--c-acento`, `--c-radio-modulo`, `--c-escala-titulos`.
 
 **Regla:** el `estilos.css` del proyecto solo tiene lo que es de ese proyecto. Si algo sirve para otros, se sube aquí.
 

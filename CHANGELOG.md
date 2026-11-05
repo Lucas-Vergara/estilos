@@ -1,5 +1,12 @@
 # Cambios
 
+## v0.20.0 — 2026-11-05
+
+- **Línea club** (`lineas/club.css`, clases `c-` bajo `.club`), para webs de servicios con membresía o suscripción. Nace de la revisión de [stridechile.cl](https://www.stridechile.cl/) (un run club de Concepción): se tomó el lenguaje, no la marca. Papel cálido con módulos casi negros de esquinas grandes, titulares en Outfit apretados con una frase en degradé, cifras condensadas en Instrument Sans (precios, pasos, descuentos), botones píldora con flecha en círculo. Piezas: cabecera, hero con nombre gigante detrás de la foto, datos y pasos numerados, pestañas grandes, evento con inscripción por pasos, persona destacada, reseñas, planes (destacado, lo incluido con "+", lo que falta con raya, selector de periodo), agenda del mes, convenios, tienda con libros, banda de enlace, app de miembros en un teléfono (calendario, tarjetas, barras, muro, chat), preguntas, cierre con foto fundida, pie, botón flotante y diálogo.
+- **Cuatro paletas** de degradé: neón (por defecto), brasa, lima y marea. Cada una con un degradé vivo para el asfalto y uno hondo para el papel; los hondos tienen 3,9:1 o más sobre el papel (en Stride, el cian sobre el papel queda en 1,5:1).
+- **`@lucas-vergara/estilos/club`**: `iniciarClub` (el único momento de movimiento: palabras que entran desenfocadas, `data-c-palabras` y `data-c-revelar`; sin script todo se ve y respeta "reducir movimiento"), `IndicadorPasos`, `Telefono` y `useProgresoFijo`.
+- **Vitrina** `club.html` con un club de ejemplo inventado (Roca, escalada en Valdivia) y selector de paleta; enlazada desde las demás páginas.
+
 ## v0.19.0 — 2026-11-04
 
 - **Tres veces más colores para las luces** (de 8 a 24), pedidos para la app de hábitos: cada color vivo suma un tono claro (maíz, durazno, chicle, lavanda, cielo, agua, aguamarina, pistacho) y uno hondo (ocre, tomate, frambuesa, uva, añil, petróleo, esmeralda, oliva). Siguen siendo luces: claros y hondos tienen saturación suficiente para el halo sobre el papel y sobre el negro del reposo. Tokens `--l-<nombre>` y clases `.l-color-<nombre>`.

@@ -235,6 +235,7 @@ import { Luz, CapaFondo, useAcomodoLuces, lugarDeLuz } from "@lucas-vergara/esti
           <a href="sitio.html">Línea sitio</a>
           <a href="3d.html">Línea 3d</a>
           <a href="sitio-disenadora.html">Línea sitio diseñadora</a>
+          <a href="club.html">Línea club</a>
         </nav>
       </footer>
       <div className="vl-controles" role="group" aria-label="Estado de la pantalla">

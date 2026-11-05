@@ -199,6 +199,7 @@ function Sitio() {
           <span>Biobío, Chile · <Hora /></span>
           <a href="#">Instagram</a>
           <a href="./">Línea panel</a>
+          <a href="club.html">Línea club</a>
           <span>© 2026 · <CreditoEstilos /></span>
         </div>
       </footer>

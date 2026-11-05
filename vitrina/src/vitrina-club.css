@@ -1,0 +1,37 @@
+/* Solo la vitrina de la línea club: diagramación de la página de ejemplo y el selector de paleta. */
+body { margin: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+.vc-ancho { grid-column: 1 / -1; }
+.vc-fila { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 32px; }
+.vc-convenios-cabeza { margin: 56px 0 20px; align-items: center; }
+.vc-fotos { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 12px; }
+.vc-fotos .c-foto { aspect-ratio: 4 / 3; }
+.vc-mini-grilla { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.vc-pantalla { display: grid; gap: 8px; animation: vc-pantalla var(--dur-lenta) var(--curva); }
+@keyframes vc-pantalla { from { opacity: 0; transform: translateY(10px); } }
+
+.vc-codigo {
+  margin: 0; padding: 22px; overflow-x: auto; border-radius: var(--c-radio-tarjeta); background: var(--c-blanco);
+  font: 13px/1.65 ui-monospace, "SF Mono", Menlo, monospace; color: var(--c-tinta-2);
+}
+
+/* Selector de paleta, abajo al centro */
+.vc-controles {
+  position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 35; max-width: calc(100% - 110px);
+  display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 2px; padding: 4px; border-radius: 999px;
+  background: color-mix(in srgb, var(--c-blanco) 92%, transparent); backdrop-filter: blur(10px); box-shadow: 0 8px 24px rgba(10,10,10,0.14);
+}
+.vc-controles button {
+  display: inline-flex; align-items: center; gap: 7px; border: 0; background: none; padding: 8px 12px; border-radius: 999px;
+  font: 600 13.5px/1 var(--c-texto); color: var(--c-tinta-2); cursor: pointer;
+}
+.vc-controles button[aria-pressed="true"] { background: var(--c-tinta); color: #fff; }
+.vc-controles i { width: 12px; height: 12px; border-radius: 50%; background: var(--c-degrade-vivo); }
+@media (max-width: 480px) {
+  .vc-controles { left: 16px; transform: none; max-width: calc(100% - 100px); flex-wrap: nowrap; }
+  .vc-controles button { padding: 8px; font-size: 0; gap: 0; }
+  .vc-controles button i { width: 16px; height: 16px; }
+}
+.c-pie { padding-bottom: 96px; }
