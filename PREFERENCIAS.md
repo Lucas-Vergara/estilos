@@ -159,7 +159,7 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 | Proyecto | Acento | Versión | Notas |
 |---|---|---|---|
 | monitor Sodimac (meyer/scrap2.0/web) | verde | v0.15.0 | origen de la biblioteca; de aquí salieron el arreglo de leyendas (v0.12.1), el pulido de escritorio (v0.13.0) y el de menos ruido (v0.14.0) |
-| datos-reciclaje (antes radar de reciclaje) | verde, línea panel2 | v0.21.0 | de aquí salieron la navegación lateral (v0.15.0) y la línea panel2 (v0.21.0); componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
+| datos-reciclaje (antes radar de reciclaje) | verde, línea panel2 | v0.22.0 | de aquí salieron la navegación lateral (v0.15.0), la línea panel2 (v0.21.0) y `ElegirArchivo` (v0.22.0); componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
 | monitor de proyectos | azul | v0.15.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
 | oportunidades | azul | v0.15.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
 | finanzas | verde | v0.15.0 | app de finanzas personales (Firebase); estilos propios mínimos en `src/estilos.css` |

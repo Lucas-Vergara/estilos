@@ -557,3 +557,40 @@ button.calor-fila-titulo:hover, .calor-fila-titulo.elegida { color: var(--acento
 @media (prefers-reduced-motion: reduce) {
   .con-lateral, .lateral, .lateral.abierta, .lateral-flecha { transition: none; }
 }
+
+/* ---------- Elegir archivo (v0.22.0) ----------
+   Zona para arrastrar un archivo con un botón que abre el selector del sistema; el input nativo queda oculto pero
+   accesible (se enfoca con el teclado). Estados: arrastrando, con archivo, con error e inactivo. Ver <ElegirArchivo>. */
+.elegir-archivo {
+  display: grid; justify-items: center; align-content: center; gap: var(--e-2); text-align: center; min-width: 0;
+  padding: var(--e-8) var(--e-6); border: 1.5px dashed var(--borde-campo); border-radius: var(--radio);
+  background: var(--superficie); color: var(--tinta-2);
+  transition: border-color var(--dur-rapida), background var(--dur-rapida);
+}
+.elegir-archivo:hover:not(.inactivo), .elegir-archivo:focus-within { border-color: color-mix(in oklab, var(--acento) 55%, var(--borde-campo)); }
+.elegir-archivo.arrastrando { border-color: var(--acento); border-style: solid; background: color-mix(in oklab, var(--acento-suave) 55%, var(--superficie)); }
+.elegir-archivo.con-archivo { border-style: solid; border-color: color-mix(in oklab, var(--acento) 35%, var(--borde)); }
+.elegir-archivo.con-error { border-color: var(--critico); }
+.elegir-archivo.inactivo { opacity: 0.7; }
+.elegir-archivo-icono {
+  display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; margin-bottom: var(--e-1);
+  background: var(--acento-suave); color: var(--sobre-acento-suave); transition: transform var(--dur) var(--curva);
+}
+.elegir-archivo.arrastrando .elegir-archivo-icono { transform: translateY(-3px); }
+.elegir-archivo-titulo { font-size: var(--texto-md); font-weight: 600; color: var(--tinta); text-wrap: balance; }
+.elegir-archivo-detalle { font-size: var(--texto-sm); color: var(--tinta-3); max-width: 440px; text-wrap: pretty; }
+.elegir-archivo-boton { position: relative; margin-top: var(--e-2); cursor: pointer; }
+.elegir-archivo-boton.deshabilitado { opacity: 0.6; cursor: default; filter: none; }
+.elegir-archivo-boton:focus-within { outline: 2px solid var(--acento); outline-offset: 2px; }
+/* Oculto a la vista, pero enfocable y legible por lectores de pantalla */
+.elegir-archivo-input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: inherit; font-size: 0; }
+.elegir-archivo-input::file-selector-button { cursor: inherit; }
+.elegir-archivo-elegido {
+  display: inline-flex; align-items: center; gap: 6px; max-width: 100%; padding: 4px 12px; border-radius: 999px;
+  background: var(--bueno-suave); color: var(--bueno-texto); font-size: var(--texto-sm); overflow-wrap: anywhere;
+}
+.elegir-archivo-elegido svg { flex: none; }
+.elegir-archivo-elegido b { font-weight: 600; }
+.elegir-archivo-error { font-size: var(--texto-sm); color: var(--critico); max-width: 460px; text-wrap: pretty; }
+@media (max-width: 640px) { .elegir-archivo { padding: var(--e-6) var(--e-4); } }
+@media (prefers-reduced-motion: reduce) { .elegir-archivo, .elegir-archivo-icono { transition: none; } }

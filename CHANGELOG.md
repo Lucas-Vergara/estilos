@@ -1,5 +1,10 @@
 # Cambios
 
+## v0.22.0 — 2026-11-07
+
+- **`ElegirArchivo`** (y `aceptaArchivo`): para subir un archivo, en reemplazo del input nativo. Zona donde arrastrarlo, con un botón que abre el selector del sistema (el input queda oculto pero se enfoca con el teclado y lo leen los lectores de pantalla). Estados: arrastrando, ocupado («Leyendo…»), con el archivo elegido y con error. Los archivos que no calzan con `accept` van a `onRechazados`. Clases `.elegir-archivo…` en `base.css` (solo clases nuevas: nada existente cambia). Nació con la carga del archivo de la romana en Datos Reciclaje.
+- **Vitrina**: sección «Elegir archivo» en la página de la línea panel.
+
 ## v0.21.0 — 2026-11-07
 
 - **Línea panel2** (`lineas/panel2.css`, bajo `<body class="panel2">`), a partir de la exploración de look and feel de Datos Reciclaje (referencias: el refresco «calmer interface» de Linear, Attio). Usa las clases de `base.css` y cambia solo lo que está bajo `.panel2`: los proyectos en la línea panel se ven igual.

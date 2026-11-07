@@ -1,4 +1,4 @@
-import { Fragment, useRef, type CSSProperties, type KeyboardEvent, type ReactNode } from "react";
+import { Fragment, useRef, useState, type CSSProperties, type KeyboardEvent, type ReactNode } from "react";
 import { fechaHora, haceCuanto, horasDesde } from "./fechas.js";
 import type { Direccion, Orden } from "./orden.js";
 
@@ -331,6 +331,120 @@ export function PanelPestana({ id, children }: { id: string; children: ReactNode
   return (
     <div role="tabpanel" id={`panel-${id}`} aria-labelledby={`pestana-${id}`} className="panel-pestana" key={id}>
       {children}
+    </div>
+  );
+}
+
+// ---------- Elegir archivo ----------
+
+/** Si un archivo calza con un `accept` («.xls,.csv,text/plain»): por extensión o por tipo. */
+export function aceptaArchivo(archivo: File, accept?: string): boolean {
+  if (!accept) return true;
+  const nombre = archivo.name.toLowerCase();
+  return accept.split(",").map((x) => x.trim().toLowerCase()).filter(Boolean).some((a) =>
+    a.startsWith(".") ? nombre.endsWith(a) : a.endsWith("/*") ? archivo.type.startsWith(a.slice(0, -1)) : archivo.type === a,
+  );
+}
+
+/**
+ * Para subir un archivo: una zona donde arrastrarlo y un botón que abre el selector del sistema (el input nativo queda
+ * oculto pero accesible: se enfoca con el teclado y lo leen los lectores de pantalla). Con `archivo` muestra el que se
+ * eligió; con `error`, por qué no sirvió. Los que no calzan con `accept` van a `onRechazados` (o se ignoran).
+ */
+export function ElegirArchivo({
+  onArchivos, onRechazados, accept, multiple, deshabilitado, ocupado, titulo = "Arrastra el archivo aquí", detalle, textoBoton = "Elegir archivo", icono,
+  archivo, error, id, etiqueta,
+}: {
+  onArchivos: (archivos: File[]) => void;
+  onRechazados?: (archivos: File[]) => void;
+  /** Igual que en el input: «.xls,.csv,text/plain». */
+  accept?: string;
+  multiple?: boolean;
+  deshabilitado?: boolean;
+  /** Mientras se lee o se sube: muestra el texto en el botón y no deja elegir otro. */
+  ocupado?: string | false;
+  titulo?: ReactNode;
+  /** Qué archivo se espera (de dónde sale, formato). */
+  detalle?: ReactNode;
+  textoBoton?: string;
+  icono?: ReactNode;
+  /** El archivo elegido: nombre y, opcionalmente, un detalle («1.284 pesajes · 1 al 31 de octubre»). */
+  archivo?: { nombre: string; detalle?: ReactNode } | null;
+  error?: ReactNode;
+  id?: string;
+  /** Nombre accesible del selector (si el título no lo dice). */
+  etiqueta?: string;
+}) {
+  const [arrastrando, setArrastrando] = useState(false);
+  const profundidad = useRef(0);
+  const inactivo = deshabilitado || !!ocupado;
+  const entregar = (lista: FileList | null) => {
+    const xs = [...(lista ?? [])].slice(0, multiple ? undefined : 1);
+    if (!xs.length) return;
+    const ok = xs.filter((f) => aceptaArchivo(f, accept));
+    const no = xs.filter((f) => !aceptaArchivo(f, accept));
+    if (ok.length) onArchivos(ok);
+    if (no.length) onRechazados?.(no);
+  };
+  const estado = error ? " con-error" : archivo ? " con-archivo" : "";
+  return (
+    <div
+      className={`elegir-archivo${arrastrando ? " arrastrando" : ""}${inactivo ? " inactivo" : ""}${estado}`}
+      onDragEnter={(e) => {
+        if (inactivo || !e.dataTransfer.types.includes("Files")) return;
+        e.preventDefault();
+        profundidad.current++;
+        setArrastrando(true);
+      }}
+      onDragOver={(e) => {
+        if (inactivo || !e.dataTransfer.types.includes("Files")) return;
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "copy";
+      }}
+      onDragLeave={() => {
+        profundidad.current = Math.max(0, profundidad.current - 1);
+        if (!profundidad.current) setArrastrando(false);
+      }}
+      onDrop={(e) => {
+        if (inactivo) return;
+        e.preventDefault();
+        profundidad.current = 0;
+        setArrastrando(false);
+        entregar(e.dataTransfer.files);
+      }}
+    >
+      <span className="elegir-archivo-icono" aria-hidden="true">
+        {icono ?? (
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 15V4M7.5 8.5 12 4l4.5 4.5M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" />
+          </svg>
+        )}
+      </span>
+      <b className="elegir-archivo-titulo">{arrastrando ? "Suelta el archivo para revisarlo" : titulo}</b>
+      {detalle && <span className="elegir-archivo-detalle">{detalle}</span>}
+      <label className={`boton boton-primario elegir-archivo-boton${inactivo ? " deshabilitado" : ""}`}>
+        <input
+          id={id}
+          type="file"
+          className="elegir-archivo-input"
+          accept={accept}
+          multiple={multiple}
+          disabled={inactivo}
+          aria-label={etiqueta}
+          onChange={(e) => {
+            entregar(e.target.files);
+            e.target.value = "";
+          }}
+        />
+        {ocupado || (archivo ? "Elegir otro archivo" : textoBoton)}
+      </label>
+      {archivo && !error && (
+        <span className="elegir-archivo-elegido">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m3.5 8.5 3 3 6-7" /></svg>
+          <span><b>{archivo.nombre}</b>{archivo.detalle && <> · {archivo.detalle}</>}</span>
+        </span>
+      )}
+      {error && <span className="elegir-archivo-error" role="alert">{error}</span>}
     </div>
   );
 }

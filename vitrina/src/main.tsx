@@ -2,7 +2,7 @@ import { StrictMode, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   Ayuda, BotonDescarga, BotonTema, CreditoEstilos, Esqueleto, EsqueletoTabla, Estado, Frescura, Indicador, LineaTiempo, PanelPestana, Pestanas, Segmentado,
-  NavegacionLateral, ThOrden, Vacio, Variacion, ordenar, useOrden, type GrupoLateral, type PropsEnlaceLateral,
+  ElegirArchivo, NavegacionLateral, ThOrden, Vacio, Variacion, ordenar, useOrden, type GrupoLateral, type PropsEnlaceLateral,
 } from "../../src";
 import { GraficoBanda, GraficoBarras, GraficoLinea, Sparkline } from "../../src/graficos";
 import "../../css/tokens.css";
@@ -345,6 +345,10 @@ function Vitrina() {
           <DemoLateral />
         </Seccion>
 
+        <Seccion id="archivo" titulo="Elegir archivo" nota="Para subir un archivo: se arrastra o se elige con el botón. El input nativo queda oculto pero se enfoca con el teclado. Muestra el archivo elegido o por qué no sirvió.">
+          <DemoArchivo />
+        </Seccion>
+
         <div className="graficos">
           <Seccion id="vacio" titulo="Estado vacío">
             <Vacio
@@ -399,3 +403,22 @@ function DemoLateral() {
 }
 
 createRoot(document.getElementById("root")!).render(<StrictMode><Vitrina /></StrictMode>);
+
+function DemoArchivo() {
+  const [archivo, setArchivo] = useState<{ nombre: string; detalle?: string } | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  return (
+    <div className="graficos">
+      <ElegirArchivo
+        accept=".xls,.csv,.txt"
+        titulo="Arrastra el informe de pesajes"
+        detalle="El archivo que exporta la romana, en .xls, .csv o .txt."
+        archivo={archivo}
+        error={error}
+        onArchivos={([f]) => { setError(null); setArchivo({ nombre: f.name, detalle: `${Math.max(1, Math.round(f.size / 1024))} KB` }); }}
+        onRechazados={([f]) => { setArchivo(null); setError(`«${f.name}» no es un .xls, .csv ni .txt.`); }}
+      />
+      <ElegirArchivo onArchivos={() => {}} titulo="Arrastra el informe de pesajes" detalle="Mientras se lee el archivo, no se puede elegir otro." ocupado="Leyendo…" />
+    </div>
+  );
+}

@@ -35,7 +35,7 @@ Las líneas se pueden **mezclar**: cada una vive bajo su propia clase y prefijo 
 | Línea luz | `lineas/luz.css` | Luces que se encienden, calendario de puntos, filas por hábito, modo reposo, capa de fondo y tablero con forma (clases `l-`) |
 | Línea club | `lineas/club.css` | Cabecera, módulos oscuros, hero con nombre gigante, datos y pasos, evento con inscripción por pasos, planes, agenda del mes, convenios, tienda, app de miembros, preguntas, cierre, pie, diálogo (clases `c-`) |
 | Tailwind | `tailwind.css` | Puente para proyectos con Tailwind v4 (`bg-superficie`, `text-acento`…) sobre las mismas variables |
-| Componentes | `@lucas-vergara/estilos` | `Indicador`, `Variacion`, `Estado`, `Frescura`, `Vacio`, `Segmentado`, `Pestanas`, `NavegacionLateral`, `ThOrden`, esqueletos, `BotonTema`, `useOrden`… |
+| Componentes | `@lucas-vergara/estilos` | `Indicador`, `Variacion`, `Estado`, `Frescura`, `Vacio`, `ElegirArchivo`, `Segmentado`, `Pestanas`, `NavegacionLateral`, `ThOrden`, esqueletos, `BotonTema`, `useOrden`… |
 | Gráficos | `@lucas-vergara/estilos/graficos` | `GraficoLinea`, `GraficoBarras`, `GraficoBanda`, `Sparkline` (requiere `recharts`) |
 | Sitio (React) | `@lucas-vergara/estilos/sitio` | `Entrada`, `Telon` + `irCon`, `NavPildora` + `useSeccionActiva`, `Avatar`, `FondoAnimado`, `MarcoNavegador`, `Proyecto`, `Ola`, `BotonSonido` + `sonidos`, `Palabras`, `Acento`, `Cursor` (solo sitio diseñadora), `iniciarMovimiento`, `iniciarInteracciones`, `SCRIPT_MOVIMIENTO`, `conTransicion` |
 | Luz (React) | `@lucas-vergara/estilos/luz` | `Luz`, `CapaFondo` (14 fondos: agua, gradientes, madera, arena, washi), `acomodarLuces` / `useAcomodoLuces` + `lugarDeLuz` (equilibrio, figuras, círculo, piedras, sendero), y las listas `FONDOS_LUZ` y `ORDENES_LUZ` con sus nombres |
@@ -141,6 +141,27 @@ const Enlace = ({ href, ...p }: PropsEnlaceLateral) => <Link to={href} {...p} />
 ```
 
 Variables: `--ancho-lateral` (240 px), `--ancho-lateral-compacta` (64 px) y `--fondo-app` (fondo de la barra y la lateral).
+
+### Elegir archivo (línea panel y panel2)
+
+Una zona para arrastrar el archivo y un botón que abre el selector del sistema (el input nativo queda oculto, pero se
+enfoca con el teclado). Muestra el archivo elegido o por qué no sirvió; los que no calzan con `accept` van a
+`onRechazados`.
+
+```tsx
+import { ElegirArchivo } from "@lucas-vergara/estilos";
+
+<ElegirArchivo
+  accept=".xls,.csv,.txt"
+  titulo="Arrastra el informe de pesajes"
+  detalle="El archivo que exporta la romana, en .xls."
+  ocupado={leyendo && "Leyendo…"}
+  archivo={elegido && { nombre: elegido.name, detalle: "1.284 pesajes" }}
+  error={error}
+  onArchivos={([f]) => leer(f)}
+  onRechazados={([f]) => setError(`«${f.name}» no es un .xls.`)}
+/>
+```
 
 ### Línea panel2
 
