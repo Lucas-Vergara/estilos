@@ -21,6 +21,22 @@ Lo que me gusta, lo que descarté y por qué. Claude lo lee antes de diseñar al
 - **Navegación lateral al estilo MUI (v0.15.0)** cuando hay varias áreas con secciones: expandible o compacta (solo íconos), con submenús plegados al inicio, y la misma pieza que la barra superior (mismo fondo y borde). Reemplazó las dos filas de pestañas (áreas y secciones), que se veían raras.
 - **Las propuestas se muestran en modo día**: los clientes usan el claro; el oscuro se revisa después.
 
+## Me gusta — línea panel2 (desde v0.21.0)
+
+Elegida el 07-11-2026 tras la exploración de look and feel de Datos Reciclaje (cinco direcciones: calma, instrumento,
+sala de control, premium suave y material). Me quedé con **calma + detalles + colores de material**, como línea aparte
+para no tocar el monitor Sodimac, que se ve bien en la línea panel.
+
+- **La navegación retrocede y el contenido vive en una hoja blanca** (referencia: Linear). Barra y lateral del color del
+  fondo, sin bordes.
+- **Sin caja por bloque**: secciones separadas por aire y una línea tenue.
+- **Detalles**: la unidad de una cifra en chico y gris, barras de proporción en tablas, período a la vista arriba a la
+  derecha con la frescura del dato, estado vacío con la acción ahí mismo.
+- **Colores de material en los gráficos de la planta** (cartón kraft, papel azul, plástico verde): quedan en el
+  proyecto, no en la biblioteca, porque son del rubro. Validados con el validador de dataviz.
+- **Descartadas por ahora**: instrumento (Geist + mono) y premium suave (sombras marcadas) chocaban con Inter y "sin
+  sombras"; sala de control, quizá como vista "operación" para la planta.
+
 ## Me gusta — línea sitio diseñadora
 
 Creada junto con Franservice (https://franservice.cl), a partir del rediseño hecho con su diseñadora, octubre 2026:
@@ -143,7 +159,7 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 | Proyecto | Acento | Versión | Notas |
 |---|---|---|---|
 | monitor Sodimac (meyer/scrap2.0/web) | verde | v0.15.0 | origen de la biblioteca; de aquí salieron el arreglo de leyendas (v0.12.1), el pulido de escritorio (v0.13.0) y el de menos ruido (v0.14.0) |
-| radar de reciclaje (app de inteligencia de datos) | verde | v0.15.0 | de aquí salió la navegación lateral (v0.15.0), en la rama `unificada`; componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
+| datos-reciclaje (antes radar de reciclaje) | verde, línea panel2 | v0.21.0 | de aquí salieron la navegación lateral (v0.15.0) y la línea panel2 (v0.21.0); componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
 | monitor de proyectos | azul | v0.15.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
 | oportunidades | azul | v0.15.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
 | finanzas | verde | v0.15.0 | app de finanzas personales (Firebase); estilos propios mínimos en `src/estilos.css` |

@@ -7,6 +7,7 @@ import {
 import { GraficoBanda, GraficoBarras, GraficoLinea, Sparkline } from "../../src/graficos";
 import "../../css/tokens.css";
 import "../../css/base.css";
+import "../../css/lineas/panel2.css";
 import "./vitrina.css";
 import verde from "../../css/acentos/verde.css?inline";
 import azul from "../../css/acentos/azul.css?inline";
@@ -38,6 +39,17 @@ function useAcento() {
     try { localStorage.setItem("acento", acento); } catch { /* sin almacenamiento */ }
   }, [acento]);
   return [acento, setAcento] as const;
+}
+
+type Linea = "panel" | "panel2";
+// panel2 se activa con una clase en <body>: lo demás de la página no cambia.
+function useLinea() {
+  const [linea, setLinea] = useState<Linea>(() => { try { return localStorage.getItem("linea") === "panel2" ? "panel2" : "panel"; } catch { return "panel"; } });
+  useEffect(() => {
+    document.body.classList.toggle("panel2", linea === "panel2");
+    try { localStorage.setItem("linea", linea); } catch { /* sin almacenamiento */ }
+  }, [linea]);
+  return [linea, setLinea] as const;
 }
 
 const clp = new Intl.NumberFormat("es-CL", { style: "currency", currency: "CLP", maximumFractionDigits: 0 });
@@ -91,6 +103,7 @@ type IdPestana = "resumen" | "precios" | "stock";
 
 function Vitrina() {
   const [acento, setAcento] = useAcento();
+  const [linea, setLinea] = useLinea();
   const [periodo, setPeriodo] = useState<7 | 30 | 90>(30);
   const [pestana, setPestana] = useState<IdPestana>("resumen");
   const [region, setRegion] = useState<string | undefined>();
@@ -117,6 +130,7 @@ function Vitrina() {
           </nav>
         </div>
         <div className="usuario">
+          <Segmentado chico etiqueta="Línea" valor={linea} onChange={setLinea} opciones={[{ valor: "panel", texto: "Panel" }, { valor: "panel2", texto: "Panel 2" }]} />
           <Segmentado chico etiqueta="Acento" valor={acento} onChange={setAcento} opciones={[{ valor: "verde", texto: "Verde" }, { valor: "azul", texto: "Azul" }]} />
           <BotonTema />
         </div>
@@ -125,7 +139,7 @@ function Vitrina() {
       <main className="contenido">
         <div>
           <h1>Vitrina de estilos</h1>
-          <p className="nota">Línea <b>panel</b> · acento <b>{acento}</b> · extraída de monitor Sodimac. Cambia el acento y el modo arriba a la derecha.</p>
+          <p className="nota">Línea <b>{linea === "panel2" ? "panel2" : "panel"}</b> · acento <b>{acento}</b> · {linea === "panel2" ? "la hoja calmada de Datos Reciclaje" : "extraída de monitor Sodimac"}. Cambia la línea, el acento y el modo arriba a la derecha.</p>
         </div>
 
         <Seccion id="tokens" titulo="Colores" nota="Superficies, texto, acento y estados. Los nombres son las variables CSS.">

@@ -3,7 +3,7 @@
 Mi biblioteca de estilos: una sola fuente para el look and feel de mis proyectos.
 Cuando un estilo mejora en un proyecto, se sube aquí y los demás proyectos lo reciben **cuando yo decida**.
 
-**Vitrina:** [línea panel](https://lucas-vergara.github.io/estilos/) · [línea sitio](https://lucas-vergara.github.io/estilos/sitio.html) · [línea 3d](https://lucas-vergara.github.io/estilos/3d.html) · [línea sitio diseñadora](https://lucas-vergara.github.io/estilos/sitio-disenadora.html) · [línea luz](https://lucas-vergara.github.io/estilos/luz.html) · [línea club](https://lucas-vergara.github.io/estilos/club.html) · local: `npm install && npm run vitrina`
+**Vitrina:** [línea panel y panel2](https://lucas-vergara.github.io/estilos/) · [línea sitio](https://lucas-vergara.github.io/estilos/sitio.html) · [línea 3d](https://lucas-vergara.github.io/estilos/3d.html) · [línea sitio diseñadora](https://lucas-vergara.github.io/estilos/sitio-disenadora.html) · [línea luz](https://lucas-vergara.github.io/estilos/luz.html) · [línea club](https://lucas-vergara.github.io/estilos/club.html) · local: `npm install && npm run vitrina`
 
 ## Líneas
 
@@ -12,6 +12,7 @@ Una **línea** es un lenguaje visual completo para un tipo de proyecto. Todas co
 | Línea | Archivo | Para qué | Cómo se ve |
 |---|---|---|---|
 | **panel** | `base.css` (o `lineas/panel.css`) | Paneles de datos: monitores, dashboards, herramientas | Fondo gris claro, tarjetas blancas, densidad compacta, Inter |
+| **panel2** | `base.css` + `lineas/panel2.css`, `<body class="panel2">` | Paneles de datos que piden más jerarquía y calma | La línea panel con la navegación fundida en el fondo y el contenido en una sola hoja blanca, sin caja por bloque. Grises con tinte del acento, cifras con la unidad en chico, barras de proporción, zona de carga. Inter |
 | **sitio** | `lineas/sitio.css` | Webs de presentación y portafolio | Clara y limpia, con personalidad: avatar, fondos vivos, paletas, entrada, telón entre páginas, scroll con movimiento. Bricolage Grotesque + Geist |
 | **3d** | `lineas/3d.css` (sobre sitio) | Secciones y heros con escenas 3D | Escenarios para las escenas de `@lucas-vergara/estilos/3d` (Three.js): objetos, orbe, vidrio, partículas, paisaje, bloques, carrusel y túnel con scroll. Usa la tipografía y las paletas de sitio |
 | **sitio diseñadora** | `lineas/sitio-disenadora.css` | Webs de estudio o marca, oscuras | Creada junto con Franservice ([franservice.cl](https://franservice.cl)): oscura, títulos enormes, mono en mayúscula, acento menta. Geist |
@@ -27,6 +28,7 @@ Las líneas se pueden **mezclar**: cada una vive bajo su propia clase y prefijo 
 | Tokens | `tokens.css` | Superficies, bordes, estados, sombras, radios, escalas de texto y espaciado, duraciones y curva de movimiento, modo oscuro |
 | Acento | `acentos/verde.css`, `acentos/azul.css` | Lo que distingue a cada proyecto: acento, tinte del texto, superficies oscuras, paletas de gráficos |
 | Base | `base.css` | Reset y clases de la línea **panel**: `.barra`, `.tarjeta`, `.boton`, `.campo`, `.segmentado`, tablas, pestañas, chips, avisos… |
+| Línea panel2 | `lineas/panel2.css` | Sobre las clases de `base.css`, todo bajo `.panel2`: la hoja (`.con-lateral-principal` o `.contenido`), bloques sin caja (`.tarjeta-caja` vuelve a la caja), `.unidad`, `.proporcion`, `.encabezado`, `.zona-carga` |
 | Línea sitio | `lineas/sitio.css` | Tipografía, cabecera que se esconde, navegación en píldora, avatar, hero con fondo vivo, entrada, telón, proyectos en marco de navegador, scroll horizontal, tarjetas inclinables, marquesina, galería, variantes noche y simple |
 | Línea 3d | `lineas/3d.css` | Escenarios para escenas 3D (clases `td-`): `td-escenario`, `td-escenario-pleno`, `td-recorrido` (con scroll), `td-dueto`, `td-sobre` + `td-panel`, `td-selector` |
 | Línea sitio diseñadora | `lineas/sitio-disenadora.css` | La línea oscura creada con Franservice (clases `sd-`) |
@@ -139,6 +141,36 @@ const Enlace = ({ href, ...p }: PropsEnlaceLateral) => <Link to={href} {...p} />
 ```
 
 Variables: `--ancho-lateral` (240 px), `--ancho-lateral-compacta` (64 px) y `--fondo-app` (fondo de la barra y la lateral).
+
+### Línea panel2
+
+La línea panel con otra jerarquía, nacida de la exploración de Datos Reciclaje (referencia: el refresco de Linear).
+Usa las mismas clases y componentes que panel; solo cambia lo que está bajo `.panel2`, así que un proyecto en la línea
+panel no se entera.
+
+```tsx
+import "@lucas-vergara/estilos/tokens.css";
+import "@lucas-vergara/estilos/acentos/verde.css";
+import "@lucas-vergara/estilos/base.css";
+import "@lucas-vergara/estilos/lineas/panel2.css";
+// index.html: <body class="panel2">
+
+<div className="encabezado">
+  <div><h1>Resumen</h1><p className="nota">En octubre entraron 712,9 t…</p></div>
+  <Segmentado … />
+</div>
+<Indicador etiqueta="Recibido" valor={<>712,9<span className="unidad">t</span></>} />
+<td><span className="proporcion"><i style={{ width: "61%" }} /></span></td>
+<div className="zona-carga"><span className="zona-carga-icono">…</span><b>Sube el archivo</b><span className="nota">…</span></div>
+```
+
+- **La hoja**: con navegación lateral, `.con-lateral-principal`; sin ella, `.contenido`. Barra y lateral toman el fondo
+  (`--plano`, con un 5 % del acento) y pierden sus bordes. Dentro de la hoja `--plano` vale lo mismo que la superficie,
+  así las pestañas fijas y lo que se pinta "del color de la página" calzan solos.
+- **Sin caja por bloque**: `.tarjeta` queda como una sección separada por aire y una línea tenue. Para una caja dentro
+  de la hoja (un bloque anidado, un diálogo): `.tarjeta.tarjeta-caja`.
+- **La página actual** en la lateral es una píldora blanca con sombra mínima; el segmentado elegido va en tinta.
+- Variables: `--radio-hoja` (14 px), `--margen-hoja` (8 px), `--sombra-hoja`.
 
 ### Línea sitio diseñadora
 

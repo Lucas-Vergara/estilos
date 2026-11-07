@@ -1,5 +1,14 @@
 # Cambios
 
+## v0.21.0 — 2026-11-07
+
+- **Línea panel2** (`lineas/panel2.css`, bajo `<body class="panel2">`), a partir de la exploración de look and feel de Datos Reciclaje (referencias: el refresco «calmer interface» de Linear, Attio). Usa las clases de `base.css` y cambia solo lo que está bajo `.panel2`: los proyectos en la línea panel se ven igual.
+  - **La hoja**: barra y lateral se funden con el fondo (gris con un 5 % del acento, sin bordes) y el contenido vive en una hoja blanca con esquinas de 14 px y sombra mínima (`.con-lateral-principal`, o `.contenido` si no hay lateral).
+  - **Bloques sin caja**: `.tarjeta` pasa a sección separada por aire y una línea tenue; `.tarjeta-caja` vuelve a la caja. Los indicadores unidos quedan como una fila sin marco.
+  - **La página actual** en la lateral, como píldora blanca con sombra mínima; segmentado elegido en tinta, no en acento.
+  - **Piezas nuevas**: `.unidad` (la unidad de una cifra, chica y gris), `.proporcion` (barra junto a un número de tabla), `.encabezado` (título y hallazgo a la izquierda, filtros a la derecha) y `.zona-carga` (estado vacío con la acción ahí mismo).
+- **Vitrina**: selector Panel / Panel 2 en la página de la línea panel.
+
 ## v0.20.0 — 2026-11-05
 
 - **Línea club** (`lineas/club.css`, clases `c-` bajo `.club`), para webs de servicios con membresía o suscripción. Nace de la revisión de [stridechile.cl](https://www.stridechile.cl/) (un run club de Concepción): se tomó el lenguaje, no la marca. Papel cálido con módulos casi negros de esquinas grandes, titulares en Outfit apretados con una frase en degradé, cifras condensadas en Instrument Sans (precios, pasos, descuentos), botones píldora con flecha en círculo. Piezas: cabecera, hero con nombre gigante detrás de la foto, datos y pasos numerados, pestañas grandes, evento con inscripción por pasos, persona destacada, reseñas, planes (destacado, lo incluido con "+", lo que falta con raya, selector de periodo), agenda del mes, convenios, tienda con libros, banda de enlace, app de miembros en un teléfono (calendario, tarjetas, barras, muro, chat), preguntas, cierre con foto fundida, pie, botón flotante y diálogo.

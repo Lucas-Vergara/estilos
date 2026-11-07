@@ -1,0 +1,111 @@
+/*! @lucas-vergara/estilos · github.com/Lucas-Vergara/estilos · Licencia MIT con atribución visible: "Estilos: Lucas Vergara" */
+/*
+ * Línea "panel2" (desde v0.21.0): la línea panel con una jerarquía más calmada. Nace de la exploración de look and
+ * feel de Datos Reciclaje (noviembre 2026), con el refresco de Linear como referencia: lo que orienta (barra y lateral)
+ * se funde con el fondo y el contenido vive en una sola hoja blanca, sin caja por bloque.
+ *
+ * Se apoya en base.css (mismas clases) y solo cambia lo que está bajo .panel2, así los proyectos en la línea panel
+ * se ven igual. Uso, en este orden: tokens.css → acentos/<acento>.css → base.css → lineas/panel2.css, y
+ * <body class="panel2">.
+ *
+ * La hoja: .con-lateral-principal (con navegación lateral) o .contenido (sin ella). Dentro de la hoja, --plano pasa a
+ * ser el blanco de la hoja, así lo que se pinta "del color de la página" (pestañas fijas, por ejemplo) calza solo.
+ * Piezas nuevas: .unidad, .proporcion, .encabezado, .zona-carga y .tarjeta-caja (para volver a la caja cuando hace falta).
+ */
+.panel2 {
+  /* Grises con un leve tinte del acento: combinan solos con verde o azul */
+  --plano: color-mix(in oklab, var(--acento) 5%, #eceeeb);
+  --borde: color-mix(in oklab, var(--tinta) 10%, var(--superficie));
+  --grilla: color-mix(in oklab, var(--tinta) 6%, var(--superficie));
+  --fondo-app: var(--plano);
+  --radio-hoja: 14px;
+  --margen-hoja: 8px;
+  --sombra-hoja: 0 0 0 1px color-mix(in oklab, var(--tinta) 6%, transparent), 0 1px 3px color-mix(in oklab, var(--tinta) 6%, transparent);
+  --hover-cromo: color-mix(in oklab, var(--tinta) 5%, transparent);
+  background: var(--plano);
+}
+:root[data-theme="dark"] .panel2 {
+  --plano: color-mix(in oklab, var(--acento) 3%, #0b0d0c);
+  --borde: color-mix(in oklab, var(--tinta) 11%, var(--superficie));
+  --grilla: color-mix(in oklab, var(--tinta) 7%, var(--superficie));
+  --sombra-hoja: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 1px 3px rgba(0, 0, 0, 0.4);
+  --hover-cromo: rgba(255, 255, 255, 0.05);
+}
+
+/* ---------- Cromo: barra y lateral retroceden ---------- */
+.panel2 .barra, .panel2 .barra.barra-app { background: var(--plano); border-bottom: 0; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.panel2 .boton-menu:hover { background: var(--hover-cromo); }
+.panel2 .lateral { background: var(--plano); border-right: 0; }
+.panel2 .lateral-titulo { color: var(--tinta-2); }
+.panel2 .lateral-titulo:hover, .panel2 .lateral-sub a:hover { background: var(--hover-cromo); }
+/* La página actual: una píldora blanca con sombra mínima, no un relleno de color */
+.panel2 .lateral-titulo.actual, .panel2 .lateral-sub a[aria-current="page"] {
+  background: var(--superficie); color: var(--tinta); font-weight: 600; box-shadow: var(--sombra-hoja);
+}
+.panel2 .lateral-titulo.actual svg, .panel2 .lateral-grupo.activo > .lateral-titulo.actual > svg:first-child { color: var(--acento); }
+
+/* ---------- La hoja ---------- */
+.panel2 .con-lateral-principal,
+.panel2 .contenido {
+  --plano: var(--superficie);
+  background: var(--superficie); border-radius: var(--radio-hoja); box-shadow: var(--sombra-hoja);
+}
+.panel2 .con-lateral-principal { margin: 0 var(--margen-hoja) var(--margen-hoja) 0; min-height: calc(100vh - var(--alto-barra) - var(--margen-hoja)); }
+/* Sin lateral, la hoja es el contenido, centrado con su margen */
+.panel2 .contenido { margin: 0 auto var(--margen-hoja); max-width: calc(var(--ancho-pagina) - 2 * var(--margen-hoja)); gap: var(--e-6); padding-top: 32px; }
+.panel2 .con-lateral-principal .contenido { background: none; border-radius: 0; box-shadow: none; margin: 0; max-width: var(--ancho-pagina); }
+
+/* ---------- Bloques sin caja: separados por aire y una línea tenue ---------- */
+.panel2 .tarjeta { background: none; border: 0; border-top: 1px solid var(--grilla); border-radius: 0; padding: var(--e-6) 0 0; box-shadow: none; }
+.panel2 .tabla-envoltura { margin: 0; padding: 0; }
+.panel2 .tarjeta-cabecera h2 { font-size: 0.97rem; font-weight: 600; letter-spacing: -0.012em; }
+/* Para volver a la caja (un bloque dentro de otro, un diálogo, el login) */
+.panel2 .tarjeta.tarjeta-caja, .panel2 .login {
+  background: var(--superficie); border: 1px solid var(--borde); border-radius: var(--radio); padding: var(--e-5);
+}
+:root[data-theme="dark"] .panel2 .tarjeta { box-shadow: none; }
+
+/* Indicadores: una fila sin caja, con divisores finos */
+.panel2 .indicadores.indicadores-unidos { background: none; border: 0; border-radius: 0; padding-top: 0; overflow: visible; }
+.panel2 .indicadores-unidos > .indicador { padding: var(--e-1) var(--e-5) var(--e-2); }
+.panel2 .indicadores-unidos > .indicador:first-child { padding-left: 0; }
+.panel2 .indicador-cabecera { color: var(--tinta-3); }
+.panel2 .indicador-valor { font-weight: 600; letter-spacing: -0.032em; }
+
+/* ---------- Detalles ---------- */
+/* La unidad de una cifra, más chica y gris: «712,9 t» se lee como cifra, no como texto */
+.panel2 .unidad { font-size: 0.6em; font-weight: 500; color: var(--tinta-3); margin-left: 0.14em; letter-spacing: 0; }
+/* Barra de proporción junto a un número de tabla */
+.panel2 .proporcion { display: inline-block; width: 88px; height: 6px; border-radius: 3px; background: var(--acento-suave); overflow: hidden; vertical-align: middle; }
+.panel2 .proporcion > i { display: block; height: 100%; border-radius: 3px; background: var(--acento); }
+/* Encabezado de página: título y hallazgo a la izquierda, período a la derecha, frescura debajo */
+.panel2 .encabezado { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--e-3) var(--e-6); }
+.panel2 .encabezado > :first-child { display: grid; gap: 6px; min-width: 0; flex: 1 1 420px; }
+.panel2 .encabezado .frescura { font-size: var(--texto-sm); color: var(--tinta-3); }
+.panel2 h1 { font-weight: 600; letter-spacing: -0.025em; }
+/* Selector segmentado más calmo: la opción elegida en tinta, no en acento */
+.panel2 .segmentado { background: var(--grilla); }
+.panel2 .segmentado button[aria-pressed="true"] { color: var(--tinta); box-shadow: var(--sombra-hoja); }
+/* Zona de carga: lo que ve alguien sin datos, con la acción ahí mismo */
+.panel2 .zona-carga {
+  display: grid; justify-items: center; gap: var(--e-2); text-align: center; padding: var(--e-8) var(--e-6);
+  border: 1.5px dashed var(--borde-campo); border-radius: var(--radio); color: var(--tinta-2);
+  transition: border-color var(--dur-rapida), background var(--dur-rapida);
+}
+.panel2 .zona-carga:hover, .panel2 .zona-carga.arrastrando { border-color: var(--acento); background: color-mix(in oklab, var(--acento-suave) 40%, transparent); }
+.panel2 .zona-carga-icono { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 11px; background: var(--acento); color: var(--sobre-acento); margin-bottom: var(--e-1); }
+.panel2 .zona-carga b { font-size: var(--texto-md); color: var(--tinta); }
+.panel2 .zona-carga .nota { font-size: var(--texto-sm); color: var(--tinta-3); max-width: 420px; }
+.panel2 .aviso { border-color: transparent; }
+
+/* ---------- Pantallas angostas ---------- */
+@media (max-width: 900px) {
+  .panel2 .con-lateral-principal { margin: 0 var(--margen-hoja) var(--margen-hoja); }
+  .panel2 .lateral { background: var(--superficie); }
+}
+@media (max-width: 640px) {
+  .panel2 { --margen-hoja: 6px; }
+  .panel2 .tarjeta { padding: var(--e-5) 0 0; }
+  .panel2 .indicadores-unidos > .indicador, .panel2 .indicadores-unidos > .indicador:first-child { padding: var(--e-3) 0; }
+  .panel2 .contenido { padding-top: 22px; }
+}
