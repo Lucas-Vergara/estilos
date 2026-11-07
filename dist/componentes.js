@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
-import { Fragment, useRef } from "react";
+import { Fragment, useRef, useState } from "react";
 import { fechaHora, haceCuanto, horasDesde } from "./fechas.js";
 // Componentes de la línea "panel". Las clases que usan están en css/base.css. Los gráficos (Recharts) están en graficos.tsx.
 /** Estado sí/no/sin dato: siempre ícono + texto, nunca solo color. */
@@ -111,4 +111,60 @@ export function Pestanas({ pestanas, activa, onCambio, etiqueta, children }) {
 }
 export function PanelPestana({ id, children }) {
     return (_jsx("div", { role: "tabpanel", id: `panel-${id}`, "aria-labelledby": `pestana-${id}`, className: "panel-pestana", children: children }, id));
+}
+// ---------- Elegir archivo ----------
+/** Si un archivo calza con un `accept` («.xls,.csv,text/plain»): por extensión o por tipo. */
+export function aceptaArchivo(archivo, accept) {
+    if (!accept)
+        return true;
+    const nombre = archivo.name.toLowerCase();
+    return accept.split(",").map((x) => x.trim().toLowerCase()).filter(Boolean).some((a) => a.startsWith(".") ? nombre.endsWith(a) : a.endsWith("/*") ? archivo.type.startsWith(a.slice(0, -1)) : archivo.type === a);
+}
+/**
+ * Para subir un archivo: una zona donde arrastrarlo y un botón que abre el selector del sistema (el input nativo queda
+ * oculto pero accesible: se enfoca con el teclado y lo leen los lectores de pantalla). Con `archivo` muestra el que se
+ * eligió; con `error`, por qué no sirvió. Los que no calzan con `accept` van a `onRechazados` (o se ignoran).
+ */
+export function ElegirArchivo({ onArchivos, onRechazados, accept, multiple, deshabilitado, ocupado, titulo = "Arrastra el archivo aquí", detalle, textoBoton = "Elegir archivo", icono, archivo, error, id, etiqueta, }) {
+    const [arrastrando, setArrastrando] = useState(false);
+    const profundidad = useRef(0);
+    const inactivo = deshabilitado || !!ocupado;
+    const entregar = (lista) => {
+        const xs = [...(lista ?? [])].slice(0, multiple ? undefined : 1);
+        if (!xs.length)
+            return;
+        const ok = xs.filter((f) => aceptaArchivo(f, accept));
+        const no = xs.filter((f) => !aceptaArchivo(f, accept));
+        if (ok.length)
+            onArchivos(ok);
+        if (no.length)
+            onRechazados?.(no);
+    };
+    const estado = error ? " con-error" : archivo ? " con-archivo" : "";
+    return (_jsxs("div", { className: `elegir-archivo${arrastrando ? " arrastrando" : ""}${inactivo ? " inactivo" : ""}${estado}`, onDragEnter: (e) => {
+            if (inactivo || !e.dataTransfer.types.includes("Files"))
+                return;
+            e.preventDefault();
+            profundidad.current++;
+            setArrastrando(true);
+        }, onDragOver: (e) => {
+            if (inactivo || !e.dataTransfer.types.includes("Files"))
+                return;
+            e.preventDefault();
+            e.dataTransfer.dropEffect = "copy";
+        }, onDragLeave: () => {
+            profundidad.current = Math.max(0, profundidad.current - 1);
+            if (!profundidad.current)
+                setArrastrando(false);
+        }, onDrop: (e) => {
+            if (inactivo)
+                return;
+            e.preventDefault();
+            profundidad.current = 0;
+            setArrastrando(false);
+            entregar(e.dataTransfer.files);
+        }, children: [_jsx("span", { className: "elegir-archivo-icono", "aria-hidden": "true", children: icono ?? (_jsx("svg", { width: "22", height: "22", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.8", strokeLinecap: "round", strokeLinejoin: "round", children: _jsx("path", { d: "M12 15V4M7.5 8.5 12 4l4.5 4.5M4 15v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" }) })) }), _jsx("b", { className: "elegir-archivo-titulo", children: arrastrando ? "Suelta el archivo para revisarlo" : titulo }), detalle && _jsx("span", { className: "elegir-archivo-detalle", children: detalle }), _jsxs("label", { className: `boton boton-primario elegir-archivo-boton${inactivo ? " deshabilitado" : ""}`, children: [_jsx("input", { id: id, type: "file", className: "elegir-archivo-input", accept: accept, multiple: multiple, disabled: inactivo, "aria-label": etiqueta, onChange: (e) => {
+                            entregar(e.target.files);
+                            e.target.value = "";
+                        } }), ocupado || (archivo ? "Elegir otro archivo" : textoBoton)] }), archivo && !error && (_jsxs("span", { className: "elegir-archivo-elegido", children: [_jsx("svg", { width: "14", height: "14", viewBox: "0 0 16 16", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": "true", children: _jsx("path", { d: "m3.5 8.5 3 3 6-7" }) }), _jsxs("span", { children: [_jsx("b", { children: archivo.nombre }), archivo.detalle && _jsxs(_Fragment, { children: [" \u00B7 ", archivo.detalle] })] })] })), error && _jsx("span", { className: "elegir-archivo-error", role: "alert", children: error })] }));
 }

@@ -137,3 +137,34 @@ export declare function PanelPestana({ id, children }: {
     id: string;
     children: ReactNode;
 }): import("react").JSX.Element;
+/** Si un archivo calza con un `accept` («.xls,.csv,text/plain»): por extensión o por tipo. */
+export declare function aceptaArchivo(archivo: File, accept?: string): boolean;
+/**
+ * Para subir un archivo: una zona donde arrastrarlo y un botón que abre el selector del sistema (el input nativo queda
+ * oculto pero accesible: se enfoca con el teclado y lo leen los lectores de pantalla). Con `archivo` muestra el que se
+ * eligió; con `error`, por qué no sirvió. Los que no calzan con `accept` van a `onRechazados` (o se ignoran).
+ */
+export declare function ElegirArchivo({ onArchivos, onRechazados, accept, multiple, deshabilitado, ocupado, titulo, detalle, textoBoton, icono, archivo, error, id, etiqueta, }: {
+    onArchivos: (archivos: File[]) => void;
+    onRechazados?: (archivos: File[]) => void;
+    /** Igual que en el input: «.xls,.csv,text/plain». */
+    accept?: string;
+    multiple?: boolean;
+    deshabilitado?: boolean;
+    /** Mientras se lee o se sube: muestra el texto en el botón y no deja elegir otro. */
+    ocupado?: string | false;
+    titulo?: ReactNode;
+    /** Qué archivo se espera (de dónde sale, formato). */
+    detalle?: ReactNode;
+    textoBoton?: string;
+    icono?: ReactNode;
+    /** El archivo elegido: nombre y, opcionalmente, un detalle («1.284 pesajes · 1 al 31 de octubre»). */
+    archivo?: {
+        nombre: string;
+        detalle?: ReactNode;
+    } | null;
+    error?: ReactNode;
+    id?: string;
+    /** Nombre accesible del selector (si el título no lo dice). */
+    etiqueta?: string;
+}): import("react").JSX.Element;
