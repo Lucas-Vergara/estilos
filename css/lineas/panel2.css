@@ -13,8 +13,9 @@
  * Piezas nuevas: .unidad, .proporcion, .encabezado, .zona-carga y .tarjeta-caja (para volver a la caja cuando hace falta).
  */
 .panel2 {
-  /* Grises con un leve tinte del acento: combinan solos con verde o azul */
-  --plano: color-mix(in oklab, var(--acento) 5%, #eceeeb);
+  /* Grises con un leve tinte del acento: combinan solos con verde o azul. Un acento puede fijar su propio marco
+     con --plano-panel2 (p. ej. petróleo, un gris frío azulado). */
+  --plano: var(--plano-panel2, color-mix(in oklab, var(--acento) 5%, #eceeeb));
   --borde: color-mix(in oklab, var(--tinta) 10%, var(--superficie));
   --grilla: color-mix(in oklab, var(--tinta) 6%, var(--superficie));
   --fondo-app: var(--plano);
@@ -25,7 +26,7 @@
   background: var(--plano);
 }
 :root[data-theme="dark"] .panel2 {
-  --plano: color-mix(in oklab, var(--acento) 3%, #0b0d0c);
+  --plano: var(--plano-panel2, color-mix(in oklab, var(--acento) 3%, #0b0d0c));
   --borde: color-mix(in oklab, var(--tinta) 11%, var(--superficie));
   --grilla: color-mix(in oklab, var(--tinta) 7%, var(--superficie));
   --sombra-hoja: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 1px 3px rgba(0, 0, 0, 0.4);

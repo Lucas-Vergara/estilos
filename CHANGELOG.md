@@ -1,5 +1,10 @@
 # Cambios
 
+## v0.23.0 — 2026-11-08
+
+- **Acento petróleo** (`acentos/petroleo.css`): azul verdoso hondo (`#0f6e7a`, 5,9:1 sobre blanco) con tinta y superficies oscuras teñidas de petróleo. Deja el verde para «bueno» y para los colores de material. Nació en Datos Reciclaje, al revisar paletas para panel2. Paletas de gráficos pendientes del validador de dataviz.
+- **panel2**: un acento puede fijar el marco con `--plano-panel2` (petróleo usa un gris frío azulado, `#eef2f3`). Sin esa variable, todo sigue igual que en v0.21.0.
+
 ## v0.22.0 — 2026-11-07
 
 - **`ElegirArchivo`** (y `aceptaArchivo`): para subir un archivo, en reemplazo del input nativo. Zona donde arrastrarlo, con un botón que abre el selector del sistema (el input queda oculto pero se enfoca con el teclado y lo leen los lectores de pantalla). Estados: arrastrando, ocupado («Leyendo…»), con el archivo elegido y con error. Los archivos que no calzan con `accept` van a `onRechazados`. Clases `.elegir-archivo…` en `base.css` (solo clases nuevas: nada existente cambia). Nació con la carga del archivo de la romana en Datos Reciclaje.

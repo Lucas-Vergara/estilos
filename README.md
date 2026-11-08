@@ -26,7 +26,7 @@ Las líneas se pueden **mezclar**: cada una vive bajo su propia clase y prefijo 
 | Capa | Archivo | Para qué |
 |---|---|---|
 | Tokens | `tokens.css` | Superficies, bordes, estados, sombras, radios, escalas de texto y espaciado, duraciones y curva de movimiento, modo oscuro |
-| Acento | `acentos/verde.css`, `acentos/azul.css` | Lo que distingue a cada proyecto: acento, tinte del texto, superficies oscuras, paletas de gráficos |
+| Acento | `acentos/verde.css`, `acentos/azul.css`, `acentos/petroleo.css` | Lo que distingue a cada proyecto: acento, tinte del texto, superficies oscuras, paletas de gráficos |
 | Base | `base.css` | Reset y clases de la línea **panel**: `.barra`, `.tarjeta`, `.boton`, `.campo`, `.segmentado`, tablas, pestañas, chips, avisos… |
 | Línea panel2 | `lineas/panel2.css` | Sobre las clases de `base.css`, todo bajo `.panel2`: la hoja (`.con-lateral-principal` o `.contenido`), bloques sin caja (`.tarjeta-caja` vuelve a la caja), `.unidad`, `.proporcion`, `.encabezado`, `.zona-carga` |
 | Línea sitio | `lineas/sitio.css` | Tipografía, cabecera que se esconde, navegación en píldora, avatar, hero con fondo vivo, entrada, telón, proyectos en marco de navegador, scroll horizontal, tarjetas inclinables, marquesina, galería, variantes noche y simple |

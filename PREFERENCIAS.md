@@ -34,6 +34,10 @@ para no tocar el monitor Sodimac, que se ve bien en la línea panel.
   derecha con la frescura del dato, estado vacío con la acción ahí mismo.
 - **Colores de material en los gráficos de la planta** (cartón kraft, papel azul, plástico verde): quedan en el
   proyecto, no en la biblioteca, porque son del rubro. Validados con el validador de dataviz.
+- **Paleta petróleo (08-11-2026, v0.23.0)**: el marco gris con 5 % de verde se veía sucio al lado de la hoja blanca. De
+  siete paletas (actual, piedra, zinc, marco bosque, todo blanco, petróleo y kraft) elegí **petróleo**: acento azul
+  verdoso y marco gris frío azulado, más cerca del blanco. El logo de Datos Reciclaje se queda en un verde jade
+  (`#16775c`) que calza con el petróleo.
 - **Descartadas por ahora**: instrumento (Geist + mono) y premium suave (sombras marcadas) chocaban con Inter y "sin
   sombras"; sala de control, quizá como vista "operación" para la planta.
 
@@ -159,7 +163,7 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 | Proyecto | Acento | Versión | Notas |
 |---|---|---|---|
 | monitor Sodimac (meyer/scrap2.0/web) | verde | v0.15.0 | origen de la biblioteca; de aquí salieron el arreglo de leyendas (v0.12.1), el pulido de escritorio (v0.13.0) y el de menos ruido (v0.14.0) |
-| datos-reciclaje (antes radar de reciclaje) | verde, línea panel2 | v0.22.0 | de aquí salieron la navegación lateral (v0.15.0), la línea panel2 (v0.21.0) y `ElegirArchivo` (v0.22.0); componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
+| datos-reciclaje (antes radar de reciclaje) | petróleo, línea panel2 | v0.23.0 | de aquí salieron la navegación lateral (v0.15.0), la línea panel2 (v0.21.0), `ElegirArchivo` (v0.22.0) y el acento petróleo (v0.23.0); componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
 | monitor de proyectos | azul | v0.15.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
 | oportunidades | azul | v0.15.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
 | finanzas | verde | v0.15.0 | app de finanzas personales (Firebase); estilos propios mínimos en `src/estilos.css` |

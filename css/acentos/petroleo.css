@@ -1,0 +1,49 @@
+/*
+ * Acento petróleo (azul verdoso hondo). Usado en: datos-reciclaje (desde v0.23.0).
+ * Tiñe levemente el texto y las superficies oscuras. Deja el verde libre para «bueno» y para los colores de material.
+ * Define --plano-panel2, el marco de la línea panel2: un gris frío azulado en vez de la mezcla con el acento.
+ * Pendiente: las paletas de gráficos (cat/sec/ord) aún no pasan por el validador de dataviz.
+ */
+:root {
+  --tinta: #1b2a2e;          /* texto principal: casi negro con tinte petróleo */
+  --tinta-2: #4b5c61;
+  --tinta-3: #5d6d73;
+  --acento: #0f6e7a;         /* texto, links y botones (contraste 5,9:1 sobre blanco) */
+  --sobre-acento: #ffffff;
+  --acento-suave: #e3f0f2;
+  --sobre-acento-suave: #0c5c66;
+  --plano-panel2: #eef2f3;
+  --serie-1: #1f8a99;
+  --serie-2: #e0742a;
+  /* Categórica en orden fijo: petróleo, naranja, violeta */
+  --cat-1: #1f8a99; --cat-2: #e0742a; --cat-3: #8a5cd0;
+  --sec-1: #e3f0f2; --sec-2: #b9dde2; --sec-3: #8cc6cf; --sec-4: #5aabb8; --sec-5: #2f8f9e; --sec-6: #17707d; --sec-7: #0e5560;
+  --ord-1: #5aabb8; --ord-2: #2f8f9e; --ord-3: #0c5c66;
+}
+
+/* Oscuro: superficies casi negras con tinte petróleo, celeste verdoso como acento */
+:root[data-theme="dark"] {
+  --plano: #0b1113;
+  --plano-panel2: #0b1113;
+  --superficie: #151b1d;
+  --superficie-2: #1c2427;
+  --superficie-3: #253033;
+  --tinta: #e3eaec;
+  --tinta-2: #a9b8bc;
+  --tinta-3: #83959a;
+  --grilla: #1f272a;
+  --eje: #34444a;
+  --borde: rgba(169, 184, 188, 0.12);
+  --borde-campo: rgba(169, 184, 188, 0.2);
+  --barra-fondo: rgba(11, 17, 19, 0.8);
+  --acento: #5cc8d6;
+  --sobre-acento: #06343a;
+  --acento-suave: #123a40;
+  --sobre-acento-suave: #b0e8ef;
+  --serie-1: #5cc8d6;
+  --serie-2: #e0682c;
+  --cat-1: #3fb0bf; --cat-2: #e0682c; --cat-3: #9a7be0;
+  --sec-1: #172124; --sec-2: #183a40; --sec-3: #1d525a; --sec-4: #256b75; --sec-5: #348c97; --sec-6: #5cb6c2; --sec-7: #a6e3ea;
+  --ord-1: #256b75; --ord-2: #4cb0bd; --ord-3: #a6e3ea;
+  --dato-vacio: #36403f;
+}
