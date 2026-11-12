@@ -4,3 +4,4 @@ export * from "./orden.js";
 export * from "./tema.js";
 export * from "./credito.js";
 export * from "./lateral.js";
+export * from "./rebote.js";

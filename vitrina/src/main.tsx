@@ -2,7 +2,7 @@ import { StrictMode, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   Ayuda, BotonDescarga, BotonTema, CreditoEstilos, Esqueleto, EsqueletoTabla, Estado, Frescura, Indicador, LineaTiempo, PanelPestana, Pestanas, Segmentado,
-  ElegirArchivo, NavegacionLateral, ThOrden, Vacio, Variacion, ordenar, useOrden, type GrupoLateral, type PropsEnlaceLateral,
+  AvisoRebote, ElegirArchivo, NavegacionLateral, ThOrden, Vacio, Variacion, ordenar, useOrden, type GrupoLateral, type PropsEnlaceLateral,
 } from "../../src";
 import { GraficoBanda, GraficoBarras, GraficoLinea, Sparkline } from "../../src/graficos";
 import "../../css/tokens.css";
@@ -348,6 +348,9 @@ function Vitrina() {
         <Seccion id="archivo" titulo="Elegir archivo" nota="Para subir un archivo: se arrastra o se elige con el botón. El input nativo queda oculto pero se enfoca con el teclado. Muestra el archivo elegido o por qué no sirvió.">
           <DemoArchivo />
         </Seccion>
+        <Seccion id="rebote" titulo="Aviso que rebota" nota="Como el logo del DVD: cruza la pantalla sin bloquear clics y cambia de color en cada choque. En un proyecto se quita pasando al tema oscuro y volviendo al claro (queda guardado). Con «reducir movimiento» queda quieto abajo a la izquierda.">
+          <DemoRebote />
+        </Seccion>
 
         <div className="graficos">
           <Seccion id="vacio" titulo="Estado vacío">
@@ -419,6 +422,16 @@ function DemoArchivo() {
         onRechazados={([f]) => { setArchivo(null); setError(`«${f.name}» no es un .xls, .csv ni .txt.`); }}
       />
       <ElegirArchivo onArchivos={() => {}} titulo="Arrastra el informe de pesajes" detalle="Mientras se lee el archivo, no se puede elegir otro." ocupado="Leyendo…" />
+    </div>
+  );
+}
+
+function DemoRebote() {
+  const [visible, setVisible] = useState(false);
+  return (
+    <div>
+      <button type="button" className="boton" onClick={() => setVisible(!visible)}>{visible ? "Quitar el aviso" : "Mostrar el aviso"}</button>
+      {visible && <AvisoRebote texto="Contacta a Lucas" quitarCon="nunca" />}
     </div>
   );
 }

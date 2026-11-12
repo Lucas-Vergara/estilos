@@ -1,5 +1,10 @@
 # Cambios
 
+## Sin publicar
+
+- **`AvisoRebote`**: un aviso que rebota por la pantalla como el logo del DVD y cambia de color en cada choque, sin bloquear clics. Se quita pasando al tema oscuro y volviendo al claro (queda guardado en el navegador con `clave`), o `quitarCon="nunca"`. Con «reducir movimiento» queda quieto. Trae sus estilos en línea, así que sirve en cualquier línea. Nació como «Contacta a Lucas» en el monitor de precios.
+- **Vitrina**: sección «Aviso que rebota» en la página de la línea panel.
+
 ## v0.23.0 — 2026-11-08
 
 - **Acento petróleo** (`acentos/petroleo.css`): azul verdoso hondo (`#0f6e7a`, 5,9:1 sobre blanco) con tinta y superficies oscuras teñidas de petróleo. Deja el verde para «bueno» y para los colores de material. Nació en Datos Reciclaje, al revisar paletas para panel2. Paletas de gráficos pendientes del validador de dataviz.
