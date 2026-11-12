@@ -1,6 +1,6 @@
 # Cambios
 
-## Sin publicar
+## v0.24.0 — 2026-11-12
 
 - **`AvisoRebote`**: un aviso que rebota por la pantalla como el logo del DVD y cambia de color en cada choque, sin bloquear clics. Se quita pasando al tema oscuro y volviendo al claro (queda guardado en el navegador con `clave`), o `quitarCon="nunca"`. Con «reducir movimiento» queda quieto. Trae sus estilos en línea, así que sirve en cualquier línea. Nació como «Contacta a Lucas» en el monitor de precios.
 - **Vitrina**: sección «Aviso que rebota» en la página de la línea panel.
