@@ -1,5 +1,9 @@
 # Cambios
 
+## v0.25.0 — 2026-11-12
+
+- **Modo oscuro del acento verde, más claro y en gris neutro.** El anterior (`#0f1210` de fondo, casi negro con tinte verde) se veía demasiado intenso y el tinte verde de los grises, extraño. Ahora fondo `#1b1c1e`, tarjetas `#232427`, campos `#2c2d30`, con texto, bordes, grilla y ejes en grises sin tinte. El verde del acento baja un poco su brillo (`#5fd885` → `#66d48c`) y «bueno» lo sigue. Contraste verificado: el texto más tenue da 5,1:1 sobre los campos. Elegido entre tres variantes (A, B, C de más oscura a más clara) probando en el monitor de precios.
+
 ## v0.24.0 — 2026-11-12
 
 - **`AvisoRebote`**: un aviso que rebota por la pantalla como el logo del DVD y cambia de color en cada choque, sin bloquear clics. Se quita pasando al tema oscuro y volviendo al claro (queda guardado en el navegador con `clave`), o `quitarCon="nunca"`. Con «reducir movimiento» queda quieto. Trae sus estilos en línea, así que sirve en cualquier línea. Nació como «Contacta a Lucas» en el monitor de precios.

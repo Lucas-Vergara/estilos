@@ -7,7 +7,7 @@ Lo que me gusta, lo que descarté y por qué. Claude lo lee antes de diseñar al
 - **Fondo gris neutro con tarjetas blancas** de borde fino (sin sombras marcadas): las tarjetas se separan solas.
 - **Densidad compacta**: tablas y controles de 36 px, cuerpo de 14 px.
 - **Inter** con números de ancho fijo (`tabular-nums`) en tablas, ejes e indicadores.
-- **Un solo acento por proyecto**, que también tiñe levemente el texto y el modo oscuro.
+- **Un solo acento por proyecto**, que también tiñe levemente el texto (en el modo oscuro del verde, desde v0.25.0, las superficies van en gris neutro).
 - **Texto casi negro con tinte**, no negro puro.
 - **Modo claro por defecto**, el oscuro solo si lo elijo (no sigue al sistema).
 - **Estados con ícono o texto**, nunca solo color (✓ Online, ✗ Sin stock, ▲/▼ en variaciones).
@@ -20,6 +20,7 @@ Lo que me gusta, lo que descarté y por qué. Claude lo lee antes de diseñar al
 - **Menos ruido (v0.14.0)**: la nota bajo un título dice el hallazgo y la metodología va en (i); los indicadores en una sola tarjeta; los cambios como línea de tiempo con la fecha a la izquierda; la cifra de hoy al final de la línea; tablas agrupadas en vez de repetir la región; columnas que no discriminan, fuera.
 - **Navegación lateral al estilo MUI (v0.15.0)** cuando hay varias áreas con secciones: expandible o compacta (solo íconos), con submenús plegados al inicio, y la misma pieza que la barra superior (mismo fondo y borde). Reemplazó las dos filas de pestañas (áreas y secciones), que se veían raras.
 - **Las propuestas se muestran en modo día**: los clientes usan el claro; el oscuro se revisa después.
+- **Modo oscuro en gris neutro y no tan hondo (12-11-2026, v0.25.0)**: el casi negro con tinte verde se veía intenso y raro. De tres grises (A, B, C) elegí el más oscuro de los nuevos (A, fondo `#1b1c1e`), sin tinte del acento en las superficies: el color queda solo en el acento.
 
 ## Me gusta — línea panel2 (desde v0.21.0)
 
@@ -162,7 +163,7 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 
 | Proyecto | Acento | Versión | Notas |
 |---|---|---|---|
-| monitor Sodimac (meyer/scrap2.0/web) | verde | v0.15.0 | origen de la biblioteca; de aquí salieron el arreglo de leyendas (v0.12.1), el pulido de escritorio (v0.13.0) y el de menos ruido (v0.14.0) |
+| monitor Sodimac (meyer/scrap2.0/web) | verde | v0.25.0 | origen de la biblioteca; de aquí salieron el arreglo de leyendas (v0.12.1), el pulido de escritorio (v0.13.0) y el de menos ruido (v0.14.0) |
 | datos-reciclaje (antes radar de reciclaje) | petróleo, línea panel2 | v0.23.0 | de aquí salieron la navegación lateral (v0.15.0), la línea panel2 (v0.21.0), `ElegirArchivo` (v0.22.0) y el acento petróleo (v0.23.0); componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
 | monitor de proyectos | azul | v0.15.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
 | oportunidades | azul | v0.15.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
