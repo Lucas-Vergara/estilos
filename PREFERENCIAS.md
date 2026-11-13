@@ -173,6 +173,7 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 | placa (app de mascotas) | — (línea «mascota», dirección Paseo) | v0.18.0 | la línea «mascota» vive por ahora en el proyecto (`src/estilos/lineas/mascota.css`), con Paseo elegida; falta subirla a la biblioteca. De aquí salió el deslizamiento de a una tarjeta de `Carrusel3D` (v0.18.0) |
 | cv (PDF del currículum) | azul | v0.15.0 | solo tokens, copiados en `cv/estilos/`; hoja de impresión propia (`cv.css`) mientras se decide si va una línea "documento" |
 | presupuestos | petróleo, línea panel2 | v0.23.0 | herramienta local (10-11-2026); el PDF del cliente tiene su hoja de impresión propia (`src/documento.css`) con cinco diseños a elegir (10-11-2026: clásico, portada en bloque, grilla suiza, resumen primero y ficha técnica; descartados editorial con serif y columna lateral): junto con cv, candidata a una línea "documento" |
+| cartelera-conce | petróleo, línea panel2 | v0.25.0 | cartelera pública de cine del Gran Concepción (13-11-2026); horarios como píldoras que enlazan a la compra o al post, estilos propios en `src/estilos.css` |
 
 ### Fuera de la biblioteca (por decidir)
 
