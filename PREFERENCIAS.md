@@ -175,6 +175,7 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 | presupuestos | petróleo, línea panel2 | v0.23.0 | herramienta local (10-11-2026); el PDF del cliente tiene su hoja de impresión propia (`src/documento.css`) con cinco diseños a elegir (10-11-2026: clásico, portada en bloque, grilla suiza, resumen primero y ficha técnica; descartados editorial con serif y columna lateral): junto con cv, candidata a una línea "documento" |
 | cartelera-conce | petróleo, línea panel2 | v0.25.0 | cartelera pública de cine del Gran Concepción (13-11-2026); horarios como píldoras que enlazan a la compra o al post, estilos propios en `src/estilos.css` |
 | bitacora | — (línea luz sobre base.css verde, como pausa) | v0.25.0 | ejercicios entre sesiones de terapia (16-11-2026), pacientes y psicóloga guía; formularios propios en `src/estilos.css` (tarjeta-suave, entrada, opciones) que comparte con pausa: candidatos a subir a la línea luz |
+| afinador | — (línea luz sobre base.css verde, como pausa) | v0.25.0 | afinador de guitarra (17-11-2026): las seis cuerdas como luces menta que se encienden al quedar afinadas; medidor de cents y hoja de afinaciones propios en `src/estilos.css` |
 
 ### Fuera de la biblioteca (por decidir)
 
