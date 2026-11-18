@@ -1,12 +1,14 @@
 import { type CSSProperties, type RefObject } from "react";
 import { type AcomodoLuz, type OrdenLuz } from "./acomodo.js";
 import { type FondoLuz } from "./fondos.js";
+import { type EncendidoLuz } from "./encendidos.js";
 /**
  * Una luz: botón redondo que se enciende despacio, con un destello. Encendida basta: no lleva ✓ (el estado queda en
  * aria-pressed para los lectores de pantalla). `color` es uno de COLORES_LUZ (ambar, coral…). `tam` cambia el
- * diámetro (p. ej. "96px") y `estilo` posiciona la casilla dentro de un tablero con forma.
+ * diámetro (p. ej. "96px") y `estilo` posiciona la casilla dentro de un tablero con forma. `encendido` elige cómo se
+ * prende (ENCENDIDOS_LUZ; por defecto, el destello).
  */
-export declare function Luz({ nombre, detalle, color, hecho, onCambiar, tam, estilo }: {
+export declare function Luz({ nombre, detalle, color, hecho, onCambiar, tam, estilo, encendido }: {
     nombre: string;
     detalle?: string;
     color: string;
@@ -14,6 +16,13 @@ export declare function Luz({ nombre, detalle, color, hecho, onCambiar, tam, est
     onCambiar: (hecho: boolean) => void;
     tam?: string;
     estilo?: CSSProperties;
+    encendido?: EncendidoLuz;
+}): import("react").JSX.Element;
+/** Las clases de una .l-luz según cómo se enciende y si está encendiéndose ahora (sirve para muestras sin Luz). */
+export declare function claseLuz(encendido?: EncendidoLuz, destellando?: boolean): string;
+/** Las capas que necesita cada encendido dentro de la .l-luz (el destello no lleva: usa ::after). */
+export declare function CapasEncendido({ encendido }: {
+    encendido: EncendidoLuz;
 }): import("react").JSX.Element;
 /**
  * El fondo detrás de las luces: una capa .l-fondo (absoluta; con `fijo`, ocupa la ventana). En reposo se apaga sola.

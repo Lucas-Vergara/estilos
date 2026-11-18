@@ -1,5 +1,11 @@
 # Cambios
 
+## v0.26.0 — 2026-11-18
+
+- **Cuatro maneras de encender una luz** (línea luz), pedidas para la app de hábitos e inspiradas en la pantalla de carga de los Xiaomi: `destello` (la de siempre, por defecto), `pulsos` (tres ondas suaves que se alejan y el color que entra a latidos), `carga` (un arco brillante con una punta de luz da la vuelta mientras el color sube desde abajo) y `completa` (la carga y, al cerrar el círculo, dos pulsos). `Luz` recibe `encendido`; para muestras sin `Luz`, `claseLuz` y `CapasEncendido`. Listas y textos en `ENCENDIDOS_LUZ`, `NOMBRES_ENCENDIDO_LUZ`, `NOTAS_ENCENDIDO_LUZ` y `DURACION_ENCENDIDO_LUZ`. Clases `.l-encendido-<forma>` y capas `.l-efecto` (`.l-onda`, `.l-arco`, `.l-punta`). Sin `encendido`, todo se ve igual que antes. Con «reducir movimiento», la luz se prende sin animación.
+- `Luz` ya no limpia `.l-destellando` con `onAnimationEnd`, sino con un reloj según la duración de cada encendido; apagar corta la animación.
+- **Vitrina**: selector «Encendido» en «Fondo y orden» de la página de la línea luz.
+
 ## v0.25.0 — 2026-11-12
 
 - **Modo oscuro del acento verde, más claro y en gris neutro.** El anterior (`#0f1210` de fondo, casi negro con tinte verde) se veía demasiado intenso y el tinte verde de los grises, extraño. Ahora fondo `#1b1c1e`, tarjetas `#232427`, campos `#2c2d30`, con texto, bordes, grilla y ejes en grises sin tinte. El verde del acento baja un poco su brillo (`#5fd885` → `#66d48c`) y «bueno» lo sigue. Contraste verificado: el texto más tenue da 5,1:1 sobre los campos. Elegido entre tres variantes (A, B, C de más oscura a más clara) probando en el monitor de precios.

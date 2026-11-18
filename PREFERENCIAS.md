@@ -98,6 +98,7 @@ Creada para la app de hábitos (24-10-2026), con la **sensación** del Every Day
 - **Fondos zen (02-11-2026, v0.16.0):** de 15 propuestos me quedé con 13 más el papel liso: el agua de piscina con la luz que se mueve muy despacio, gradientes suaves (amanecer, niebla, aurora, respiración, hora del día) y materia sobria (madera clara, arena rastrillada, washi). **Descartados:** la sombra de hojas que se mece, sola y sobre madera.
 - **Órdenes con forma (02-11-2026, v0.16.0):** me gustaron las cinco (equilibrio, figuras, círculo, piedras, sendero) y quedan todas como opción, junto con las filas de siempre. El usuario elige; las luces se acomodan solas según cuántas haya.
 - **24 colores (04-11-2026, v0.19.0):** pedí el triple de tonos. A cada uno de los ocho vivos se le sumó un tono claro y uno hondo, todos con saturación para seguir siendo luces (nada de pasteles grises ni oscuros apagados). En el selector de habitos van en tres filas: claros, vivos y hondos, cada columna un mismo color.
+- **Cuatro encendidos (18-11-2026, v0.26.0):** me gusta la pantalla de carga de mi Xiaomi (pulsaciones e iluminaciones suaves). De ahí salieron pulsos, carga (un arco que da la vuelta) y carga completa; quedan las cuatro, junto con el destello de siempre, para elegir en los ajustes de habitos. Sigue siendo un solo momento de movimiento: solo al encender.
 - Pensada para pantallas táctiles vistas de lejos (pantalla en la sala, celular): blancos grandes, poco texto.
 
 ## Línea club (desde v0.20.0)

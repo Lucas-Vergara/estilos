@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import "../../css/tokens.css";
 import "../../css/lineas/luz.css";
 import "./vitrina-luz.css";
-import { CapaFondo, COLORES_CLAROS_LUZ, COLORES_HONDOS_LUZ, COLORES_VIVOS_LUZ, NOMBRES_COLOR_LUZ, FONDOS_LUZ, Luz, NOMBRES_FONDO_LUZ, NOMBRES_ORDEN_LUZ, ORDENES_LUZ, lugarDeLuz, useAcomodoLuces, type FondoLuz, type OrdenLuz } from "../../src/luz/index.js";
+import { CapaFondo, COLORES_CLAROS_LUZ, COLORES_HONDOS_LUZ, COLORES_VIVOS_LUZ, NOMBRES_COLOR_LUZ, FONDOS_LUZ, Luz, NOMBRES_FONDO_LUZ, NOMBRES_ORDEN_LUZ, ORDENES_LUZ, ENCENDIDOS_LUZ, NOMBRES_ENCENDIDO_LUZ, lugarDeLuz, useAcomodoLuces, type EncendidoLuz, type FondoLuz, type OrdenLuz } from "../../src/luz/index.js";
 
 // Vitrina de la línea "luz" con datos de ejemplo: el tablero del día, el año de un hábito y las últimas semanas.
 
@@ -66,6 +66,7 @@ function FondoYOrden() {
   const [fondo, setFondo] = useState<FondoLuz>("piscina");
   const [orden, setOrden] = useState<OrdenLuz>("equilibrio");
   const [cantidad, setCantidad] = useState(5);
+  const [encendido, setEncendido] = useState<EncendidoLuz>("destello");
   const [hechos, setHechos] = useState<boolean[]>([true, false, true, false, false, true, false, false]);
   const tablero = useRef<HTMLDivElement>(null);
   const acomodo = useAcomodoLuces(tablero, orden, cantidad, { etiqueta: 30, maximo: 110 });
@@ -75,7 +76,7 @@ function FondoYOrden() {
     <section className="vl-seccion" aria-labelledby="vl-fondo">
       <div className="vl-texto">
         <h2 id="vl-fondo">Fondo y orden</h2>
-        <p>Catorce fondos zen detrás de las luces (<code>CapaFondo</code>; el agua y las gotas se mueven muy despacio) y seis formas de acomodarlas según cuántas haya (<code>acomodarLuces</code> o <code>useAcomodoLuces</code>, con <code>.l-tablero.l-forma</code>). En reposo, el fondo se apaga.</p>
+        <p>Catorce fondos zen detrás de las luces (<code>CapaFondo</code>; el agua y las gotas se mueven muy despacio) y seis formas de acomodarlas según cuántas haya (<code>acomodarLuces</code> o <code>useAcomodoLuces</code>, con <code>.l-tablero.l-forma</code>). En reposo, el fondo se apaga. Cuatro maneras de encender (<code>encendido</code> en <code>Luz</code>): el destello de siempre, pulsos, carga y carga completa.</p>
       </div>
       <div className="vl-selectores">
         <label>Fondo
@@ -88,6 +89,11 @@ function FondoYOrden() {
             {ORDENES_LUZ.map((o) => <option key={o} value={o}>{NOMBRES_ORDEN_LUZ[o]}</option>)}
           </select>
         </label>
+        <label>Encendido
+          <select value={encendido} onChange={(e) => setEncendido(e.target.value as EncendidoLuz)}>
+            {ENCENDIDOS_LUZ.map((x) => <option key={x} value={x}>{NOMBRES_ENCENDIDO_LUZ[x]}</option>)}
+          </select>
+        </label>
         <label>Luces
           <input type="range" min={1} max={10} value={cantidad} onChange={(e) => setCantidad(+e.target.value)} />
           <output>{cantidad}</output>
@@ -97,7 +103,7 @@ function FondoYOrden() {
         <CapaFondo fondo={fondo} luces={() => tablero.current} />
         <div ref={tablero} className={`l-tablero${orden !== "filas" ? " l-forma" : ""}`}>
           {nombres.slice(0, cantidad).map((n, i) => (
-            <Luz key={n} nombre={n} color={colores[i]} hecho={hechos[i]} {...lugarDeLuz(acomodo, i)}
+            <Luz key={n} nombre={n} color={colores[i]} hecho={hechos[i]} encendido={encendido} {...lugarDeLuz(acomodo, i)}
               onCambiar={(v) => setHechos((h) => h.map((x, j) => (j === i ? v : x)))} />
           ))}
         </div>

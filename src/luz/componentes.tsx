@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState, type CSSProperties, type RefObject } from "react";
 import { acomodarLuces, type AcomodoLuz, type OrdenLuz } from "./acomodo.js";
 import { PINTORES_FONDO_LUZ, type FondoLuz } from "./fondos.js";
+import { DURACION_ENCENDIDO_LUZ, type EncendidoLuz } from "./encendidos.js";
 
 /**
  * Una luz: botón redondo que se enciende despacio, con un destello. Encendida basta: no lleva ✓ (el estado queda en
  * aria-pressed para los lectores de pantalla). `color` es uno de COLORES_LUZ (ambar, coral…). `tam` cambia el
- * diámetro (p. ej. "96px") y `estilo` posiciona la casilla dentro de un tablero con forma.
+ * diámetro (p. ej. "96px") y `estilo` posiciona la casilla dentro de un tablero con forma. `encendido` elige cómo se
+ * prende (ENCENDIDOS_LUZ; por defecto, el destello).
  */
-export function Luz({ nombre, detalle, color, hecho, onCambiar, tam, estilo }: {
+export function Luz({ nombre, detalle, color, hecho, onCambiar, tam, estilo, encendido = "destello" }: {
   nombre: string;
   detalle?: string;
   color: string;
@@ -15,24 +17,53 @@ export function Luz({ nombre, detalle, color, hecho, onCambiar, tam, estilo }: {
   onCambiar: (hecho: boolean) => void;
   tam?: string;
   estilo?: CSSProperties;
+  encendido?: EncendidoLuz;
 }) {
-  const [destello, setDestello] = useState(false);
+  const [destello, setDestello] = useState(0);   // > 0 mientras se enciende; contar las veces reinicia el reloj
+  useEffect(() => {
+    if (!destello) return;
+    const t = setTimeout(() => setDestello(0), DURACION_ENCENDIDO_LUZ[encendido]);
+    return () => clearTimeout(t);
+  }, [destello, encendido]);
+  useEffect(() => { if (!hecho) setDestello(0); }, [hecho]);   // apagar corta la animación
+
   return (
     <div className={`l-casilla l-color-${color}`} style={tam || estilo ? ({ ...estilo, ...(tam && { "--l-tam-luz": tam }) } as CSSProperties) : undefined}>
       <button
         type="button"
-        className={`l-luz${destello ? " l-destellando" : ""}`}
+        className={claseLuz(encendido, destello > 0)}
         aria-pressed={hecho}
         aria-label={`${nombre}: ${hecho ? "hecho, tocar para apagar" : "pendiente, tocar para encender"}`}
         onClick={() => {
-          if (!hecho) setDestello(true);
+          if (!hecho) setDestello((n) => n + 1);
           onCambiar(!hecho);
         }}
-        onAnimationEnd={() => setDestello(false)}
-      />
+      >
+        <CapasEncendido encendido={encendido} />
+      </button>
       <span className="l-nombre">{nombre}</span>
       {detalle && <span className="l-detalle">{detalle}</span>}
     </div>
+  );
+}
+
+/** Las clases de una .l-luz según cómo se enciende y si está encendiéndose ahora (sirve para muestras sin Luz). */
+export function claseLuz(encendido: EncendidoLuz = "destello", destellando = false): string {
+  return `l-luz${encendido !== "destello" ? ` l-encendido-${encendido}` : ""}${destellando ? " l-destellando" : ""}`;
+}
+
+/** Las capas que necesita cada encendido dentro de la .l-luz (el destello no lleva: usa ::after). */
+export function CapasEncendido({ encendido }: { encendido: EncendidoLuz }) {
+  const ondas = encendido === "pulsos" ? 3 : encendido === "completa" ? 2 : 0;
+  const arco = encendido === "carga" || encendido === "completa";
+  return (
+    <>
+      {/* Las ondas van primero: el CSS las cuenta con :nth-of-type */}
+      {Array.from({ length: ondas }, (_, i) => <span key={i} className="l-efecto l-onda" aria-hidden="true" />)}
+      {arco && <span className="l-efecto l-arco l-arco-brillo" aria-hidden="true" />}
+      {arco && <span className="l-efecto l-arco" aria-hidden="true" />}
+      {arco && <span className="l-efecto l-punta" aria-hidden="true" />}
+    </>
   );
 }
 

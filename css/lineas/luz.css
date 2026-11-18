@@ -17,6 +17,8 @@
  *  - .l-fila           una fila de puntos con su etiqueta a la izquierda (un hábito por fila)
  *  - .l-fondo         capa detrás de las luces (fondos: CapaFondo de @lucas-vergara/estilos/luz); .l-con-fondo en el
  *                      contenedor deja ver el fondo a través de las luces apagadas
+ *  - .l-encendido-<forma>  cómo se enciende una luz (en .l-luz): sin clase, el destello de siempre; pulsos, carga o
+ *                      completa, con las capas .l-efecto que pone Luz (ENCENDIDOS_LUZ de @lucas-vergara/estilos/luz)
  *  - .l-tablero.l-forma  tablero con las luces en una forma (equilibrio, figuras, círculo, piedras, sendero: acomodarLuces)
  *  - .l-color-<nombre> pone el color de una luz o de un contenedor: los ocho vivos (ambar, coral, rosa, violeta, azul,
  *                      cian, menta, lima), sus tonos claros (maiz, durazno, chicle, lavanda, cielo, agua, aguamarina,
@@ -221,6 +223,65 @@
   100% { opacity: 0; box-shadow: 0 0 0 calc(var(--l-tam-luz) * 0.28) transparent; }
 }
 
+/* ——— Otras maneras de encender (desde v0.26.0), inspiradas en la pantalla de carga de los Xiaomi ———
+ * Van en .l-luz con .l-encendido-pulsos, -carga o -completa, y las capas .l-efecto que pone Luz (CapasEncendido).
+ * Se animan mientras la luz tiene .l-destellando, igual que el destello. */
+@property --l-giro { syntax: "<angle>"; inherits: true; initial-value: 0deg; }
+@property --l-nivel { syntax: "<percentage>"; inherits: true; initial-value: 0%; }
+.l-luz > .l-efecto { position: absolute; border-radius: 50%; pointer-events: none; opacity: 0; }
+.l-luz[class*="l-encendido-"]::after { display: none; }
+
+/* Pulsos: tres ondas suaves que se alejan, y el color que entra a latidos */
+.l-onda {
+  inset: 0; border: 2px solid color-mix(in srgb, var(--l-color) 80%, #fff);
+  box-shadow: 0 0 16px 2px color-mix(in srgb, var(--l-color) 70%, transparent), inset 0 0 14px color-mix(in srgb, var(--l-color) 50%, transparent);
+  filter: blur(1px);
+}
+.l-luz.l-destellando > .l-onda { animation: l-onda 1900ms cubic-bezier(0.2, 0.6, 0.2, 1) both; }
+.l-luz.l-destellando > .l-onda:nth-of-type(2) { animation-delay: 420ms; }
+.l-luz.l-destellando > .l-onda:nth-of-type(3) { animation-delay: 840ms; }
+@keyframes l-onda {
+  0% { opacity: 0; transform: scale(0.92); }
+  14% { opacity: 0.85; }
+  100% { opacity: 0; transform: scale(1.85); }
+}
+.l-encendido-pulsos.l-destellando::before { animation: l-latidos 1800ms var(--l-curva-luz) both; }
+@keyframes l-latidos {
+  0% { opacity: 0; } 18% { opacity: 0.5; } 30% { opacity: 0.32; }
+  48% { opacity: 0.78; } 60% { opacity: 0.62; } 82%, 100% { opacity: 1; }
+}
+
+/* Carga: un arco brillante da la vuelta con una punta de luz, y el color sube desde abajo */
+.l-arco {
+  inset: -7px;
+  background: conic-gradient(from 0deg, transparent 0deg, color-mix(in srgb, var(--l-color) 35%, transparent) calc(var(--l-giro) * 0.45),
+    color-mix(in srgb, var(--l-color) 70%, #fff) var(--l-giro), transparent var(--l-giro));
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3.5px));
+          mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 3.5px));
+}
+.l-arco.l-arco-brillo { inset: -10px; filter: blur(7px); }
+.l-punta { inset: -7px; transform: rotate(var(--l-giro)); }
+.l-punta::before {
+  content: ""; position: absolute; left: 50%; top: 0; width: 9px; height: 9px; margin: -2.5px 0 0 -4.5px; border-radius: 50%;
+  background: #fff; box-shadow: 0 0 6px 2px var(--l-color), 0 0 18px 6px color-mix(in srgb, var(--l-color) 60%, transparent);
+}
+.l-encendido-carga.l-destellando, .l-encendido-completa.l-destellando { animation: l-cargar 1500ms cubic-bezier(0.45, 0, 0.25, 1) both; }
+@keyframes l-cargar { from { --l-giro: 0deg; --l-nivel: -20%; } to { --l-giro: 360deg; --l-nivel: 100%; } }
+.l-luz.l-destellando > .l-arco { animation: l-arco 2400ms var(--l-curva-luz) both; }
+.l-luz.l-destellando > .l-punta { animation: l-punta 1500ms linear both; }
+@keyframes l-arco { 0%, 62% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes l-punta { 0%, 92% { opacity: 1; } 100% { opacity: 0; } }
+.l-encendido-carga.l-destellando::before, .l-encendido-completa.l-destellando::before {
+  opacity: 1; transition: none;
+  -webkit-mask: linear-gradient(to top, #000 var(--l-nivel), transparent calc(var(--l-nivel) + 18%));
+          mask: linear-gradient(to top, #000 var(--l-nivel), transparent calc(var(--l-nivel) + 18%));
+}
+
+/* Carga completa: la carga y, al cerrar el círculo, dos pulsos */
+.l-encendido-completa.l-destellando > .l-onda { animation-duration: 1800ms; }
+.l-encendido-completa.l-destellando > .l-onda:nth-of-type(1) { animation-delay: 1350ms; }
+.l-encendido-completa.l-destellando > .l-onda:nth-of-type(2) { animation-delay: 1750ms; }
+
 /* Calendario: puntos chicos que se encienden igual, para ver la semana, el mes o el año */
 .l-calendario {
   display: grid; gap: calc(var(--l-tam-punto) * 0.5);
@@ -296,5 +357,7 @@ button.l-punto:focus-visible { outline: 2px solid var(--l-foco); outline-offset:
   .l-luz::before, .l-luz[aria-pressed="true"]::before, .l-forma > .l-casilla { transition: none; }
   .l-fondo-manchas > i, .l-fondo-amanecer::before, .l-fondo-respira::before { animation: none !important; }
   .l-luz.l-destellando::after { animation: none; }
+  .l-luz.l-destellando, .l-luz.l-destellando::before, .l-luz.l-destellando > .l-efecto { animation: none !important; }
+  .l-luz.l-destellando::before { -webkit-mask: none !important; mask: none !important; }
   .l-luz:active { transform: none; }
 }
