@@ -34,8 +34,13 @@
       "types": "./dist/club/index.d.ts",
       "default": "./dist/club/index.js"
     },
+    "./grilla": {
+      "types": "./dist/grilla.d.ts",
+      "default": "./dist/grilla.js"
+    },
     "./tokens.css": "./css/tokens.css",
     "./base.css": "./css/base.css",
+    "./grilla.css": "./css/grilla.css",
     "./tailwind.css": "./css/tailwind.css",
     "./acentos/*": "./css/acentos/*",
     "./lineas/*": "./css/lineas/*"

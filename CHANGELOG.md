@@ -1,5 +1,14 @@
 # Cambios
 
+## v0.27.0 — 2026-11-19
+
+- **Módulo grilla** (`grilla.css` y `@lucas-vergara/estilos/grilla`), el primer módulo que no es una línea: sirve dentro de cualquiera. Sale del archivo de Figma «franservice · Sistema de grillas y secciones», donde Claude propuso dos estilos de grilla para el editor de franservice:
+  - **A · editorial** (`variante="editorial"`): 12 columnas con separación fija de 24 px (14 px en celular). El aire se arma dejando columnas vacías, no cambiando la separación, así todo queda alineado a las mismas columnas.
+  - **B · celdas** (`variante="celdas"`): las mismas 12 columnas sin separación; cada columna es una celda con línea fina y 24 px de relleno (14 en celular), y la grilla lleva una cabecera mono opcional (número y tipo). `relleno={false}` deja que una foto o un video llene su celda.
+  - En celular (≤ 900 px), A cae a 4 columnas y B a 2: `Celda` redondea `anchoCelular` a cuartos o mitades de las 12 columnas (`anchoCelularGrilla`).
+  - Colores y letras con respaldo en los tokens (`--borde`, `--tinta-3`) y en la línea sitio diseñadora (`--sd-linea`, `--sd-mono`, `--sd-tenue`); un proyecto con estilos propios los fija con `--grilla-linea`, `--grilla-mono` y `--grilla-tenue`.
+- **Vitrina**: sección «Grillas» con selector A / B en la página de la línea sitio diseñadora.
+
 ## v0.26.0 — 2026-11-18
 
 - **Cuatro maneras de encender una luz** (línea luz), pedidas para la app de hábitos e inspiradas en la pantalla de carga de los Xiaomi: `destello` (la de siempre, por defecto), `pulsos` (tres ondas suaves que se alejan y el color que entra a latidos), `carga` (un arco brillante con una punta de luz da la vuelta mientras el color sube desde abajo) y `completa` (la carga y, al cerrar el círculo, dos pulsos). `Luz` recibe `encendido`; para muestras sin `Luz`, `claseLuz` y `CapasEncendido`. Listas y textos en `ENCENDIDOS_LUZ`, `NOMBRES_ENCENDIDO_LUZ`, `NOTAS_ENCENDIDO_LUZ` y `DURACION_ENCENDIDO_LUZ`. Clases `.l-encendido-<forma>` y capas `.l-efecto` (`.l-onda`, `.l-arco`, `.l-punta`). Sin `encendido`, todo se ve igual que antes. Con «reducir movimiento», la luz se prende sin animación.

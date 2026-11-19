@@ -3,10 +3,12 @@ import { createRoot } from "react-dom/client";
 import { CreditoEstilos, Indicador, Variacion } from "../../src";
 import { GraficoLinea } from "../../src/graficos";
 import { Acento, Cursor, Palabras, iniciarMovimiento } from "../../src/sitio";
+import { Celda, Grilla, NOMBRES_VARIANTE_GRILLA, NOTAS_VARIANTE_GRILLA, VARIANTES_GRILLA, type VarianteGrilla } from "../../src/grilla";
 import "../../css/tokens.css";
 import "../../css/acentos/verde.css";
 import "../../css/base.css";
 import "../../css/lineas/sitio-disenadora.css";
+import "../../css/grilla.css";
 import "./vitrina-sitio-disenadora.css";
 
 // Vitrina de la línea "sitio diseñadora" (creada con Franservice) con contenido de ejemplo. Al final, una sección mezcla la línea panel dentro del sitio.
@@ -77,6 +79,51 @@ function Hero() {
   );
 }
 
+const ESTRUCTURAS: { nombre: string; anchos: number[] }[] = [
+  { nombre: "⅓ + ⅔", anchos: [4, 8] },
+  { nombre: "3 columnas", anchos: [4, 4, 4] },
+  { nombre: "4 columnas", anchos: [3, 3, 3, 3] },
+];
+
+/** Módulo grilla (A editorial o B celdas), con las estructuras del editor de franservice. */
+function Grillas() {
+  const [variante, setVariante] = useState<VarianteGrilla>("editorial");
+  return (
+    <section className="sd-seccion" id="grillas">
+      <div className="sd-seccion-cabecera">
+        <h2 className="sd-titulo">Grillas<span className="sd-contador">{variante === "editorial" ? "A" : "B"}</span></h2>
+        <div className="sd-nota-lateral">
+          <p style={{ margin: "0 0 14px" }}>Módulo grilla (<code>grilla.css</code> y <code>@lucas-vergara/estilos/grilla</code>), sirve en cualquier línea. {NOTAS_VARIANTE_GRILLA[variante]} En celular, A cae a 4 columnas y B a 2.</p>
+          <div style={{ display: "flex", gap: 8 }}>
+            {VARIANTES_GRILLA.map((v) => (
+              <button key={v} type="button" className={`sd-pildora${v === variante ? " sd-solida" : ""}`} onClick={() => setVariante(v)} aria-pressed={v === variante}>{NOMBRES_VARIANTE_GRILLA[v]}</button>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 56 }}>
+        {ESTRUCTURAS.map((e, k) => (
+          <Grilla key={e.nombre} variante={variante} cabecera={[`0${k + 1} / Grilla de columnas`, e.nombre]}>
+            {e.anchos.map((a, i) => (
+              <Celda key={i} ancho={a} anchoCelular={e.anchos.length === 4 ? 6 : 12} variante={variante} relleno={!(k === 0 && i === 0)}>
+                {k === 0 && i === 0 ? (
+                  <div className="demo-imagen" style={{ "--tono": 150, minHeight: 260, height: "100%" } as CSSProperties} />
+                ) : (
+                  <>
+                    <span className="sd-etiqueta">{a}/12</span>
+                    <p className="sd-lead" style={{ margin: "12px 0 0" }}>{k === 0 ? "Primero escuchar, después dibujar." : SERVICIOS[i]?.[0] ?? "Módulo"}</p>
+                    <p className="sd-nota-lateral" style={{ margin: "8px 0 0" }}>{k === 0 ? "Una foto que llena su celda y el texto al lado." : SERVICIOS[i]?.[1]}</p>
+                  </>
+                )}
+              </Celda>
+            ))}
+          </Grilla>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function Sitio() {
   const [aviso, setAviso] = useState(false);
   useEffect(() => iniciarMovimiento(), []);
@@ -89,6 +136,7 @@ function Sitio() {
         <nav className="sd-nav">
           <a href="#trabajos" aria-current="page">Trabajos</a>
           <a href="#servicios">Servicios</a>
+          <a href="#grillas">Grillas</a>
           <a href="#mezcla">Mezcla</a>
           <a href="./" className="sd-nav-destacado">Otras líneas →</a>
         </nav>
@@ -157,6 +205,8 @@ function Sitio() {
           ))}
         </div>
       </section>
+
+      <Grillas />
 
       <section className="sd-seccion" id="mezcla">
         <div className="sd-seccion-cabecera">

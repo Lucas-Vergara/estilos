@@ -56,6 +56,7 @@ Creada junto con Franservice (https://franservice.cl), a partir del rediseño he
 - **Hero a pantalla completa** con segmentos de progreso y un "REC ●" que late.
 - Detalles: cursor-punto que se agranda con "Ver", botón flotante que se abre con su etiqueta, wordmark gigante en el pie, transiciones de página suaves.
 - Todo el movimiento respeta "reducir movimiento".
+- **Grillas para armar secciones** (módulo grilla, v0.27.0, diseñado en Figma el 19-11-2026): A · editorial (separación fija, aire con columnas vacías) o B · celdas (líneas finas, relleno y cabecera mono, como ficha técnica). Fran elige una por grilla en el editor.
 
 ## Me gusta — línea sitio (oficial, desde v0.4.0)
 
@@ -183,7 +184,7 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 | Proyecto | Por qué no se migró |
 |---|---|
 | trote-app | Diseño propio (violeta, CSS modules) de una app de entrenamiento: adoptar la biblioteca sería un rediseño. |
-| franservice (web) | Sitio de un cliente: es la fuente de la línea sitio, pero se deja tal cual (no carga la biblioteca). |
+| franservice (web) | Sitio de un cliente: es la fuente de la línea sitio, pero se deja tal cual. Solo carga el **módulo grilla** (desde v0.27.0, 19-11-2026), con sus colores y letras fijados a los de la marca. |
 | meyer/calculadora-termica | Calculadora con la marca Gyplac (cliente), en Tailwind; además tiene cambios sin commitear. |
 | Liss/axis, Liss/axis-2, fases | Tailwind con estilos propios; se podrían migrar con `tailwind.css` si se quiere la misma línea. |
 | etexScrapF | Antiguo, en MUI. |

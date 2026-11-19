@@ -1,0 +1,94 @@
+/*
+ * Módulo grilla: 12 columnas en dos estilos, para armar secciones (nació en franservice, diseñado en Figma:
+ * «franservice · Sistema de grillas y secciones»). No es una línea: sirve dentro de cualquiera.
+ *
+ *   A · editorial (.grilla-editorial): separación fija entre columnas; el aire se arma dejando columnas vacías.
+ *   B · celdas    (.grilla-celdas):    sin separación; cada columna es una celda con línea fina y relleno,
+ *                                      y la grilla puede llevar una cabecera mono (número y tipo de bloque).
+ *
+ * El margen lateral lo pone la sección que la contiene. En celular (≤ 900 px) A cae a 4 columnas y B a 2: el
+ * componente redondea el ancho de celular a cuartos (A) o mitades (B) de las 12 columnas, así todo calza.
+ *
+ * Variables (con respaldo en los tokens de la biblioteca y de la línea sitio diseñadora):
+ *   --grilla-separacion  A: espacio entre columnas (24 px; 14 px en celular)
+ *   --grilla-relleno     B: relleno de cada celda (24 px; 14 px en celular)
+ *   --grilla-linea       B: color de las líneas
+ *   --grilla-mono        B: letra de la cabecera
+ *   --grilla-tenue       B: color de la cabecera
+ */
+
+.grilla {
+  --grilla-separacion-real: var(--grilla-separacion, 24px);
+  --grilla-relleno-real: var(--grilla-relleno, 24px);
+  --grilla-linea-real: var(--grilla-linea, var(--sd-linea, var(--borde, rgba(127, 127, 127, 0.3))));
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .grilla {
+    --grilla-separacion-real: var(--grilla-separacion-celular, 14px);
+    --grilla-relleno-real: var(--grilla-relleno-celular, 14px);
+  }
+}
+
+.grilla-celda {
+  grid-column: span var(--grilla-ancho, 12);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  container-type: inline-size;
+}
+
+@media (max-width: 900px) {
+  .grilla-celda {
+    grid-column: span var(--grilla-ancho-celular, 12);
+  }
+}
+
+/* ---------- A · editorial ---------- */
+
+.grilla-editorial {
+  column-gap: var(--grilla-separacion-real);
+  row-gap: calc(var(--grilla-separacion-real) * 2);
+  align-items: start;
+}
+.grilla-editorial[data-alinear="center"] { align-items: center; }
+.grilla-editorial[data-alinear="end"] { align-items: end; }
+.grilla-editorial[data-alinear="stretch"] { align-items: stretch; }
+
+/* ---------- B · celdas ---------- */
+
+.grilla-celdas {
+  gap: 0;
+  align-items: stretch;
+  border-top: 1px solid var(--grilla-linea-real);
+  border-left: 1px solid var(--grilla-linea-real);
+}
+.grilla-celdas > .grilla-celda {
+  padding: var(--grilla-relleno-real);
+  border-right: 1px solid var(--grilla-linea-real);
+  border-bottom: 1px solid var(--grilla-linea-real);
+}
+/* Fotos y videos llenan su celda, sin relleno. */
+.grilla-celdas > .grilla-celda[data-relleno="no"] { padding: 0; }
+.grilla-celdas[data-alinear="center"] > .grilla-celda { justify-content: center; }
+.grilla-celdas[data-alinear="end"] > .grilla-celda { justify-content: flex-end; }
+
+.grilla-cabecera {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px var(--grilla-relleno-real);
+  border-right: 1px solid var(--grilla-linea-real);
+  border-bottom: 1px solid var(--grilla-linea-real);
+  font-family: var(--grilla-mono, var(--sd-mono, ui-monospace, "SFMono-Regular", monospace));
+  font-size: 10px;
+  line-height: 1.3;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--grilla-tenue, var(--sd-tenue, var(--tinta-3, currentColor)));
+}
+.grilla-cabecera > :last-child:not(:first-child) { text-align: right; }
