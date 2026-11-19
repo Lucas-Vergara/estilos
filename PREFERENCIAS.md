@@ -166,7 +166,7 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 |---|---|---|---|
 | monitor Sodimac (etex/monitor-materiales/web) | verde | v0.25.0 | origen de la biblioteca; de aquí salieron el arreglo de leyendas (v0.12.1), el pulido de escritorio (v0.13.0) y el de menos ruido (v0.14.0) |
 | datos-reciclaje (antes radar de reciclaje) | petróleo, línea panel2 | v0.23.0 | de aquí salieron la navegación lateral (v0.15.0), la línea panel2 (v0.21.0), `ElegirArchivo` (v0.22.0) y el acento petróleo (v0.23.0); componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
-| monitor de proyectos | azul | v0.15.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
+| panel de proyectos (antes monitor de proyectos) | azul | v0.15.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
 | oportunidades | azul | v0.15.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
 | finanzas | verde | v0.15.0 | app de finanzas personales (Firebase); estilos propios mínimos en `src/estilos.css` |
 | habitos (web) | — (línea luz) | v0.26.0 | app de hábitos; de aquí salieron los fondos y órdenes de la línea luz (v0.16.0, hasta 10 luces en v0.17.0), los 24 colores (v0.19.0) y los cuatro encendidos (v0.26.0); la pantalla ESP32 replica la línea en su firmware |
@@ -191,4 +191,4 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 
 ## Pendiente: unificar componentes
 
-Radar, monitor de proyectos y oportunidades aún tienen su propio `Segmentado` (prop `onCambio`, opciones con `etiqueta`) y su propia `Frescura` (prop `iso`), con otra API que la de la biblioteca. Cuando se toquen, conviene migrarlos a los componentes de la biblioteca.
+Radar, panel de proyectos y oportunidades aún tienen su propio `Segmentado` (prop `onCambio`, opciones con `etiqueta`) y su propia `Frescura` (prop `iso`), con otra API que la de la biblioteca. Cuando se toquen, conviene migrarlos a los componentes de la biblioteca.
