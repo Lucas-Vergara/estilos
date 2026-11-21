@@ -178,6 +178,7 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 | cartelera-conce | petróleo, línea panel2 | v0.25.0 | cartelera pública de cine del Gran Concepción (13-11-2026); horarios como píldoras que enlazan a la compra o al post, estilos propios en `src/estilos.css` |
 | bitacora | — (línea luz sobre base.css verde, como pausa) | v0.25.0 | ejercicios entre sesiones de terapia (16-11-2026), pacientes y psicóloga guía; formularios propios en `src/estilos.css` (tarjeta-suave, entrada, opciones) que comparte con pausa: candidatos a subir a la línea luz |
 | afinador | — (línea luz sobre base.css verde, como pausa) | v0.25.0 | afinador de guitarra (17-11-2026): las seis cuerdas como luces menta que se encienden al quedar afinadas; medidor de cents y hoja de afinaciones propios en `src/estilos.css` |
+| proyecto-politico (web) | petróleo, línea panel2 | v0.27.0 | datos públicos de política en Chile (20-11-2026), pública; sección Gastos con tarjetas tocables que bajan un nivel (`.nodos`/`.nodo`) y barra apilada (`.apilada`) en `src/estilos.css`: candidatas a subir a panel2 |
 
 ### Fuera de la biblioteca (por decidir)
 
