@@ -1,5 +1,14 @@
 # Cambios
 
+## v0.31.0 — 2026-11-22
+
+Línea consola, fase 4 del panel de proyectos. Solo clases nuevas:
+
+- **Permiso mientras trabaja un agente**: `section.co-permiso` (borde ámbar, `header` con el título y el detalle; la vista en `.co-permiso-vista`, `.co-permiso-plan` o un `.co-diff`; `.co-permiso-motivo` para decir por qué se niega; `.co-permiso-acciones`). En el hilo, la decisión queda como `.co-permiso-paso` (`.negado`).
+- **Marca en la lateral**: `.co-marca-sesion` (punto que late: respondiendo) y `.co-marca-sesion.espera` (ámbar: espera tu permiso).
+- **Tareas programadas**: `.co-reloj` (aviso con acción), el formulario `.co-programar` (`.co-programar-ancho`, `.co-programar-fila`, `.co-programar-acciones`, `.co-dias`, `.co-en-linea`) y la lista `.co-programadas` > `.co-programada` (`.pausada`, `.co-programada-titulo`, `-texto`, `-resumen`, `-acciones`, `.co-historial`).
+- **Vitrina**: pregunta de permiso y marca de espera en la sesión de ejemplo.
+
 ## v0.30.0 — 2026-11-22
 
 Línea consola, para revisar lo que hizo un agente (fase 3 del panel de proyectos). Solo clases nuevas:

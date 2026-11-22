@@ -214,6 +214,8 @@ como predeterminado:
   `.co-espaciador`, `.co-enviar` o `.co-detener`).
 - **Revisión** (v0.30.0): `details.co-diff.co-cambios` > `details.co-cambio` por archivo; `.co-traza` con
   `.co-traza-linea` (herramientas en una línea de tiempo); `.co-sesion-vistas`; lista de skills `.co-skills` > `.co-skill`.
+- **Permisos y programadas** (v0.31.0): `section.co-permiso` (con `.co-permiso-acciones`), `.co-marca-sesion(.espera)`,
+  `.co-reloj`, formulario `.co-programar` y lista `.co-programadas` > `.co-programada`.
 - **Espacios en la lateral**: `li.co-espacio` > `.co-espacio-fila` (`.co-item.co-boton-item` que pliega y `.co-espacio-nueva`)
   + `.co-lista` de `.co-sesion-item`.
 - **Tokens propios**: `--lateral-fondo`, `--lateral-velo`, `--lateral-tinta(-2)`, `--control`, `--control-hover`,

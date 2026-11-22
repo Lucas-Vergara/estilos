@@ -43,7 +43,7 @@ function Vitrina() {
               </div>
               <ul className="co-lista">
                 <li><a href="#" className="co-item co-item-sub co-sesion-item active"><span>¿En qué quedó la fase 4?</span></a></li>
-                <li><a href="#" className="co-item co-item-sub co-sesion-item"><span>Revisar el diseño de Tareas, con un título largo que se corta</span></a></li>
+                <li><a href="#" className="co-item co-item-sub co-sesion-item"><span>Revisar el diseño de Tareas, con un título largo que se corta</span><i className="co-marca-sesion espera" aria-label="Espera tu permiso" /></a></li>
                 <li className="co-vacio co-vacio-sub">y 3 más antiguas</li>
               </ul>
             </li>
@@ -108,6 +108,15 @@ function Vitrina() {
                   </details>
                 </div>
               </div>
+              <section className="co-permiso" role="alertdialog" aria-label="Claude quiere usar Bash">
+                <header><b>Claude quiere usar Bash</b><span className="nota-chica">Correr los tests</span></header>
+                <pre className="co-codigo co-permiso-vista">npm test -- --run resultados</pre>
+                <div className="co-permiso-acciones">
+                  <button type="button" className="boton boton-primario">Permitir</button>
+                  <button type="button" className="boton">Permitir siempre en esta sesión</button>
+                  <button type="button" className="boton">Negar…</button>
+                </div>
+              </section>
               <form className="co-compositor" onSubmit={(e) => e.preventDefault()}>
                 <label className="sr-only" htmlFor="m">Mensaje</label>
                 <textarea id="m" rows={2} placeholder="Describe lo que quieres hacer; / para comandos, @ para archivos" />
