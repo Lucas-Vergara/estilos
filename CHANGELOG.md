@@ -1,5 +1,17 @@
 # Cambios
 
+## v0.29.0 — 2026-11-22
+
+Piezas de la línea consola para conversar con Claude desde el panel de proyectos (fase 2):
+
+- **Lateral con capa interior** (`.co-lateral` > `.co-lateral-interior`): el contenido se desliza dentro de una capa 24 px más ancha y la barra de desplazamiento queda fuera de la vista en cualquier navegador. Algunos Chrome ignoran `scrollbar-width` y `::-webkit-scrollbar`, y la franja de la barra se veía sobre la lateral. **Cambio de estructura**: el contenido de la lateral va ahora dentro de `.co-lateral-interior`.
+- **Espacios con sus sesiones**: `.co-espacio` > `.co-espacio-fila` (la carpeta, que se pliega, y un `+` que aparece al pasar el cursor, `.co-espacio-nueva`) y `.co-sesion-item`; `.co-boton-item` para ítems que son botones; `.co-vacio-sub`.
+- **Respuesta en bloques**: los pasos sin texto (pensar y usar herramientas) van en un `details.co-pensamiento` con `.co-resumen-trabajo` («Pensó y usó 12 herramientas») y `.co-pasos` (`.co-paso-pensamiento`, `.co-herramienta`). Mientras responde, `.co-latido` y `.co-esperando`.
+- **Markdown de las respuestas**: `.co-md` (párrafos, listas, títulos, citas), `.co-codigo` y `.co-tabla`.
+- **Cuadro para escribir**: `.co-selector-fijo` (el espacio de una sesión que ya existe), `.co-detener` (el botón de enviar pasa a detener).
+- **Sesión**: `.co-sesion-cabecera`, y `.co-bienvenida` con `.co-sesion-nueva` para una sesión nueva (saludo y cuadro para escribir al centro).
+- Las listas de la lateral no se ensanchan con un título largo (`grid-template-columns: minmax(0, 1fr)`) y el contenido de `.co-principal` se alinea arriba.
+
 ## v0.28.0 — 2026-11-22
 
 - **Línea consola** (`lineas/consola.css`, bajo `<body class="consola">`), para herramientas en las que se trabaja con agentes (sesiones, conversación, automatización) y además se muestran datos. Nació al rediseñar el panel de proyectos imitando la app de escritorio de un harness de agentes:

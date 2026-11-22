@@ -16,6 +16,7 @@ const reloj = i(<><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>);
 const carpeta = i(<path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h4l2 2h9A1.5 1.5 0 0 1 21 9.5v8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5Z" />);
 const menu = i(<path d="M4 7h16M4 12h16M4 17h16" />);
 const enviar = i(<path d="M12 19V5M6 11l6-6 6 6" />);
+const mas = i(<path d="M12 5v14M5 12h14" />);
 
 type Vista = "sesion" | "datos";
 
@@ -26,6 +27,7 @@ function Vitrina() {
   return (
     <div className="co-app">
       <aside id="co-lateral" className={`co-lateral${abierta ? " abierta" : ""}`} aria-label="Navegación">
+        <div className="co-lateral-interior">
         <a href="./consola.html" className="co-marca"><span>consola</span><span className="co-sello">ESTILOS</span></a>
         <button type="button" className={`co-nueva${vista === "sesion" ? " active" : ""}`} onClick={() => setVista("sesion")}>{nueva}Nueva sesión</button>
         <nav className="co-nav" aria-label="Herramientas">
@@ -34,11 +36,20 @@ function Vitrina() {
         <div className="co-grupo">
           <div className="co-grupo-cabecera"><span className="co-grupo-titulo">Espacios de trabajo</span></div>
           <ul className="co-lista">
-            {["panel-proyectos", "habitos", "franservice"].map((n, k) => (
-              <li key={n}><a href="#" className={`co-item${k === 0 ? " active" : ""}`}>{carpeta}<span>{n}</span></a></li>
+            <li className="co-espacio">
+              <div className="co-espacio-fila">
+                <button type="button" className="co-item co-boton-item" aria-expanded="true">{carpeta}<span>panel-proyectos</span></button>
+                <a href="#" className="co-icono co-icono-chico co-espacio-nueva" aria-label="Nueva sesión en panel-proyectos">{mas}</a>
+              </div>
+              <ul className="co-lista">
+                <li><a href="#" className="co-item co-item-sub co-sesion-item active"><span>¿En qué quedó la fase 4?</span></a></li>
+                <li><a href="#" className="co-item co-item-sub co-sesion-item"><span>Revisar el diseño de Tareas, con un título largo que se corta</span></a></li>
+                <li className="co-vacio co-vacio-sub">y 3 más antiguas</li>
+              </ul>
+            </li>
+            {["habitos", "franservice"].map((n) => (
+              <li key={n}><a href="#" className="co-item">{carpeta}<span>{n}</span></a></li>
             ))}
-            <li><a href="#" className="co-item co-item-sub"><span>¿En qué quedó la fase 4?</span></a></li>
-            <li><a href="#" className="co-item co-item-sub"><span>Revisar el diseño de Tareas</span></a></li>
           </ul>
         </div>
         <div className="co-grupo">
@@ -54,6 +65,7 @@ function Vitrina() {
           <span className="co-cuenta">Lucas</span>
           <BotonTema predeterminado="dark" clave="consola:tema" className="co-icono" tamano={16} />
         </div>
+        </div>
       </aside>
       <div className={`co-fondo${abierta ? " visible" : ""}`} onClick={() => setAbierta(false)} aria-hidden="true" />
 
@@ -68,12 +80,21 @@ function Vitrina() {
               <div className="co-hilo">
                 <div className="co-turno-usuario"><p>¿En qué quedó la fase 4 y qué falta?</p></div>
                 <div className="co-turno-claude">
-                  <details className="co-pensamiento"><summary>Pensó 14 s</summary><p>Reviso la cola, el informe de la última corrida y el log de la rama.</p></details>
-                  <div className="co-herramientas">
-                    <span className="co-herramienta"><b>Leer</b> tareas/cola.md</span>
-                    <span className="co-herramienta"><b>Bash</b> git log --oneline -5</span>
+                  <details className="co-pensamiento" open>
+                    <summary><span className="co-resumen-trabajo">Pensó y usó 2 herramientas</span></summary>
+                    <div className="co-pasos">
+                      <p className="co-paso-pensamiento">Reviso la cola, el informe de la última corrida y el log de la rama.</p>
+                      <span className="co-herramienta"><b>Read</b>tareas/cola.md</span>
+                      <span className="co-herramienta"><b>Bash</b>Ver los últimos commits</span>
+                    </div>
+                  </details>
+                  <div className="co-md">
+                    <p>Las fases F0 a F3 están listas. De la <b>F4</b> falta terminar la pantalla de resultados y elegir la biblioteca del mapa:</p>
+                    <div className="co-tabla"><table><thead><tr><th>Opción</th><th>Peso</th><th>Nota</th></tr></thead>
+                      <tbody><tr><td>Leaflet</td><td>42 kB</td><td>simple, teselas raster</td></tr><tr><td>MapLibre</td><td>210 kB</td><td>vectorial, estilos propios</td></tr></tbody></table></div>
+                    <pre className="co-codigo"><code>npm install maplibre-gl</code></pre>
                   </div>
-                  <p>Las fases F0 a F3 están listas. De la <b>F4</b> falta terminar la pantalla de resultados y elegir la biblioteca del mapa.</p>
+                  <details className="co-pensamiento"><summary><span className="co-latido" aria-hidden="true" /><span className="co-resumen-trabajo">Bash · Correr los tests</span></summary></details>
                   <div className="co-diff">
                     <div className="co-diff-cabecera"><span>Cambios · turno 1</span><span className="co-diff-archivo">src/resultados.tsx</span><span className="co-diff-suma">+2</span><span className="co-diff-resta">−1</span></div>
                     <pre><span className="co-diff-ctx">  const filas = useResultados(filtro);</span><span className="co-diff-menos">- return &lt;Tabla filas={"{filas}"} /&gt;;</span><span className="co-diff-mas">+ if (!filas.length) return &lt;Vacio /&gt;;</span><span className="co-diff-mas">+ return &lt;Tabla filas={"{filas}"} /&gt;;</span></pre>

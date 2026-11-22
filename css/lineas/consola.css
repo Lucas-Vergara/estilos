@@ -122,12 +122,15 @@ body.consola { background: var(--plano); }
 
 /* ---------- Barra lateral ---------- */
 .co-lateral {
-  position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; gap: 6px;
-  padding: 14px 10px 10px; background: var(--lateral-velo), var(--lateral-fondo);
+  position: sticky; top: 0; height: 100vh; overflow: hidden; background: var(--lateral-velo), var(--lateral-fondo);
   box-shadow: inset -0.5px 0 0 var(--lateral-borde); color: var(--lateral-tinta); font-size: 0.88rem;
-  scrollbar-width: none;
 }
-.co-lateral::-webkit-scrollbar { width: 0; height: 0; }
+/* El contenido se desliza dentro de una capa 24 px más ancha: la barra de desplazamiento queda fuera de la vista en
+   cualquier navegador (algunos Chrome ignoran scrollbar-width y ::-webkit-scrollbar). */
+.co-lateral-interior {
+  height: 100%; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; gap: 6px;
+  padding: 14px 34px 10px 10px; margin-right: -24px;
+}
 .co-marca {
   display: flex; align-items: center; gap: 8px; padding: 4px 8px 12px; color: var(--lateral-tinta);
   font-size: 1.12rem; font-weight: 700; letter-spacing: -0.03em;
@@ -144,7 +147,7 @@ body.consola { background: var(--plano); }
 }
 .co-nueva:hover { background: var(--control-hover); text-decoration: none; }
 .co-nueva.active { box-shadow: var(--control-linea), inset 0 0 0 1px rgba(122, 155, 240, 0.4); }
-.co-nav, .co-lista { display: grid; gap: 1px; list-style: none; margin: 0; padding: 0; }
+.co-nav, .co-lista { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1px; list-style: none; margin: 0; padding: 0; }
 .co-item {
   display: flex; align-items: center; gap: 10px; min-height: 33px; padding: 0 8px; border-radius: 8px;
   color: var(--lateral-tinta); font-weight: 400; transition: background var(--dur-rapida);
@@ -159,6 +162,18 @@ body.consola { background: var(--plano); }
 .co-esqueleto { background: var(--lateral-hover); margin: 3px 0; min-height: 27px; animation: co-latido 1.4s ease-in-out infinite; }
 @keyframes co-latido { 50% { opacity: 0.5; } }
 .co-vacio { padding: 4px 8px; color: var(--lateral-tinta-2); font-size: 0.8rem; }
+.co-vacio-sub { padding-left: 34px; font-size: 0.76rem; }
+.co-boton-item { width: 100%; border: 0; background: none; font: inherit; text-align: left; cursor: pointer; }
+
+/* Espacio de trabajo con sus sesiones: la carpeta se pliega y el «+» abre una sesión nueva ahí */
+.co-espacio-fila { position: relative; display: flex; align-items: center; }
+.co-espacio-fila > .co-item { flex: 1; min-width: 0; padding-right: 30px; }
+.co-espacio-nueva { position: absolute; right: 4px; opacity: 0; transition: opacity var(--dur-rapida); }
+.co-espacio-fila:hover .co-espacio-nueva, .co-espacio-nueva:focus-visible { opacity: 1; }
+@media (hover: none) { .co-espacio-nueva { opacity: 1; } }
+.co-espacio > .co-lista { margin: 1px 0 4px; }
+.co-sesion-item { min-height: 30px; font-size: 0.84rem; color: var(--lateral-tinta-2); }
+.co-sesion-item.active { color: var(--lateral-tinta); }
 
 .co-grupo { display: grid; gap: 2px; margin-top: 14px; }
 .co-grupo-cabecera { display: flex; align-items: center; justify-content: space-between; padding: 0 2px 0 8px; }
@@ -248,21 +263,48 @@ body.consola { background: var(--plano); }
 .co-hilo ol { margin: 0; padding-left: 22px; display: grid; gap: 4px; }
 .co-muestra { justify-self: center; font-size: 0.78rem; color: var(--tinta-3); padding: 4px 12px; border-radius: 999px; background: var(--control); }
 .co-turno-usuario { justify-self: end; max-width: 75%; padding: 9px 16px; border-radius: 18px; background: var(--burbuja); }
-.co-turno-claude { display: grid; gap: 12px; }
-.co-pensamiento { border-bottom: 0.5px solid var(--borde); padding-bottom: 10px; }
+.co-turno-claude { display: grid; gap: 10px; }
+.co-turno-usuario p { white-space: pre-wrap; overflow-wrap: anywhere; }
+.co-pensamiento { min-width: 0; }
 .co-pensamiento summary {
-  list-style: none; cursor: pointer; color: var(--tinta-3); font-size: 0.82rem; display: inline-flex; align-items: center; gap: 6px; margin: 0;
+  max-width: 100%; list-style: none; cursor: pointer; color: var(--tinta-3); font-size: 0.82rem; display: inline-flex; align-items: center; gap: 6px; margin: 0;
 }
 .co-pensamiento summary::-webkit-details-marker { display: none; }
 .co-pensamiento summary::after { content: "›"; transition: transform var(--dur-rapida) var(--curva); }
 .co-pensamiento[open] summary::after { transform: rotate(90deg); }
 .co-pensamiento p { margin-top: 8px; color: var(--tinta-3); font-size: 0.86rem; }
+.co-resumen-trabajo { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 680px; }
+/* Los pasos de un bloque de trabajo: lo que pensó y las herramientas que usó */
+.co-pasos { display: grid; gap: 6px; justify-items: start; padding: 8px 0 4px 12px; border-left: 0.5px solid var(--borde); margin: 6px 0 0 4px; }
+.co-pasos .co-herramienta { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.co-pasos .co-paso-pensamiento { margin: 0; color: var(--tinta-3); font-size: 0.84rem; line-height: 1.6; white-space: pre-wrap; }
+/* Respondiendo: un punto que late (quieto con «reducir movimiento») */
+.co-esperando { display: inline-flex; align-items: center; gap: 8px; color: var(--tinta-3); font-size: 0.86rem; margin: 0; }
+.co-latido { width: 7px; height: 7px; border-radius: 50%; background: var(--relleno-acento); flex: none; animation: co-latir 1.2s ease-in-out infinite; }
+@keyframes co-latir { 50% { opacity: 0.3; transform: scale(0.8); } }
+@media (prefers-reduced-motion: reduce) { .co-latido { animation: none; } }
 .co-herramientas { display: flex; flex-wrap: wrap; gap: 6px; }
 .co-herramienta {
   font-family: var(--fuente-mono); font-size: 0.74rem; color: var(--tinta-3); padding: 3px 10px; border-radius: 8px;
   background: var(--control); box-shadow: var(--control-linea);
 }
 .co-herramienta b { font-family: var(--fuente); color: var(--tinta-2); font-weight: 500; margin-right: 4px; }
+
+/* Markdown de las respuestas */
+.co-md { display: grid; gap: 10px; min-width: 0; overflow-wrap: anywhere; }
+.co-md p, .co-md ul, .co-md ol, .co-md blockquote { margin: 0; }
+.co-md ul, .co-md ol { padding-left: 22px; display: grid; gap: 3px; }
+.co-md li > ul, .co-md li > ol { margin-top: 3px; }
+.co-md h3, .co-md h4, .co-md h5, .co-md h6 { margin: 6px 0 0; font-size: 1rem; font-weight: 600; letter-spacing: -0.01em; }
+.co-md h3 { font-size: 1.08rem; }
+.co-md hr { border: 0; border-top: 0.5px solid var(--borde); margin: 4px 0; width: 100%; }
+.co-md blockquote { padding-left: 12px; border-left: 2px solid var(--borde-campo); color: var(--tinta-2); }
+.co-codigo { margin: 0; padding: 12px 14px; border-radius: 12px; background: var(--superficie); box-shadow: var(--control-linea); overflow-x: auto; font-size: 0.8rem; line-height: 1.6; }
+.co-codigo code { background: none; padding: 0; font-size: inherit; }
+.co-tabla { overflow-x: auto; border-radius: 12px; box-shadow: var(--control-linea); }
+.co-tabla table { font-size: 0.86rem; }
+.co-tabla th, .co-tabla td { padding: 7px 12px; vertical-align: top; }
+.co-tabla th { background: var(--control); }
 
 .co-diff { border-radius: 12px; overflow: hidden; box-shadow: var(--control-linea); background: var(--superficie); font-size: 0.78rem; }
 .co-diff-cabecera { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: var(--control); color: var(--tinta-2); }
@@ -303,12 +345,24 @@ body.consola { background: var(--plano); }
 }
 .co-selector select:focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; border-radius: 4px; }
 .co-selector-tenue { color: var(--tinta-3); }
+.co-selector-fijo { cursor: default; padding-right: 8px; }
+.co-selector-fijo:hover { background: none; }
 .co-enviar {
   width: 30px; height: 30px; border-radius: 50%; border: 0; padding: 0; display: grid; place-items: center; margin-left: 6px;
   background: var(--relleno-acento); color: #fff; transition: filter var(--dur-rapida), opacity var(--dur-rapida);
 }
 .co-enviar:hover:not(:disabled) { filter: brightness(1.1); }
 .co-enviar:disabled { opacity: 0.55; cursor: default; }
+.co-detener { background: var(--tinta); color: var(--plano); }
+
+/* Cabecera de una sesión y bienvenida de una sesión nueva (el cuadro para escribir queda bajo el saludo) */
+.co-sesion-cabecera { display: grid; gap: 4px; padding-bottom: 4px; }
+.co-sesion-cabecera h1 { font-size: 1.15rem; letter-spacing: -0.02em; }
+.co-bienvenida { margin-top: 18vh; display: grid; gap: 8px; text-align: center; justify-items: center; }
+.co-bienvenida h1 { font-size: 1.6rem; }
+.co-bienvenida .nota { max-width: 560px; color: var(--tinta-3); }
+.co-sesion-nueva .co-hilo { flex: 0 0 auto; }
+.co-sesion-nueva .co-compositor { position: static; }
 @media (max-width: 640px) {
   .co-turno-usuario { max-width: 90%; }
   .co-compositor { bottom: 8px; }

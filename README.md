@@ -181,10 +181,12 @@ import { BotonTema } from "@lucas-vergara/estilos";
 
 <div className="co-app">
   <aside className="co-lateral">            {/* .abierta bajo 900 px */}
+   <div className="co-lateral-interior">    {/* se desliza aquí, con la barra de desplazamiento fuera de la vista */}
     <a className="co-marca">panel <span className="co-sello">PROYECTOS</span></a>
     <a className="co-nueva">Nueva sesión</a>
     <a className="co-item active">…</a>      {/* .co-grupo > .co-grupo-cabecera + .co-lista para secciones */}
     <div className="co-pie-lateral">… <BotonTema predeterminado="dark" clave="consola:tema" className="co-icono" tamano={16} /></div>
+   </div>
   </aside>
   <div className="co-fondo" />              {/* .visible con la lateral abierta en pantallas angostas */}
   <div className="co-principal">
@@ -205,9 +207,13 @@ como predeterminado:
 </script>
 ```
 
-- **Sesión**: `.co-sesion` > `.co-hilo` (`.co-turno-usuario` como burbuja, `.co-turno-claude` con `details.co-pensamiento`,
-  `.co-herramientas` > `.co-herramienta`, `.co-diff`) y `form.co-compositor` (textarea, `.co-selector` con un select
-  adentro, `.co-redondo`, `.co-espaciador`, `.co-enviar`).
+- **Sesión**: `.co-sesion` (`.co-sesion-nueva` con `.co-bienvenida` si es nueva; `.co-sesion-cabecera`) > `.co-hilo`
+  (`.co-turno-usuario` como burbuja; `.co-turno-claude` con `.co-md` para el texto y `details.co-pensamiento` >
+  `.co-resumen-trabajo` + `.co-pasos` para lo que pensó y las herramientas que usó; `.co-diff`; `.co-latido` mientras
+  responde) y `form.co-compositor` (textarea, `.co-selector` con un select adentro o `.co-selector-fijo`, `.co-redondo`,
+  `.co-espaciador`, `.co-enviar` o `.co-detener`).
+- **Espacios en la lateral**: `li.co-espacio` > `.co-espacio-fila` (`.co-item.co-boton-item` que pliega y `.co-espacio-nueva`)
+  + `.co-lista` de `.co-sesion-item`.
 - **Tokens propios**: `--lateral-fondo`, `--lateral-velo`, `--lateral-tinta(-2)`, `--control`, `--control-hover`,
   `--control-linea` (la línea interior que reemplaza al borde), `--compositor`, `--burbuja`, `--relleno-acento`, `--fuente-mono`.
 - Sobre cualquier acento, pero redefine texto y superficies; el contraste se revisa con `npm run contraste`.
