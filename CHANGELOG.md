@@ -1,5 +1,15 @@
 # Cambios
 
+## v0.30.0 — 2026-11-22
+
+Línea consola, para revisar lo que hizo un agente (fase 3 del panel de proyectos). Solo clases nuevas:
+
+- **Cambios por pedido**: `details.co-diff.co-cambios` (cabecera con `.co-cambios-cuenta` y el total +/−) con un `details.co-cambio` por archivo (`.co-cambio-fila` con `.co-diff-archivo`, chip «nuevo» y `.co-cambio-cuentas`), trozos con `.co-trozo-separador` («⋯ línea 12»).
+- **Traza**: `.co-traza` (tabla de pedidos con `.co-traza-pedido`, `.co-traza-error`, fila `.co-traza-detalle`) y `.co-traza-linea`, las herramientas en una línea de tiempo (`.co-traza-nombre`, `.co-traza-pista` > `i` con `left`/`width` en %, `.co-traza-ms`, `li.con-error`).
+- **Vista de una sesión**: `.co-sesion-vistas` (el segmentado Conversación / Traza a la derecha de la cabecera) y `.co-sesion-ancha`.
+- **Lista de skills**: `.co-skills` > `.co-skill` (`.co-skill-fila` con `.co-skill-nombre`, chip y `.co-skill-descripcion` en dos líneas; `.co-skill-detalle` y `.co-skill-cuerpo` para el SKILL.md), `.co-buscar` y `.co-conectores`.
+- **Vitrina**: cambios por pedido en la sesión de ejemplo.
+
 ## v0.29.0 — 2026-11-22
 
 Piezas de la línea consola para conversar con Claude desde el panel de proyectos (fase 2):

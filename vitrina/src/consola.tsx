@@ -95,10 +95,17 @@ function Vitrina() {
                     <pre className="co-codigo"><code>npm install maplibre-gl</code></pre>
                   </div>
                   <details className="co-pensamiento"><summary><span className="co-latido" aria-hidden="true" /><span className="co-resumen-trabajo">Bash · Correr los tests</span></summary></details>
-                  <div className="co-diff">
-                    <div className="co-diff-cabecera"><span>Cambios · turno 1</span><span className="co-diff-archivo">src/resultados.tsx</span><span className="co-diff-suma">+2</span><span className="co-diff-resta">−1</span></div>
-                    <pre><span className="co-diff-ctx">  const filas = useResultados(filtro);</span><span className="co-diff-menos">- return &lt;Tabla filas={"{filas}"} /&gt;;</span><span className="co-diff-mas">+ if (!filas.length) return &lt;Vacio /&gt;;</span><span className="co-diff-mas">+ return &lt;Tabla filas={"{filas}"} /&gt;;</span></pre>
-                  </div>
+                  <details className="co-diff co-cambios" open>
+                    <summary className="co-diff-cabecera"><span>Cambios · pedido 1</span><span className="co-cambios-cuenta">2 archivos</span><span className="co-diff-suma">+3</span><span className="co-diff-resta">−1</span></summary>
+                    <details className="co-cambio" open>
+                      <summary className="co-cambio-fila"><span className="co-diff-archivo">src/resultados.tsx</span><span className="co-cambio-cuentas"><span className="co-diff-suma">+2</span> <span className="co-diff-resta">−1</span></span></summary>
+                      <pre><span className="co-trozo-separador">⋯ línea 12</span><span className="co-diff-ctx">  const filas = useResultados(filtro);</span><span className="co-diff-menos">- return &lt;Tabla filas={"{filas}"} /&gt;;</span><span className="co-diff-mas">+ if (!filas.length) return &lt;Vacio /&gt;;</span><span className="co-diff-mas">+ return &lt;Tabla filas={"{filas}"} /&gt;;</span></pre>
+                    </details>
+                    <details className="co-cambio">
+                      <summary className="co-cambio-fila"><span className="co-diff-archivo">src/vacio.tsx</span><span className="chip chip-neutro">nuevo</span><span className="co-cambio-cuentas"><span className="co-diff-suma">+1</span> <span className="co-diff-resta">−0</span></span></summary>
+                      <pre><span className="co-diff-mas">+export const Vacio = () =&gt; &lt;p&gt;Sin resultados&lt;/p&gt;;</span></pre>
+                    </details>
+                  </details>
                 </div>
               </div>
               <form className="co-compositor" onSubmit={(e) => e.preventDefault()}>

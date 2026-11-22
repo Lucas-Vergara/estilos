@@ -212,6 +212,8 @@ como predeterminado:
   `.co-resumen-trabajo` + `.co-pasos` para lo que pensó y las herramientas que usó; `.co-diff`; `.co-latido` mientras
   responde) y `form.co-compositor` (textarea, `.co-selector` con un select adentro o `.co-selector-fijo`, `.co-redondo`,
   `.co-espaciador`, `.co-enviar` o `.co-detener`).
+- **Revisión** (v0.30.0): `details.co-diff.co-cambios` > `details.co-cambio` por archivo; `.co-traza` con
+  `.co-traza-linea` (herramientas en una línea de tiempo); `.co-sesion-vistas`; lista de skills `.co-skills` > `.co-skill`.
 - **Espacios en la lateral**: `li.co-espacio` > `.co-espacio-fila` (`.co-item.co-boton-item` que pliega y `.co-espacio-nueva`)
   + `.co-lista` de `.co-sesion-item`.
 - **Tokens propios**: `--lateral-fondo`, `--lateral-velo`, `--lateral-tinta(-2)`, `--control`, `--control-hover`,

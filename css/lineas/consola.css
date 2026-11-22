@@ -367,3 +367,64 @@ body.consola { background: var(--plano); }
   .co-turno-usuario { max-width: 90%; }
   .co-compositor { bottom: 8px; }
 }
+
+/* ---------- Revisión de una sesión: cambios por pedido, traza, y la lista de skills (v0.30.0) ---------- */
+/* Cambios de un pedido: un .co-diff plegable con un .co-cambio por archivo */
+.co-cambios { padding: 0; }
+.co-cambios > summary { cursor: pointer; list-style: none; }
+.co-cambios > summary::-webkit-details-marker { display: none; }
+.co-cambios > summary::after { content: "›"; transition: transform var(--dur-rapida) var(--curva); color: var(--tinta-3); }
+.co-cambios[open] > summary::after { transform: rotate(90deg); }
+.co-cambios-cuenta { margin-right: auto; color: var(--tinta-3); }
+.co-cambio { border-top: 0.5px solid var(--borde); }
+.co-cambio-fila { display: flex; align-items: center; gap: 10px; padding: 7px 12px; cursor: pointer; list-style: none; }
+.co-cambio-fila::-webkit-details-marker { display: none; }
+.co-cambio-fila:hover { background: var(--control); }
+.co-cambio-fila .co-diff-archivo { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.co-cambio-fila .co-diff-archivo { margin-right: 0; }
+.co-cambio-cuentas { margin-left: auto; white-space: nowrap; }
+.co-cambio pre { max-height: 520px; overflow: auto; border-top: 0.5px solid var(--borde); }
+.co-cambio pre span { white-space: pre; }
+.co-trozo-separador { color: var(--tinta-3); background: var(--control); font-size: 0.72rem; padding-block: 2px !important; }
+
+.co-sesion-cabecera { position: relative; }
+.co-sesion-vistas { position: absolute; right: 0; top: -2px; }
+.co-sesion-cabecera h1, .co-sesion-cabecera > p { padding-right: 230px; }
+@media (max-width: 640px) {
+  .co-sesion-vistas { position: static; order: 3; }
+  .co-sesion-cabecera h1, .co-sesion-cabecera > p { padding-right: 0; }
+}
+.co-traza { display: grid; gap: 12px; }
+.co-traza table { font-size: 0.84rem; }
+.co-traza-pedido { border: 0; background: none; padding: 0; color: var(--tinta); font: inherit; text-align: left; cursor: pointer; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.co-traza-error { color: var(--critico); }
+.co-traza-detalle > td { background: color-mix(in srgb, var(--superficie-2) 50%, transparent); }
+.co-traza-linea { list-style: none; margin: 8px 0 4px; padding: 0; display: grid; gap: 3px; }
+.co-traza-linea li { display: grid; grid-template-columns: minmax(0, 2fr) minmax(120px, 3fr) 70px; gap: 10px; align-items: center; font-size: 0.78rem; }
+.co-traza-nombre { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--tinta-3); font-family: var(--fuente-mono); }
+.co-traza-nombre b { font-family: var(--fuente); color: var(--tinta-2); font-weight: 500; }
+.co-traza-pista { position: relative; height: 8px; border-radius: 4px; background: var(--control); }
+.co-traza-pista i { position: absolute; top: 0; bottom: 0; border-radius: 4px; background: var(--relleno-acento); }
+.co-traza-linea li.con-error .co-traza-pista i { background: var(--critico); }
+.co-traza-linea li.con-error .co-traza-ms { color: var(--critico); }
+.co-traza-ms { text-align: right; font-variant-numeric: tabular-nums; color: var(--tinta-3); }
+
+.co-skills { list-style: none; margin: 0; padding: 0; display: grid; }
+.co-skill { border-top: 0.5px solid var(--grilla); }
+.co-skill:first-child { border-top: 0; }
+.co-skill-fila {
+  width: 100%; display: grid; grid-template-columns: minmax(140px, max-content) auto minmax(0, 1fr); gap: 4px 12px; align-items: baseline;
+  border: 0; background: none; padding: 10px 6px; font: inherit; color: var(--tinta); text-align: left; cursor: pointer; border-radius: 8px;
+}
+.co-skill-fila:hover { background: var(--control); }
+.co-skill-nombre { font-weight: 600; font-family: var(--fuente-mono); font-size: 0.86rem; }
+.co-skill-fila .chip { justify-self: start; }
+.co-skill-fila .chip:empty { visibility: hidden; padding: 0; }
+.co-skill-descripcion { color: var(--tinta-3); font-size: 0.84rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.co-skill-fila[aria-expanded="true"] .co-skill-descripcion { -webkit-line-clamp: unset; }
+.co-skill-detalle { display: grid; gap: 8px; padding: 0 6px 14px; }
+.co-skill-cuerpo { max-height: 480px; overflow: auto; padding: 14px 16px; border-radius: 12px; background: var(--plano); box-shadow: var(--control-linea); font-size: 0.88rem; }
+@media (max-width: 640px) { .co-skill-fila { grid-template-columns: minmax(0, 1fr) auto; } .co-skill-descripcion { grid-column: 1 / -1; } }
+.co-buscar { height: 32px; padding: 0 12px; min-width: 180px; font: inherit; font-size: 0.84rem; }
+.co-conectores { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 12px; }
+.co-sesion.co-sesion-ancha { max-width: 1080px; }
