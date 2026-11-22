@@ -3,10 +3,11 @@
 import { readFileSync, readdirSync } from "node:fs";
 
 // Lee las variables de los bloques :root y :root[data-theme="dark"] de un archivo CSS
+// (la línea consola usa :root:has(> body.consola) y :root[data-theme="dark"]:has(> body.consola))
 function leer(ruta) {
   const css = readFileSync(ruta, "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
   const temas = { claro: {}, oscuro: {} };
-  for (const [, selector, cuerpo] of css.matchAll(/(:root(?:\[data-theme="dark"\])?)\s*\{([^}]*)\}/g)) {
+  for (const [, selector, cuerpo] of css.matchAll(/(:root(?:\[data-theme="dark"\])?(?::has\(> body\.consola\))?)\s*\{([^}]*)\}/g)) {
     const tema = selector.includes("dark") ? temas.oscuro : temas.claro;
     for (const [, nombre, valor] of cuerpo.matchAll(/--([\w-]+):\s*([^;]+);/g)) tema[nombre] = valor.trim();
   }
@@ -59,6 +60,20 @@ for (const archivo of readdirSync("css/acentos")) {
     for (const [frente, fondo, minimo] of PENDIENTES) {
       const r = contraste(v[frente], v[fondo]);
       if (r < minimo) console.log(`· pendiente ${archivo.replace(".css", "")} ${tema}: --${frente} sobre --${fondo} = ${r.toFixed(2)}:1 (mínimo ${minimo}:1)`);
+    }
+  }
+}
+// Línea consola: redefine todos los tokens de texto y superficie, sobre cualquier acento (se prueba con azul)
+{
+  const consola = leer("css/lineas/consola.css");
+  const azul = leer("css/acentos/azul.css");
+  const PARES_CONSOLA = [...PARES, ["tinta-2", "compositor", TEXTO], ["tinta-3", "compositor", TEXTO],
+    ["lateral-tinta", "lateral-fondo", TEXTO], ["lateral-tinta-2", "lateral-fondo", TEXTO]];
+  for (const tema of ["claro", "oscuro"]) {
+    const v = { ...base.claro, ...azul.claro, ...consola.claro, ...(tema === "oscuro" ? { ...base.oscuro, ...azul.oscuro, ...consola.oscuro } : {}) };
+    for (const [frente, fondo, minimo] of PARES_CONSOLA) {
+      const r = contraste(v[frente], v[fondo]);
+      if (r < minimo) { fallas++; console.log(`✗ consola ${tema}: --${frente} sobre --${fondo} = ${r.toFixed(2)}:1 (mínimo ${minimo}:1)`); }
     }
   }
 }

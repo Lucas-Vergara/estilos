@@ -127,6 +127,7 @@ function Vitrina() {
             <a href="sitio-disenadora.html">Sitio diseñadora →</a>
             <a href="luz.html">Línea luz →</a>
             <a href="club.html">Línea club →</a>
+            <a href="consola.html">Línea consola →</a>
           </nav>
         </div>
         <div className="usuario">

@@ -42,6 +42,19 @@ para no tocar el monitor Sodimac, que se ve bien en la línea panel.
 - **Descartadas por ahora**: instrumento (Geist + mono) y premium suave (sombras marcadas) chocaban con Inter y "sin
   sombras"; sala de control, quizá como vista "operación" para la planta.
 
+## Me gusta — línea consola (desde v0.28.0)
+
+Pedida el 22-11-2026 al rediseñar el panel de proyectos: quería que se pareciera a la app de un harness de agentes
+(la de DeepSeek), imitándola lo más posible, y que el panel se ordenara como ella (sesiones y espacios de trabajo a la
+izquierda, la conversación al centro).
+
+- **Oscuro por defecto, con el claro opcional** (excepción consciente a «modo claro por defecto»): el oscuro de esa app,
+  con la **barra lateral en un gris pizarra más claro** que el fondo y los **detalles del chat y los botones un poco más
+  claros**, con letras claras.
+- **DM Sans** en vez de Inter, para explorarla y ver si gusta (excepción a «Inter», en prueba).
+- Casi sin bordes: una línea interior de media opacidad; esquinas generosas; botón de enviar redondo y azul.
+- Me gustó mucho como quedó en el panel (22-11-2026): pasó a la biblioteca tal cual.
+
 ## Me gusta — línea sitio diseñadora
 
 Creada junto con Franservice (https://franservice.cl), a partir del rediseño hecho con su diseñadora, octubre 2026:
@@ -167,7 +180,7 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 |---|---|---|---|
 | monitor Sodimac (etex/monitor-materiales/web) | verde | v0.25.0 | origen de la biblioteca; de aquí salieron el arreglo de leyendas (v0.12.1), el pulido de escritorio (v0.13.0) y el de menos ruido (v0.14.0) |
 | datos-reciclaje (antes radar de reciclaje) | petróleo, línea panel2 | v0.23.0 | de aquí salieron la navegación lateral (v0.15.0), la línea panel2 (v0.21.0), `ElegirArchivo` (v0.22.0) y el acento petróleo (v0.23.0); componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
-| panel de proyectos (antes monitor de proyectos) | azul | v0.15.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
+| panel de proyectos (antes monitor de proyectos) | azul, línea consola | v0.28.0 | de aquí salió la línea consola (v0.28.0); la barra lateral (`Lateral.tsx`) y las páginas son del proyecto; componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
 | oportunidades | azul | v0.15.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
 | finanzas | verde | v0.15.0 | app de finanzas personales (Firebase); estilos propios mínimos en `src/estilos.css` |
 | habitos (web) | — (línea luz) | v0.26.0 | app de hábitos; de aquí salieron los fondos y órdenes de la línea luz (v0.16.0, hasta 10 luces en v0.17.0), los 24 colores (v0.19.0) y los cuatro encendidos (v0.26.0); la pantalla ESP32 replica la línea en su firmware |

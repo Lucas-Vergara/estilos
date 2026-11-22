@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Línea consola</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <script>
+      // Línea consola: oscuro por defecto, el claro solo si se eligió (antes de pintar, para que no parpadee).
+      try { if (localStorage.getItem("consola:tema") !== "light") document.documentElement.dataset.theme = "dark"; }
+      catch { document.documentElement.dataset.theme = "dark"; }
+    </script>
+  </head>
+  <body class="consola">
+    <div id="root"></div>
+    <script type="module" src="/src/consola.tsx"></script>
+  </body>
+</html>

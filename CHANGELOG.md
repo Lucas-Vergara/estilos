@@ -1,5 +1,18 @@
 # Cambios
 
+## v0.28.0 — 2026-11-22
+
+- **Línea consola** (`lineas/consola.css`, bajo `<body class="consola">`), para herramientas en las que se trabaja con agentes (sesiones, conversación, automatización) y además se muestran datos. Nació al rediseñar el panel de proyectos imitando la app de escritorio de un harness de agentes:
+  - **Oscura por defecto, clara opcional**: fondo `#151517`, barra lateral gris pizarra `#343a43` con un velo azul y violeta, controles y cuadro para escribir un poco más claros (`--control`, `--compositor`), letras claras. El claro usa la misma estructura sobre blanco.
+  - **Casi sin bordes**: una línea interior de media opacidad (`--control-linea`) en tarjetas, botones, campos y chips; esquinas de 16 px en tarjetas y 20 px en el cuadro para escribir.
+  - **DM Sans** (y DM Mono para código y herramientas), en prueba para ver si gusta.
+  - **Estructura** `co-app`: `co-lateral` (marca con sello, «Nueva sesión», ítems, grupos plegables, pie con la cuenta y el tema; panel sobre el contenido bajo 900 px), `co-principal` y `co-barra` con la ruta.
+  - **Sesión con un agente**: burbuja del usuario, «Pensó 14 s» plegable, herramientas usadas, diff por turno y el cuadro para escribir con selectores de espacio, permisos, modelo y esfuerzo, y el botón de enviar redondo.
+  - Viste las clases de la línea panel (tarjetas, botones, campos, segmentado, chips, tablas, avisos) solo bajo `.consola`: los demás proyectos no cambian.
+- **`BotonTema`** recibe `predeterminado` (`"light"` por defecto, `"dark"` en consola), `clave`, `className` y `tamano`. Sin props, igual que antes.
+- **`npm run contraste`** revisa también los tokens de la línea consola en ambos temas.
+- **Vitrina**: página `consola.html`.
+
 ## v0.27.0 — 2026-11-19
 
 - **Módulo grilla** (`grilla.css` y `@lucas-vergara/estilos/grilla`), el primer módulo que no es una línea: sirve dentro de cualquiera. Sale del archivo de Figma «franservice · Sistema de grillas y secciones», donde Claude propuso dos estilos de grilla para el editor de franservice:

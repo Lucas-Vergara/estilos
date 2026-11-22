@@ -3,7 +3,7 @@
 Mi biblioteca de estilos: una sola fuente para el look and feel de mis proyectos.
 Cuando un estilo mejora en un proyecto, se sube aquí y los demás proyectos lo reciben **cuando yo decida**.
 
-**Vitrina:** [línea panel y panel2](https://lucas-vergara.github.io/estilos/) · [línea sitio](https://lucas-vergara.github.io/estilos/sitio.html) · [línea 3d](https://lucas-vergara.github.io/estilos/3d.html) · [línea sitio diseñadora](https://lucas-vergara.github.io/estilos/sitio-disenadora.html) · [línea luz](https://lucas-vergara.github.io/estilos/luz.html) · [línea club](https://lucas-vergara.github.io/estilos/club.html) · local: `npm install && npm run vitrina`
+**Vitrina:** [línea panel y panel2](https://lucas-vergara.github.io/estilos/) · [línea consola](https://lucas-vergara.github.io/estilos/consola.html) · [línea sitio](https://lucas-vergara.github.io/estilos/sitio.html) · [línea 3d](https://lucas-vergara.github.io/estilos/3d.html) · [línea sitio diseñadora](https://lucas-vergara.github.io/estilos/sitio-disenadora.html) · [línea luz](https://lucas-vergara.github.io/estilos/luz.html) · [línea club](https://lucas-vergara.github.io/estilos/club.html) · local: `npm install && npm run vitrina`
 
 ## Líneas
 
@@ -17,6 +17,7 @@ Una **línea** es un lenguaje visual completo para un tipo de proyecto. Todas co
 | **3d** | `lineas/3d.css` (sobre sitio) | Secciones y heros con escenas 3D | Escenarios para las escenas de `@lucas-vergara/estilos/3d` (Three.js): objetos, orbe, vidrio, partículas, paisaje, bloques, carrusel y túnel con scroll. Usa la tipografía y las paletas de sitio |
 | **sitio diseñadora** | `lineas/sitio-disenadora.css` | Webs de estudio o marca, oscuras | Creada junto con Franservice ([franservice.cl](https://franservice.cl)): oscura, títulos enormes, mono en mayúscula, acento menta. Geist |
 | **luz** | `lineas/luz.css` | Pantallas de tocar y encender: hábitos, rutinas, registros diarios | Papel claro de día y casi negro en reposo; luces de colores con halo que se encienden con un destello. Inter |
+| **consola** | `base.css` + `lineas/consola.css`, `<body class="consola">` | Herramientas para trabajar con agentes (sesiones, conversación, automatización) que además muestran datos | Oscura por defecto (claro opcional): barra lateral gris pizarra más clara que el fondo, controles y cuadro para escribir un poco más claros, casi sin bordes, esquinas generosas. Nacida en el panel de proyectos, inspirada en la app de un harness de agentes. DM Sans + DM Mono |
 | **club** | `lineas/club.css` | Servicios con membresía o suscripción: clubes, gimnasios, academias, estudios | Nacida de [stridechile.cl](https://www.stridechile.cl/): papel cálido con módulos casi negros, titulares redondos con una frase en degradé, cifras condensadas, planes, tienda de pago único y la app de miembros en un teléfono. Outfit + Instrument Sans |
 
 Las líneas se pueden **mezclar**: cada una vive bajo su propia clase y prefijo (`.sitio` con `s-…`, `.sitio-disenadora` con `sd-…`). Dentro de ellas, los tokens comunes toman los colores de la línea, así que una `.tarjeta`, un `Indicador` o un `GraficoLinea` de la línea panel se ven coherentes (ver "Proyectos" en la vitrina de sitio). Para una línea nueva: `css/lineas/<nombre>.css`, con alcance propio (`.<nombre>`) y prefijo de clases propio.
@@ -29,6 +30,7 @@ Las líneas se pueden **mezclar**: cada una vive bajo su propia clase y prefijo 
 | Acento | `acentos/verde.css`, `acentos/azul.css`, `acentos/petroleo.css` | Lo que distingue a cada proyecto: acento, tinte del texto, superficies oscuras, paletas de gráficos |
 | Base | `base.css` | Reset y clases de la línea **panel**: `.barra`, `.tarjeta`, `.boton`, `.campo`, `.segmentado`, tablas, pestañas, chips, avisos… |
 | Línea panel2 | `lineas/panel2.css` | Sobre las clases de `base.css`, todo bajo `.panel2`: la hoja (`.con-lateral-principal` o `.contenido`), bloques sin caja (`.tarjeta-caja` vuelve a la caja), `.unidad`, `.proporcion`, `.encabezado`, `.zona-carga` |
+| Línea consola | `lineas/consola.css` | Sobre las clases de `base.css`, todo bajo `.consola`: tokens oscuros y claros, estructura `co-app` (`co-lateral`, `co-principal`, `co-barra`), sesión con un agente (`co-hilo`, `co-turno-usuario`, `co-pensamiento`, `co-herramienta`, `co-diff`, `co-compositor`, `co-selector`, `co-enviar`) |
 | Línea sitio | `lineas/sitio.css` | Tipografía, cabecera que se esconde, navegación en píldora, avatar, hero con fondo vivo, entrada, telón, proyectos en marco de navegador, scroll horizontal, tarjetas inclinables, marquesina, galería, variantes noche y simple |
 | Línea 3d | `lineas/3d.css` | Escenarios para escenas 3D (clases `td-`): `td-escenario`, `td-escenario-pleno`, `td-recorrido` (con scroll), `td-dueto`, `td-sobre` + `td-panel`, `td-selector` |
 | Línea sitio diseñadora | `lineas/sitio-disenadora.css` | La línea oscura creada con Franservice (clases `sd-`) |
@@ -164,6 +166,51 @@ import { ElegirArchivo } from "@lucas-vergara/estilos";
   onRechazados={([f]) => setError(`«${f.name}» no es un .xls.`)}
 />
 ```
+
+### Línea consola
+
+Para herramientas en las que se conversa con un agente y se miran datos (nació con el panel de proyectos). Oscura por
+defecto y clara si se elige; usa las clases de `base.css` vestidas bajo `.consola`, más piezas propias `co-`.
+
+```tsx
+import "@lucas-vergara/estilos/tokens.css";
+import "@lucas-vergara/estilos/acentos/azul.css";
+import "@lucas-vergara/estilos/base.css";
+import "@lucas-vergara/estilos/lineas/consola.css";
+import { BotonTema } from "@lucas-vergara/estilos";
+
+<div className="co-app">
+  <aside className="co-lateral">            {/* .abierta bajo 900 px */}
+    <a className="co-marca">panel <span className="co-sello">PROYECTOS</span></a>
+    <a className="co-nueva">Nueva sesión</a>
+    <a className="co-item active">…</a>      {/* .co-grupo > .co-grupo-cabecera + .co-lista para secciones */}
+    <div className="co-pie-lateral">… <BotonTema predeterminado="dark" clave="consola:tema" className="co-icono" tamano={16} /></div>
+  </aside>
+  <div className="co-fondo" />              {/* .visible con la lateral abierta en pantallas angostas */}
+  <div className="co-principal">
+    <header className="co-barra"><button className="co-icono co-menu">☰</button><span className="co-ruta">…</span></header>
+    <main className="contenido">…</main>
+  </div>
+</div>
+```
+
+En `index.html`: `<body class="consola">`, DM Sans y DM Mono de Google Fonts y el tema antes de pintar, con el oscuro
+como predeterminado:
+
+```html
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&family=DM+Mono:wght@400;500&display=swap" />
+<script>
+  try { if (localStorage.getItem("consola:tema") !== "light") document.documentElement.dataset.theme = "dark"; }
+  catch { document.documentElement.dataset.theme = "dark"; }
+</script>
+```
+
+- **Sesión**: `.co-sesion` > `.co-hilo` (`.co-turno-usuario` como burbuja, `.co-turno-claude` con `details.co-pensamiento`,
+  `.co-herramientas` > `.co-herramienta`, `.co-diff`) y `form.co-compositor` (textarea, `.co-selector` con un select
+  adentro, `.co-redondo`, `.co-espaciador`, `.co-enviar`).
+- **Tokens propios**: `--lateral-fondo`, `--lateral-velo`, `--lateral-tinta(-2)`, `--control`, `--control-hover`,
+  `--control-linea` (la línea interior que reemplaza al borde), `--compositor`, `--burbuja`, `--relleno-acento`, `--fuente-mono`.
+- Sobre cualquier acento, pero redefine texto y superficies; el contraste se revisa con `npm run contraste`.
 
 ### Línea panel2
 
