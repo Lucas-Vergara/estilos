@@ -1,6 +1,7 @@
 import { StrictMode, useState, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { BotonTema, CreditoEstilos, Segmentado } from "../../src";
+import { Selector } from "../../src/consola/index.js";
 import "../../css/tokens.css";
 import "../../css/acentos/azul.css";
 import "../../css/base.css";
@@ -24,6 +25,8 @@ function Vitrina() {
   const [vista, setVista] = useState<Vista>("sesion");
   const [abierta, setAbierta] = useState(false);
   const [filtro, setFiltro] = useState("todas");
+  const [modo, setModo] = useState("preguntar");
+  const [modelo, setModelo] = useState("opus");
   return (
     <div className="co-app">
       <aside id="co-lateral" className={`co-lateral${abierta ? " abierta" : ""}`} aria-label="Navegación">
@@ -121,9 +124,13 @@ function Vitrina() {
                 <label className="sr-only" htmlFor="m">Mensaje</label>
                 <textarea id="m" rows={2} placeholder="Describe lo que quieres hacer; / para comandos, @ para archivos" />
                 <div className="co-compositor-fila">
-                  <label className="co-selector"><span className="sr-only">Permisos</span><select><option>Solo lectura</option><option>Planificar</option><option>Editar el espacio</option></select></label>
+                  <Selector etiqueta="Permisos" valor={modo} onCambio={setModo} opciones={[
+                    { valor: "preguntar", texto: "Preguntar", nota: "Corre lo permitido y pregunta por lo demás" },
+                    { valor: "lectura", texto: "Solo lectura", nota: "Lee y busca; no cambia nada" },
+                    { valor: "auto", texto: "Automático", nota: "Edita y corre comandos" },
+                  ]} />
                   <span className="co-espaciador" />
-                  <label className="co-selector"><span className="sr-only">Modelo</span><select><option>Opus 5.5</option><option>Sonnet 5.5</option></select></label>
+                  <Selector etiqueta="Modelo" valor={modelo} onCambio={setModelo} opciones={[{ valor: "opus", texto: "Opus" }, { valor: "sonnet", texto: "Sonnet" }, { valor: "haiku", texto: "Haiku" }]} />
                   <button type="submit" className="co-enviar" aria-label="Enviar">{enviar}</button>
                 </div>
               </form>

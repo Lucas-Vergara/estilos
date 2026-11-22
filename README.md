@@ -214,6 +214,9 @@ como predeterminado:
   `.co-espaciador`, `.co-enviar` o `.co-detener`).
 - **Revisión** (v0.30.0): `details.co-diff.co-cambios` > `details.co-cambio` por archivo; `.co-traza` con
   `.co-traza-linea` (herramientas en una línea de tiempo); `.co-sesion-vistas`; lista de skills `.co-skills` > `.co-skill`.
+- **Selector** (v0.32.0, `import { Selector } from "@lucas-vergara/estilos/consola"`): en vez de `<select>`, con
+  `opciones={[{ valor, texto, nota? }]}`, `etiqueta`, `icono`, `tenue` y `campo` (forma de campo de formulario).
+  También `.co-interruptor` (`role="switch"`) para activar y desactivar.
 - **Permisos y programadas** (v0.31.0): `section.co-permiso` (con `.co-permiso-acciones`), `.co-marca-sesion(.espera)`,
   `.co-reloj`, formulario `.co-programar` y lista `.co-programadas` > `.co-programada`.
 - **Espacios en la lateral**: `li.co-espacio` > `.co-espacio-fila` (`.co-item.co-boton-item` que pliega y `.co-espacio-nueva`)

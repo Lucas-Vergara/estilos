@@ -1,5 +1,13 @@
 # Cambios
 
+## v0.32.0 — 2026-11-22
+
+- **`Selector`** (`@lucas-vergara/estilos/consola`, el primer componente de la línea consola): reemplaza al `<select>` nativo, cuya lista abierta dibuja el sistema y se veía como HTML sin estilo en el cuadro para escribir. Botón con ícono, texto y flecha; menú `.co-menu-opciones` con la opción elegida marcada (✓), una nota opcional por opción y la activa resaltada; se abre hacia arriba si abajo no cabe. Teclado: flechas, Inicio/Fin, Enter o espacio, Escape y saltar por letra. Prop `campo` para la forma de campo de formulario (`.co-selector-campo`, ancho completo y 36 px).
+- **Interruptor** `.co-interruptor` (`role="switch"`, `aria-checked`), con `.co-interruptor-confirmar` para confirmar en el mismo lugar; skills desactivadas (`.co-skill.desactivada`, `.co-skill-interruptor`), `.co-plugin`.
+- **Diff**: `.co-cambio-nota` (p. ej. «Archivo binario»).
+- La tarjeta de permiso ya no depende de una clase de proyecto para su subtítulo.
+- **Vitrina**: los selectores del cuadro para escribir usan `Selector`.
+
 ## v0.31.0 — 2026-11-22
 
 Línea consola, fase 4 del panel de proyectos. Solo clases nuevas:

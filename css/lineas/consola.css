@@ -438,6 +438,7 @@ body.consola { background: var(--plano); }
 }
 .co-permiso > header { display: grid; gap: 2px; }
 .co-permiso > header b { font-weight: 600; }
+.co-permiso > header > span { font-size: 0.8rem; color: var(--tinta-3); overflow-wrap: anywhere; }
 .co-permiso > header b::before { content: "● "; color: var(--advertencia); }
 .co-permiso-vista { max-height: 320px; white-space: pre-wrap; overflow-wrap: anywhere; }
 .co-permiso-plan { max-height: 420px; overflow: auto; padding: 12px 14px; border-radius: 12px; background: var(--plano); box-shadow: var(--control-linea); }
@@ -473,3 +474,61 @@ body.consola { background: var(--plano); }
 .co-historial { margin: 0; padding-left: 18px; font-size: 0.78rem; color: var(--tinta-3); display: grid; gap: 2px; }
 @media (max-width: 720px) { .co-programada { grid-template-columns: minmax(0, 1fr); } .co-programada-acciones { justify-content: flex-start; max-width: none; } }
 .co-programada-resumen { margin: 0; font-size: 0.82rem; color: var(--tinta-2); padding-left: 10px; border-left: 2px solid var(--borde-campo); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; white-space: pre-wrap; }
+
+/* ---------- Selector propio, interruptor y diff de git (v0.32.0) ---------- */
+/* .co-selector > button.co-selector-boton + ul.co-menu-opciones[role=listbox] (.arriba si se abre hacia arriba;
+   li.activa, .co-menu-marca, .co-menu-texto con small): reemplaza al <select> nativo, cuya lista abierta dibuja el
+   sistema. .co-selector-campo: con forma de campo de formulario. */
+.co-selector:has(> .co-selector-boton) { padding: 0; }
+.co-selector:has(> .co-selector-boton):hover { background: none; }
+.co-selector-boton {
+  display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 8px; border: 0; border-radius: 8px;
+  background: none; color: inherit; font: inherit; cursor: pointer; white-space: nowrap; transition: background var(--dur-rapida), color var(--dur-rapida);
+}
+.co-selector-boton:hover, .co-selector.abierto .co-selector-boton { background: var(--control); color: var(--tinta); }
+.co-selector-boton:focus-visible { outline: 2px solid var(--acento); outline-offset: 1px; }
+.co-selector-texto { max-width: 220px; overflow: hidden; text-overflow: ellipsis; }
+.co-selector-flecha { opacity: 0.7; transition: transform var(--dur-rapida) var(--curva); }
+.co-selector.abierto .co-selector-flecha { transform: rotate(180deg); }
+
+.co-menu-opciones {
+  position: absolute; z-index: 40; top: calc(100% + 6px); left: 0; min-width: max(100%, 260px); max-width: 360px; max-height: 340px; overflow-y: auto;
+  margin: 0; padding: 4px; list-style: none; border-radius: 12px; background: var(--compositor);
+  box-shadow: 0 0 0 0.5px var(--borde-campo), var(--sombra-flotante); color: var(--tinta); font-size: 0.84rem; outline: none;
+  scrollbar-width: thin;
+}
+.co-menu-opciones.arriba { top: auto; bottom: calc(100% + 6px); }
+.co-compositor-fila .co-espaciador ~ .co-selector .co-menu-opciones { left: auto; right: 0; }
+.co-menu-opciones li { display: flex; align-items: flex-start; gap: 6px; padding: 7px 10px 7px 6px; border-radius: 8px; cursor: pointer; }
+.co-menu-opciones li.activa { background: var(--control-hover); }
+.co-menu-marca { width: 14px; flex: none; color: var(--acento); font-weight: 600; text-align: center; }
+.co-menu-texto { display: grid; gap: 1px; min-width: 0; }
+.co-menu-texto small { color: var(--tinta-3); font-size: 0.74rem; line-height: 1.35; white-space: normal; }
+
+/* Con forma de campo de formulario */
+.co-selector.co-selector-campo { display: flex; width: 100%; min-width: 200px; height: auto; color: var(--tinta); font-size: var(--texto-base); font-weight: 400; }
+.co-selector-campo .co-selector-boton {
+  width: 100%; height: 36px; padding: 0 12px; justify-content: space-between; background: var(--control); box-shadow: var(--control-linea); border-radius: var(--radio-campo);
+}
+.co-selector-campo .co-selector-texto { max-width: none; flex: 1; text-align: left; }
+.co-selector-campo .co-menu-opciones { max-width: none; width: 100%; }
+
+/* Interruptor (activar / desactivar) y skills desactivadas */
+.co-interruptor {
+  position: relative; width: 34px; height: 20px; flex: none; padding: 0; border: 0; border-radius: 999px; cursor: pointer;
+  background: var(--superficie-3); box-shadow: var(--control-linea); transition: background var(--dur) var(--curva);
+}
+.co-interruptor i { position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: var(--tinta-3); transition: transform var(--dur) var(--curva), background var(--dur); }
+.co-interruptor[aria-checked="true"] { background: var(--relleno-acento); }
+.co-interruptor[aria-checked="true"] i { transform: translateX(14px); background: #fff; }
+.co-interruptor:focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; }
+.co-interruptor-confirmar { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.co-skill { position: relative; }
+.co-skill-interruptor { position: absolute; right: 6px; top: 10px; z-index: 1; }
+.co-skill:has(.co-skill-interruptor) .co-skill-fila { padding-right: 56px; }
+.co-skill:has(.co-interruptor-confirmar) .co-skill-interruptor { position: static; padding: 8px 6px 0; }
+.co-skill.desactivada .co-skill-nombre { color: var(--tinta-3); text-decoration: line-through; text-decoration-thickness: 1px; }
+.co-plugin { display: flex !important; align-items: center; justify-content: space-between; gap: 12px; }
+.co-plugin > div { display: grid; gap: 2px; }
+
+.co-cambio-nota { margin: 0; padding: 8px 12px; border-top: 0.5px solid var(--borde); }
