@@ -115,6 +115,25 @@ Creada para la app de hábitos (24-10-2026), con la **sensación** del Every Day
 - **Cuatro encendidos (18-11-2026, v0.26.0):** me gusta la pantalla de carga de mi Xiaomi (pulsaciones e iluminaciones suaves). De ahí salieron pulsos, carga (un arco que da la vuelta) y carga completa; quedan las cuatro, junto con el destello de siempre, para elegir en los ajustes de habitos. Sigue siendo un solo momento de movimiento: solo al encender.
 - Pensada para pantallas táctiles vistas de lejos (pantalla en la sala, celular): blancos grandes, poco texto.
 
+## Me gusta — línea remanso (desde v0.33.0)
+
+Pedida el 24-11-2026 para el rediseño 2.0 de Bitácora: la app pasa a tener al paciente al centro y a la terapeuta en
+segundo plano, con un estilo nuevo «moderno y cool, manteniendo lo zen», a partir de cómo se ven las webs de terapia
+(BetterHelp y parecidas). Primero el teléfono, pero que también se vea bien en el computador.
+
+- **Lo que se tomó de las webs de terapia:** papel crema en vez de blanco, un verde hondo que da confianza, títulos con
+  serifa suave (Fraunces, con su eje SOFT) y mucho aire. De las apps (Headspace, Calm, How We Feel): una tesela de color
+  pastel por práctica con su ícono en un círculo, una tarjeta destacada para lo más importante de la semana y atajos
+  «para este momento».
+- **Lo moderno:** pestañas flotantes de vidrio abajo en el teléfono (barra lateral desde 960 px), esquinas generosas
+  (24 px), sombras largas y muy suaves, una palabra en itálica en el acento en cada título (como en la línea
+  diseñadora), botones píldora.
+- **Lo zen:** un solo movimiento, el aura que deriva despacio detrás del saludo; nada salta ni rebota.
+- **Excepciones conscientes:** Figtree en vez de Inter (más amable para un público no técnico) y un saludo como título
+  en la pantalla principal («Buenas tardes, ¿cómo llegas hoy?»): la regla del h1 sustantivo es de la línea panel.
+- **Pendiente:** modo oscuro (por ahora solo claro); subir a la biblioteca la tabla de íconos si otro proyecto usa la
+  línea.
+
 ## Línea club (desde v0.20.0)
 
 Pedida el 05-11-2026 a partir de [stridechile.cl](https://www.stridechile.cl/), un run club de Concepción con planes mensuales, tienda y app de miembros (Next.js en Vercel, hecho a medida). Me gustó su diseño; la quise como línea para **servicios con suscripción**.
@@ -189,7 +208,7 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 | cv (PDF del currículum) | azul | v0.15.0 | solo tokens, copiados en `cv/estilos/`; hoja de impresión propia (`cv.css`) mientras se decide si va una línea "documento" |
 | presupuestos | petróleo, línea panel2 | v0.23.0 | herramienta local (10-11-2026); el PDF del cliente tiene su hoja de impresión propia (`src/documento.css`) con cinco diseños a elegir (10-11-2026: clásico, portada en bloque, grilla suiza, resumen primero y ficha técnica; descartados editorial con serif y columna lateral): junto con cv, candidata a una línea "documento" |
 | cartelera-conce | petróleo, línea panel2 | v0.25.0 | cartelera pública de cine del Gran Concepción (13-11-2026); horarios como píldoras que enlazan a la compra o al post, estilos propios en `src/estilos.css` |
-| bitacora | — (línea luz sobre base.css verde, como pausa) | v0.25.0 | ejercicios entre sesiones de terapia (16-11-2026), pacientes y psicóloga guía; formularios propios en `src/estilos.css` (tarjeta-suave, entrada, opciones) que comparte con pausa: candidatos a subir a la línea luz |
+| bitacora | — (línea remanso, paleta bosque; luz para las luces de hábitos y pausa) | v0.25.0 → v0.33.0 al publicar | ejercicios entre sesiones de terapia (16-11-2026), pacientes y psicóloga guía. La 1.0 (línea luz) quedó en la rama `v1.0`; el rediseño 2.0 (24-11-2026, paciente al centro) dio origen a la línea remanso. Mientras no se publique, usa una copia en `src/remanso.css` |
 | afinador | — (línea luz sobre base.css verde, como pausa) | v0.25.0 | afinador de guitarra (17-11-2026): las seis cuerdas como luces menta que se encienden al quedar afinadas; medidor de cents y hoja de afinaciones propios en `src/estilos.css` |
 | proyecto-politico (web) | petróleo, línea panel2 | v0.27.0 | datos públicos de política en Chile (20-11-2026), pública; sección Gastos con tarjetas tocables que bajan un nivel (`.nodos`/`.nodo`) y barra apilada (`.apilada`) en `src/estilos.css`: candidatas a subir a panel2 |
 

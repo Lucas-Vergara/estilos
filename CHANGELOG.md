@@ -1,5 +1,15 @@
 # Cambios
 
+## v0.33.0 — sin publicar
+
+- **Línea remanso** (`lineas/remanso.css`, `<body class="remanso">`, clases `r-`): apps de bienestar y acompañamiento, primero el teléfono. Nació del rediseño 2.0 de Bitácora (centrado en el paciente), con la referencia de las webs de terapia (BetterHelp, Headspace, Calm, Rula). Papel crema, verde bosque, Fraunces para títulos (con una palabra en itálica en el acento) y Figtree para el texto.
+  - Estructura: `r-app` con `r-lateral` (barra lateral desde 960 px) y `r-tabs` (pestañas flotantes de vidrio en el teléfono, con `r-insignia`), `r-contenido`, `r-pagina` (`r-pagina-ancha`), `r-cabeza-movil`, `r-marca`.
+  - Piezas: `r-cabecera` + `r-volver`, `r-titulo`, `r-h2`, `r-antetitulo`, `r-bajada`, `r-nota`; `r-tarjeta`, `r-tarjeta-plana`, `r-destacada` (el verde hondo con anillos), `r-teselas` + `r-tesela` + `r-icono-circulo`, `r-acciones` + `r-accion` (fila que se desliza en el teléfono), `r-lista` + `r-fila` + `r-chevron`, `r-seccion` + `r-seccion-cabeza`, `r-boton` (`-primario`, `-suave`, `-claro`, `-chico`, `-icono`), `r-entrada`, `r-chip`, `r-insignia`, `r-etiqueta`, `r-privado`, `r-vacio`.
+  - Un solo movimiento: `r-aura`, tres manchas que derivan detrás del encabezado (quieta con «reducir movimiento»).
+  - Paletas `r-paleta-marea` y `r-paleta-arcilla` (bosque por defecto) y ocho tonos `r-tono-…` para las teselas.
+  - `npm run contraste` revisa también la línea remanso: sus tokens en las tres paletas y la tinta de cada tono.
+- **Vitrina**: `remanso.html`, con una app de autocuidado inventada («Orilla») y el selector de paleta.
+
 ## v0.32.0 — 2026-11-22
 
 - **`Selector`** (`@lucas-vergara/estilos/consola`, el primer componente de la línea consola): reemplaza al `<select>` nativo, cuya lista abierta dibuja el sistema y se veía como HTML sin estilo en el cuadro para escribir. Botón con ícono, texto y flecha; menú `.co-menu-opciones` con la opción elegida marcada (✓), una nota opcional por opción y la activa resaltada; se abre hacia arriba si abajo no cabe. Teclado: flechas, Inicio/Fin, Enter o espacio, Escape y saltar por letra. Prop `campo` para la forma de campo de formulario (`.co-selector-campo`, ancho completo y 36 px).

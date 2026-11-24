@@ -77,5 +77,35 @@ for (const archivo of readdirSync("css/acentos")) {
     }
   }
 }
+// Línea remanso: sus propios tokens (bloque .remanso), cada paleta (.r-paleta-…) y cada tono de tesela (.r-tono-…)
+{
+  const css = readFileSync("css/lineas/remanso.css", "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
+  const bloque = (selector) => {
+    const m = css.match(new RegExp(`(^|\\n)${selector.replace(".", "\\.")}\\s*\\{([^}]*)\\}`));
+    return m ? Object.fromEntries([...m[2].matchAll(/--([\w-]+):\s*([^;]+);/g)].map(([, n, v]) => [n, v.trim()])) : {};
+  };
+  const raiz = bloque(".remanso");
+  const PARES_REMANSO = [
+    ...["r-tinta", "r-tinta-2", "r-tenue"].flatMap((t) => ["r-fondo", "r-superficie", "r-superficie-2"].map((f) => [t, f, TEXTO])),
+    ["r-acento", "r-fondo", TEXTO], ["r-acento", "r-superficie", TEXTO], ["r-sobre-acento", "r-acento", TEXTO],
+    ["r-acento-hondo", "r-acento-suave", TEXTO], ["r-acento-vivo", "r-acento", TEXTO], ["#ffffff", "r-calido", TEXTO],
+    ["r-acento", "r-superficie-2", CONTROL],
+  ];
+  for (const paleta of ["bosque", "marea", "arcilla"]) {
+    const v = { ...raiz, ...(paleta === "bosque" ? {} : bloque(`.r-paleta-${paleta}`)) };
+    const color = (x) => (x.startsWith("#") ? x : v[x]);
+    for (const [frente, fondo, minimo] of PARES_REMANSO) {
+      const r = contraste(color(frente), color(fondo));
+      if (r < minimo) { fallas++; console.log(`✗ remanso ${paleta}: ${frente} sobre ${fondo} = ${r.toFixed(2)}:1 (mínimo ${minimo}:1)`); }
+    }
+  }
+  for (const [, tono] of css.matchAll(/\.r-tono-([a-z]+)\s*\{/g)) {
+    const t = bloque(`.r-tono-${tono}`);
+    for (const [frente, fondo] of [[t["r-tono-tinta"], t["r-tono"]], ["#ffffff", t["r-tono-tinta"]]]) {
+      const r = contraste(frente, fondo);
+      if (r < TEXTO) { fallas++; console.log(`✗ remanso tono ${tono}: ${frente} sobre ${fondo} = ${r.toFixed(2)}:1`); }
+    }
+  }
+}
 console.log(fallas ? `\n${fallas} pares bajo el mínimo.` : `✓ Todos los pares cumplen (${PARES.length} pares × acentos × 2 temas).`);
 process.exit(fallas ? 1 : 0);

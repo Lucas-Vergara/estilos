@@ -1,0 +1,28 @@
+/* Solo la diagramación de la vitrina de remanso: lo reusable está en css/lineas/remanso.css */
+body { margin: 0; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.vr-sello {
+  width: 28px; height: 28px; border-radius: 50%; flex: none;
+  background: radial-gradient(circle at 35% 30%, #fff 0, var(--r-acento-suave) 30%, var(--r-acento) 100%);
+  box-shadow: 0 0 0 4px var(--r-acento-suave);
+}
+.vr-saludo { padding-top: 12px; }
+.vr-grilla { display: grid; gap: 28px; }
+.vr-columna { display: grid; gap: 28px; align-content: start; min-width: 0; }
+@media (min-width: 960px) { .vr-grilla { grid-template-columns: minmax(0, 1fr) 340px; gap: 40px; } }
+.vr-destacada { display: grid; justify-items: start; gap: 10px; }
+.vr-destacada-titulo { margin: 0; font-family: var(--r-titular); font-weight: 420; font-size: clamp(1.5rem, 5.6vw, 1.9rem); line-height: 1.2; letter-spacing: -0.015em; text-wrap: balance; font-variation-settings: "SOFT" 70; }
+.vr-destacada-nota { margin: 0 0 12px; color: var(--r-tinta-2); font-size: 0.875rem; }
+.vr-controles { display: grid; gap: 18px; }
+.vr-fila { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.vr-campo { display: grid; gap: 8px; font-size: 0.875rem; font-weight: 650; color: var(--r-tinta-2); }
+.vr-tonos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.vr-tonos li { display: grid; place-items: end start; height: 64px; padding: 8px 10px; box-sizing: border-box; border-radius: 16px; background: var(--r-tono); color: var(--r-tono-tinta); font-size: 0.75rem; font-weight: 700; }
+.vr-otras { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 0.875rem; }
+.vr-otras a { color: var(--r-acento); font-weight: 600; text-decoration: none; }
+.vr-paletas { display: flex; gap: 8px; padding: 0 6px; }
+.vr-paleta { width: 26px; height: 26px; border-radius: 50%; border: 0; cursor: pointer; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1); }
+.vr-paleta[aria-checked="true"] { box-shadow: 0 0 0 2px var(--r-fondo), 0 0 0 4px var(--r-tinta); }
+.vr-paleta-bosque { background: #2b6a4e; }
+.vr-paleta-marea { background: #1f6670; }
+.vr-paleta-arcilla { background: #9a4a32; }

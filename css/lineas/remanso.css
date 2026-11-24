@@ -1,0 +1,374 @@
+/*! @lucas-vergara/estilos · github.com/Lucas-Vergara/estilos · Licencia MIT con atribución visible: "Estilos: Lucas Vergara" */
+/*
+ * Línea "remanso": apps de bienestar y acompañamiento (terapia, autocuidado, diarios, hábitos). Nace del rediseño de
+ * Bitácora (noviembre 2026), con la referencia de las webs y apps de terapia (BetterHelp, Headspace, Calm, Rula): papel
+ * crema, un verde hondo de confianza, títulos con serifa suave y una palabra en itálica, teselas de colores pastel por
+ * ejercicio y mucho aire. Zen, pero moderna: esquinas generosas, vidrio en la navegación, sombras largas y muy suaves.
+ *
+ * Pensada primero para el teléfono: barra de pestañas flotante abajo (r-tabs) que en pantallas anchas (≥ 960 px) pasa a
+ * una barra lateral (r-lateral) con las mismas entradas.
+ *
+ * Todo vive bajo .remanso (en <body>) con clases r-. Paletas del acento: r-paleta-bosque (por defecto), r-paleta-marea,
+ * r-paleta-arcilla. Tonos de las teselas: r-tono-miel, marea, coral, lavanda, salvia, cielo, durazno, rosa.
+ *
+ * Un solo momento de movimiento: el aura (r-aura) que deriva muy despacio detrás del encabezado. Se queda quieta con
+ * "reducir movimiento".
+ *
+ * Requiere tokens.css. Fuentes: Fraunces (títulos, con los ejes SOFT y opsz) y Figtree (texto). Se mezcla con base.css:
+ * dentro de .remanso, los tokens comunes toman los colores y tamaños de la línea (texto de 16 px, para leer en el
+ * teléfono).
+ */
+
+.remanso {
+  color-scheme: light;
+
+  /* Papel y tinta */
+  --r-fondo: #f6f3ee;
+  --r-superficie: #fffdfa;
+  --r-superficie-2: #efebe4;      /* campos, pozos, filas abiertas */
+  --r-hundido: #e6e0d6;
+  --r-tinta: #1c2b25;
+  --r-tinta-2: #45534c;           /* 7,6:1 sobre el papel */
+  --r-tenue: #5f6c65;             /* 5,1:1 sobre el papel */
+  --r-linea: rgba(28, 43, 37, 0.1);
+  --r-linea-fuerte: rgba(28, 43, 37, 0.22);
+
+  /* Acento: bosque */
+  --r-acento: #2b6a4e;            /* 6,2:1 sobre el papel; botones y lo elegido */
+  --r-acento-hondo: #1d4c38;
+  --r-acento-suave: #e0ebe2;
+  --r-acento-vivo: #c2ecd3;       /* antetítulos sobre la destacada (5:1) */
+  --r-sobre-acento: #ffffff;
+  --r-calido: #b8513e;            /* el segundo color: insignias (4,9:1 con blanco) */
+  --r-calido-suave: #f8e1da;
+  --r-destacada: radial-gradient(120% 130% at 100% 0%, #337a5c 0%, rgba(51, 122, 92, 0) 58%),
+    radial-gradient(90% 90% at 0% 100%, #24594a 0%, rgba(36, 89, 74, 0) 70%), linear-gradient(160deg, #2b6a4e, #1b4635);
+
+  /* Aura del encabezado: tres manchas que derivan */
+  --r-aura-1: rgba(120, 196, 160, 0.42);
+  --r-aura-2: rgba(110, 190, 205, 0.34);
+  --r-aura-3: rgba(236, 150, 128, 0.26);
+
+  /* Forma */
+  --r-radio: 24px;
+  --r-radio-chico: 16px;
+  --r-radio-campo: 14px;
+  --r-sombra: 0 1px 2px rgba(28, 43, 37, 0.04), 0 10px 28px -14px rgba(28, 43, 37, 0.16);
+  --r-sombra-alta: 0 2px 6px rgba(28, 43, 37, 0.05), 0 22px 48px -16px rgba(28, 43, 37, 0.28);
+  --r-ancho: 1120px;
+  --r-ancho-lectura: 680px;
+  --r-pad: clamp(18px, 5vw, 40px);
+  --r-alto-tabs: 72px;
+
+  --r-titular: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --r-texto: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Tokens comunes: lo de base.css que se use adentro se ve coherente; el texto sube a 16 px para el teléfono */
+  --plano: var(--r-fondo);
+  --superficie: var(--r-superficie);
+  --superficie-2: var(--r-superficie-2);
+  --superficie-3: var(--r-hundido);
+  --tinta: var(--r-tinta);
+  --tinta-2: var(--r-tinta-2);
+  --tinta-3: var(--r-tenue);
+  --borde: var(--r-linea);
+  --borde-campo: var(--r-linea-fuerte);
+  --acento: var(--r-acento);
+  --sobre-acento: var(--r-sobre-acento);
+  --acento-suave: var(--r-acento-suave);
+  --sobre-acento-suave: var(--r-acento-hondo);
+  --radio: var(--r-radio);
+  --radio-campo: var(--r-radio-campo);
+  --fuente: var(--r-texto);
+  --texto-xs: 0.78rem;
+  --texto-sm: 0.875rem;
+  --texto-base: 1rem;
+  --texto-md: 1.0625rem;
+  --texto-lg: 1.25rem;
+  --texto-xl: 1.75rem;
+
+  background: var(--r-fondo);
+  color: var(--r-tinta);
+  font-family: var(--r-texto);
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Paletas del acento */
+.r-paleta-marea {
+  --r-acento: #1f6670; --r-acento-hondo: #164a52; --r-acento-suave: #dcebec; --r-acento-vivo: #a9e3e6;
+  --r-destacada: radial-gradient(120% 130% at 100% 0%, #26787e 0%, rgba(38, 120, 126, 0) 58%), linear-gradient(160deg, #1f6670, #133f46);
+  --r-aura-1: rgba(110, 190, 205, 0.42); --r-aura-2: rgba(140, 170, 230, 0.3);
+}
+.r-paleta-arcilla {
+  --r-fondo: #f7f2ec; --r-acento: #9a4a32; --r-acento-hondo: #713521; --r-acento-suave: #f3e2d9; --r-acento-vivo: #fcdccf;
+  --r-destacada: radial-gradient(120% 130% at 100% 0%, #a9563c 0%, rgba(169, 86, 60, 0) 58%), linear-gradient(160deg, #9a4a32, #5e2b1c);
+  --r-aura-1: rgba(236, 150, 128, 0.36); --r-aura-2: rgba(230, 190, 120, 0.3); --r-aura-3: rgba(150, 190, 160, 0.26);
+}
+
+/* Lo que dibuja el navegador también lleva la paleta */
+.remanso ::selection { background: color-mix(in srgb, var(--r-acento) 22%, transparent); color: var(--r-tinta); }
+.remanso { caret-color: var(--r-acento); accent-color: var(--r-acento); scrollbar-color: var(--r-linea-fuerte) transparent; }
+.remanso :focus-visible { outline: 2px solid var(--r-acento); outline-offset: 2px; }
+
+/* ——— Tipografía ——— */
+.r-titulo, .r-h2 {
+  margin: 0; font-family: var(--r-titular); font-weight: 420; color: var(--r-tinta); text-wrap: balance;
+  font-variation-settings: "SOFT" 60, "WONK" 0; font-optical-sizing: auto;
+}
+.r-titulo { font-size: clamp(2rem, 7.5vw, 2.75rem); line-height: 1.08; letter-spacing: -0.02em; }
+.r-h2 { font-size: clamp(1.3rem, 4.6vw, 1.55rem); line-height: 1.2; letter-spacing: -0.012em; }
+.r-titulo em, .r-h2 em { font-style: italic; font-weight: 360; color: var(--r-acento); }
+.r-antetitulo {
+  margin: 0; font-size: 0.75rem; font-weight: 650; letter-spacing: 0.09em; text-transform: uppercase; color: var(--r-tenue);
+}
+.r-bajada { margin: 0; font-size: 1.0625rem; line-height: 1.55; color: var(--r-tinta-2); text-wrap: pretty; max-width: 52ch; }
+.r-nota { margin: 0; font-size: 0.875rem; line-height: 1.5; color: var(--r-tenue); text-wrap: pretty; }
+
+/* ——— Estructura: pestañas abajo en el teléfono, barra lateral en pantallas anchas ——— */
+.r-app { min-height: 100vh; min-height: 100svh; }
+.r-contenido { min-width: 0; padding-bottom: calc(var(--r-alto-tabs) + 32px + env(safe-area-inset-bottom)); }
+.r-pagina {
+  box-sizing: border-box; width: 100%; max-width: var(--r-ancho-lectura); margin: 0 auto;
+  padding: max(20px, env(safe-area-inset-top)) var(--r-pad) 24px; display: grid; align-content: start; gap: 20px;
+}
+.r-pagina-ancha { max-width: var(--r-ancho); }
+
+.r-tabs {
+  position: fixed; z-index: 40; left: 12px; right: 12px; bottom: max(12px, env(safe-area-inset-bottom));
+  max-width: 480px; margin: 0 auto; display: flex; gap: 2px; padding: 6px; border-radius: 28px;
+  background: color-mix(in srgb, var(--r-superficie) 80%, transparent);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5); backdrop-filter: blur(20px) saturate(1.5);
+  box-shadow: var(--r-sombra-alta), inset 0 0 0 1px var(--r-linea);
+}
+.r-tab {
+  position: relative; flex: 1 1 0; min-width: 0; display: grid; justify-items: center; gap: 2px; padding: 8px 2px 7px;
+  border-radius: 22px; color: var(--r-tenue); text-decoration: none; font-size: 0.6875rem; font-weight: 650; letter-spacing: 0.01em;
+  transition: color var(--dur-rapida) var(--curva), background-color var(--dur) var(--curva);
+}
+.r-tab svg { width: 24px; height: 24px; }
+.r-tab:hover { color: var(--r-tinta); }
+.r-tab[aria-current="page"] { color: var(--r-acento-hondo); background: var(--r-acento-suave); }
+.r-tab .r-insignia { position: absolute; top: 4px; left: calc(50% + 6px); }
+
+.r-lateral { display: none; }
+.r-cabeza-movil { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; }
+
+@media (min-width: 960px) {
+  .r-app { display: grid; grid-template-columns: 272px minmax(0, 1fr); }
+  .r-tabs, .r-cabeza-movil { display: none; }
+  .r-contenido { padding-bottom: 56px; }
+  .r-pagina { padding-top: 48px; gap: 24px; }
+  .r-lateral {
+    position: sticky; z-index: 30; top: 0; height: 100vh; height: 100svh; box-sizing: border-box; display: flex; flex-direction: column;
+    background: var(--r-fondo);
+    gap: 28px; padding: 28px 18px 22px; overflow-y: auto;
+  }
+  .r-lateral::after {
+    content: ""; position: absolute; top: 24px; bottom: 24px; right: 0; width: 1px; background: var(--r-linea);
+  }
+}
+.r-lateral-nav { display: grid; gap: 4px; }
+.r-lateral-item {
+  display: flex; align-items: center; gap: 12px; min-height: 46px; padding: 0 14px; border-radius: 16px;
+  color: var(--r-tinta-2); text-decoration: none; font-weight: 600; font-size: 0.9375rem;
+  transition: background-color var(--dur-rapida) var(--curva), color var(--dur-rapida) var(--curva);
+}
+.r-lateral-item svg { width: 22px; height: 22px; flex: none; }
+.r-lateral-item:hover { background: color-mix(in srgb, var(--r-superficie) 70%, transparent); color: var(--r-tinta); }
+.r-lateral-item[aria-current="page"] { background: var(--r-superficie); color: var(--r-acento-hondo); box-shadow: var(--r-sombra); }
+.r-lateral-item .r-insignia { margin-left: auto; }
+.r-lateral-pie { margin-top: auto; display: grid; gap: 12px; }
+.r-lateral .r-marca { padding: 0 8px; }
+.r-lateral .r-privado { justify-content: flex-start; padding: 0 8px; }
+
+/* La marca: el símbolo y el nombre */
+.r-marca {
+  display: inline-flex; align-items: center; gap: 10px; color: var(--r-tinta); text-decoration: none;
+  font-family: var(--r-titular); font-size: 1.375rem; font-weight: 480; letter-spacing: -0.015em;
+  font-variation-settings: "SOFT" 80;
+}
+.r-marca svg, .r-marca img { width: 32px; height: 32px; flex: none; }
+
+/* ——— Encabezado de página ——— */
+.r-cabecera { display: grid; gap: 10px; justify-items: start; }
+.r-volver {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 14px 0 10px; border-radius: 999px;
+  background: var(--r-superficie); box-shadow: var(--r-sombra); color: var(--r-tinta-2); text-decoration: none;
+  font-size: 0.875rem; font-weight: 600; border: 0; cursor: pointer;
+}
+.r-volver svg { width: 18px; height: 18px; }
+.r-volver:hover { color: var(--r-tinta); }
+
+/* El aura: el único momento de movimiento. Va detrás del encabezado de la página principal. */
+.r-con-aura { position: relative; isolation: isolate; }
+.r-aura {
+  position: absolute; z-index: -1; inset: -40px -12vw auto; height: 460px; pointer-events: none; overflow: hidden;
+  -webkit-mask-image: radial-gradient(ellipse 75% 100% at 50% 0%, #000 35%, transparent 78%);
+  mask-image: radial-gradient(ellipse 75% 100% at 50% 0%, #000 35%, transparent 78%);
+}
+.r-aura i {
+  position: absolute; width: 60vmax; height: 60vmax; max-width: 640px; max-height: 640px; border-radius: 50%; filter: blur(8px);
+  animation: r-deriva 60s ease-in-out infinite alternate;
+}
+.r-aura i:nth-child(1) { left: -12%; top: -55%; background: radial-gradient(circle closest-side, var(--r-aura-1), transparent); }
+.r-aura i:nth-child(2) { right: -18%; top: -40%; background: radial-gradient(circle closest-side, var(--r-aura-2), transparent); animation-duration: 80s; animation-delay: -20s; }
+.r-aura i:nth-child(3) { left: 30%; top: -10%; width: 44vmax; height: 44vmax; background: radial-gradient(circle closest-side, var(--r-aura-3), transparent); animation-duration: 70s; animation-delay: -35s; }
+@keyframes r-deriva {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(6%, 8%, 0) scale(1.08); }
+  100% { transform: translate3d(-5%, 4%, 0) scale(0.96); }
+}
+@media (prefers-reduced-motion: reduce) { .r-aura i { animation: none; } }
+
+/* ——— Tarjetas ——— */
+.r-tarjeta {
+  box-sizing: border-box; padding: 20px; border-radius: var(--r-radio); background: var(--r-superficie);
+  box-shadow: var(--r-sombra), inset 0 0 0 1px var(--r-linea);
+}
+.r-tarjeta-plana { box-sizing: border-box; padding: 20px; border-radius: var(--r-radio); background: var(--r-superficie-2); }
+a.r-tarjeta, button.r-tarjeta { color: inherit; text-decoration: none; transition: box-shadow var(--dur) var(--curva), transform var(--dur) var(--curva); }
+a.r-tarjeta:hover { box-shadow: var(--r-sombra-alta), inset 0 0 0 1px var(--r-linea); }
+
+/* La destacada: lo más importante de la pantalla, en el verde hondo */
+.r-destacada {
+  position: relative; overflow: hidden; box-sizing: border-box; padding: 24px; border-radius: calc(var(--r-radio) + 4px);
+  background: var(--r-destacada); color: #fff; box-shadow: var(--r-sombra-alta);
+  --r-tinta: #ffffff; --r-tinta-2: rgba(255, 255, 255, 0.86); --r-tenue: rgba(255, 255, 255, 0.74); --r-linea: rgba(255, 255, 255, 0.16);
+}
+.r-destacada::after {
+  content: ""; position: absolute; right: -60px; bottom: -80px; width: 220px; height: 220px; border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.14); box-shadow: 0 0 0 28px rgba(255, 255, 255, 0.04), 0 0 0 56px rgba(255, 255, 255, 0.03);
+  pointer-events: none;
+}
+.r-destacada > * { position: relative; z-index: 1; }
+.r-destacada .r-antetitulo { color: var(--r-acento-vivo); }
+
+/* Teselas: una por ejercicio, en su tono pastel, con el ícono en un círculo */
+.r-teselas { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 720px) { .r-teselas { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); } }
+.r-teselas > li { display: grid; }
+.r-tesela {
+  box-sizing: border-box; display: grid; align-content: space-between; gap: 18px; min-height: 148px; padding: 16px;
+  border-radius: var(--r-radio); background: var(--r-tono, var(--r-superficie-2)); color: var(--r-tinta); text-decoration: none;
+  transition: transform var(--dur) var(--curva), box-shadow var(--dur) var(--curva);
+}
+.r-tesela:hover { box-shadow: var(--r-sombra); transform: translateY(-1px); }
+.r-tesela:active { transform: scale(0.985); }
+.r-tesela-texto { display: grid; gap: 4px; }
+.r-tesela-texto strong { font-size: 1rem; font-weight: 650; letter-spacing: -0.005em; line-height: 1.25; }
+.r-tesela-texto small { font-size: 0.8125rem; line-height: 1.4; color: color-mix(in srgb, var(--r-tono-tinta, var(--r-tinta-2)) 70%, var(--r-tinta)); }
+.r-icono-circulo {
+  display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; flex: none;
+  background: color-mix(in srgb, var(--r-superficie) 72%, transparent); color: var(--r-tono-tinta, var(--r-acento));
+}
+.r-icono-circulo svg { width: 24px; height: 24px; }
+
+.r-tono-miel { --r-tono: #f6e6c8; --r-tono-tinta: #85570f; }
+.r-tono-marea { --r-tono: #d5ece8; --r-tono-tinta: #1b6660; }
+.r-tono-coral { --r-tono: #f8ddd4; --r-tono-tinta: #a2412b; }
+.r-tono-lavanda { --r-tono: #e6e0f4; --r-tono-tinta: #56449a; }
+.r-tono-salvia { --r-tono: #dde9da; --r-tono-tinta: #376640; }
+.r-tono-cielo { --r-tono: #dae6f5; --r-tono-tinta: #2b5590; }
+.r-tono-durazno { --r-tono: #fae3d2; --r-tono-tinta: #94501f; }
+.r-tono-rosa { --r-tono: #f6dce6; --r-tono-tinta: #95385f; }
+
+/* Acciones rápidas: una fila que se desliza en el teléfono */
+.r-acciones {
+  list-style: none; margin: 0 calc(-1 * var(--r-pad)); padding: 2px var(--r-pad) 6px; display: flex; gap: 10px;
+  overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+}
+.r-acciones::-webkit-scrollbar { display: none; }
+.r-acciones > li { scroll-snap-align: start; flex: none; }
+.r-accion {
+  display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 10px 18px 10px 10px; border-radius: 22px;
+  background: var(--r-superficie); box-shadow: var(--r-sombra), inset 0 0 0 1px var(--r-linea); color: var(--r-tinta);
+  text-decoration: none; font-weight: 600; line-height: 1.25; white-space: nowrap;
+  transition: box-shadow var(--dur) var(--curva), transform var(--dur) var(--curva);
+}
+.r-accion .r-icono-circulo { background: var(--r-tono, var(--r-acento-suave)); }
+.r-accion small { display: block; font-weight: 500; font-size: 0.8125rem; color: var(--r-tenue); }
+.r-accion:hover { box-shadow: var(--r-sombra-alta), inset 0 0 0 1px var(--r-linea); }
+.r-accion:active { transform: scale(0.985); }
+@media (min-width: 960px) {
+  .r-acciones { margin: 0; padding: 0; display: grid; overflow: visible; }
+  .r-accion { white-space: normal; }
+}
+
+/* Listas agrupadas: filas dentro de una tarjeta, con ícono, texto y chevron */
+.r-lista { list-style: none; margin: 0; padding: 6px; border-radius: var(--r-radio); background: var(--r-superficie); box-shadow: var(--r-sombra), inset 0 0 0 1px var(--r-linea); display: grid; }
+.r-fila {
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 14px; min-height: 60px; padding: 8px 12px;
+  border-radius: 18px; color: var(--r-tinta); text-decoration: none; background: none; border: 0; font: inherit; text-align: left; width: 100%;
+  box-sizing: border-box;
+}
+.r-fila + .r-fila, .r-lista > li + li { box-shadow: 0 -1px 0 var(--r-linea); }
+a.r-fila:hover, button.r-fila:hover { background: var(--r-superficie-2); }
+.r-fila-texto { display: grid; gap: 2px; min-width: 0; }
+.r-fila-texto strong { font-weight: 600; overflow-wrap: anywhere; }
+.r-fila-texto small { color: var(--r-tenue); font-size: 0.875rem; }
+.r-chevron { width: 18px; height: 18px; color: var(--r-tenue); }
+.r-fila .r-icono-circulo { background: var(--r-tono, var(--r-acento-suave)); }
+
+/* Encabezado de una sección dentro de la página */
+.r-seccion { display: grid; gap: 14px; }
+.r-seccion-cabeza { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.r-seccion-cabeza a { font-size: 0.875rem; font-weight: 600; color: var(--r-acento); text-decoration: none; }
+.r-seccion-cabeza a:hover { text-decoration: underline; }
+
+/* ——— Controles ——— */
+.r-boton {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; box-sizing: border-box;
+  border-radius: 999px; border: 0; background: var(--r-superficie); color: var(--r-tinta);
+  box-shadow: inset 0 0 0 1px var(--r-linea-fuerte); font: inherit; font-weight: 650; font-size: 0.9375rem; text-decoration: none; cursor: pointer;
+  transition: background-color var(--dur-rapida) var(--curva), box-shadow var(--dur-rapida) var(--curva), transform var(--dur-rapida) var(--curva);
+}
+.r-boton:hover { background: var(--r-superficie-2); }
+.r-boton:active { transform: scale(0.98); }
+.r-boton:disabled { opacity: 0.45; cursor: default; transform: none; }
+.r-boton svg { width: 18px; height: 18px; }
+.r-boton-primario { background: var(--r-acento); color: var(--r-sobre-acento); box-shadow: 0 8px 20px -10px color-mix(in srgb, var(--r-acento) 80%, transparent); }
+.r-boton-primario:hover { background: var(--r-acento-hondo); }
+.r-boton-suave { background: var(--r-acento-suave); color: var(--r-acento-hondo); box-shadow: none; }
+.r-boton-suave:hover { background: color-mix(in srgb, var(--r-acento) 18%, var(--r-superficie)); }
+/* Sobre la destacada: blanco con el texto en el acento */
+.r-boton-claro { background: #fff; color: var(--r-acento-hondo); box-shadow: 0 8px 20px -10px rgba(0, 0, 0, 0.4); }
+.r-boton-claro:hover { background: #f1f5f2; }
+.r-boton-chico { min-height: 38px; padding: 0 16px; font-size: 0.875rem; }
+.r-boton-icono { width: 44px; min-height: 44px; padding: 0; border-radius: 50%; }
+
+.r-entrada {
+  width: 100%; min-height: 50px; box-sizing: border-box; padding: 12px 16px; border-radius: var(--r-radio-campo);
+  border: 1px solid transparent; background: var(--r-superficie-2); color: var(--r-tinta); font: inherit; font-size: 16px;
+  transition: border-color var(--dur-rapida) var(--curva), background-color var(--dur-rapida) var(--curva), box-shadow var(--dur-rapida) var(--curva);
+}
+.r-entrada:hover { border-color: var(--r-linea-fuerte); }
+.r-entrada:focus { outline: none; background: var(--r-superficie); border-color: var(--r-acento); box-shadow: 0 0 0 4px color-mix(in srgb, var(--r-acento) 16%, transparent); }
+.r-entrada::placeholder { color: color-mix(in srgb, var(--r-tenue) 80%, transparent); }
+
+.r-chip {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 14px; border-radius: 999px; box-sizing: border-box;
+  border: 0; background: var(--r-superficie); box-shadow: inset 0 0 0 1px var(--r-linea-fuerte); color: var(--r-tinta-2);
+  font: inherit; font-size: 0.875rem; font-weight: 550; text-decoration: none; cursor: pointer;
+}
+.r-chip:hover { color: var(--r-tinta); background: var(--r-superficie-2); }
+.r-chip[aria-pressed="true"], .r-chip[aria-checked="true"], .r-chip.r-elegido { background: var(--r-acento); color: var(--r-sobre-acento); box-shadow: none; }
+
+.r-insignia {
+  display: inline-grid; place-items: center; min-width: 18px; height: 18px; padding: 0 5px; box-sizing: border-box; border-radius: 999px;
+  background: var(--r-calido); color: #fff; font-size: 0.6875rem; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums;
+  box-shadow: 0 0 0 2px var(--r-superficie);
+}
+.r-etiqueta {
+  display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: var(--r-acento-suave);
+  color: var(--r-acento-hondo); font-size: 0.75rem; font-weight: 650;
+}
+
+/* Una línea de confianza: el candado y la promesa */
+.r-privado { display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--r-tenue); font-size: 0.8125rem; text-align: center; }
+.r-privado svg { width: 16px; height: 16px; flex: none; }
+
+/* Estado vacío con la acción ahí mismo */
+.r-vacio { display: grid; gap: 12px; justify-items: start; padding: 22px; border-radius: var(--r-radio); background: var(--r-superficie-2); color: var(--r-tinta-2); line-height: 1.5; }

@@ -3,7 +3,7 @@
 Mi biblioteca de estilos: una sola fuente para el look and feel de mis proyectos.
 Cuando un estilo mejora en un proyecto, se sube aquí y los demás proyectos lo reciben **cuando yo decida**.
 
-**Vitrina:** [línea panel y panel2](https://lucas-vergara.github.io/estilos/) · [línea consola](https://lucas-vergara.github.io/estilos/consola.html) · [línea sitio](https://lucas-vergara.github.io/estilos/sitio.html) · [línea 3d](https://lucas-vergara.github.io/estilos/3d.html) · [línea sitio diseñadora](https://lucas-vergara.github.io/estilos/sitio-disenadora.html) · [línea luz](https://lucas-vergara.github.io/estilos/luz.html) · [línea club](https://lucas-vergara.github.io/estilos/club.html) · local: `npm install && npm run vitrina`
+**Vitrina:** [línea panel y panel2](https://lucas-vergara.github.io/estilos/) · [línea consola](https://lucas-vergara.github.io/estilos/consola.html) · [línea sitio](https://lucas-vergara.github.io/estilos/sitio.html) · [línea 3d](https://lucas-vergara.github.io/estilos/3d.html) · [línea sitio diseñadora](https://lucas-vergara.github.io/estilos/sitio-disenadora.html) · [línea luz](https://lucas-vergara.github.io/estilos/luz.html) · [línea club](https://lucas-vergara.github.io/estilos/club.html) · [línea remanso](https://lucas-vergara.github.io/estilos/remanso.html) · local: `npm install && npm run vitrina`
 
 ## Líneas
 
@@ -19,6 +19,7 @@ Una **línea** es un lenguaje visual completo para un tipo de proyecto. Todas co
 | **luz** | `lineas/luz.css` | Pantallas de tocar y encender: hábitos, rutinas, registros diarios | Papel claro de día y casi negro en reposo; luces de colores con halo que se encienden con un destello. Inter |
 | **consola** | `base.css` + `lineas/consola.css`, `<body class="consola">` | Herramientas para trabajar con agentes (sesiones, conversación, automatización) que además muestran datos | Oscura por defecto (claro opcional): barra lateral gris pizarra más clara que el fondo, controles y cuadro para escribir un poco más claros, casi sin bordes, esquinas generosas. Nacida en el panel de proyectos, inspirada en la app de un harness de agentes. DM Sans + DM Mono |
 | **club** | `lineas/club.css` | Servicios con membresía o suscripción: clubes, gimnasios, academias, estudios | Nacida de [stridechile.cl](https://www.stridechile.cl/): papel cálido con módulos casi negros, titulares redondos con una frase en degradé, cifras condensadas, planes, tienda de pago único y la app de miembros en un teléfono. Outfit + Instrument Sans |
+| **remanso** | `lineas/remanso.css`, `<body class="remanso">` | Apps de bienestar y acompañamiento: terapia, autocuidado, diarios, hábitos. Primero el teléfono | Nacida del rediseño de Bitácora, con la referencia de las webs y apps de terapia (BetterHelp, Headspace, Calm): papel crema, verde hondo, títulos con serifa suave y una palabra en itálica, teselas pastel por práctica, tarjeta destacada en verde, pestañas flotantes abajo que pasan a barra lateral en pantallas anchas. Fraunces + Figtree |
 
 Las líneas se pueden **mezclar**: cada una vive bajo su propia clase y prefijo (`.sitio` con `s-…`, `.sitio-disenadora` con `sd-…`). Dentro de ellas, los tokens comunes toman los colores de la línea, así que una `.tarjeta`, un `Indicador` o un `GraficoLinea` de la línea panel se ven coherentes (ver "Proyectos" en la vitrina de sitio). Para una línea nueva: `css/lineas/<nombre>.css`, con alcance propio (`.<nombre>`) y prefijo de clases propio.
 
@@ -36,6 +37,7 @@ Las líneas se pueden **mezclar**: cada una vive bajo su propia clase y prefijo 
 | Línea sitio diseñadora | `lineas/sitio-disenadora.css` | La línea oscura creada con Franservice (clases `sd-`) |
 | Línea luz | `lineas/luz.css` | Luces que se encienden, calendario de puntos, filas por hábito, modo reposo, capa de fondo y tablero con forma (clases `l-`) |
 | Línea club | `lineas/club.css` | Cabecera, módulos oscuros, hero con nombre gigante, datos y pasos, evento con inscripción por pasos, planes, agenda del mes, convenios, tienda, app de miembros, preguntas, cierre, pie, diálogo (clases `c-`) |
+| Línea remanso | `lineas/remanso.css` | Estructura `r-app` (`r-lateral`, `r-tabs`, `r-contenido`, `r-pagina`), tipografía (`r-titulo`, `r-h2`, `r-antetitulo`, `r-bajada`), `r-aura`, `r-tarjeta`, `r-destacada`, `r-teselas` + `r-tesela` con `r-tono-…`, `r-acciones`, `r-lista` + `r-fila`, `r-boton`, `r-entrada`, `r-chip`, `r-insignia`, `r-etiqueta`, `r-privado`, `r-vacio` (clases `r-`) |
 | Módulo grilla | `grilla.css` | 12 columnas en dos estilos para armar secciones, en cualquier línea: **A · editorial** (`.grilla-editorial`, separación fija; el aire se arma con columnas vacías) y **B · celdas** (`.grilla-celdas`, celdas con línea fina, relleno y cabecera mono). En celular, A cae a 4 columnas y B a 2. Variables `--grilla-separacion`, `--grilla-relleno`, `--grilla-linea`, `--grilla-mono`, `--grilla-tenue` |
 | Tailwind | `tailwind.css` | Puente para proyectos con Tailwind v4 (`bg-superficie`, `text-acento`…) sobre las mismas variables |
 | Componentes | `@lucas-vergara/estilos` | `Indicador`, `Variacion`, `Estado`, `Frescura`, `Vacio`, `ElegirArchivo`, `AvisoRebote`, `Segmentado`, `Pestanas`, `NavegacionLateral`, `ThOrden`, esqueletos, `BotonTema`, `useOrden`… |
@@ -299,6 +301,33 @@ useEffect(() => iniciarClub(), []);
 ```
 
 Cada paleta trae un degradé vivo (`--c-degrade-vivo`, sobre el asfalto) y uno hondo (`--c-degrade`, sobre el papel, 3:1 o más para títulos grandes); `.c-degrade` elige solo según dónde esté. Dentro de un módulo, `.c-claro` vuelve a los colores del papel. Variables por proyecto: `--c-papel`, `--c-tinta`, `--c-acento`, `--c-radio-modulo`, `--c-escala-titulos`.
+
+### Línea remanso
+
+```html
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400..800&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,0..100;1,9..144,300..600,0..100&display=swap" rel="stylesheet" />
+<body class="remanso">   <!-- paletas: r-paleta-marea · r-paleta-arcilla (bosque por defecto) -->
+```
+
+```tsx
+import "@lucas-vergara/estilos/tokens.css";
+import "@lucas-vergara/estilos/lineas/remanso.css";
+
+<div className="r-app">
+  <aside className="r-lateral">…<nav className="r-lateral-nav"><a className="r-lateral-item" aria-current="page">…</a></nav></aside>
+  <div className="r-contenido">
+    <main className="r-pagina r-con-aura">
+      <div className="r-aura" aria-hidden="true"><i /><i /><i /></div>   {/* el único movimiento */}
+      <h1 className="r-titulo">Buenas tardes,<br /><em>¿cómo llegas hoy?</em></h1>
+      <section className="r-destacada">…<a className="r-boton r-boton-claro">Hacer la tarea</a></section>
+      <ul className="r-teselas"><li><a className="r-tesela r-tono-cielo">…</a></li></ul>
+    </main>
+  </div>
+  <nav className="r-tabs"><a className="r-tab" aria-current="page">…</a></nav>   {/* abajo en el teléfono; se oculta desde 960 px */}
+</div>
+```
+
+No trae JS: los íconos van en el proyecto (trazo de 1,7 px en `currentColor`). Ocho tonos de tesela (`r-tono-miel`, `marea`, `coral`, `lavanda`, `salvia`, `cielo`, `durazno`, `rosa`), cada uno con su tinta a 4,5:1 o más; `--r-tono` y `--r-tono-tinta` sirven también para teñir las piezas propias de cada ejercicio. Dentro de `.remanso`, el texto de `base.css` sube a 16 px. Variables por proyecto: `--r-fondo`, `--r-acento`, `--r-destacada`, `--r-aura-1…3`, `--r-radio`.
 
 **Regla:** el `estilos.css` del proyecto solo tiene lo que es de ese proyecto. Si algo sirve para otros, se sube aquí.
 
