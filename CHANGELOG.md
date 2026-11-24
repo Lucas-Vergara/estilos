@@ -1,6 +1,6 @@
 # Cambios
 
-## v0.33.0 — sin publicar
+## v0.33.0 — 2026-11-24
 
 - **Línea remanso** (`lineas/remanso.css`, `<body class="remanso">`, clases `r-`): apps de bienestar y acompañamiento, primero el teléfono. Nació del rediseño 2.0 de Bitácora (centrado en el paciente), con la referencia de las webs de terapia (BetterHelp, Headspace, Calm, Rula). Papel crema, verde bosque, Fraunces para títulos (con una palabra en itálica en el acento) y Figtree para el texto.
   - Estructura: `r-app` con `r-lateral` (barra lateral desde 960 px) y `r-tabs` (pestañas flotantes de vidrio en el teléfono, con `r-insignia`), `r-contenido`, `r-pagina` (`r-pagina-ancha`), `r-cabeza-movil`, `r-marca`.
