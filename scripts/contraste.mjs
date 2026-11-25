@@ -107,5 +107,38 @@ for (const archivo of readdirSync("css/acentos")) {
     }
   }
 }
+// Línea mascota: sus tokens (bloque .mascota), cada dirección (.mascota.m-direccion-…) en claro y oscuro, las
+// categorías de registro y, en Álbum, el texto blanco de los pases sobre el color de cada mascota
+{
+  const css = readFileSync("css/lineas/mascota.css", "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
+  const bloque = (selector) => {
+    const vars = {};
+    for (const [, sel, cuerpo] of css.matchAll(/([^{}]+)\{([^}]*)\}/g))
+      if (sel.trim() === selector) for (const [, n, v] of cuerpo.matchAll(/--m-([\w-]+):\s*(#[0-9a-f]{6})\s*;/gi)) vars[n] = v;
+    return vars;
+  };
+  const PARES_MASCOTA = [
+    ...["tinta", "tinta-2", "tenue"].flatMap((t) => ["fondo", "superficie", "superficie-2"].map((f) => [t, f, TEXTO])),
+    ["tenue", "hundido", TEXTO], ["tinta", "hundido", TEXTO], ["tinta-2", "hundido", TEXTO],
+    ["acento-texto", "superficie", TEXTO], ["acento-texto", "fondo", TEXTO], ["sobre-acento", "acento", TEXTO],
+    ["sobre-acento-suave", "acento-suave", TEXTO], ["sobre-primario", "primario", TEXTO],
+    ["critico", "superficie", TEXTO], ["critico", "critico-suave", TEXTO], ["aviso", "superficie", TEXTO], ["aviso", "aviso-suave", TEXTO],
+    ["bueno", "superficie", TEXTO], ["bueno", "bueno-suave", TEXTO],
+    ["vivo-tinta", "vivo-fondo", TEXTO], ["vivo-tenue", "vivo-fondo", TEXTO], ["vivo-tinta", "vivo-superficie", TEXTO],
+    ...["vacuna", "antiparasitario", "comida", "remedio", "veterinario", "peso"].map((c) => [`cat-${c}`, "superficie", TEXTO]),
+    ["acento", "superficie", CONTROL],
+  ];
+  const raiz = { claro: bloque(".mascota"), oscuro: bloque('[data-theme="dark"] .mascota') };
+  for (const d of ["paseo", "album", "agenda"])
+    for (const tema of ["claro", "oscuro"]) {
+      const v = { ...raiz.claro, ...bloque(`.mascota.m-direccion-${d}`), ...(tema === "oscuro" ? { ...raiz.oscuro, ...bloque(`[data-theme="dark"] .mascota.m-direccion-${d}`) } : {}) };
+      const pares = [...PARES_MASCOTA, ...(d === "album" ? [1, 2, 3, 4].map((n) => ["#ffffff", `color-${n}`, TEXTO]) : [])];
+      for (const [frente, fondo, minimo] of pares) {
+        const color = (x) => (x.startsWith("#") ? x : v[x]);
+        const r = contraste(color(frente), color(fondo));
+        if (r < minimo) { fallas++; console.log(`✗ mascota ${d} ${tema}: ${frente} sobre ${fondo} = ${r.toFixed(2)}:1 (mínimo ${minimo}:1)`); }
+      }
+    }
+}
 console.log(fallas ? `\n${fallas} pares bajo el mínimo.` : `✓ Todos los pares cumplen (${PARES.length} pares × acentos × 2 temas).`);
 process.exit(fallas ? 1 : 0);

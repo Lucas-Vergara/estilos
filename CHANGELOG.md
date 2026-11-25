@@ -1,5 +1,16 @@
 # Cambios
 
+## v0.34.0 — 2026-11-25
+
+- **Línea mascota** (`lineas/mascota.css`, `<body class="mascota m-direccion-…">`, clases `m-`): apps para cuidar a alguien que no habla y pedirle servicios, primero el teléfono. Nació en Placa (la app de mascotas) en su rediseño 2.0, que buscó un aire más moderno sin perder la facilidad de uso. Se mezcla con `base.css`: dentro de `.mascota`, `.tarjeta`, `.boton`, `.campo`, `.segmentado`, `.aviso`, los esqueletos y `GraficoLinea` toman los colores y la forma de la dirección.
+  - **Paseo 2.0** (por defecto): la claridad de Uber (servicios como teselas grises con ilustraciones, la acción principal en negro, el servicio en curso en una tarjeta oscura que se actualiza sola), el resumen de Apple Salud (teselas con un color y un ícono por categoría, la tendencia en una frase) y los estados de Flighty (cuenta regresiva grande, el estado en una píldora con texto). Inter + Geist. Conserva de Paseo 1.0 el color propio de cada mascota y las fotos en squircle.
+  - **Álbum** (`m-direccion-album`): Airbnb + Apple Wallet. Cálida y fotográfica: blanco con sombras suaves, rosa como acción principal, Figtree, teselas blancas que flotan, botones con borde y cada mascota como un pase de su color.
+  - **Agenda** (`m-direccion-agenda`): Flighty + Things. Sobria y exacta: hojas con borde fino y sin sombra, azul como acción principal, esquinas medianas, cuentas regresivas y fechas en Geist Mono, etiquetas de estado rectas.
+  - Piezas: `m-pestanas` + `m-pestana` (`m-solo-telefono`), `m-ahora` (`-etiqueta`, `-punto`, `-titulo`, `-detalle`, `-progreso`, `-pie`, `-quien`, `-siguientes`), `m-servicios` + `m-servicio` (`m-servicios-grande`), `m-mascotas-fila` + `m-mini`, `m-resumen` + `m-dato`, `m-cat` + `m-cat-<tipo>` + `m-cat-texto`, `m-vencimientos`, `m-estado` (píldora), `m-filas` + `m-fila`, `m-seccion-cabeza` + `m-ver-todo`, `m-tarjeta-mascota`, `m-foto`, `m-chips`, `m-registro`, `m-boton-suave`, `m-boton-peligro`, `m-etiqueta`, `m-color-1…4`.
+  - Las direcciones son variables (no selectores) salvo el pase de Álbum, así que se pueden poner lado a lado en una misma página.
+  - `npm run contraste` revisa también la línea mascota: sus tokens en las tres direcciones y los dos temas, las seis categorías y el texto blanco de los pases.
+- **Vitrina**: `mascota.html`, con una app de mascotas inventada («Collar») y el selector de dirección y de tema.
+
 ## v0.33.0 — 2026-11-24
 
 - **Línea remanso** (`lineas/remanso.css`, `<body class="remanso">`, clases `r-`): apps de bienestar y acompañamiento, primero el teléfono. Nació del rediseño 2.0 de Bitácora (centrado en el paciente), con la referencia de las webs de terapia (BetterHelp, Headspace, Calm, Rula). Papel crema, verde bosque, Fraunces para títulos (con una palabra en itálica en el acento) y Figtree para el texto.

@@ -3,7 +3,7 @@
 Mi biblioteca de estilos: una sola fuente para el look and feel de mis proyectos.
 Cuando un estilo mejora en un proyecto, se sube aquí y los demás proyectos lo reciben **cuando yo decida**.
 
-**Vitrina:** [línea panel y panel2](https://lucas-vergara.github.io/estilos/) · [línea consola](https://lucas-vergara.github.io/estilos/consola.html) · [línea sitio](https://lucas-vergara.github.io/estilos/sitio.html) · [línea 3d](https://lucas-vergara.github.io/estilos/3d.html) · [línea sitio diseñadora](https://lucas-vergara.github.io/estilos/sitio-disenadora.html) · [línea luz](https://lucas-vergara.github.io/estilos/luz.html) · [línea club](https://lucas-vergara.github.io/estilos/club.html) · [línea remanso](https://lucas-vergara.github.io/estilos/remanso.html) · local: `npm install && npm run vitrina`
+**Vitrina:** [línea panel y panel2](https://lucas-vergara.github.io/estilos/) · [línea consola](https://lucas-vergara.github.io/estilos/consola.html) · [línea sitio](https://lucas-vergara.github.io/estilos/sitio.html) · [línea 3d](https://lucas-vergara.github.io/estilos/3d.html) · [línea sitio diseñadora](https://lucas-vergara.github.io/estilos/sitio-disenadora.html) · [línea luz](https://lucas-vergara.github.io/estilos/luz.html) · [línea club](https://lucas-vergara.github.io/estilos/club.html) · [línea remanso](https://lucas-vergara.github.io/estilos/remanso.html) · [línea mascota](https://lucas-vergara.github.io/estilos/mascota.html) · local: `npm install && npm run vitrina`
 
 ## Líneas
 
@@ -20,6 +20,7 @@ Una **línea** es un lenguaje visual completo para un tipo de proyecto. Todas co
 | **consola** | `base.css` + `lineas/consola.css`, `<body class="consola">` | Herramientas para trabajar con agentes (sesiones, conversación, automatización) que además muestran datos | Oscura por defecto (claro opcional): barra lateral gris pizarra más clara que el fondo, controles y cuadro para escribir un poco más claros, casi sin bordes, esquinas generosas. Nacida en el panel de proyectos, inspirada en la app de un harness de agentes. DM Sans + DM Mono |
 | **club** | `lineas/club.css` | Servicios con membresía o suscripción: clubes, gimnasios, academias, estudios | Nacida de [stridechile.cl](https://www.stridechile.cl/): papel cálido con módulos casi negros, titulares redondos con una frase en degradé, cifras condensadas, planes, tienda de pago único y la app de miembros en un teléfono. Outfit + Instrument Sans |
 | **remanso** | `lineas/remanso.css`, `<body class="remanso">` | Apps de bienestar y acompañamiento: terapia, autocuidado, diarios, hábitos. Primero el teléfono | Nacida del rediseño de Bitácora, con la referencia de las webs y apps de terapia (BetterHelp, Headspace, Calm): papel crema, verde hondo, títulos con serifa suave y una palabra en itálica, teselas pastel por práctica, tarjeta destacada en verde, pestañas flotantes abajo que pasan a barra lateral en pantallas anchas. Fraunces + Figtree |
+| **mascota** | `base.css` + `lineas/mascota.css`, `<body class="mascota m-direccion-paseo">` | Apps para cuidar a alguien que no habla y pedirle servicios: registro de mascotas (vacunas, remedios, peso) con paseos, cuidados y vacunas con hora. Primero el teléfono | Nacida en Placa. Tres direcciones sobre las mismas piezas: **Paseo 2.0** (Uber + Apple Salud + Flighty: servicios en teselas grises con ilustraciones, la acción principal en negro, el servicio en curso en una tarjeta oscura, resumen de salud en teselas; Inter + Geist), **Álbum** (Airbnb + Apple Wallet: cálida, sombras suaves, rosa, mascotas como pases de color; Figtree) y **Agenda** (Flighty + Things: hojas con borde fino, azul, cuentas regresivas en Geist Mono, etiquetas rectas) |
 
 Las líneas se pueden **mezclar**: cada una vive bajo su propia clase y prefijo (`.sitio` con `s-…`, `.sitio-disenadora` con `sd-…`). Dentro de ellas, los tokens comunes toman los colores de la línea, así que una `.tarjeta`, un `Indicador` o un `GraficoLinea` de la línea panel se ven coherentes (ver "Proyectos" en la vitrina de sitio). Para una línea nueva: `css/lineas/<nombre>.css`, con alcance propio (`.<nombre>`) y prefijo de clases propio.
 
@@ -38,6 +39,7 @@ Las líneas se pueden **mezclar**: cada una vive bajo su propia clase y prefijo 
 | Línea luz | `lineas/luz.css` | Luces que se encienden, calendario de puntos, filas por hábito, modo reposo, capa de fondo y tablero con forma (clases `l-`) |
 | Línea club | `lineas/club.css` | Cabecera, módulos oscuros, hero con nombre gigante, datos y pasos, evento con inscripción por pasos, planes, agenda del mes, convenios, tienda, app de miembros, preguntas, cierre, pie, diálogo (clases `c-`) |
 | Línea remanso | `lineas/remanso.css` | Estructura `r-app` (`r-lateral`, `r-tabs`, `r-contenido`, `r-pagina`), tipografía (`r-titulo`, `r-h2`, `r-antetitulo`, `r-bajada`), `r-aura`, `r-tarjeta`, `r-destacada`, `r-teselas` + `r-tesela` con `r-tono-…`, `r-acciones`, `r-lista` + `r-fila`, `r-boton`, `r-entrada`, `r-chip`, `r-insignia`, `r-etiqueta`, `r-privado`, `r-vacio` (clases `r-`) |
+| Línea mascota | `lineas/mascota.css` | Sobre las clases de `base.css`, todo bajo `.mascota` con una dirección (`m-direccion-paseo`, `-album`, `-agenda`): `m-pestanas` + `m-pestana` (abajo en el teléfono, en la barra desde 900 px), `m-ahora` (el servicio en curso), `m-servicios` + `m-servicio` (`m-servicios-grande`), `m-mascotas-fila` + `m-mini`, `m-resumen` + `m-dato`, `m-cat-…` (seis categorías de registro), `m-vencimientos` + `m-vencimiento`, `m-estado` (píldora con ícono y texto), `m-filas` + `m-fila`, `m-tarjeta-mascota`, `m-foto`, `m-registro`, `m-seccion-cabeza` + `m-ver-todo`, `m-color-1…4` (clases `m-`) |
 | Módulo grilla | `grilla.css` | 12 columnas en dos estilos para armar secciones, en cualquier línea: **A · editorial** (`.grilla-editorial`, separación fija; el aire se arma con columnas vacías) y **B · celdas** (`.grilla-celdas`, celdas con línea fina, relleno y cabecera mono). En celular, A cae a 4 columnas y B a 2. Variables `--grilla-separacion`, `--grilla-relleno`, `--grilla-linea`, `--grilla-mono`, `--grilla-tenue` |
 | Tailwind | `tailwind.css` | Puente para proyectos con Tailwind v4 (`bg-superficie`, `text-acento`…) sobre las mismas variables |
 | Componentes | `@lucas-vergara/estilos` | `Indicador`, `Variacion`, `Estado`, `Frescura`, `Vacio`, `ElegirArchivo`, `AvisoRebote`, `Segmentado`, `Pestanas`, `NavegacionLateral`, `ThOrden`, esqueletos, `BotonTema`, `useOrden`… |
@@ -328,6 +330,41 @@ import "@lucas-vergara/estilos/lineas/remanso.css";
 ```
 
 No trae JS: los íconos van en el proyecto (trazo de 1,7 px en `currentColor`). Ocho tonos de tesela (`r-tono-miel`, `marea`, `coral`, `lavanda`, `salvia`, `cielo`, `durazno`, `rosa`), cada uno con su tinta a 4,5:1 o más; `--r-tono` y `--r-tono-tinta` sirven también para teñir las piezas propias de cada ejercicio. Dentro de `.remanso`, el texto de `base.css` sube a 16 px. Variables por proyecto: `--r-fondo`, `--r-acento`, `--r-destacada`, `--r-aura-1…3`, `--r-radio`.
+
+### Línea mascota
+
+```html
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Geist:wght@400..800&display=swap" rel="stylesheet" />
+<!-- Álbum suma Figtree; Agenda, Geist Mono -->
+<body class="mascota m-direccion-paseo">   <!-- direcciones: m-direccion-paseo (por defecto) · m-direccion-album · m-direccion-agenda -->
+```
+
+```tsx
+import "@lucas-vergara/estilos/tokens.css";
+import "@lucas-vergara/estilos/acentos/azul.css";   // la línea pone sus colores encima; el acento solo hace falta para base.css
+import "@lucas-vergara/estilos/base.css";
+import "@lucas-vergara/estilos/lineas/mascota.css";
+
+<header className="barra">
+  <a className="marca">…</a>
+  <nav className="m-pestanas"><a className="m-pestana" aria-current="page"><svg className="m-icono" />Inicio</a>…</nav>
+</header>
+<main className="contenido">
+  <section className="m-ahora m-color-2">   {/* el servicio en curso: tarjeta oscura con punto en vivo y barra de avance */}
+    <span className="m-ahora-etiqueta"><span className="m-ahora-punto" />En curso desde las 9:30</span>
+    <p className="m-ahora-titulo">Martina pasea a Rocco</p>
+    <div className="m-ahora-progreso"><span style={{ "--m-avance": "62%" }} /></div>
+  </section>
+  <ul className="m-mascotas-fila"><li><a className="m-mini m-color-1">…<span className="m-estado m-vencido">Atrasado</span></a></li></ul>
+  <ul className="m-servicios"><li><a className="m-servicio"><svg className="m-ilustracion" /><span className="m-servicio-nombre">Paseo</span></a></li></ul>
+  <ul className="m-resumen"><li><div className="m-dato">
+    <span className="m-dato-cabeza m-cat-peso"><span className="m-cat">…</span><span className="m-cat-texto">Peso</span></span>
+    <p className="m-dato-cifra">21,4<small>kg</small></p><p className="m-dato-nota">▼ 0,6 kg desde el 2 oct</p>
+  </div></li></ul>
+</main>
+```
+
+No trae JS: los íconos (trazo de 1,8 px en `currentColor`) y las ilustraciones de los servicios van en el proyecto (ver la vitrina o `src/componentes/iconos.tsx` de Placa). Los estados siempre llevan ícono y texto (`m-vencido` «!», `m-hoy` «●», `m-pronto` «◔», `m-programado` «○», `m-listo` y `m-bien` «✓»). Cada mascota tiene su color (`m-color-1…4` o `style="--m-color: #…"`); en Álbum, la fila del inicio la muestra como un pase de ese color. Un solo movimiento propio: el punto en vivo de `m-ahora` late (quieto con «reducir movimiento» o con `.m-quieto`). Variables por proyecto: `--m-acento`, `--m-primario`, `--m-color-1…4`, `--m-cat-…`, `--m-radio`, `--m-mini-ancho`.
 
 **Regla:** el `estilos.css` del proyecto solo tiene lo que es de ese proyecto. Si algo sirve para otros, se sube aquí.
 

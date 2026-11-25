@@ -134,6 +134,28 @@ segundo plano, con un estilo nuevo «moderno y cool, manteniendo lo zen», a par
 - **Pendiente:** modo oscuro (por ahora solo claro); subir a la biblioteca la tabla de íconos si otro proyecto usa la
   línea.
 
+## Me gusta — línea mascota (desde v0.34.0)
+
+Pedida el 25-11-2026 para el rediseño de Placa: «más moderna y cool, manteniendo la funcionalidad y la facilidad de
+uso». De las referencias propuestas (Uber, Airbnb, Rover/Wag, Apple Salud, Flighty, Apple Wallet, Things) armé tres
+combinaciones y elegí la **A · Uber + Apple Salud** (con los estados de Flighty) para la app. Las otras dos quedan en la
+línea como direcciones para probar, con las mismas piezas.
+
+- **Lo que se tomó de Uber:** los servicios como teselas grises con una ilustración con volumen; una sola acción
+  principal, en negro; el servicio en curso en una tarjeta oscura con punto en vivo y barra de avance (como el viaje);
+  pestañas abajo en el teléfono (Inicio · Servicios · Actividad · Cuenta) que pasan a la barra en el computador; la
+  cuenta como página propia.
+- **De Apple Salud:** el resumen de la mascota fijado en teselas (lo próximo, peso con tendencia, vacunas, remedio o
+  veterinario) y un color y un ícono por categoría de registro.
+- **De Flighty:** la cuenta regresiva grande y el estado en una píldora con su ícono y texto.
+- **Se mantiene de Paseo 1.0:** el color propio de cada mascota y las fotos en squircle. Sin infantilismo: nada de
+  huellitas por todas partes (la huella va solo en el logo).
+- **Descartado del Inicio:** el carrusel 3D de mascotas (v0.18.0), reemplazado por una fila que se desliza: más clara y
+  a un toque. `Carrusel3D` sigue en la biblioteca.
+- **Álbum** (Airbnb + Wallet) y **Agenda** (Flighty + Things) quedan como direcciones `m-direccion-album` y
+  `m-direccion-agenda`, para empezar otro proyecto con ellas o cambiar Placa si algún día gusta más otra.
+- Las direcciones anteriores de Placa (Placa y Carnet, v1) no pasaron a la biblioteca: quedan en el historial del repo.
+
 ## Línea club (desde v0.20.0)
 
 Pedida el 05-11-2026 a partir de [stridechile.cl](https://www.stridechile.cl/), un run club de Concepción con planes mensuales, tienda y app de miembros (Next.js en Vercel, hecho a medida). Me gustó su diseño; la quise como línea para **servicios con suscripción**.
@@ -204,7 +226,7 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 | finanzas | verde | v0.15.0 | app de finanzas personales (Firebase); estilos propios mínimos en `src/estilos.css` |
 | habitos (web) | — (línea luz) | v0.26.0 | app de hábitos; de aquí salieron los fondos y órdenes de la línea luz (v0.16.0, hasta 10 luces en v0.17.0), los 24 colores (v0.19.0) y los cuatro encendidos (v0.26.0); la pantalla ESP32 replica la línea en su firmware |
 | pausa | — (línea luz) | v0.23.0 | prototipo (09-11-2026) para momentos bajos: luz grande de inicio, elegir con luces, respiración y reloj con anillo propios del proyecto |
-| placa (app de mascotas) | — (línea «mascota», dirección Paseo) | v0.18.0 | la línea «mascota» vive por ahora en el proyecto (`src/estilos/lineas/mascota.css`), con Paseo elegida; falta subirla a la biblioteca. De aquí salió el deslizamiento de a una tarjeta de `Carrusel3D` (v0.18.0) |
+| placa (app de mascotas) | — (línea mascota, dirección Paseo 2.0) | v0.34.0 | de aquí salieron la línea mascota y sus tres direcciones (v0.34.0, rediseño 25-11-2026) y el deslizamiento de a una tarjeta de `Carrusel3D` (v0.18.0); íconos e ilustraciones propios en `src/componentes/iconos.tsx` |
 | cv (PDF del currículum) | azul | v0.15.0 | solo tokens, copiados en `cv/estilos/`; hoja de impresión propia (`cv.css`) mientras se decide si va una línea "documento" |
 | presupuestos | petróleo, línea panel2 | v0.23.0 | herramienta local (10-11-2026); el PDF del cliente tiene su hoja de impresión propia (`src/documento.css`) con cinco diseños a elegir (10-11-2026: clásico, portada en bloque, grilla suiza, resumen primero y ficha técnica; descartados editorial con serif y columna lateral): junto con cv, candidata a una línea "documento" |
 | cartelera-conce | petróleo, línea panel2 | v0.25.0 | cartelera pública de cine del Gran Concepción (13-11-2026); horarios como píldoras que enlazan a la compra o al post, estilos propios en `src/estilos.css` |

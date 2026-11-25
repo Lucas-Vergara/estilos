@@ -3,7 +3,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 // La vitrina usa el código fuente directo (../src, ../css): lo que ves aquí es lo que se publicará.
-// Una página por línea: index.html (panel), sitio.html (sitio), 3d.html (3d), sitio-disenadora.html (sitio diseñadora), luz.html (luz), club.html (club), consola.html (consola) y remanso.html (remanso).
+// Una página por línea: index.html (panel), sitio.html (sitio), 3d.html (3d), sitio-disenadora.html (sitio diseñadora), luz.html (luz), club.html (club), consola.html (consola), remanso.html (remanso) y mascota.html (mascota).
 export default defineConfig({
   root: "vitrina",
   base: "/estilos/",
@@ -14,6 +14,7 @@ export default defineConfig({
         sitioDisenadora: resolve(import.meta.dirname, "sitio-disenadora.html"), tresd: resolve(import.meta.dirname, "3d.html"),
         luz: resolve(import.meta.dirname, "luz.html"), club: resolve(import.meta.dirname, "club.html"),
         consola: resolve(import.meta.dirname, "consola.html"), remanso: resolve(import.meta.dirname, "remanso.html"),
+        mascota: resolve(import.meta.dirname, "mascota.html"),
       },
     },
   },
