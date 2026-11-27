@@ -19,6 +19,9 @@ const menu = i(<path d="M4 7h16M4 12h16M4 17h16" />);
 const enviar = i(<path d="M12 19V5M6 11l6-6 6 6" />);
 const mas = i(<path d="M12 5v14M5 12h14" />);
 
+// Para probar el filtro: «sódi» deja monitor-sodimac (sin importar la tilde) y «pa pro», panel-proyectos (cada palabra por separado).
+const ESPACIOS = ["panel-proyectos", "estilos", "trote-app", "fases", "franservice", "monitor-sodimac", "datos-reciclaje", "bitacora", "placa", "mesa", "cv", "claude-config"];
+
 type Vista = "sesion" | "datos";
 
 function Vitrina() {
@@ -27,6 +30,7 @@ function Vitrina() {
   const [filtro, setFiltro] = useState("todas");
   const [modo, setModo] = useState("preguntar");
   const [modelo, setModelo] = useState("opus");
+  const [espacio, setEspacio] = useState("panel-proyectos");
   return (
     <div className="co-app">
       <aside id="co-lateral" className={`co-lateral${abierta ? " abierta" : ""}`} aria-label="Navegación">
@@ -124,6 +128,8 @@ function Vitrina() {
                 <label className="sr-only" htmlFor="m">Mensaje</label>
                 <textarea id="m" rows={2} placeholder="Describe lo que quieres hacer; / para comandos, @ para archivos" />
                 <div className="co-compositor-fila">
+                  <Selector etiqueta="Espacio de trabajo" icono={carpeta} valor={espacio} onCambio={setEspacio}
+                    opciones={ESPACIOS.map((e) => ({ valor: e, texto: e }))} />
                   <Selector etiqueta="Permisos" valor={modo} onCambio={setModo} opciones={[
                     { valor: "preguntar", texto: "Preguntar", nota: "Corre lo permitido y pregunta por lo demás" },
                     { valor: "lectura", texto: "Solo lectura", nota: "Lee y busca; no cambia nada" },

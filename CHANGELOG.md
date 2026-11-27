@@ -1,5 +1,10 @@
 # Cambios
 
+## v0.36.0 — 2026-11-27
+
+- **`Selector` (línea consola) para escribir y filtrar.** Al abrirlo, el texto del botón pasa a ser un campo (`role="combobox"`) con lo elegido como placeholder; lo escrito filtra la lista sin distinguir mayúsculas ni tildes, palabra por palabra («pa pro» calza con panel-proyectos), y resalta en el acento la parte que calza. Flechas y Enter eligen, Escape cierra y devuelve el foco; escribir con el botón enfocado lo abre ya filtrando. Si nada calza, `.co-menu-vacio` lo dice. Clases nuevas: `.co-selector-buscando`, `.co-selector-entrada`, `.co-menu-vacio` y `mark` dentro de `.co-menu-texto`. `buscar={false}` vuelve a la lista sin campo (saltar por letra). Pedido para que los selects funcionen como los de otras apps.
+- **Vitrina**: selector «Espacio de trabajo» con doce carpetas en el cuadro para escribir, para probar el filtro.
+
 ## v0.35.0 — 2026-11-27
 
 - **Línea consola: el cuadro para escribir crece con el texto.** El `textarea` de `.co-compositor` se alarga hacia abajo a medida que se escribe (`field-sizing: content`), desde los 48 px de antes hasta el 45 % de la ventana, y desde ahí se desplaza por dentro. Sin JavaScript. Nació en el chat rápido del panel de proyectos.

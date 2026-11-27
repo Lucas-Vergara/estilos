@@ -515,6 +515,20 @@ body.consola { background: var(--plano); }
 .co-selector-campo .co-selector-texto { max-width: none; flex: 1; text-align: left; }
 .co-selector-campo .co-menu-opciones { max-width: none; width: 100%; }
 
+/* Para escribir y filtrar (v0.36.0): al abrirse, el botón pasa a .co-selector-buscando con input.co-selector-entrada
+   (role=combobox); lo elegido queda como placeholder, la parte que calza va en <mark> y .co-menu-vacio dice que nada calza. */
+.co-selector-buscando { cursor: text; background: var(--control); color: var(--tinta); }
+.co-selector-buscando:focus-within { outline: 2px solid var(--acento); outline-offset: 1px; }
+.co-selector-buscando .co-selector-flecha { cursor: pointer; }
+.consola .co-selector-buscando input.co-selector-entrada, .co-selector-buscando input.co-selector-entrada {
+  appearance: none; field-sizing: content; min-width: 9ch; max-width: 220px; height: auto; margin: 0; padding: 0;
+  border: 0; border-radius: 0; background: none; box-shadow: none; outline: none; color: var(--tinta); font: inherit;
+}
+.co-selector-entrada::placeholder { color: var(--tinta-2); opacity: 1; }
+.consola .co-selector-campo .co-selector-buscando input.co-selector-entrada, .co-selector-campo .co-selector-buscando input.co-selector-entrada { flex: 1; min-width: 0; max-width: none; }
+.co-menu-texto mark { background: none; color: var(--acento); font-weight: 600; }
+.co-menu-opciones li.co-menu-vacio { cursor: default; padding: 8px 10px; color: var(--tinta-3); }
+
 /* Interruptor (activar / desactivar) y skills desactivadas */
 .co-interruptor {
   position: relative; width: 34px; height: 20px; flex: none; padding: 0; border: 0; border-radius: 999px; cursor: pointer;

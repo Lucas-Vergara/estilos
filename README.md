@@ -220,6 +220,7 @@ como predeterminado:
   `.co-traza-linea` (herramientas en una línea de tiempo); `.co-sesion-vistas`; lista de skills `.co-skills` > `.co-skill`.
 - **Selector** (v0.32.0, `import { Selector } from "@lucas-vergara/estilos/consola"`): en vez de `<select>`, con
   `opciones={[{ valor, texto, nota? }]}`, `etiqueta`, `icono`, `tenue` y `campo` (forma de campo de formulario).
+  Desde v0.36.0 se escribe para filtrar las opciones (sin tildes ni mayúsculas); `buscar={false}` lo apaga.
   También `.co-interruptor` (`role="switch"`) para activar y desactivar.
 - **Permisos y programadas** (v0.31.0): `section.co-permiso` (con `.co-permiso-acciones`), `.co-marca-sesion(.espera)`,
   `.co-reloj`, formulario `.co-programar` y lista `.co-programadas` > `.co-programada`.

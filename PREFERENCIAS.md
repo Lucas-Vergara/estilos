@@ -56,6 +56,8 @@ izquierda, la conversación al centro).
 - Me gustó mucho como quedó en el panel (22-11-2026): pasó a la biblioteca tal cual.
 - **El cuadro para escribir crece hacia abajo con el texto** (pedido el 27-11-2026, v0.35.0), hasta cerca de media
   ventana; después se desplaza por dentro.
+- **Los selects se escriben para filtrar** (pedido el 27-11-2026, v0.36.0), como en otras apps: al abrirlo, el texto
+  pasa a ser un campo y la lista se acota con lo escrito, sin importar tildes ni mayúsculas.
 
 ## Me gusta — línea sitio diseñadora
 
