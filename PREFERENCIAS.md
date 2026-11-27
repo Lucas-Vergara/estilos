@@ -54,6 +54,8 @@ izquierda, la conversación al centro).
 - **DM Sans** en vez de Inter, para explorarla y ver si gusta (excepción a «Inter», en prueba).
 - Casi sin bordes: una línea interior de media opacidad; esquinas generosas; botón de enviar redondo y azul.
 - Me gustó mucho como quedó en el panel (22-11-2026): pasó a la biblioteca tal cual.
+- **El cuadro para escribir crece hacia abajo con el texto** (pedido el 27-11-2026, v0.35.0), hasta cerca de media
+  ventana; después se desplaza por dentro.
 
 ## Me gusta — línea sitio diseñadora
 
@@ -221,7 +223,7 @@ Revisé dos skills de diseño populares, [Impeccable](https://github.com/pbakaus
 |---|---|---|---|
 | monitor Sodimac (etex/monitor-materiales/web) | verde | v0.25.0 | origen de la biblioteca; de aquí salieron el arreglo de leyendas (v0.12.1), el pulido de escritorio (v0.13.0) y el de menos ruido (v0.14.0) |
 | datos-reciclaje (antes radar de reciclaje) | petróleo, línea panel2 | v0.23.0 | de aquí salieron la navegación lateral (v0.15.0), la línea panel2 (v0.21.0), `ElegirArchivo` (v0.22.0) y el acento petróleo (v0.23.0); componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
-| panel de proyectos (antes monitor de proyectos) | azul, línea consola | v0.32.0 | de aquí salió la línea consola (v0.28.0), sus piezas de sesión (v0.29.0), de revisión (v0.30.0), de permisos y programadas (v0.31.0) y el Selector (v0.32.0); la barra lateral (`Lateral.tsx`) y las páginas son del proyecto; componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
+| panel de proyectos (antes monitor de proyectos) | azul, línea consola | v0.35.0 | de aquí salió la línea consola (v0.28.0), sus piezas de sesión (v0.29.0), de revisión (v0.30.0), de permisos y programadas (v0.31.0), el Selector (v0.32.0) y el cuadro que crece (v0.35.0); la barra lateral (`Lateral.tsx`) y las páginas son del proyecto; componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
 | oportunidades | azul | v0.15.0 | componentes propios de una generación anterior (Tarjeta, Segmentado, Frescura) |
 | finanzas | verde | v0.15.0 | app de finanzas personales (Firebase); estilos propios mínimos en `src/estilos.css` |
 | habitos (web) | — (línea luz) | v0.26.0 | app de hábitos; de aquí salieron los fondos y órdenes de la línea luz (v0.16.0, hasta 10 luces en v0.17.0), los 24 colores (v0.19.0) y los cuatro encendidos (v0.26.0); la pantalla ESP32 replica la línea en su firmware |

@@ -1,5 +1,9 @@
 # Cambios
 
+## v0.35.0 — 2026-11-27
+
+- **Línea consola: el cuadro para escribir crece con el texto.** El `textarea` de `.co-compositor` se alarga hacia abajo a medida que se escribe (`field-sizing: content`), desde los 48 px de antes hasta el 45 % de la ventana, y desde ahí se desplaza por dentro. Sin JavaScript. Nació en el chat rápido del panel de proyectos.
+
 ## v0.34.0 — 2026-11-25
 
 - **Línea mascota** (`lineas/mascota.css`, `<body class="mascota m-direccion-…">`, clases `m-`): apps para cuidar a alguien que no habla y pedirle servicios, primero el teléfono. Nació en Placa (la app de mascotas) en su rediseño 2.0, que buscó un aire más moderno sin perder la facilidad de uso. Se mezcla con `base.css`: dentro de `.mascota`, `.tarjeta`, `.boton`, `.campo`, `.segmentado`, `.aviso`, los esqueletos y `GraficoLinea` toman los colores y la forma de la dirección.

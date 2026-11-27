@@ -321,9 +321,11 @@ body.consola { background: var(--plano); }
   position: sticky; bottom: 16px; display: grid; gap: 6px; padding: 12px 12px 10px 14px; border-radius: 20px;
   background: var(--compositor); box-shadow: var(--compositor-sombra);
 }
+/* El texto crece hacia abajo con lo que se escribe, hasta el 45 % de la ventana; desde ahí se desplaza por dentro */
 .co-compositor textarea {
   width: 100%; resize: none; border: 0; padding: 2px 2px 6px; background: none; box-shadow: none; color: var(--tinta);
   font: inherit; font-size: 0.95rem; line-height: 1.5; outline: none; min-height: 48px;
+  field-sizing: content; max-height: 45vh; overflow-y: auto;
 }
 .co-compositor textarea::placeholder { color: var(--tinta-3); }
 .co-compositor-fila { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
